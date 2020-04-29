@@ -113,7 +113,10 @@ class Navigation extends React.Component {
             <div className="container" onMouseLeave={!this.state.lockedPanel? this.props.onMouseLeave : () => {}}>
                 <view className='upperPartOfNavigation'>
                     <br/>
-                    <Link className="navLink" to={{pathname: '/', state: {css: "HomeContainer " + this.state.panelState }}}>Home</Link>
+                    <Link className="navLink" to={'/'}>Home</Link>
+                    <br/>
+                    <br/>
+                    <Link className="navLink" to={'/about'}>About</Link>
                     <br/>
                     <br/>
                     <Link to={'/vehicle-catalog'} props={{addToCart: this.addToCart}} className={"navLink"}>Catalog</Link>

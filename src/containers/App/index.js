@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../Home';
+import About from '../About';
 import Empty from '../Empty';
 import VehicleCatalog from '../VehicleCatalog';
 import AddCar from '../AddCar';
@@ -15,11 +16,12 @@ import WishListModal from "../../components/WishListModal";
 import OrdersModal from "../../components/OrdersModal";
 import * as localForage from 'localforage';
 import history from '../../history';
+import Footer from '../../components/Footer';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             user: []
         };
         this.loginPressed = this.loginPressed.bind(this);
@@ -30,35 +32,37 @@ class App extends React.Component {
             }
         }
     }
-    loginPressed(userDetails){
-        this.setState({user:userDetails});
-        localForage.setItem('user',userDetails);
+    loginPressed(userDetails) {
+        this.setState({ user: userDetails });
+        localForage.setItem('user', userDetails);
 
     }
-    sighOut(){
-        this.setState({user:[]})
-        localForage.setItem('user',[]);
+    sighOut() {
+        this.setState({ user: [] })
+        localForage.setItem('user', []);
 
     }
     render() {
         return (
             <BrowserRouter history={history}>
-            <Header sighOut={this.sighOut} user={this.state.user}/>
-                <SighupModal/>
-                <AddUserModal/>
-                {this.state.user.length!==0&&<CartModal/>}
-                {this.state.user.length!==0&&<WishListModal/>}
-                {this.state.user.length!==0&&<WishListModal/>}
-                {this.state.user.length!==0&&<OrdersModal/>}
-                <LoginModal loginPressed={this.loginPressed}/>
+                <Header sighOut={this.sighOut} user={this.state.user} />
+                <SighupModal />
+                <AddUserModal />
+                {this.state.user.length !== 0 && <CartModal />}
+                {this.state.user.length !== 0 && <WishListModal />}
+                {this.state.user.length !== 0 && <WishListModal />}
+                {this.state.user.length !== 0 && <OrdersModal />}
+                <LoginModal loginPressed={this.loginPressed} />
                 <Switch>
-                    <Route path='/add-car' component={AddCar}/>
-                    <Route path='/update-order' component={UpdateOrders}/>
-                    <Route path='/add-order' component={AddOrder}/>
+                    <Route exact path='/' component={Home} />
+                    <Route path='/about' component={About} />
+                    <Route path='/add-car' component={AddCar} />
+                    <Route path='/update-order' component={UpdateOrders} />
+                    <Route path='/add-order' component={AddOrder} />
                     <Route path='/empty' component={Empty} />
                     <Route path='/vehicle-catalog' component={VehicleCatalog} />
-                    <Route exact path='/' component={Home} />
                 </Switch>
+                <Footer />
             </BrowserRouter>
         );
     }

@@ -4,4 +4,8 @@
     /* --background-color: blue; */
     --background-color: #F1F2F2;
     --regular-font: 'Roboto', sans-serif;
+    --footer-color: #585858;
+    --phone-width: 479px;
+    --tablet-width: 767px;
+    --desktop-width: 1000px;
 }

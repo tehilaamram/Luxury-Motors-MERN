@@ -9,11 +9,12 @@ class SlideShow extends React.Component {
     // constructor(props) {
     //     super(props);
     // }
+    intervalId;
     componentDidMount() {
         // window.
         $("#slideshow > div:gt(0)").hide();
 
-        setInterval(function () {
+        this.intervalId = setInterval(function () {
             $('#slideshow > div:first')
                 .fadeOut(1000)
                 .next()
@@ -22,6 +23,10 @@ class SlideShow extends React.Component {
                 .appendTo('#slideshow');
         }, 3000);
     }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
+      }
 
     render() {
         return (

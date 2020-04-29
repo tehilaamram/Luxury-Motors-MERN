@@ -1,0 +1,10 @@
+@import '../../css/variables.css';
+* {
+    box-sizing: border-box;
+}
+
+.AboutContainer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--background-color);
+}

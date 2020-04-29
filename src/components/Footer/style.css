@@ -1,0 +1,14 @@
+@import '../../css/variables.css';
+
+.FooterContainer {
+    padding: 5px;
+    height: 30px;
+    width: 100%;
+    background-color: var(--footer-color);
+}
+
+.CopyRight {
+    text-align: center;
+    font-family: var(--regular-font);
+    font-size: 14px;
+}
