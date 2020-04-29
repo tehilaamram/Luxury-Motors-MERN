@@ -1,0 +1,37 @@
+@import '../../css/variables.css';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--secondary-color);
+    position: absolute;
+    top: 71.44px;
+    width: 200px;
+    height: calc(100vh - 71.44px);
+    animation-name: opening;
+    animation-duration: 300ms;
+}
+@keyframes opening {
+    0%   {width: 0px; height: 0vh}
+    /*25%  {background-color:yellow; left:200px; top:0px;}*/
+    /*50%  {background-color:blue; left:200px; top:200px;}*/
+    /*75%  {background-color:green; left:0px; top:200px;}*/
+    100% {width: 200px; height: 91vh}
+}
+.item {
+    top: 10px;
+}
+.navLink {
+    border: none;
+    background-color: transparent;
+    text-align: start;
+    font-family: var(--regular-font);
+    color: var(--background-color);
+    padding-inline-start: 12px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

@@ -1,0 +1,60 @@
+{
+  "name": "but-a-luxury-vehicle",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.9.9",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "concurrently": "^5.1.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "history": "^4.10.1",
+    "http-errors": "~1.6.3",
+    "jquery": "^3.5.0",
+    "localforage": "^1.7.3",
+    "material-ui-selectfield": "^1.0.24",
+    "mongoose": "^5.9.9",
+    "morgan": "~1.9.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.0"
+  },
+  "scripts": {
+    "server_start": "node ./bin/www",
+    "client_start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "run_mongo_for_ubuntu": "sudo service mongod start"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:3000",
+  "devDependencies": {
+    "node-env-run": "^3.0.2"
+  }
+}

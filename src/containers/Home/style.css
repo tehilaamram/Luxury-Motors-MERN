@@ -1,0 +1,45 @@
+@import '../../css/variables.css';
+* {
+  box-sizing: border-box;
+}
+.HomeContainer {
+  /* text-align: center; */
+  /* display: -ms-flexbox; IE10 */
+  display: flex;
+  /* -ms-flex-wrap: wrap; IE10 */
+  flex-wrap: wrap;
+  /* background-image: url("../../images/background.jpg"); */
+  /* background-size: cover; */
+  /* background-repeat: no-repeat; */
+  background-color: var(--background-color);
+  height: calc(100vh - 71.44px);
+}
+
+.minimize {
+  margin-inline-start: 0;
+}
+
+.pin-panel {
+  margin-inline-start: 200px;
+}
+
+.Video {
+  -ms-flex: 60%; /* IE10 */
+  flex: 60%;
+  background-color: white;
+  padding: 20px;
+}
+
+.MainImage {
+  -ms-flex: 40%; /* IE10 */
+  flex: 40%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.SlideShow {
+  /* padding: 20px; */
+  text-align: center;
+  background: #ddd;
+  width: 100vw;
+}

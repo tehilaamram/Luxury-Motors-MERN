@@ -1,0 +1,20 @@
+@import '../../css/variables.css';
+
+.header {
+  display: absolute;
+  z-index: 1;
+  position: sticky;
+  padding-inline-start: 0;
+  top: 0;
+  width: 100%;
+  height: 71.44px;
+  background-color: var(--primary-color);
+}
+.appLogo {
+  position: absolute;
+  height: 68.44px;
+  width: 86.38px;
+  background-color: var(--secondary-color);
+  padding-top: 3px;
+  margin-block-end: 0;
+}
