@@ -1,3 +1,4 @@
+@import '../../css/variables.css';
 .button3 {
     display: inline-block;
     padding: 0.3em 1.2em;
@@ -22,16 +23,65 @@
    }
 }
 
-.navButton {
-    /* background-color: #4CAF50; */
-    border: none;
+.navButton, select{
+    /* border: none;
     background-color: transparent;
-    /* color: #; */
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
+    cursor: pointer; */
+    align-self: baseline;
+    cursor: pointer;
+    padding-left: 13px;
+    color: #fff;
+    font-family: var(--regular-font);
+     font-size: 20px;
+     padding-bottom:20px;
+     border: none;
+     outline:none;
+     background-color: transparent;
+  }
+
+  .PrimaryButton {
+    font-family: var(--regular-font);
+    margin-top: 35px;
+    align-self: center;
+    width: 100%;
+    height: 50px;
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 7px;
+    transition-duration: 0.4s;
     cursor: pointer;
   }
+  .PrimaryButton:hover {
+    background-color: white;
+    color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.RoundCloseButton {
+    margin-top: 10px;
+    border-radius: 50%;
+    color: var(--primary-color);
+    cursor: pointer;
+    height: 20px;
+    width: 23px;
+    background-color: transparent;
+    border-width: 2px;
+    text-align: center;
+    font-weight: 900;
+    border-color: var(--primary-color);
+    align-self: center;
+    background-image: url(../../images/x.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

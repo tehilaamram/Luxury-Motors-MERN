@@ -97,7 +97,7 @@
     cursor: pointer;
 }
 
-input[type=text] {
+/* input[type=text] {
     margin-left: 5px;
     background-color: unset;
     border: none;
@@ -114,8 +114,8 @@ input[type=text] {
     line-height: normal;
     font-family: Arial;
     width: 365px
-}
-input[type=number] {
+} */
+/* input[type=number] {
     margin-left: 5px;
     background-color: unset;
     border: none;
@@ -132,4 +132,4 @@ input[type=number] {
     line-height: normal;
     font-family: Arial;
     width: 365px
-}
+} */

@@ -1,22 +1,38 @@
-/* The LoginModal (background) */
-.modal {
+
+* {
+    box-sizing: border-box;
+  }
+.SignUpModal {
+    top: 0;
+    justify-content: center;
+    z-index: 101;
+    position: fixed;
     display: none;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    /* border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px; */
+    /* display: none;
     align-items: center;
     justify-content: center;
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    overflow: hidden;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+    /* z-index: 100; Sit on top */
+    /* overflow: hidden; */
+    /* width: 100%; Full width */
+    /* height: 100%; Full height */
+    /* overflow: auto; Enable scroll if needed */
+    /* background-color: rgba(0,0,0,0.7); Black w/ opacity */
 }
 
 /* LoginModal Content/Box */
 .modal-content {
+    position: fixed;
+    /* overflow: auto; */
     display: flex;
     flex-direction: column;
-    height: 500px;
+    height: fit-content;
     width: 700px;
     align-self: center;
     border-radius: 10px;
@@ -70,11 +86,14 @@
     color: white;
 }
 .modal-real-content{
-    display: flex;
+    background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+    /* display: flex;
     flex-direction: column;
     padding-top: 25px;
     padding-right: 50px;
-    padding-left: 50px;
+    padding-left: 50px; */
 }
 
 .sighupButton:hover {
@@ -98,7 +117,7 @@
     cursor: pointer;
 }
 
-input[type=text] {
+/* input[type=text] {
     margin-left: 5px;
     background-color: unset;
     border: none;
@@ -115,8 +134,8 @@ input[type=text] {
     line-height: normal;
     font-family: Arial;
     width: 365px
-}
-input[type=number] {
+} */
+/* input[type=number] {
     margin-left: 5px;
     background-color: unset;
     border: none;
@@ -133,4 +152,4 @@ input[type=number] {
     line-height: normal;
     font-family: Arial;
     width: 365px
-}
+} */

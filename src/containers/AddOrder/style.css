@@ -48,7 +48,7 @@
     justify-content: flex-start;
     background-color: rgba(255,255,255, 1);
 }
-input[type=text] {
+/* input[type=text] {
     margin-left: 5px;
     background-color: unset;
     border: none;
@@ -65,7 +65,7 @@ input[type=text] {
     line-height: normal;
     font-family: Arial;
     width: 365px
-}
+} */
 input[type=number] {
     margin-left: 5px;
     background-color: unset;

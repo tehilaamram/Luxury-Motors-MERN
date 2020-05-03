@@ -39,6 +39,7 @@
 .SlideShow {
   text-align: center;
   background: transparent;
+  padding: 0 10px;
   width: 100%;
 }
 

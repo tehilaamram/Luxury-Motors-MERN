@@ -8,9 +8,13 @@ class TextInput extends React.Component {
 
     render() {
         return (
-            <div class="form__group field">
-                <input type={this.props.type} class="form__field" placeholder={this.props.name} name={this.props.name} id={this.props.name} required/>
-                <label for={this.props.name} class="form__label">{this.props.name}</label>
+            <div className="TextInputRow">
+                <div className="TextInputLabelContainer">
+                    <label className={"TextInputLabel"} htmlFor={this.props.id}>{this.props.text}</label>
+                </div>
+                <div className="TextInputTextContainer">
+                    <input type={this.props.type} id={this.props.id} onChange={this.props.onChange} value={this.props.value}/>
+                </div>
             </div>
         );
     }

@@ -9,7 +9,7 @@ import AddCar from '../AddCar';
 import AddOrder from '../AddOrder';
 import UpdateOrders from '../UpdateOrders';
 import Header from '../../components/Header';
-import SighupModal from "../../components/SighupModal";
+import SignUpModal from "../../components/SignUpModal";
 import LoginModal from "../../components/LoginModal";
 import AddUserModal from "../../components/AddUserModal";
 import CartModal from "../../components/CartModal";
@@ -47,7 +47,7 @@ class App extends React.Component {
         return (
             <BrowserRouter history={history}>
                 <Header sighOut={this.sighOut} user={this.state.user} />
-                <SighupModal />
+                <SignUpModal />
                 <AddUserModal />
                 {this.state.user.length !== 0 && <CartModal />}
                 {this.state.user.length !== 0 && <WishListModal />}

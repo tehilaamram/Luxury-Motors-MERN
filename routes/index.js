@@ -7,23 +7,18 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Home' });
 });
 
-router.post('/register', async (req, res) => {
+router.post('/signUp', async (req, res) => {
   User.findOne({ email:  req.body.email }).then((user) => {
-    console.log('in user');
     if (user) {
-      return res.send(409); // 409 conflict
+      return res.sendStatus(409); // 409 conflict
     } else {
       const newUser = new User({
           email : req.body.email,
           password: req.body.password,
           username: req.body.email,
           fullName: req.body.fullName,
-        orders: [],
-      cart: [],
-      wishList: [],
-      status:true,
+          level: 'user',
       });
-       console.log('oihfe');
       newUser.save().then(user => {
         passport.authenticate('local')(req, res, function () {
           var session = req.session;

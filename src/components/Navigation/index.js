@@ -12,6 +12,7 @@ class Navigation extends React.Component {
         super(props);
         this.state = {lockedPanel: false, panelState: 'minimize'};
         this.changePanelState = this.changePanelState.bind(this);
+        // this.navigateTo = this.navigateTo.bind(this);
       }
     
     openLoginModal() {
@@ -33,10 +34,10 @@ class Navigation extends React.Component {
         }
     }
     openSighupModal() {
-        if (document.getElementById('sighupRegisterModal').style.display === 'flex') {
-            document.getElementById('sighupRegisterModal').style.display = 'none';
+        if (document.getElementById('signUpModal').style.display === 'flex') {
+            document.getElementById('signUpModal').style.display = 'none';
         } else {
-            document.getElementById('sighupRegisterModal').style.display = 'flex';
+            document.getElementById('signUpModal').style.display = 'flex';
             const email = document.getElementById('Email');
 
             if(email) {
@@ -93,7 +94,6 @@ class Navigation extends React.Component {
     //     history.push(pageName);
     // }
     changePanelState() {
-        this.props.history.push('/empty')
         console.log("in state");
         if (this.state.lockedPanel) {
             this.setState({
@@ -110,7 +110,7 @@ class Navigation extends React.Component {
     render() {
         console.log(this.props.user.length);
         return (
-            <div className="container" onMouseLeave={!this.state.lockedPanel? this.props.onMouseLeave : () => {}}>
+            <div className="NavigationContainer" onMouseLeave={!this.state.lockedPanel? this.props.onMouseLeave : () => {}}>
                 <view className='upperPartOfNavigation'>
                     <br/>
                     <Link className="navLink" to={'/'}>Home</Link>
@@ -132,14 +132,14 @@ class Navigation extends React.Component {
                     <view onClick={this.openAddUserModal} className={"navLink"}>Add user</view>
                     </view>
                 <view style={{display:'flex', flexDirection: 'column'}}>
-                <Button title={"pin Panel"} css={"button3"} onClick={this.changePanelState}/>
-                    {this.props.user.length === 0&&<view onClick={this.openLoginModal} style={{paddingLeft: 13, color: 'white', fontSize: 20, paddingBottom:20}}>Login</view>}
-                    {this.props.user.length === 0&&<view onClick={this.openSighupModal} style={{paddingLeft: 13, color: 'white', fontSize: 20, paddingBottom:20}}>Sign up</view>}
+                <Button title={"pin Panel"} css={"navButton"} onClick={this.changePanelState}/>
+                    {this.props.user.length === 0&&<view onClick={this.openLoginModal} style={{paddingLeft: 13, color: 'white', fontSize: 20, paddingBottom:20}}>Sign In</view>}
+                    {this.props.user.length === 0&&<view onClick={this.openSighupModal} style={{cursor: 'pointer',paddingLeft: 13, color: 'white', fontSize: 20, paddingBottom:20}}>Sign Up</view>}
                     {this.props.user.length !== 0&&<view onClick={this.openWishListModal} style={{paddingLeft: 13, color: 'white', fontSize: 20, paddingBottom:20}}>Wish list</view>}
                     {this.props.user.length !== 0&&<view onClick={this.openCartModal} style={{paddingLeft: 13, color: 'white', fontSize: 20, paddingBottom:20}}>Cart</view>}
                     {this.props.user.length !== 0&&<view onClick={this.openOrdersModal} style={{paddingLeft: 13, color: 'white', fontSize: 20, paddingBottom:20}}>Orders</view>}
                     {this.props.user.length !== 0&&<hr style={{width: '173px'}}/>}
-                    {this.props.user.length !== 0&&<view onClick={this.props.sighOut} style={{paddingLeft: 13, color: 'white', fontSize: 20, paddingBottom:20}}>Sigh out</view>}
+                    {this.props.user.length !== 0&&<view onClick={this.props.sighOut} style={{ paddingLeft: 13, color: 'white', fontSize: 20, paddingBottom:20}}>Sigh out</view>}
                 </view>
 
             </div>
