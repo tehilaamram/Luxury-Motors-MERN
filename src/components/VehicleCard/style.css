@@ -1,0 +1,13 @@
+@import '../../css/variables.css';
+
+.VehicleCard {
+    height: 100px;
+    width: 100px;
+    border-width: 1px;
+    border-color: turquoise;
+}
+
+.CardImage {
+    height: 60%;
+    width: 100%;
+}

@@ -6,7 +6,7 @@ class Footer extends React.Component {
         return (
             <footer className={"FooterContainer"}>
                <div className={"CopyRight"}>
-               CopyRight © 2020 Tehila Amram
+               CopyRight © 2020 Tehila Amram All rights reserved.
                </div>
             </footer>
         );

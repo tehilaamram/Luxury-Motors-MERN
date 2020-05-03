@@ -119,7 +119,8 @@ class Navigation extends React.Component {
                     <Link className="navLink" to={'/about'}>About</Link>
                     <br/>
                     <br/>
-                    <Link to={'/vehicle-catalog'} props={{addToCart: this.addToCart}} className={"navLink"}>Catalog</Link>
+                    {/**<Link to={'/vehicle-catalog'} props={{addToCart: this.addToCart}} className={"navLink"}>Catalog</Link>*/}
+                    <Link className="navLink" to={'/catalog'}>Catalog</Link>
                     <br/>
                     <br/>
                     <Link to={'/add-car'} className={"navLink"}>Add vehicle</Link>

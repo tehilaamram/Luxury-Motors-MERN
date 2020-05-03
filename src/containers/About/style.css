@@ -8,3 +8,42 @@
     flex-wrap: wrap;
     background-color: var(--background-color);
 }
+
+.Title {
+    height: 150px;
+    flex: 100%;
+    position: relative;
+}
+
+.ImageTitle {
+    height: 100%;
+    width: 100%;
+}
+
+.TitleText {
+    color: var(--primary-color);
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    -webkit-text-stroke: var(--secondary-color);
+    -webkit-text-stroke-width: 1px;
+    font-weight: bold;
+  width: 100%;
+  top: 0;
+  left: 0;
+  font-family: var(--regular-font);
+  font-size: 30px;
+}
+
+.AboutBody {
+    /* max-width: 90%; */
+    flex: 100%;
+    background-color: transparent;
+    padding: 40px;
+    position: relative;
+}
+
+.AboutMainText {
+    padding: 0 0 20px;
+    font-family: var(--regular-font);
+}
