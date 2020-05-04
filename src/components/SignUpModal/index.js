@@ -1,9 +1,11 @@
 import React from 'react';
-import md5 from 'md5';
+// import md5 from 'md5';
 import './style.css';
 import axios from "axios";
 import TextInput from '../TextInput';
 import Button from '../Button';
+import FlashMessage from '../FlashMessage';
+const crypto = require('crypto');
 
 class SignUpModal extends React.Component {
     constructor(props) {
@@ -13,6 +15,9 @@ class SignUpModal extends React.Component {
             password: '',
             confirmPassword: '',
             fullName: '',
+            error: false,
+            errorSubject: '',
+            errorMessage: '',
         };
         this.onEmailChange = this.onEmailChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
@@ -42,9 +47,12 @@ class SignUpModal extends React.Component {
         ) {
             alert('Make sure you filled all field and your passwords are same')
         } else {
+            var mykey = crypto.createCipher('aes-128-cbc', 'luxury');
+            var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
+            encryptedPassword += mykey.final('hex');
             axios.post(`${process.env.REACT_APP_SERVER_URL}/signUp`, {
-                email: this.state.email,
-                password: md5(this.state.password),
+                username: this.state.email,
+                password: encryptedPassword,
                 fullName: this.state.fullName,
             })
                 .then((res) => {
@@ -56,8 +64,22 @@ class SignUpModal extends React.Component {
                         alert(res.data.error.errmsg);
                     }
                 }).catch((err) => {
-                    console.log(err, ' errorvidhv');
-                    
+                    console.log(err.response);
+                    if (err.response === undefined) {
+                        this.setState({
+                            error: true,
+                            errorMessage: 'Unable to connect the server, please try later.'
+                        });
+                        document.getElementById('SignUpModalErrorFlash').style.display = "block";
+                    } else {
+                        if (err.response.status === 409) {
+                            this.setState({
+                                error: true,
+                                errorMessage: 'email already exists'
+                            });
+                            document.getElementById('SignUpModalErrorFlash').style.display = "block";
+                        }
+                    }
                 });
         }
     }
@@ -68,6 +90,7 @@ class SignUpModal extends React.Component {
     render() {
         return (
             <div id='signUpModal' className="SignUpModal">
+                {this.state.error && <FlashMessage id={'SignUpModalErrorFlash'} css={"Error"} subject={'Error!'} message={this.state.errorMessage} />}
                 <div id='loginRegisterModalContent' className="modal-content">
                     <div className="sighup-form-title">
                         <span className='sighupTitle'>

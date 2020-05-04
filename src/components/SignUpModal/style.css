@@ -1,4 +1,6 @@
 
+@import '../../css/variables.css';
+
 * {
     box-sizing: border-box;
   }
@@ -82,8 +84,9 @@
     font-stretch: normal;
     font-size: 40px;
     line-height: normal;
-    font-family: Arial;
+    font-family: var(--regular-font);
     color: white;
+    font-weight: bold;
 }
 .modal-real-content{
     background-color: #f2f2f2;

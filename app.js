@@ -1,20 +1,23 @@
 var createError = require('http-errors');
 var express = require('express');
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
+let session = require('express-session'); // add session management module
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
+
 var vehicleRouter = require('./routes/vehicle');
 var orderRouter = require('./routes/order');
 
 var app = express();
-
-// Passport Config
-require('./config/passport')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +27,7 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('my-secret'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -32,17 +35,42 @@ app.use('/user', usersRouter);
 app.use('/vehicle', vehicleRouter);
 app.use('/order', orderRouter);
 
-// Passport middleware
+// Configure passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Configure passport-local to use account model for authentication
+var User = require('./models')("User");
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+mongoose.connect('mongodb://localhost/buy-a-luxury-vehicle-sessions', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+app.use(session({
+  name: 'users.sid', // the name of session ID cookie
+  secret: 'my-secret', // the secret for signing the session ID cookie - mandatory option
+  resave: false, // do we need to resave unchanged session? (only if touch does not work) - mandatory option
+  rolling: true, // do we send the session ID cookie with each response?
+  saveUninitialized: true,  // do we need to save an 'empty' session object? - mandatory option
+  store: new MongoStore({ mongooseConnection: db }), // session storage backend
+  cookie: { maxAge: 900000, httpOnly: true, sameSite: true }  // cookie parameters
+}));
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
-
+// // catch 404 and forward to error handler
+// app.use(function (req, res, next) {
+//   let err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

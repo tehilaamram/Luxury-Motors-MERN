@@ -1,32 +1,41 @@
-// const passport = require('passport');
-const Users = require('../models/user');
-
+var User = require('../models')("User");
+var ReverseMd5 = require('reverse-md5')
+var reverseMd5 = ReverseMd5({
+    lettersUpper: true,
+    lettersLower: true,
+    numbers: true,
+    special: true,
+    whitespace: true,
+    maxLen: 12
+});
 const LocalStrategy = require('passport-local').Strategy;
-module.exports = function(passport) {
-passport.serializeUser(function(user, done) {
-    return done(null, user.id);
-});
+module.exports = function (passport) {
+    passport.use(
+        new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+            console.log('password ', password);
+            // Match user
+            User.findOne({
+                email: email,
+            }).then(user => {
+                console.log("found", user);
+                if (!user) {
+                    return done(null, false, { message: 'email' });
+                }
+                if (user.password === reverseMd5(password)) {
+                    console.log('in ap');
+                    return done(null, user);
+                }
+                return done(null, false, { message: 'password' });
+            });
+        })
+    );
+    passport.serializeUser(function (user, done) {
+        done(null, user.id);
+    });
 
-passport.deserializeUser(async function(id, done) {
-    try {
-        const userObj = await Users.findById(id, '-password');
-        return done(null, userObj);
-    }
-    catch (error) {
-        done(error);
-    }
-});
-
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-}, async function(req, email, password, done) {
-    const userObj = await Users.findOne({email: email, password: password});
-    if (userObj.length() > 0) {
-        return done(null, {id: userObj._id});
-    }
-    return done(null, false);
-}));
+    passport.deserializeUser(function (id, done) {
+        User.findById(id, function (err, user) {
+            done(err, user);
+        });
+    });
 }
-
-// module.exports = passport;

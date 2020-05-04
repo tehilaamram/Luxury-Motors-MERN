@@ -1,5 +1,6 @@
 const debug = require("debug")('lab7:model-user');
 const mongo = require("mongoose");
+var passportLocalMongoose = require('passport-local-mongoose');
 
 module.exports = db => {
     // create a schema
@@ -8,15 +9,15 @@ module.exports = db => {
             type: String,
             required: true,
         },
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-        },
-        password: {
-            type: String,
-            required: true,
-        },
+        // email: {
+        //     type: String,
+        //     required: true,
+        //     unique: true,
+        // },
+        // password: {
+        //     type: String,
+        //     required: true,
+        // },
         fullName: {
             type: String,
             required: true,
@@ -33,8 +34,17 @@ module.exports = db => {
             type: Boolean,
             default: true,
         },
+        resetPasswordToken: {
+            type: String,
+            default: '',
+        },
+        resetPasswordExpires: {
+            type: Date,
+            default: undefined,
+        },
     }, { autoIndex: false });
 
+    schema.plugin(passportLocalMongoose);
     db.model('User', schema);
     debug("User model created");
 }

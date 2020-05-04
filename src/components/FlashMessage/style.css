@@ -1,0 +1,43 @@
+@import '../../css/variables.css';
+
+.Alert {
+    margin-top: 3px;
+    padding: 7px 10px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    height: fit-content;
+    width: fit-content;
+    /* display: block; */
+}
+
+.Error {
+    display: block;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+    cursor: pointer;
+    background-color: transparent;
+    border: transparent;
+}
+
+.Alert .close {
+    position: relative;
+    top: -2px;
+    right: 0;
+    color: inherit;
+    margin-inline-start: 15px;
+}

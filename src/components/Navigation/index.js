@@ -3,7 +3,7 @@ import './style.css';
 import {Link} from "react-router-dom";
 // import MenuItem from "@material-ui/core/MenuItem";
 import Button from '../Button';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 
 // import history from '../../history';
 

@@ -86,45 +86,6 @@ router.post('/putClient', (req, res) => {
         return res.json({ success: true });
     });
 });
-// router.post('/register', async (req, res) => {
-//   console.log('gere user');
-//   Users.register(new Users({ email : req.body.email, password: req.body.password}), req.body.password, function(err, account) {
-//       if (err) {
-//           console.log(err, req.body, ' error');
-//           return res.render('register', {title: 'Register', problem: undefined});
-//       }
-
-//       passport.authenticate('local')(req, res, function () {
-//           var session = req.session;
-//           delete session.badLogin;
-//           req.session.userId = req.body.email;
-//           session.admin = true;
-//           session.userName = req.body.name;
-//           session.count = 0;
-//           req.session = session;
-//           res.redirect(req.session.referer);
-//       });
-//   });
-// });
-
-// router.post('/register', (req, res) => {
-//   let data = new Users();
-//   const { email, password, fullName} = req.body;
-//   data.admin=false;
-//   data.email = email;
-//   data.password = password;
-//   data.fullName = fullName;
-//   data.orders = [];
-//   data.cart = [];
-//   data.wishList = [];
-//   data.status = true;
-//   console.log(data);
-//   data.save((err) => {
-//       console.log(err);
-//       if (err) return res.json({ success: false, error: err });
-//       return res.json({ success: true });
-//   });
-// });
 
 module.exports = router;
 
