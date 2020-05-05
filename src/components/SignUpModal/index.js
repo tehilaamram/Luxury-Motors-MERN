@@ -51,14 +51,14 @@ class SignUpModal extends React.Component {
             var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
             encryptedPassword += mykey.final('hex');
             axios.post(`${process.env.REACT_APP_SERVER_URL}/signUp`, {
-                username: this.state.email,
+                email: this.state.email,
                 password: encryptedPassword,
                 fullName: this.state.fullName,
             })
                 .then((res) => {
                     console.log(res, ' res');
-                    if (res.data.success === true) {
-                        alert(this.state.fullName + ': you sighed up successfully');
+                    if (res.status === 200) {
+                        // alert(this.state.fullName + ': you sighed up successfully');
                         this.closeModal();
                     } else {
                         alert(res.data.error.errmsg);
