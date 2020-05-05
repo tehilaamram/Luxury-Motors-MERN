@@ -1,10 +1,14 @@
 import React from 'react';
-// import md5 from 'md5';
-import './style.css';
+import { connect } from 'react-redux';
 import axios from "axios";
+
+import './style.css';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import FlashMessage from '../FlashMessage';
+import { signUp } from '../../store/user/actions';
+
+
 const crypto = require('crypto');
 
 class SignUpModal extends React.Component {
@@ -39,6 +43,7 @@ class SignUpModal extends React.Component {
     }
 
     signUp() {
+        console.log(this.props.user);
         if (this.state.email === '' ||
             this.state.password === '' ||
             this.state.confirmPassword === '' ||
@@ -54,32 +59,33 @@ class SignUpModal extends React.Component {
                 email: this.state.email,
                 password: encryptedPassword,
                 fullName: this.state.fullName,
-            })
-                .then((res) => {
-                    console.log(res, ' res');
+            }).then((res) => {
                     if (res.status === 200) {
-                        // alert(this.state.fullName + ': you sighed up successfully');
+                        this.props.onSignUp(this.state.email, this.state.password, this.state.fullName);
                         this.closeModal();
                     } else {
                         alert(res.data.error.errmsg);
                     }
                 }).catch((err) => {
-                    console.log(err.response);
                     if (err.response === undefined) {
                         this.setState({
                             error: true,
                             errorMessage: 'Unable to connect the server, please try later.'
                         });
-                        document.getElementById('SignUpModalErrorFlash').style.display = "block";
                     } else {
                         if (err.response.status === 409) {
                             this.setState({
                                 error: true,
                                 errorMessage: 'email already exists'
                             });
-                            document.getElementById('SignUpModalErrorFlash').style.display = "block";
+                        } else {
+                            this.setState({
+                                error: true,
+                                errorMessage: err,
+                            });
                         }
                     }
+                    document.getElementById('SignUpModalErrorFlash').style.display = "block";
                 });
         }
     }
@@ -91,19 +97,21 @@ class SignUpModal extends React.Component {
         return (
             <div id='signUpModal' className="SignUpModal">
                 {this.state.error && <FlashMessage id={'SignUpModalErrorFlash'} css={"Error"} subject={'Error!'} message={this.state.errorMessage} />}
-                <div id='loginRegisterModalContent' className="modal-content">
-                    <div className="sighup-form-title">
+                <div id='signUpModalContent' className="SignUpModalContent">
+                    <div className="SignUpDivTitle">
                         <span className='sighupTitle'>
                             Sign Up
 					</span>
                     </div>
-                    <div className='modal-real-content'>
+                    <div className='SignUpModalRealContent'>
                         <TextInput id={"fullName"} text={"Full Name"} type={"text"} onChange={this.onFullNameChange} value={this.state.fullName} />
                         <TextInput id={"email"} text={"Email"} type={"email"} onChange={this.onEmailChange} value={this.state.email} />
                         <TextInput id={"password"} text={"Password"} type={"password"} onChange={this.onPasswordChange} value={this.state.password} />
                         <TextInput id={"confirmPassword"} text={"Confirm Password"} type={"password"} onChange={this.onConfirmPasswordChange} value={this.state.confirmPassword} />
                         <Button css={"PrimaryButton"} title={"Sign Up"} onClick={this.signUp} />
-                        <Button css={"RoundCloseButton"} title={""} onClick={this.closeModal} />
+                        <div className="CloseSignUpModalDiv">
+                        <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -111,4 +119,12 @@ class SignUpModal extends React.Component {
     }
 }
 
-export default SignUpModal;
+const mapStateToProps = (state) => ({
+    user: state.user,
+});
+
+const mapDispatchToProps = {
+    onSignUp: signUp,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpModal);

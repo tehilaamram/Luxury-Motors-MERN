@@ -33,13 +33,15 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer; */
+    padding-inline-start: 12px;
+    margin: 8px 2px;
     align-self: baseline;
     cursor: pointer;
-    padding-left: 13px;
+    /* padding-left: 13px; */
     color: #fff;
     font-family: var(--regular-font);
      font-size: 20px;
-     padding-bottom:20px;
+     /* padding-bottom:20px; */
      border: none;
      outline:none;
      background-color: transparent;
@@ -72,16 +74,19 @@
     border-radius: 50%;
     color: var(--primary-color);
     cursor: pointer;
-    height: 20px;
-    width: 23px;
+    height: 25px;
+    width: 29px;
     background-color: transparent;
     border-width: 2px;
     text-align: center;
     font-weight: 900;
+    font-size: 25px;
+    font-weight: 900;
     border-color: var(--primary-color);
     align-self: center;
-    background-image: url(../../images/x.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    line-height: 0.7;
+    /* background-image: url(../../images/x.png); */
+    /* background-po/sition: center; */
+    /* background-repeat: no-repeat; */
+    /* background-size: contain; */
 }

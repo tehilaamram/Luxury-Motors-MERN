@@ -20,11 +20,6 @@ class SighupModal extends React.Component {
         this.onFullNameChange = this.onFullNameChange.bind(this);
         this.onLevelChange = this.onLevelChange.bind(this);
         this.AddUser = this.AddUser.bind(this);
-        window.onclick = function (event) {
-            if (event.target !== document.getElementById("loginRegisterModalContent") && event.target !== document.getElementById('userAvatar')) {
-                // document.getElementById('loginRegisterModal').style.display = 'none';
-            }
-        }
     }
     onEmailChange(event){
         this.setState({email:event.target.value});

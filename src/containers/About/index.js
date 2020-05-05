@@ -15,10 +15,10 @@ class About extends React.Component {
             </div>
                 </div>
                 <div className={"AboutBody"}>
-                    <p className={"AboutMainText"}>
-                        LUXURY MOTORS was founded following the need of our customers who demanded exclusive and exclusive luxury vehicles that are not imported to Israel regularly by the official importers, while emphasizing service and price lower than the prices of the official importers.
-                    </p>
-                    <p className={"AboutMainText"}>
+                <p className={"AboutMainText"}>
+                LUXURY MOTORS was founded following the need of our customers who demanded exclusive and exclusive luxury vehicles that are not imported to Israel regularly by the official importers, while emphasizing service and price lower than the prices of the official importers.
+            </p>
+                 <p className={"AboutMainText"}>
                     In our company you can enjoy every pen from the renewal of the world of luxury cars to ensure you the most luxurious vehicles and set the highest level in the world of luxury cars and sports.
                     </p>
                     <p className={"AboutMainText"}>
@@ -35,7 +35,9 @@ class About extends React.Component {
                     </p>
                     <p className={"AboutMainText"}>
                     Every customer of our company enjoys close accompaniment not only until the vehicle is received but much later, so it is no wonder that all of our customers become an integral part of the LUXURY MOTORS family and always welcome any request or problem of all our customers.
-                    </p>
+                    </p> 
+                   
+                   
                 </div>
             </div>
         );

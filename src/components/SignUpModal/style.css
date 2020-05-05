@@ -13,25 +13,11 @@
     height: 100%;
     width: 100%;
     background-color: rgba(0,0,0,0.7);
-    /* border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px; */
-    /* display: none;
-    align-items: center;
-    justify-content: center;
-    position: fixed; /* Stay in place */
-    /* z-index: 100; Sit on top */
-    /* overflow: hidden; */
-    /* width: 100%; Full width */
-    /* height: 100%; Full height */
-    /* overflow: auto; Enable scroll if needed */
-    /* background-color: rgba(0,0,0,0.7); Black w/ opacity */
 }
 
-/* LoginModal Content/Box */
-.modal-content {
+.SignUpModalContent {
+    top: 3px;
     position: fixed;
-    /* overflow: auto; */
     display: flex;
     flex-direction: column;
     height: fit-content;
@@ -40,10 +26,9 @@
     border-radius: 10px;
     background-color: #fefefe;
 }
-.sighup-form-title {
-    /*background-image: url("https://images.pexels.com/photos/627680/pexels-photo-627680.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");*/
-    background-image: url("https://images.pexels.com/photos/326259/pexels-photo-326259.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
-    /*background-image: url("");*/
+.SignUpDivTitle {
+    background-image: url(../../images/sign_up_image.jpeg);
+    background-size: cover;
     position: relative;
     z-index: 1;
     display: -webkit-box;
@@ -88,15 +73,11 @@
     color: white;
     font-weight: bold;
 }
-.modal-real-content{
+
+.SignUpModalRealContent{
     background-color: #f2f2f2;
   padding: 20px;
   border-radius: 10px;
-    /* display: flex;
-    flex-direction: column;
-    padding-top: 25px;
-    padding-right: 50px;
-    padding-left: 50px; */
 }
 
 .sighupButton:hover {
@@ -118,6 +99,10 @@
     border-radius: 7px;
     transition-duration: 0.4s;
     cursor: pointer;
+}
+.CloseSignUpModalDiv {
+    width: 100%;
+    text-align: center;
 }
 
 /* input[type=text] {
