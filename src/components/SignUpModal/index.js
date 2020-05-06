@@ -6,7 +6,7 @@ import './style.css';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import FlashMessage from '../FlashMessage';
-import { signUp } from '../../store/user/actions';
+import { signUp } from '../../redux/user/actions';
 
 
 const crypto = require('crypto');
@@ -61,7 +61,7 @@ class SignUpModal extends React.Component {
                 fullName: this.state.fullName,
             }).then((res) => {
                     if (res.status === 200) {
-                        this.props.onSignUp(this.state.email, this.state.password, this.state.fullName);
+                        this.props.onSignUp(this.state.email, this.state.fullName);
                         this.closeModal();
                     } else {
                         alert(res.data.error.errmsg);

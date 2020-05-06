@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import store from '../../store';
+import Init from '../../components/Init';
 
 import Home from '../Home';
 import About from '../About';
@@ -28,6 +29,7 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <BrowserRouter>
+                <Init/>
                     <SignUpModal />
                      <Header />
                     <LoginModal/>

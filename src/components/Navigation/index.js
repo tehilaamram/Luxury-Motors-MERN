@@ -1,19 +1,21 @@
 import React from 'react';
+import autoBind from 'react-autobind';
 import {Link, withRouter} from "react-router-dom";
 import { connect } from 'react-redux';
 
 
 import './style.css';
 import Button from '../Button';
-
+import { ROLE } from '../../helpers/consts';
+import { signOut } from '../../redux/user/actions';
 
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {lockedPanel: false, panelState: 'minimize'};
-        this.changePanelState = this.changePanelState.bind(this);
-      }
-    
+        autoBind(this);
+    }
+
     openSignInModal() {
         if (document.getElementById('signInModal').style.display === 'flex') {
             document.getElementById('signInModal').style.display = 'none';
@@ -28,22 +30,8 @@ class Navigation extends React.Component {
             document.getElementById('signUpModal').style.display = 'flex';
         }
     }
-    changePanelState() {
-        console.log("in state");
-        if (this.state.lockedPanel) {
-            this.setState({
-                lockedPanel: false,
-                panelState: 'minimize',
-            });
-        } else {
-            this.setState({
-                lockedPanel: true,
-                panelState: 'pin-panel',
-            });
-        }
-    }
     signOut(){
-
+        this.props.onSignOut();
     }
     render() {
         var {user} = this.props;
@@ -58,14 +46,13 @@ class Navigation extends React.Component {
                     <Link className="navLink" to={'/catalog'}>Catalog</Link>
                     <br/>
                     <br/>
-                    { user.role !== 'user' && <Link to={'/add-car'} className={"navLink"}>Add vehicle</Link>}
+                    { user.role !== ROLE.GUEST && <Link to={'/add-car'} className={"navLink"}>Add vehicle</Link>}
                     <br/>
                     </div>
                 <div style={{display:'flex', flexDirection: 'column'}}>
-                { user.email !== '' && <Button title={"Sign Out"} css={"navButton"} onClick={this.signOut}/>}
-                <Button title={"pin Panel"} css={"navButton"} onClick={this.changePanelState}/>
-                { user.email === '' && <Button title={"Sign In"} css={"navButton"} onClick={this.openSignInModal}/>}
-                { user.email === '' && <Button title={"Sign Up"} css={"navButton"} onClick={this.openSignUpModal}/>}
+                { user.role !== ROLE.GUEST && <Button title={"Sign Out"} css={"navButton"} onClick={this.signOut}/>}
+                { user.role === ROLE.GUEST && <Button title={"Sign In"} css={"navButton"} onClick={this.openSignInModal}/>}
+                { user.role === ROLE.GUEST && <Button title={"Sign Up"} css={"navButton"} onClick={this.openSignUpModal}/>}
                 <br/>
                 </div>
             </div>
@@ -76,5 +63,8 @@ const mapStateToProps = (state) => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps, {})(withRouter(Navigation));
-// export default withRouter(Navigation);
+const mapDispatchToProps = {
+    onSignOut: signOut,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navigation));

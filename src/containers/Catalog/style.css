@@ -3,6 +3,7 @@
   box-sizing: border-box;
 }
 .CatalogContainer {
+  min-height: calc(100vh - 71.44px - 30px);
   display: flex;
   flex-wrap: wrap;
   background-color: var(--background-color);

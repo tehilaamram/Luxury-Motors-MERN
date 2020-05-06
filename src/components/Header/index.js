@@ -1,4 +1,6 @@
 import React from 'react';
+import autoBind from 'react-autobind';
+
 import './style.css';
 import logo from '../../images/luxury_motors3.jpg';
 import Navigation from '../Navigation';
@@ -7,10 +9,7 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {isMouseIn: false};
-
-        // This binding is necessary to make `this` work in the callback
-        this.handleMouseIn = this.handleMouseIn.bind(this);
-        this.handleMouseOut = this.handleMouseOut.bind(this);
+        autoBind(this);
     }
     handleMouseIn() {
         this.setState({isMouseIn: true});
@@ -20,10 +19,10 @@ class Header extends React.Component {
     }
     render() {
         return (
-            <header className={"header"}>
-                <img src={logo} className={"appLogo"} alt="logo"
+            <header className={"AppHeader"}>
+                <img src={logo} className={"AppLogo"} alt="logo"
                      onMouseEnter={this.handleMouseIn}/>
-                {this.state.isMouseIn && <Navigation sighOut={this.props.sighOut} user={this.props.user} onMouseLeave={this.handleMouseOut} />}
+                {this.state.isMouseIn && <Navigation onMouseLeave={this.handleMouseOut} />}
             </header>
         );
     }
