@@ -7,15 +7,16 @@
   padding-inline-start: 0;
   top: 0;
   width: 100%;
-  height: 71.44px;
-  object-fit: cover;
-  background-image: url(../../images/header_background.jpg);
+  height: var(--header-height);
+  background-color: var(--silver-color);
+  /* object-fit: cover; */
+  /* background-image: url(../../images/header_background.jpg); */
 }
 .AppLogo {
   position: absolute;
-  height: 68.44px;
+  height: calc(var(--header-height) - 3px);
   width: 86.38px;
-  background-color: var(--secondary-color);
-  padding-top: 3px;
+  background-color: var(--red-color);
+  padding: 3px 0 0 3px;
   margin-block-end: 0;
 }

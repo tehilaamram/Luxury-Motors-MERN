@@ -9,7 +9,13 @@ class Video extends React.Component {
     render() {
         return (
             <div className={"VehicleCard"}>
-            <img src={this.props.imgUrl} alt="Avatar" className={"CardImage"}/>
+                <div className="VehicleCardHeader">
+                    <img src={this.props.imgUrl} alt="Avatar" className={"VehicleCardImage"} />
+                </div>
+                <div className="VehicleCardBody">
+                </div>
+                <div className="VehicleCardFooter">
+                </div>
             </div>
         );
     }

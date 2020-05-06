@@ -10,16 +10,16 @@ class Home extends React.Component {
         console.log()
         return (
             <div className={"HomeContainer"}>
-            <div className={"MainImage"}>
+            <div className={"HomeMainImage"}>
             <img src={MainImage} alt="Smiley face" height="100%" width="100%"/> 
-            <div className="ImageText">Your road <br/>
+            <div className="HomeImageText">Your road <br/>
             to a new <br/>level <br/>
             starts here</div>
             </div>
-            <div className={"Video"}>
+            <div className={"HomeVideo"}>
             <Video/>
             </div>
-            <div className={"SlideShow"}>
+            <div className={"HomeSlideShow"}>
             <SlideShow/>
             </div>
             </div>

@@ -1,49 +1,58 @@
 @import '../../css/variables.css';
+
 * {
   box-sizing: border-box;
 }
 .HomeContainer {
+  padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  background-color: var(--background-color);
+  background-color: var(--light-gray-color);
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
   .HomeContainer {   
     flex-direction: column;
   }
 }
 
-.minimize {
+@media screen and (min-width: 769px) {
+  .HomeMainImage {
+    padding-right: 10px;
+  }
+}
+
+/* .minimize {
   margin-inline-start: 0;
-}
+} */
 
-.pin-panel {
+/* .pin-panel {
   margin-inline-start: 200px;
-}
+} */
 
-.Video {
+.HomeVideo {
   -ms-flex: 60%; /* IE10 */
   flex: 60%;
   background-color: transparent;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
-.MainImage {
+.HomeMainImage {
   -ms-flex: 40%; /* IE10 */
   flex: 40%;
   background-color: transparent;
-  padding: 20px;
+  /* padding: 20px; */
   position: relative;
 }
 
-.SlideShow {
+.HomeSlideShow {
   text-align: center;
   background: transparent;
-  padding: 0 10px;
+  /* padding: 0 10px; */
   width: 100%;
 }
 
-.ImageText {
+.HomeImageText {
   position: absolute;
   z-index: 1;
   top: 0;
@@ -51,13 +60,13 @@
   height: calc(100% - 80px);
   width: calc(100% - 80px);
   margin: 40px;
-  background-color: var(--primary-color);
-  color: var(--background-color);
+  background-color: var(--black-color);
+  color: var(--light-gray-color);
   font-family: var(--regular-font);
   text-align: center;
   opacity: 0.5;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 5vw;
   overflow: hidden;
   line-height: 1.4;
   text-transform: capitalize;

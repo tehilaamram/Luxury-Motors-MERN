@@ -1,13 +1,31 @@
 @import '../../css/variables.css';
 
 .VehicleCard {
-    height: 100px;
-    width: 100px;
+    height: fit-content;
+    width: 353px;
     border-width: 1px;
+    background-color: tomato;
     border-color: turquoise;
 }
 
-.CardImage {
-    height: 60%;
+.VehicleCardImage {
+    height: 100%;
     width: 100%;
+}
+
+.VehicleCardHeader {
+    height: 233px;
+    width: 100%;
+
+}
+
+.VehicleCardBody {
+    background-color: violet;
+    height: 30px;
+
+}
+
+.VehicleCardFooter {
+    background-color: teal;
+    height: 40px;
 }

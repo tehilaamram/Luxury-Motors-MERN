@@ -3,62 +3,14 @@
   box-sizing: border-box;
 }
 .CatalogContainer {
+  padding: 20px;
   min-height: calc(100vh - 71.44px - 30px);
   display: flex;
   flex-wrap: wrap;
-  background-color: var(--background-color);
+  background-color: var(--light-gray-color);
 }
 @media screen and (max-width: 700px) {
-  .HomeContainer {   
+  .CatalogContainer {   
     flex-direction: column;
   }
-}
-
-.minimize {
-  margin-inline-start: 0;
-}
-
-.pin-panel {
-  margin-inline-start: 200px;
-}
-
-.Video {
-  -ms-flex: 60%; /* IE10 */
-  flex: 60%;
-  background-color: transparent;
-  padding: 20px;
-}
-
-.MainImage {
-  -ms-flex: 40%; /* IE10 */
-  flex: 40%;
-  background-color: transparent;
-  padding: 20px;
-  position: relative;
-}
-
-.SlideShow {
-  text-align: center;
-  background: transparent;
-  width: 100%;
-}
-
-.ImageText {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  height: calc(100% - 80px);
-  width: calc(100% - 80px);
-  margin: 40px;
-  background-color: var(--primary-color);
-  color: var(--background-color);
-  font-family: var(--regular-font);
-  text-align: center;
-  opacity: 0.5;
-  font-weight: bold;
-  font-size: 30px;
-  overflow: hidden;
-  line-height: 1.4;
-  text-transform: capitalize;
 }

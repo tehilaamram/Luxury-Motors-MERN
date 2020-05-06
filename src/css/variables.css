@@ -1,8 +1,11 @@
 :root {
-    --primary-color:#000000;
-    --secondary-color: #E20338;
-    /* --background-color: blue; */
-    --background-color: #F1F2F2;
+    --black-color:#000000;
+    --red-color: #E20338;
+    --header-height: 73px;
+    --footer-height: 30px;
+    /* --light-gray-color: blue; */
+    --light-gray-color: #F1F2F2;
+    --silver-color: #C8C8C8;
     --regular-font: 'Roboto', sans-serif;
     --footer-color: #585858;
     --phone-width: 479px;

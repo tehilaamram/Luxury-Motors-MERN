@@ -6,7 +6,7 @@
 .AboutContainer {
     display: flex;
     flex-wrap: wrap;
-    background-color: var(--background-color);
+    background-color: var(--light-gray-color);
     min-height: calc(100vh - 71.44px - 30px);
 }
 
@@ -22,11 +22,11 @@
 }
 
 .TitleText {
-    color: var(--primary-color);
+    color: var(--black-color);
     z-index: 1;
     position: absolute;
     text-align: center;
-    -webkit-text-stroke: var(--secondary-color);
+    -webkit-text-stroke: var(--red-color);
     -webkit-text-stroke-width: 1px;
     font-weight: bold;
   width: 100%;

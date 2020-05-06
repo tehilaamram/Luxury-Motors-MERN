@@ -32,13 +32,13 @@ class SlideShow extends React.Component {
         return (
             <div id="slideshow">
                 <div>
-                    <img src={FirstImage} alt={"vehicle1"} height="100%" width="100%" />
+                    <img src={FirstImage} alt={"vehicle1"} className="SlideShowImg"/>
                 </div>
                 <div>
-                    <img src={SecondImage} alt={"vehicle2"} height="100%" width="100%" />
+                    <img src={SecondImage} alt={"vehicle2"} className="SlideShowImg" />
                 </div>
                 <div>
-                <img src={ThirdImage} alt={"vehicle3"} height="100%" width="100%" />
+                <img src={ThirdImage} alt={"vehicle3"} className="SlideShowImg" />
                 </div>
             </div>
         );
