@@ -1,0 +1,21 @@
+@import '../../css/variables.css';
+
+.IconTextContainer {
+    display: flex;
+    margin-bottom: 7px;
+}
+.IconTextImgDiv {
+    height: 20px;
+    width: 20px;
+}
+.IconTextImg {
+height: 100%;
+width: 100%;
+}
+
+.IconTextLabel {
+    font-family: var(--regular-font);
+    align-self: center;
+    font-size: 15px;
+    margin-inline-start: 5px;
+}

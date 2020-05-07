@@ -46,10 +46,11 @@ class Navigation extends React.Component {
                     <Link className="navLink" to={'/catalog'}>Catalog</Link>
                     <br/>
                     <br/>
-                    { user.role !== ROLE.GUEST && <Link to={'/add-car'} className={"navLink"}>Add vehicle</Link>}
+                    <Link to={'/add-vehicle'} className={"navLink"}>Add vehicle</Link>
                     <br/>
                     </div>
                 <div style={{display:'flex', flexDirection: 'column'}}>
+                <hr className="NavigationHr"/>
                 { user.role !== ROLE.GUEST && <Button title={"Sign Out"} css={"navButton"} onClick={this.signOut}/>}
                 { user.role === ROLE.GUEST && <Button title={"Sign In"} css={"navButton"} onClick={this.openSignInModal}/>}
                 { user.role === ROLE.GUEST && <Button title={"Sign Up"} css={"navButton"} onClick={this.openSignUpModal}/>}

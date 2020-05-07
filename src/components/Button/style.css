@@ -47,9 +47,12 @@
      background-color: transparent;
   }
 
+  .SignUpButton {
+    margin-top: 35px;
+  }
+
   .PrimaryButton {
     font-family: var(--regular-font);
-    margin-top: 35px;
     align-self: center;
     width: 100%;
     height: 50px;
@@ -60,8 +63,9 @@
     display: inline-block;
     font-size: 15px;
     border-radius: 7px;
-    transition-duration: 0.4s;
     cursor: pointer;
+    border: hidden;
+    border: 2px solid var(--red-color);
   }
   .PrimaryButton:hover {
     background-color: white;
@@ -85,8 +89,19 @@
     border-color: var(--black-color);
     align-self: center;
     line-height: 0.7;
-    /* background-image: url(../../images/x.png); */
-    /* background-po/sition: center; */
-    /* background-repeat: no-repeat; */
-    /* background-size: contain; */
+}
+
+.VehicleCardButton {
+    margin-top: 5px;
+}
+
+.LinkButton {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: var(--red-color);
+    font-size: 15px;
+    font-family: var(--regular-font);
+    cursor: pointer;
+    margin-top: 10px;
 }

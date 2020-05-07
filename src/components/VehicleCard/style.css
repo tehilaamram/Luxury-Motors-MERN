@@ -1,31 +1,55 @@
 @import '../../css/variables.css';
 
 .VehicleCard {
-    height: fit-content;
-    width: 353px;
+    margin: 10px;
+    display: flex;
+    height: 200px;
+    width: 550px;
+    /* width: 80vw; */
+    /* width: calc(100vw - 10px); */
     border-width: 1px;
-    background-color: tomato;
+    background-color: var(--white-color);
     border-color: turquoise;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .VehicleCardImage {
     height: 100%;
-    width: 100%;
+    width: calc(200px * 4 / 3);;
+    border-radius: 5px 0 0 5px;
 }
 
 .VehicleCardHeader {
-    height: 233px;
-    width: 100%;
-
+    /* height: calc(353px * 9 / 16); */
+    /* width: 353px; */
+    flex: content;
 }
 
 .VehicleCardBody {
-    background-color: violet;
-    height: 30px;
-
+flex: 85%;
+margin: 10px 10px 10px 20px;
 }
 
 .VehicleCardFooter {
-    background-color: teal;
-    height: 40px;
+    background-color: transparent;
+    flex: 10%;
+    border-radius: 0 5px 5px 0;
+    margin: 10px;
+    /* height: 40px; */
+}
+
+.VerticalHr {
+    flex: 5%;
+    border: none;
+    border-left: 1px solid hsl(200, 15%, 86%);
+    height: calc(100% - 20px);
+    width: 1px;
+}
+
+.ModelText {
+    font-size: 20px;
+    font-family: var(--regular-font);
+    font-weight: bold;
+    margin-bottom: 10px;
 }

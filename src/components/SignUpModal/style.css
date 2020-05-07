@@ -27,6 +27,8 @@
     background-color: #fefefe;
 }
 .SignUpDivTitle {
+    -webkit-text-stroke: var(--red-color);
+    -webkit-text-stroke-width: medium;
     background-image: url(../../images/sign_up_image.jpeg);
     background-size: cover;
     position: relative;
@@ -48,18 +50,7 @@
     border-top-right-radius:10px;
     border-top-left-radius:10px;
 }
-.sighup-form-title::before {
-    content: "";
-    display: block;
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(54,84,99,0.5);
-}
-.sighupTitle{
+.SignUpTitle{
     padding-top: 15px;
     font-style: normal;
     font-variant-ligatures: normal;
@@ -80,64 +71,7 @@
   border-radius: 10px;
 }
 
-.sighupButton:hover {
-    background-color: white;
-    color: black;
-    border: 2px solid brown;
-}
-.sighupButton{
-    margin-top: 35px;
-    align-self: center;
-    width: 500px;
-    height: 50px;
-    background-color: brown;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    border-radius: 7px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
 .CloseSignUpModalDiv {
     width: 100%;
     text-align: center;
 }
-
-/* input[type=text] {
-    margin-left: 5px;
-    background-color: unset;
-    border: none;
-    border-bottom: 2px solid black;
-    height: 25px;
-    font-style: normal;
-    font-variant-ligatures: normal;
-    font-variant-caps: normal;
-    font-variant-numeric: normal;
-    font-variant-east-asian: normal;
-    font-weight: 400;
-    font-stretch: normal;
-    font-size: 13.3333px;
-    line-height: normal;
-    font-family: Arial;
-    width: 365px
-} */
-/* input[type=number] {
-    margin-left: 5px;
-    background-color: unset;
-    border: none;
-    border-bottom: 2px solid black;
-    height: 25px;
-    font-style: normal;
-    font-variant-ligatures: normal;
-    font-variant-caps: normal;
-    font-variant-numeric: normal;
-    font-variant-east-asian: normal;
-    font-weight: 400;
-    font-stretch: normal;
-    font-size: 13.3333px;
-    line-height: normal;
-    font-family: Arial;
-    width: 365px
-} */

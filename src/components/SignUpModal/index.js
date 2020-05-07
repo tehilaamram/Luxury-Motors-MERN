@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from "axios";
+import autoBind from 'react-autobind';
 
 import './style.css';
 import TextInput from '../TextInput';
@@ -23,11 +24,7 @@ class SignUpModal extends React.Component {
             errorSubject: '',
             errorMessage: '',
         };
-        this.onEmailChange = this.onEmailChange.bind(this);
-        this.onPasswordChange = this.onPasswordChange.bind(this);
-        this.onConfirmPasswordChange = this.onConfirmPasswordChange.bind(this);
-        this.onFullNameChange = this.onFullNameChange.bind(this);
-        this.signUp = this.signUp.bind(this);
+        autoBind(this);
     }
     onEmailChange(event) {
         this.setState({ email: event.target.value });
@@ -50,7 +47,7 @@ class SignUpModal extends React.Component {
             this.state.fullName === '' ||
             this.state.confirmPassword !== this.state.password
         ) {
-            alert('Make sure you filled all field and your passwords are same')
+            alert('Make sure you filled all field and your passwords are same');
         } else {
             var mykey = crypto.createCipher('aes-128-cbc', 'luxury');
             var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
@@ -99,7 +96,7 @@ class SignUpModal extends React.Component {
                 {this.state.error && <FlashMessage id={'SignUpModalErrorFlash'} css={"Error"} subject={'Error!'} message={this.state.errorMessage} />}
                 <div id='signUpModalContent' className="SignUpModalContent">
                     <div className="SignUpDivTitle">
-                        <span className='sighupTitle'>
+                        <span className='SignUpTitle'>
                             Sign Up
 					</span>
                     </div>
@@ -108,7 +105,7 @@ class SignUpModal extends React.Component {
                         <TextInput id={"email"} text={"Email"} type={"email"} onChange={this.onEmailChange} value={this.state.email} />
                         <TextInput id={"password"} text={"Password"} type={"password"} onChange={this.onPasswordChange} value={this.state.password} />
                         <TextInput id={"confirmPassword"} text={"Confirm Password"} type={"password"} onChange={this.onConfirmPasswordChange} value={this.state.confirmPassword} />
-                        <Button css={"PrimaryButton"} title={"Sign Up"} onClick={this.signUp} />
+                        <Button css={"PrimaryButton SignUpButton"} title={"Sign Up"} onClick={this.signUp} />
                         <div className="CloseSignUpModalDiv">
                         <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
                         </div>

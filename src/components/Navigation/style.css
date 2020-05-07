@@ -33,3 +33,16 @@
     margin: 8px 2px;
     cursor: pointer;
 }
+
+.NavigationHr {
+    width: 80%;
+    align-self: center;
+    color: var(--light-gray-color);
+    clear: both;
+    height: .05882353em;
+    border: 0;
+    border-width: 1px;
+    border-top-style: solid;
+    /* margin: 1.35294118em 0 1.41176471em; */
+    padding: 0;
+}
