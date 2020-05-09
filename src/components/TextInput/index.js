@@ -13,7 +13,7 @@ class TextInput extends React.Component {
                     <label className={"TextInputLabel"} htmlFor={this.props.id}>{this.props.text}</label>
                 </div>
                 <div className="TextInputTextContainer">
-                    <input type={this.props.type} id={this.props.id} onChange={this.props.onChange} value={this.props.value}/>
+                    <input type={this.props.type} id={this.props.id} onChange={this.props.onChange} value={this.props.value} min={this.props.min} max={this.props.max}/>
                 </div>
             </div>
         );

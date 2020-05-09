@@ -3,7 +3,7 @@
 * {
   box-sizing: border-box;
 }
-.AddVehicleContainer {
+.VehicleContainer {
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -11,20 +11,20 @@
   min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
-.AddVehicleUploadImagesContainer {
+.VehicleUploadImagesContainer {
   flex: 40%;
 }
 
-.AddVehicleDetailsContainer {
+.VehicleDetailsContainer {
   flex: 50%;
   padding: 0 20px;
 }
 
-.AddVehicleButton {
+.VehicleButton {
   flex: 100%;
 }
 
-.SaveBottonAddVehicle {
+.BottonAddVehicle {
   width: 100px;
   margin: auto;
 }

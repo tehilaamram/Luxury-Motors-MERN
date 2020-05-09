@@ -1,6 +1,6 @@
 import React from 'react';
 import autoBind from 'react-autobind';
-import {Link, withRouter} from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import { connect } from 'react-redux';
 
 
@@ -33,20 +33,23 @@ class Navigation extends React.Component {
     signOut(){
         this.props.onSignOut();
     }
+    navigateTo(page) {
+        this.props.onMouseLeave();
+        this.props.history.push(page);
+    }
     render() {
         var {user} = this.props;
         return (
             <div className="NavigationContainer" onMouseLeave={!this.state.lockedPanel? this.props.onMouseLeave : () => {}}>
                 <div className='upperPartOfNavigation'>
                     <br/>
-                    <Link className="navLink" to={'/'}>Home</Link>
+                    <Button title={"Home"} css={"navButton"} onClick={() => {this.navigateTo('/')}}/>
                     <br/>
-                    <Link className="navLink" to={'/about'}>About</Link>
+                    <Button title={"About"} css={"navButton"} onClick={() => {this.navigateTo('/about')}}/>
                     <br/>
-                    <Link className="navLink" to={'/catalog'}>Catalog</Link>
+                    <Button title={"Catalog"} css={"navButton"} onClick={() => {this.navigateTo('/catalog')}}/>
                     <br/>
-                    <br/>
-                    <Link to={'/add-vehicle'} className={"navLink"}>Add vehicle</Link>
+                    <Button title={"Add Vehicle"} css={"navButton"} onClick={() => {this.navigateTo('/add-vehicle')}}/>
                     <br/>
                     </div>
                 <div style={{display:'flex', flexDirection: 'column'}}>
