@@ -5,7 +5,7 @@ var passportLocalMongoose = require('passport-local-mongoose');
 module.exports = db => {
     // create a schema
     let schema = new mongo.Schema({
-        level: {
+        role: {
             type: String,
             required: true,
         },

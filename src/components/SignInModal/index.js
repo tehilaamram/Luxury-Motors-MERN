@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import axios from "axios";
 import autoBind from 'react-autobind';
 
 import './style.css';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import FlashMessage from '../FlashMessage';
-import { signUp } from '../../redux/user/actions';
+import { signIn } from '../../redux/user/actions';
+import AjaxService from '../../services/AjaxService';
 
 
 const crypto = require('crypto');
@@ -39,14 +39,16 @@ class SignInModal extends React.Component {
             var mykey = crypto.createCipher('aes-128-cbc', 'luxury');
             var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
             encryptedPassword += mykey.final('hex');
-            axios.post(`${process.env.REACT_APP_SERVER_URL}/signIn`, {
+            AjaxService.post('/signIn', {
                 user: {
                     email: this.state.email,
                     password: encryptedPassword,
                 }
             }).then((res) => {
                     if (res.status === 200) {
-                        this.props.onSignIn(res.body.role, this.state.email, this.state.fullName);
+                        // console.log(res, ' res sign in');
+                        // console.log(res.body.user.id);
+                        this.props.onSignIn(res.data.user.id, res.data.user.role, this.state.email, res.data.user.fullName);
                         this.closeModal();
                     } else {
                         alert(res.data.error.errmsg);
@@ -91,7 +93,7 @@ class SignInModal extends React.Component {
                     <div className='SignInModalRealContent'>
                         <TextInput id={"email"} text={"Email"} type={"email"} onChange={this.onEmailChange} value={this.state.email} />
                         <TextInput id={"password"} text={"Password"} type={"password"} onChange={this.onPasswordChange} value={this.state.password} />
-                        <Button css={"PrimaryButton SignUpButton"} title={"Sign In"} onClick={this.signUp} />
+                        <Button css={"PrimaryButton SignUpButton"} title={"Sign In"} onClick={this.signIn} />
                         <div className="CloseSignUpModalDiv">
                         <Button css={"LinkButton"} title={"Forgot Your Password?"} onClick={this.signUp} />
                         <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
@@ -108,7 +110,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    onSignIn: signUp,
+    onSignIn: signIn,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInModal);

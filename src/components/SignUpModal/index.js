@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import axios from "axios";
 import autoBind from 'react-autobind';
 
 import './style.css';
+import AjaxService from '../../services/AjaxService';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import FlashMessage from '../FlashMessage';
@@ -52,13 +52,14 @@ class SignUpModal extends React.Component {
             var mykey = crypto.createCipher('aes-128-cbc', 'luxury');
             var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
             encryptedPassword += mykey.final('hex');
-            axios.post(`${process.env.REACT_APP_SERVER_URL}/signUp`, {
+            AjaxService.post('/signUp', {
                 email: this.state.email,
                 password: encryptedPassword,
                 fullName: this.state.fullName,
             }).then((res) => {
                     if (res.status === 200) {
-                        this.props.onSignUp(this.state.email, this.state.fullName);
+                        console.log(res, ' session', res);
+                        this.props.onSignUp(res.data.user.id, this.state.email, this.state.fullName);
                         this.closeModal();
                     } else {
                         alert(res.data.error.errmsg);

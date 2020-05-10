@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 
 import './style.css';
+import AjaxService from '../../services/AjaxService';
 import Button from '../Button';
 import { ROLE } from '../../helpers/consts';
 import { signOut } from '../../redux/user/actions';
@@ -31,7 +32,11 @@ class Navigation extends React.Component {
         }
     }
     signOut(){
+        AjaxService.get('/signOut', {data: {user: this.props.user.email}}).then((res) => {
         this.props.onSignOut();
+        }).catch((err) => {
+            console.log('error in sign out ', err);
+        })
     }
     navigateTo(page) {
         this.props.onMouseLeave();

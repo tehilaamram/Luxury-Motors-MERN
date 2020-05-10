@@ -32,7 +32,9 @@ class Init extends React.Component {
             localStorage.getItem(CONNECTED_USER.ROLE).then((currRole) => {
               localStorage.getItem(CONNECTED_USER.EMAIL).then((currEmail) => {
                localStorage.getItem(CONNECTED_USER.FULL_NAME).then((currFullName) => {
-                   this.props.onUpdateFromLocalStorage(currRole, currEmail, currFullName);
+                localStorage.getItem(CONNECTED_USER.ID).then((currId) => {
+                    this.props.onUpdateFromLocalStorage(currId, currRole, currEmail, currFullName);
+                });
                });
               });
             });

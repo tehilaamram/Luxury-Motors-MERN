@@ -1,58 +1,66 @@
 var express = require('express');
+var multer = require('multer');
+let fs = require("fs");
 var router = express.Router();
 var Vehicle = require('../models')("Vehicle");
-router.get('/getVehicle', (req, res) => {
-    Vehicle.find((err, data) => {
-        if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true, data: data });
-    });
-});
 
-// this is our update method
-// this method overwrites existing data in our database
-router.post('/updateVehicle', (req, res) => {
-    const { id, update } = req.body;
-    Vehicle.findByIdAndUpdate(id, update, (err) => {
-        console.log(id);
-        if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true });
-    });
-});
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploadedImages');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now());
+  }
+})
 
-// this is our delete method
-// this method removes existing data in our database
-router.delete('/deleteVehicle', (req, res) => {
-    const { number } = req.body;
-    Vehicle.findByIdAndRemove(number, (err) => {
-        if (err) return res.send(err);
-        return res.json({ success: true });
-    });
-});
+var upload = multer({ storage: storage })
+router.post('/addVehicle', upload.array('file', 12), (req, res) => {
+  console.log(req.files);
+  var additionalImagesList = [];
+  for (var i =1; i < req.files.length; i++) {
+    var img = fs.readFileSync(req.files[i].path);
+    var encode_image = img.toString('base64');
+    // Define a JSONobject for the image attributes for saving to database
+    var finalImg = {
+      contentType: req.files[i].mimetype,
+      image: new Buffer(encode_image, 'base64')
+    };
+    additionalImagesList.push(finalImg);
+  }
+  console.log('in add vehicle');
+  var img = fs.readFileSync(req.files[0].path);
+  var encode_image = img.toString('base64');
+  // Define a JSONobject for the image attributes for saving to database
 
-// this is our create methid
-// this method adds new data in our database
-router.post('/putVehicle', (req, res) => {
-    let data = new Vehicle();
+  var finalImg = {
+    contentType: req.files[0].mimetype,
+    image: new Buffer(encode_image, 'base64')
+  };
+  var newVehicle = new Vehicle({
+    make: req.body.make,
+    model: req.body.model,
+    color: req.body.color,
+    mainImg: finalImg,
+    additionalImg: additionalImagesList,
+    seats: req.body.seats,
+    doors: req.body.doors,
+    transmission: req.body.transmission,
+  });
+  newVehicle.save().then((vehicle) => {
+    res.sendStatus(200);
+        // res.redirect('/')
 
-    const { number, area, manufacturer,model,color,image,engineCapacity,seats,engineType,gearbox } = req.body;
+  });
+  // Vehicle.insertOne(finalImg, (err, result) => {
+  //   console.log(result)
 
-    data.number = number;
-    data.area = area;
-    data.manufacturer = manufacturer;
-    data.model = model;
-    data.color = color;
-    data.image = image;
-    data.engineCapacity = engineCapacity;
-    data.seats = seats;
-    data.engineType = engineType;
-    data.gearbox = gearbox;
-    data.status = true;
-    console.log(data);
-    data.save((err) => {
-        console.log(err);
-        if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true });
-    });
-});
+  //   if (err) return console.log(err)
+
+  //   console.log('saved to database')
+  //   // res.redirect('/')
+
+
+  // })
+})
 
 module.exports = router;

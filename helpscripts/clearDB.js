@@ -8,4 +8,5 @@ const mongo = require("mongoose");
   } catch (err) {
       console.log("Failed: " + err);
   }
+  process.exit(0);
 })();

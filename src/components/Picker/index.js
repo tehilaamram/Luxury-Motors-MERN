@@ -8,17 +8,17 @@ class Picker extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
     handleChange(event) {
-        if(event.target.value === '0' ) {
-            this.props.valueChanged('Choose option');
+        // if(event.target.value === '0' ) {
+            // this.props.valueChanged('Choose option');
 
-        }else{
-            this.props.valueChanged(this.props.list[event.target.value-1]);
-        }
+        // }else{
+            this.props.valueChanged(this.props.list[event.target.value]);
+        // }
         this.setState({value: event.target.value});
     }
     renderList() {
         return (
-            this.props.make.map((option, index)=>{
+            this.props.list.map((option, index)=>{
                 return(<option key={index} value={index}>{option}</option>);
             })
         )
@@ -32,9 +32,7 @@ class Picker extends React.Component {
                 <div className="PickerListContainer">
                     <select id={this.props.id} value={this.state.value} onChange={this.handleChange}>
                     {/**this.renderList()*/}
-                        <option value="saab">Saab</option>
-                        <option value="opel">Opel</option>
-                        <option value="audi">Audi</option>
+                                        {this.renderList()}
                     </select>
                 </div>
             </div>

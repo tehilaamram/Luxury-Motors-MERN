@@ -4,15 +4,25 @@
   box-sizing: border-box;
 }
 .AddVehicleContainer {
+  /* padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--light-gray-color);
+  min-height: calc(100vh - var(--header-height) - var(--footer-height)); */
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
   background-color: var(--light-gray-color);
   min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  /* display: contents; */
 }
 
 .AddVehicleUploadImagesContainer {
   flex: 40%;
+  height: fit-content;
+  /* display: flow-root; */
+  /* display: table; */
+  display: contents;
 }
 
 .AddVehicleDetailsContainer {

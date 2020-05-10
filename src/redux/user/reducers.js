@@ -11,6 +11,7 @@ const initialState =
     role: ROLE.GUEST,
     email: '',
     fullName: '',
+    id: '',
 };
 
 export default function reducer(state = initialState, action) {
@@ -18,6 +19,7 @@ export default function reducer(state = initialState, action) {
         case SIGN_UP:
             return {
                 ...state,
+                id: action.id,
                 role: ROLE.USER,
                 email: action.email,
                 fullName: action.fullName,
@@ -25,6 +27,7 @@ export default function reducer(state = initialState, action) {
         case SIGN_IN:
             return {
                 ...state,
+                id: action.id,
                 role: action.role,
                 email: action.email,
                 fullName: action.fullName,

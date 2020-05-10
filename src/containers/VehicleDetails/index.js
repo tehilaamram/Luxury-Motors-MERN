@@ -3,11 +3,10 @@ import autoBind from 'react-autobind';
 
 import './style.css';
 
-import ImageUpload from '../../components/ImageUpload';
 import TextInput from '../../components/TextInput';
 import Picker from '../../components/Picker';
 import Button from '../../components/Button';
-class AddVehicle extends React.Component {
+class VehicleDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,8 +54,6 @@ save() {
 
         </div>
         <div className="AddVehicleUploadImagesContainer">
-        <ImageUpload buttonText={"Upload Main Image"} singleImage={true}/>
-        <ImageUpload buttonText={"Upload Additional Images"} singleImage={false}/>
         </div>
         <div className="AddVehicleButton">
         <div className="SaveBottonAddVehicle">
@@ -68,4 +65,4 @@ save() {
   }
 }
 
-export default AddVehicle;
+export default VehicleDetails;

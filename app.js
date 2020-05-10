@@ -78,8 +78,19 @@ var User = require('./models')("User");
 // passport.use(User.createStrategy());
 passport.use(new LocalStrategy(User.authenticate()));
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+
+passport.serializeUser(function(user, done) {
+    console.log(user, ' user');
+  done(null, user.email);
+});
+ 
+passport.deserializeUser(function(id, done) {
+    console.log(id, ' id');
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
+
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {

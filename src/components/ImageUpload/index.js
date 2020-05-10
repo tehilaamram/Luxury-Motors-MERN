@@ -13,6 +13,7 @@ class ImageUpload extends React.Component {
         this.setState({
             pictures: pictureFiles
         });
+        this.props.onValueChanged(pictureFiles);
     }
 
     render() {
