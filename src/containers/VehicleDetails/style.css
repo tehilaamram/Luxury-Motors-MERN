@@ -3,7 +3,9 @@
 * {
   box-sizing: border-box;
 }
-.VehicleContainer {
+.VehicleDetailsContainer {
+  margin: auto;
+    width: 80%;
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -11,16 +13,17 @@
   min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
-.VehicleUploadImagesContainer {
-  flex: 40%;
+.VehicleDetailsImagesContainer {
+  flex: 30%;
 }
 
-.VehicleDetailsContainer {
-  flex: 50%;
+.DetailsVehicleDetailsContainer {
+  flex: 30%;
   padding: 0 20px;
+  text-align: center;
 }
 
-.VehicleButton {
+.VehicleDetailsButtons {
   flex: 100%;
 }
 

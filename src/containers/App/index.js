@@ -31,7 +31,7 @@ class App extends React.Component {
                         <Route path='/about' component={About} />
                         <Route path='/catalog' component={Catalog} />
                         <Route path='/add-vehicle' component={AddVehicle} />
-                        <Route path='/vehicle' component={VehicleDetails}/>
+                        <Route path='/vehicle/:id' component={VehicleDetails}/>
                     </Switch>
                     <Footer />
                 </BrowserRouter>

@@ -31,7 +31,6 @@ router.post('/addVehicle', upload.array('file', 12), (req, res) => {
   var img = fs.readFileSync(req.files[0].path);
   var encode_image = img.toString('base64');
   // Define a JSONobject for the image attributes for saving to database
-
   var finalImg = {
     contentType: req.files[0].mimetype,
     image: new Buffer(encode_image, 'base64')
@@ -45,22 +44,33 @@ router.post('/addVehicle', upload.array('file', 12), (req, res) => {
     seats: req.body.seats,
     doors: req.body.doors,
     transmission: req.body.transmission,
+    year: req.body.year,
   });
   newVehicle.save().then((vehicle) => {
-    res.sendStatus(200);
-        // res.redirect('/')
-
+    console.log(vehicle, ' vehicle saved');
+    res.json({
+      status: 200,
+    id: vehicle.id,
   });
-  // Vehicle.insertOne(finalImg, (err, result) => {
-  //   console.log(result)
+  });
+});
 
-  //   if (err) return console.log(err)
+router.get('/getAll', (req, res) => {
+  return Vehicle.find({}).then((vehicles) => {
+    res.send(vehicles);
+  });
+});
 
-  //   console.log('saved to database')
-  //   // res.redirect('/')
-
-
-  // })
-})
+router.get('/getVehicle/:id', (req, res) => {
+  Vehicle.findById(req.params.id, (err, vehicle) => {
+    if (err) {
+      return res.sendStatus(404);
+    }
+    return res.json({
+      status: 200,
+      vehicle,
+    });
+  });
+});
 
 module.exports = router;

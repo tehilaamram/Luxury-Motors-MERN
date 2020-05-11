@@ -3,22 +3,26 @@ import { Cookies } from 'react-cookie';
 import autoBind from 'react-autobind';
 import './style.css';
 import Card from '../../components/VehicleCard';
-import CurrentIng from '../../images/home_page_vehicle.jpg';
-import ThirdImage from '../../images/vehicle_3.png';
-
+import AjaxService from '../../services/AjaxService';
 
 class Catalog extends React.Component {
     constructor(props) {
         super(props);
         this.cookies = new Cookies();
-        let oldVehicle = this.cookies.get('vehicles');
-        if (oldVehicle) {
-            this.state = oldVehicle;
-        } else {
+        let oldVehicleCart = this.cookies.get('vehicles');
+        if (oldVehicleCart) {
             this.state = {
                 vehicleList: [],
                 count_total: 0,
-                // count_incomplete: 0,
+                vehicleCart: oldVehicleCart,
+                next_id: 0,
+                new_vehicle_value: ''
+            };
+        } else {
+            this.state = {
+                vehicleCart: [],
+                vehicleList: [],
+                count_total: 0,
                 next_id: 0,
                 new_vehicle_value: ''
             };
@@ -26,27 +30,38 @@ class Catalog extends React.Component {
         autoBind(this);
     }
     componentDidMount() {
-        
+        AjaxService.get('/vehicle/getAll').then((res) => {
+            console.log(res, ' res get all vehicles');
+            this.setState({
+                vehicleList: res.data,
+            });
+        }).catch((err) => {
+            console.log('err get all vehicles', err);
+        });
     }
     setStateCallback() {
+        console.log(this.state.vehicleCart, ' vehicle cart update cookie');
         let date = new Date();
         date.setTime(date.getTime() + (99 * 365 * 24 * 60 * 60 * 1000));
-        this.cookies.set('vehicles', this.state, { path: '/', expires: date });
+        console.log('in cookie');
+        this.cookies.set('vehicles', this.state.vehicleCart, { path: '/', expires: date });
         // this.nameInput.focus();
     }
 
 
     addToCart(event) {
-        console.log(this.props.imgUrl);
+        console.log(event, ' event');
         this.setState(function(state, props){
+             console.log(state, ' state');
             // todoList items should not be empty
-            if (this.props.imgUrl.trim() === "") {
+            if (event === undefined) {
                 return {new_vehicle_value: ''};
             }
-            state.vehicleList[state.next_id] = {id: state.next_id, vehicle: this.props.imgUrl};
+            state.vehicleCart[state.next_id] = {id: state.next_id, vehicle: event.id};
+            console.log(state.vehicleCart, ' vehicle cart');
             return {
                 new_vehicle_value: '',
-                vehicleList: state.vehicleList,
+                vehicleCart: state.vehicleCart,
                 count_total: state.count_total + 1,
                 // count_incomplete: state.count_incomplete + 1,
                 next_id: state.next_id + 1
@@ -68,18 +83,24 @@ class Catalog extends React.Component {
     //         };
     //     }, this.setStateCallback);
     // }
+    renderVehicle() {
+        return (
+            this.state.vehicleList.map((option, index)=>{
+                // console.log(option);
+                return(
+                    <Card
+                    vehicle={option}
+                    key={index}
+                    addToCart={this.addToCart.bind(this, option)}
+                    />);
+            })
+        )
+    }
+
     render() {
-        console.log()
         return (
             <div className={"CatalogContainer"}>
-            <Card imgUrl={CurrentIng}/>
-            <Card imgUrl={ThirdImage}/>
-            <Card imgUrl={CurrentIng}/>
-            <Card imgUrl={CurrentIng}/>
-            <Card imgUrl={CurrentIng}/>
-            <Card imgUrl={CurrentIng}/>
-            <Card imgUrl={CurrentIng}/>
-            <Card imgUrl={CurrentIng}/>
+            {this.renderVehicle()}
             </div>
           );
     }

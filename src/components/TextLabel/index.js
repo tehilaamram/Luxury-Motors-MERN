@@ -13,7 +13,7 @@ class TextLabel extends React.Component {
                     <label className={"TextLabel"} htmlFor={this.props.id}>{this.props.text}</label>
                 </div>
                 <div className="TextLabelTextContainer">
-                    <label id={this.props.id}  value={this.props.value}/>
+                    <label className={"TextLabel"} id={this.props.id} >  {this.props.value}</label>
                 </div>
             </div>
         );

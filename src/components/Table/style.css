@@ -1,0 +1,20 @@
+@import '../../css/variables.css';
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+    font-family: var(--regular-font);
+  }
+  
+  tr:nth-child(even){background-color: #f2f2f2}
+
+    .TableColorText {
+      align-self: center;
+    margin-left: 10px;
+    }

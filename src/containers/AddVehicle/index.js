@@ -70,7 +70,7 @@ data.append(VEHICLE.YEAR, this.state.year);
 data.append(VEHICLE.SEATS, this.state.seats);
 
 AjaxService.post('/vehicle/addVehicle', data , {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res) => {
-
+  this.props.history.push(`/vehicle/${res.data.id}`);
 }).catch((err) => {
   console.log(err, ' add vehicle save error');
 });

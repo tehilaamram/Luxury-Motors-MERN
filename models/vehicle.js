@@ -28,8 +28,14 @@ module.exports = db => {
             type: String,
             required: true,
         },
+        year: {
+            type: Number,
+            required: true,
+        },
         mainImg: { 
-            data: Buffer, contentType: String 
+            type: {
+                data: Buffer, contentType: String,
+            }
         },
         additionalImg: { 
             type: [],
