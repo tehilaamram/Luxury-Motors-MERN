@@ -25,6 +25,9 @@ class Catalog extends React.Component {
         }
         autoBind(this);
     }
+    componentDidMount() {
+        
+    }
     setStateCallback() {
         let date = new Date();
         date.setTime(date.getTime() + (99 * 365 * 24 * 60 * 60 * 1000));

@@ -9,6 +9,7 @@ import Home from '../Home';
 import About from '../About';
 import Catalog from '../Catalog';
 import AddVehicle from '../AddVehicle';
+import VehicleDetails from '../VehicleDetails';
 import Header from '../../components/Header';
 import SignUpModal from "../../components/SignUpModal";
 import LoginModal from "../../components/SignInModal";
@@ -30,6 +31,7 @@ class App extends React.Component {
                         <Route path='/about' component={About} />
                         <Route path='/catalog' component={Catalog} />
                         <Route path='/add-vehicle' component={AddVehicle} />
+                        <Route path='/vehicle' component={VehicleDetails}/>
                     </Switch>
                     <Footer />
                 </BrowserRouter>

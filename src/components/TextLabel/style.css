@@ -1,0 +1,49 @@
+@import '../../css/variables.css';
+* {
+  box-sizing: border-box;
+}
+.TextLabel {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: var(--regular-font);
+}
+
+.TextLabel {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.TextLabelContainer {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.TextLabelTextContainer {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.TextLabelRow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .TextLabelContainer, .TextLabelTextContainer {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+/* @media screen and (min-width: 601px) {
+  .TextInputTextContainer {
+    margin-top: 12px;
+  }
+} */
