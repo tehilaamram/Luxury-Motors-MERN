@@ -53,7 +53,7 @@ class SignUpModal extends React.Component {
             var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
             encryptedPassword += mykey.final('hex');
             AjaxService.post('/signUp', {
-                email: this.state.email,
+                username: this.state.email,
                 password: encryptedPassword,
                 fullName: this.state.fullName,
             }).then((res) => {

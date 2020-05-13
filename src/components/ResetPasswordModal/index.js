@@ -60,7 +60,7 @@ class ResetPasswordModal extends React.Component {
                             });
                         }
                     }
-                    document.getElementById('SignUpModalErrorFlash').style.display = "block";
+                    document.getElementById('ResetPasswordModalErrorFlash').style.display = "block";
                 });
         }
     }

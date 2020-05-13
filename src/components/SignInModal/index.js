@@ -40,10 +40,10 @@ class SignInModal extends React.Component {
             var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
             encryptedPassword += mykey.final('hex');
             AjaxService.post('/signIn', {
-                user: {
-                    email: this.state.email,
+                // user: {
+                    username: this.state.email,
                     password: encryptedPassword,
-                }
+                // }
             }).then((res) => {
                     if (res.status === 200) {
                         // console.log(res, ' res sign in');

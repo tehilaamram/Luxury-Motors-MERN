@@ -1,8 +1,8 @@
+let path = require('path');
 let express = require('express');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 // var createError = require('http-errors');
-let path = require('path');
 // let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
@@ -78,18 +78,19 @@ var User = require('./models')("User");
 // passport.use(User.createStrategy());
 passport.use(new LocalStrategy(User.authenticate()));
 
-
-passport.serializeUser(function(user, done) {
-    console.log(user, ' user');
-  done(null, user.email);
-});
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+// passport.serializeUser(function(user, done) {
+//     console.log(user, ' user ser');
+//   done(null, user.email);
+// });
  
-passport.deserializeUser(function(id, done) {
-    console.log(id, ' id');
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
-});
+// passport.deserializeUser(function(id, done) {
+//     console.log(id, ' id de');
+//   User.findByUsername(id, function (err, user) {
+//     done(err, user);
+//   });
+// });
 
 
     // catch 404 and forward to error handler

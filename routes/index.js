@@ -9,51 +9,56 @@ const crypto = require('crypto');
 var serverEmailAddress = 'buy.a.luxury.vehicle';
 var serverEmailPassword = 'tehila1997';
 
-router.post('/signUp', function (req, res, next) {
+router.post('/signUp', function (req, res) {
+  console.log(req.isAuthenticated(), ' auth');
   var mykey = crypto.createDecipher('aes-128-cbc', 'luxury');
   var mystr = mykey.update(req.body.password, 'hex', 'utf8');
   mystr += mykey.final('utf8');
-  User.register(new User({ email: req.body.email, role: 'user', fullName: req.body.fullName }), mystr, function (err, user) {
+  User.register(new User({ username: req.body.username, role: 'user', fullName: req.body.fullName}), req.body.password, function (err, user) {
     console.log('in', user);
     if (err) {
+      console.log(err);
       return res.sendStatus(409);
     }
-    req.login(user, function (err) {
-      if (err) {
-        return res.sendStatus(err);
-      }
-      return res.json({
+    console.log('req session befor login', req.session);
+    passport.authenticate('local')(req, res, function () {
+      // res.redirect('/');
+      console.log('in here', req.user);
+    return res.json({
         status: 200,
         user: {
           id: req.user.id,
         }
       });
     });
+    // req.login(user, function (err) {
+    //   if (err) {
+    //     return res.sendStatus(err);
+    //   }
+    //   console.log('req session after login', req.session);
+    //   return res.json({
+    //     status: 200,
+    //     user: {
+    //       id: req.user.id,
+    //     }
+    //   });
+    // });
   });
 });
-router.post('/signIn', function (req, res) {
-  var mykey = crypto.createDecipher('aes-128-cbc', 'luxury');
-  var mystr = mykey.update(req.body.user.password, 'hex', 'utf8');
-  mystr += mykey.final('utf8');
-  req.body.user.password = mystr;
-  req.login(req.body.user, function (err) {
-    if (err) {
-      return res.sendStatus(err);
-    }
-    return User.find({email: req.user.email}).then((fuser) => {
-      return res.json({
+router.post('/signIn',  passport.authenticate('local'), (req, res) => {
+  console.log(req.session, ' in sign in');
+       return res.json({
         status: 200,
         user: {
-          id: fuser[0].id,
-          fullName: fuser[0].fullName,
-          role: fuser[0].role,
+          id: req.user.id,
+          fullName: req.user.fullName,
+          role: req.user.role,
         }
       });
-    });
-  });
 });
 
 router.get('/signOut', function (req, res) {
+  console.log(req.user);
   console.log(req.session, ' req');
   req.logout();
   return res.sendStatus(200);
@@ -69,17 +74,17 @@ router.post('/resetPassword', async (req, res) => {
       });
     },
     function(token, done) {
-     User.findOne({email: req.body.email}).exec().then((user) => {
+     User.findOne({username: req.body.email}).exec().then((user) => {
        console.log(user, ' user reset');
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
         console.log(user, ' user')
-        User.collection.updateOne({email: req.body.email}, user);
-        console.log(user, ' save error')
-        user.save((err) => {
-          console.log(err, ' err save')
-          done(err, token, user);
-        });
+        User.collection.updateOne({username: req.body.email}, user);
+        // console.log(user, ' save error')
+        // user.save((err) => {
+        //   console.log(err, ' err save')
+          done(null, token, user);
+        // });
      });
 
     },
@@ -94,7 +99,7 @@ router.post('/resetPassword', async (req, res) => {
      });
      var mailOptions = {
 
-       to: user.email,
+       to: user.username,
        from: 'Buy a Luxury Vehicle',
        subject: 'Reset Password',
        text:          'Hello ' + user.fullName + '\n\n' +
@@ -106,7 +111,7 @@ router.post('/resetPassword', async (req, res) => {
      };
      console.log('step 3')
        smtpTrans.sendMail(mailOptions, function(err) {
-       req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+      //  req.flash('success', 'An e-mail has been sent to ' + user.username + ' with further instructions.');
        console.log('sent')
        if (err) {
          return res.sendStatus(404);
@@ -124,6 +129,28 @@ router.post('/resetPassword', async (req, res) => {
     }
   });
   res.redirect('/');
+});
+
+router.get('/resetPassword/:token', (req, res) => {
+  // console.log(req, ' req');
+  return User.findOne({resetPasswordToken: req.params.token}, (err, user) => {
+    if (err) {
+      console.log(err, 'reset password error');
+      return res.sendStatus(404);
+    }
+    // return res.sendStatus(404);
+
+    if (user.resetPasswordExpires < Date.now()) {
+      return res.sendStatus(419); // expired
+      // req.route.path = '/catalog';
+      // next();
+      // res.render('/catalog');
+    } else {
+      return res.json({
+        status: 200,
+      });
+    }
+  });
 });
 
 module.exports = router;

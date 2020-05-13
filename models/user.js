@@ -9,6 +9,16 @@ module.exports = db => {
             type: String,
             required: true,
         },
+        attemptsField: {
+            type: Number,
+            default: 0,
+        },
+        username: {
+            type: String,
+        },
+        password: {
+            type: String,
+        },
         fullName: {
             type: String,
             required: true,
@@ -35,7 +45,8 @@ module.exports = db => {
         },
     }, { autoIndex: false });
 
-    schema.plugin(passportLocalMongoose, {usernameField: "email"});
+    schema.plugin(passportLocalMongoose);
+        //, {usernameField: "email",  passwordField: 'password',});
     db.model('User', schema);
     debug("User model created");
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider } from "react-redux";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
+import { BrowserRouter, Switch,  Route } from 'react-router-dom';
 import store from '../../store';
 import Init from '../../components/Init';
 
@@ -18,9 +17,8 @@ import LoginModal from "../../components/SignInModal";
 import ResetPasswordModal from '../../components/ResetPasswordModal';
 
 import Footer from '../../components/Footer';
-
-
 class App extends React.Component {
+     
     render() {
         return (
             <Provider store={store}>
