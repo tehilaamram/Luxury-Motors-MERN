@@ -54,7 +54,8 @@ class Navigation extends React.Component {
                     <br/>
                     <Button title={"Catalog"} css={"navButton"} onClick={() => {this.navigateTo('/catalog')}}/>
                     <br/>
-                    <Button title={"Add Vehicle"} css={"navButton"} onClick={() => {this.navigateTo('/add-vehicle')}}/>
+                    {/**(user.role === ROLE.WORKER || user.role === ROLE.ADMIN) && */ }
+                        <Button title={"Add Vehicle"} css={"navButton"} onClick={() => {this.navigateTo('/add-vehicle')}}/>
                     <br/>
                     </div>
                 <div style={{display:'flex', flexDirection: 'column'}}>

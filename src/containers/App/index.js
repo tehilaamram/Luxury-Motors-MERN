@@ -10,9 +10,12 @@ import About from '../About';
 import Catalog from '../Catalog';
 import AddVehicle from '../AddVehicle';
 import VehicleDetails from '../VehicleDetails';
+import ResetPassword from '../ResetPassword';
+
 import Header from '../../components/Header';
 import SignUpModal from "../../components/SignUpModal";
 import LoginModal from "../../components/SignInModal";
+import ResetPasswordModal from '../../components/ResetPasswordModal';
 
 import Footer from '../../components/Footer';
 
@@ -26,12 +29,14 @@ class App extends React.Component {
                     <SignUpModal />
                      <Header />
                     <LoginModal/>
+                    <ResetPasswordModal/>
                     <Switch>
                         <Route exact path='/' component={Home} />
                         <Route path='/about' component={About} />
                         <Route path='/catalog' component={Catalog} />
                         <Route path='/add-vehicle' component={AddVehicle} />
                         <Route path='/vehicle/:id' component={VehicleDetails}/>
+                        <Route path='/reset/:token' component={ResetPassword} />
                     </Switch>
                     <Footer />
                 </BrowserRouter>
