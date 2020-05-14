@@ -71,3 +71,21 @@
     cursor: pointer;
     margin-top: 10px;
 }
+
+.ChatButton {
+  cursor: pointer;
+  position: relative;
+  height: 60px;
+  width: 60px;
+   background-image: url(../../images/chat.svg);
+   border-radius: 50%;
+   border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: var(--red-color);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px;
+    background-size: 30px 30px;
+}

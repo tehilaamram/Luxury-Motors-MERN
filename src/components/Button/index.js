@@ -12,5 +12,7 @@ class Button extends React.Component {
         );
     }
 }
-
+// Button.defaultProps = {
+//     color: 'blue'
+//   };
 export default Button;

@@ -1,21 +1,23 @@
 .form {
   display: flex;
-  border-top: 2px solid #D3D3D3;
+  border-top: 2px solid #f2f5f8;
 }
 
 .input {
   border: none;
   border-radius: 0;
-  padding: 5%;
+  border-radius: 0 0 0 8px;
   width: 80%;
-  font-size: 1.2em;
+  font-size: 14px;
+  color: var(--chat-text-color);
 }
 
-input:focus, textarea:focus, select:focus{
+.input:focus, textarea:focus, select:focus{
   outline: none;
 }
 
 .sendButton {
+  border-radius: 0 0 8px 0;
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
