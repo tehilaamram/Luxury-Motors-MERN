@@ -43,10 +43,13 @@ module.exports = db => {
             type: Date,
             default: undefined,
         },
+        rooms: [{
+            type: mongo.Schema.Types.ObjectId,
+            ref: 'Room'
+        }],
     }, { autoIndex: false });
 
     schema.plugin(passportLocalMongoose);
-        //, {usernameField: "email",  passwordField: 'password',});
     db.model('User', schema);
     debug("User model created");
 }

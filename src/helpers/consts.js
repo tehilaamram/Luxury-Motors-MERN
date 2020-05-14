@@ -27,3 +27,7 @@ export const VEHICLE = {
     TRANSMISSION: 'transmission',
     YEAR: 'year',
 }
+
+export const CHAT = {
+    ROOM: 'room',
+}

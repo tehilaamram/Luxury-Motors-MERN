@@ -19,7 +19,6 @@ var vehicleRouter = require('./routes/vehicle');
 var orderRouter = require('./routes/order');
 
 let app = express();
-
 (async () => {
     let MongoStore = connectMongo(session);
     let sessConnStr = "mongodb://127.0.0.1/buy-a-luxury-vehicle-sessions";

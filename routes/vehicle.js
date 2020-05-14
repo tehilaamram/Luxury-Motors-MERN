@@ -3,7 +3,7 @@ var multer = require('multer');
 let fs = require("fs");
 var router = express.Router();
 var Vehicle = require('../models')("Vehicle");
-
+var ObjectId = require('mongoose').Types.ObjectId;
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploadedImages');
@@ -71,6 +71,17 @@ router.get('/getVehicle/:id', (req, res) => {
       vehicle,
     });
   });
+});
+
+router.get('/getVehiclesById/', (req, res) => {
+// console.log('in get by id', JSON.parse(req.query.params));
+var idJson = JSON.parse(req.query.params);
+var obj_ids = idJson.vid.map(function(element) { return ObjectId(element.vehicle); });
+Vehicle.find({_id: {$in: obj_ids}}, (err, list) => {
+  return res.json({
+    status: 200,
+    list,
+  });})
 });
 
 module.exports = router;

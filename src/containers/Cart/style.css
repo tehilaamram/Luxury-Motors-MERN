@@ -1,0 +1,17 @@
+@import '../../css/variables.css';
+* {
+  box-sizing: border-box;
+}
+.CatalogContainer {
+  padding: 20px;
+  min-height: calc(100vh - 73px - 30px);
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--light-gray-color);
+  justify-content: center;
+}
+@media screen and (max-width: 700px) {
+  .CatalogContainer {   
+    flex-direction: column;
+  }
+}

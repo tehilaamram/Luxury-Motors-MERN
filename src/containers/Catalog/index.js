@@ -57,7 +57,7 @@ class Catalog extends React.Component {
             if (event === undefined) {
                 return {new_vehicle_value: ''};
             }
-            state.vehicleCart[state.next_id] = {id: state.next_id, vehicle: event.id};
+            state.vehicleCart[state.next_id] = {id: state.next_id, vehicle: event._id};
             console.log(state.vehicleCart, ' vehicle cart');
             return {
                 new_vehicle_value: '',
