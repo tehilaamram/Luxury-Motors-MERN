@@ -9,7 +9,7 @@ class Home extends React.Component {
         return (
             <div className={"HomeContainer"}>
                 <div className={"HomeMainImage"}>
-                    <img src={MainImage} alt="Smiley face" height="100%" width="100%" />
+                    <img className="HomeMainImageCSS" src={MainImage} alt="Smiley face"/>
                     <div className="HomeImageText">Your road <br />
             to a new <br />level <br />
             starts here</div>

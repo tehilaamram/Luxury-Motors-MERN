@@ -39,9 +39,9 @@ let app = express();
     app.set('view engine', 'ejs');
 
 
-    // Configure passport middleware
-    app.use(passport.initialize());
-    app.use(passport.session());
+    // // Configure passport middleware
+    // app.use(passport.initialize());
+    // app.use(passport.session());
 
     app.use(logger('dev'));
     app.use(cors());
@@ -52,6 +52,7 @@ let app = express();
     app.use(cookieParser(secret));
 
     app.use(session({
+        // httpOnly: false,
         name: 'users.sid',         // the name of session ID cookie
         secret: secret,            // the secret for signing the session ID cookie - mandatory option
         resave: false,             // do we need to resave unchanged session? (only if touch does not work)  - mandatory option
@@ -61,6 +62,11 @@ let app = express();
         cookie: { maxAge: 900000, httpOnly: true, sameSite: true }  // cookie parameters
         // NB: maxAge is used for session object expiry setting in the storage backend as well
     }));
+
+      // Configure passport middleware
+      app.use(passport.initialize());
+      app.use(passport.session());
+  
 
     // app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
     app.use(express.static(path.join(__dirname, 'public')));
@@ -74,8 +80,8 @@ let app = express();
 
 // Configure passport-local to use account model for authentication
 var User = require('./models')("User");
-// passport.use(User.createStrategy());
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(User.createStrategy());
+// passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());

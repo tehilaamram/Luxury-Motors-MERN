@@ -57,8 +57,9 @@ class SignUpModal extends React.Component {
                 password: encryptedPassword,
                 fullName: this.state.fullName,
             }).then((res) => {
-                    if (res.status === 200) {
-                        console.log(res, ' session', res);
+                console.log(res, ' cookie');
+                if (res.status === 200) {
+                        // console.log(res.header['Set-Cookie'], ' session', res);
                         this.props.onSignUp(res.data.user.id, this.state.email, this.state.fullName);
                         this.closeModal();
                     } else {
