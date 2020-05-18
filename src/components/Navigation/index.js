@@ -18,6 +18,7 @@ class Navigation extends React.Component {
     }
 
     openSignInModal() {
+        this.props.closenav();
         if (document.getElementById('signInModal').style.display === 'flex') {
             document.getElementById('signInModal').style.display = 'none';
         } else {
@@ -25,6 +26,7 @@ class Navigation extends React.Component {
         }
     }
     openSignUpModal() {
+        this.props.closenav();
         if (document.getElementById('signUpModal').style.display === 'flex') {
             document.getElementById('signUpModal').style.display = 'none';
         } else {
@@ -39,13 +41,13 @@ class Navigation extends React.Component {
         })
     }
     navigateTo(page) {
-        this.props.onMouseLeave();
+        this.props.closenav();
         this.props.history.push(page);
     }
     render() {
         var {user} = this.props;
         return (
-            <div className="NavigationContainer" onMouseLeave={!this.state.lockedPanel? this.props.onMouseLeave : () => {}}>
+            <div className="NavigationContainer">
                 <div className='upperPartOfNavigation'>
                     <br/>
                     <Button title={"Home"} css={"navButton"} onClick={() => {this.navigateTo('/')}}/>

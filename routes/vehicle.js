@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({ storage: storage })
-router.post('/addVehicle', upload.array('file', 12), (req, res) => {
+router.post('/addVehicle', upload.array('file', 30), (req, res) => {
   console.log(req.files);
   var additionalImagesList = [];
   for (var i =1; i < req.files.length; i++) {

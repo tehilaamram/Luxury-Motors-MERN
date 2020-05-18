@@ -10,6 +10,7 @@ var serverEmailAddress = 'buy.a.luxury.vehicle';
 var serverEmailPassword = 'tehila1997';
 
 router.post('/signUp', function (req, res) {
+  console.log(req.sessionID, ' session id');
   console.log(req.isAuthenticated(), ' auth');
   var mykey = crypto.createDecipher('aes-128-cbc', 'luxury');
   var mystr = mykey.update(req.body.password, 'hex', 'utf8');
@@ -45,22 +46,32 @@ router.post('/signUp', function (req, res) {
     // });
   });
 });
-router.post('/signIn',  passport.authenticate('local'), (req, res) => {
-  console.log(req.session, ' in sign in');
+router.post('/signIn', passport.authenticate('local'), (req, res) => {
+  console.log('in')
+  // res.setHeader ("Access-Control-Allow-Origin", "http://localhost:3000"); //front-end domain name
+  // console.log(req.session, ' in sign in');
+  // res.setHeader('Access-Control-Allow-Credentials' , true);
+  // res.header("Access-Control-Allow-Origin", 'http://app.com:4000');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+      // req.setHeader('withCredentials' , "true");
+      // res.cookie('userid', req.user.id, { maxAge: 2592000000 });  // Expires in one month
+    // console.log(req.headers, ' sign in')
        return res.json({
         status: 200,
         user: {
           id: req.user.id,
           fullName: req.user.fullName,
           role: req.user.role,
-        }
+        },
+        // withCredentials: true,
       });
 });
 
 router.get('/signOut', function (req, res) {
-  console.log(req.user);
-  console.log(req.session, ' req');
+  // console.log(req.user);
+  console.log(req.isAuthenticated(), ' req out');
   req.logout();
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   return res.sendStatus(200);
 });
 

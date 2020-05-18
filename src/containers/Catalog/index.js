@@ -3,6 +3,7 @@ import { Cookies } from 'react-cookie';
 import autoBind from 'react-autobind';
 import './style.css';
 import Card from '../../components/VehicleCard';
+import Filter from '../../components/Filter';
 import AjaxService from '../../services/AjaxService';
 
 class Catalog extends React.Component {
@@ -68,21 +69,6 @@ class Catalog extends React.Component {
             };
         }, this.setStateCallback);
     }
-
-    // removeFromCart() {
-    //     this.setState(function(state, props){
-    //         if (! state.todoList.hasOwnProperty(id)) {
-    //             return {};
-    //         }
-    //         let is_completed = state.todoList[id].completed;
-    //         delete state.todoList[id];
-    //         return {
-    //             todoList: state.todoList,
-    //             count_total: state.count_total - 1,
-    //             count_incomplete: state.count_incomplete + (is_completed ? 0 : -1)
-    //         };
-    //     }, this.setStateCallback);
-    // }
     renderVehicle() {
         return (
             this.state.vehicleList.map((option, index)=>{
@@ -100,7 +86,12 @@ class Catalog extends React.Component {
     render() {
         return (
             <div className={"CatalogContainer"}>
+            <div className="CatalogFilterDiv">
+            <Filter />
+            </div>
+            <div className="CatalogCardsDiv">
             {this.renderVehicle()}
+            </div>
             </div>
           );
     }

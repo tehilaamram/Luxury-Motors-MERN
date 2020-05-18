@@ -89,3 +89,36 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px;
     background-size: 30px 30px;
 }
+
+.FilterButton {
+  font-family: var(--regular-font);
+    align-self: center;
+    width: fit-content;
+    height: 30px;
+    background-color: var(--filter-color);
+    color: var(--black-color);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 2px;
+    cursor: pointer;
+    /* border: hidden; */
+    border: 1px solid var(--filter-color);
+    margin: 3px;
+}
+
+.SelectedFilterButton{
+  margin: 3px;
+  font-family: var(--regular-font);
+  width: fit-content;
+    height: 30px;
+    background-color: var(--filter-color);
+  color: var(--red-color);
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border: 1px solid var(--red-color);
+}

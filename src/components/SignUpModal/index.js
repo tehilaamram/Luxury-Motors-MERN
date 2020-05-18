@@ -66,25 +66,25 @@ class SignUpModal extends React.Component {
                         alert(res.data.error.errmsg);
                     }
                 }).catch((err) => {
-                    if (err.response === undefined) {
-                        this.setState({
-                            error: true,
-                            errorMessage: 'Unable to connect the server, please try later.'
-                        });
-                    } else {
-                        if (err.response.status === 409) {
-                            this.setState({
-                                error: true,
-                                errorMessage: 'email already exists'
-                            });
-                        } else {
-                            this.setState({
-                                error: true,
-                                errorMessage: err,
-                            });
-                        }
-                    }
-                    document.getElementById('SignUpModalErrorFlash').style.display = "block";
+                    // if (err.response === undefined) {
+                    //     this.setState({
+                    //         error: true,
+                    //         errorMessage: 'Unable to connect the server, please try later.'
+                    //     });
+                    // } else {
+                    //     if (err.response.status === 409) {
+                    //         this.setState({
+                    //             error: true,
+                    //             errorMessage: 'email already exists'
+                    //         });
+                    //     } else {
+                    //         this.setState({
+                    //             error: true,
+                    //             errorMessage: err,
+                    //         });
+                    //     }
+                    // }
+                    // document.getElementById('SignUpModalErrorFlash').style.display = "block";
                 });
         }
     }

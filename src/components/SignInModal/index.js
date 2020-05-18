@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import autoBind from 'react-autobind';
+import {Cookies}  from 'react-cookie';
 
 import './style.css';
 import TextInput from '../TextInput';
@@ -8,6 +9,7 @@ import Button from '../Button';
 import FlashMessage from '../FlashMessage';
 import { signIn } from '../../redux/user/actions';
 import AjaxService from '../../services/AjaxService';
+import { data } from 'jquery';
 
 
 const crypto = require('crypto');
@@ -15,6 +17,7 @@ const crypto = require('crypto');
 class SignInModal extends React.Component {
     constructor(props) {
         super(props);
+        this.cookies = new Cookies();
         this.state = {
             email: '',
             password: '',
@@ -22,6 +25,9 @@ class SignInModal extends React.Component {
             errorSubject: '',
             errorMessage: '',
         };
+        // let date = new Date();
+        // date.setTime(date.getTime() + (99 * 365 * 24 * 60 * 60 * 1000));
+    //  this.cookies.set('session', [], { path: '/', expires: data });
         autoBind(this);
     }
     onEmailChange(event) {
@@ -46,33 +52,33 @@ class SignInModal extends React.Component {
                 // }
             }).then((res) => {
                     if (res.status === 200) {
-                        // console.log(res, ' res sign in');
-                        // console.log(res.body.user.id);
+                        console.log(res, ' res sign in');
                         this.props.onSignIn(res.data.user.id, res.data.user.role, this.state.email, res.data.user.fullName);
                         this.closeModal();
                     } else {
                         alert(res.data.error.errmsg);
                     }
                 }).catch((err) => {
-                    if (err.response === undefined) {
-                        this.setState({
-                            error: true,
-                            errorMessage: 'Unable to connect the server, please try later.'
-                        });
-                    } else {
-                        if (err.response.status === 401) {
-                            this.setState({
-                                error: true,
-                                errorMessage: 'email or password is incorrect'
-                            });
-                        } else {
-                            this.setState({
-                                error: true,
-                                errorMessage: err,
-                            });
-                        }
-                    }
-                    document.getElementById('SignInModalErrorFlash').style.display = "block";
+                    console.log(err);
+                    // if (err.response === undefined) {
+                    //     this.setState({
+                    //         error: true,
+                    //         errorMessage: 'Unable to connect the server, please try later.'
+                    //     });
+                    // } else {
+                    //     if (err.response.status === 401) {
+                    //         this.setState({
+                    //             error: true,
+                    //             errorMessage: 'email or password is incorrect'
+                    //         });
+                    //     } else {
+                    //         this.setState({
+                    //             error: true,
+                    //             errorMessage: err,
+                    //         });
+                    //     }
+                    // }
+                    // document.getElementById('SignInModalErrorFlash').style.display = "block";
                 });
         }
     }

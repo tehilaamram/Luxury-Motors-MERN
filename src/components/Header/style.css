@@ -19,4 +19,15 @@
   background-color: var(--red-color);
   padding: 3px 0 0 3px;
   margin-block-end: 0;
+  right: 0;
+}
+.react-icons {
+  vertical-align: middle;
+  height: 100%;
+  width: 100px;
+  color: var(--light-gray-color);
+  position: absolute;
+  align-self: auto;
+  padding: 15px;
+  cursor: pointer;
 }

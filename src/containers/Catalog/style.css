@@ -15,3 +15,17 @@
     flex-direction: column;
   }
 }
+
+.CatalogFilterDiv {
+  flex: 20%;
+  background-color: yellow;
+}
+
+.CatalogCardsDiv {
+  text-align: -webkit-center;
+flex: 80%;
+background-color: violet;
+flex-wrap: wrap;
+display: inherit;
+justify-content: center;
+}

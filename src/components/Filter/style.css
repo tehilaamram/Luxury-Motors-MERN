@@ -1,0 +1,11 @@
+@import '../../css/variables.css';
+
+.FilterNameText {
+    font-weight: bold;
+}
+
+.FilterName {
+    width: 100%;
+    height: fit-content;
+    padding: 8px 4px;
+}

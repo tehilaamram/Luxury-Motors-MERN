@@ -10,9 +10,9 @@ class About extends React.Component {
             <div className={"AboutContainer"}>
                 <div className={"Title"}>
                     <img src={AboutTitleImage} className={"ImageTitle"} alt="about title background" />
-                    <div className={"TitleText"}>
+                    <span className={"TitleText"}>
                         About Us
-            </div>
+            </span>
                 </div>
                 <div className={"AboutBody"}>
                 <p className={"AboutMainText"}>
