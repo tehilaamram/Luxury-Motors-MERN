@@ -69,8 +69,9 @@ router.post('/signIn', passport.authenticate('local'), (req, res) => {
 
 router.get('/signOut', function (req, res) {
   // console.log(req.user);
-  console.log(req.isAuthenticated(), ' req out');
+  console.log(req.isAuthenticated(), req.user, ' req out');
   req.logout();
+  console.log(req.isAuthenticated(), ' req after out');
   // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   return res.sendStatus(200);
 });

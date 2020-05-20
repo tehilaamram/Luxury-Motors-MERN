@@ -2,16 +2,11 @@ let path = require('path');
 let express = require('express');
 const bodyParser = require('body-parser')
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-// var createError = require('http-errors');
-// let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let debug = require('debug')('lab7:app'); // add using the debugger tool
 let mongoose = require('mongoose');  // add mongoose for MongoDB access
- /* The csurf middleware provides easy-to-use protection against
-    Cross Site Request Forgeries. */ 
-// let csrf = require('csurf');
+
 let session = require('express-session'); // add session management module
 let connectMongo = require('connect-mongo'); // add session store implementation for MongoDB
 const cors = require('cors');
@@ -43,13 +38,9 @@ let app = express();
     app.set('view engine', 'ejs');
 
 
-    // // Configure passport middleware
-    // app.use(passport.initialize());
-    // app.use(passport.session());
-
     app.use(logger('dev'));
-    app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
-    // app.use(cors());
+    /* for saving session in client side and not blocking the request at server side */ 
+    app.use(cors({credentials: true, origin: ['http://localhost:3000', 'http://localhost:3001']}));
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 
@@ -76,8 +67,6 @@ let app = express();
     }));
     var User = require('./models')("User");
     passport.use(User.createStrategy());
-    // passport.use(new LocalStrategy(User.authenticate()));
-    // app.use(csrf());
 
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
@@ -94,41 +83,12 @@ let app = express();
         res.send('Session has expired or form tampered with.');
     });
 
-    // var User = require('./models')("User");
-    // passport.use(User.createStrategy());
-    // // passport.use(new LocalStrategy(User.authenticate()));
-    
-    // passport.serializeUser(User.serializeUser());
-    // passport.deserializeUser(User.deserializeUser());
-    // app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
     app.use(express.static(path.join(__dirname, 'public')));
 
     app.use('/', indexRouter);
     app.use('/user', usersRouter);
     app.use('/vehicle', vehicleRouter);
     app.use('/order', orderRouter);
-    
-
-
-// Configure passport-local to use account model for authentication
-// var User = require('./models')("User");
-// passport.use(User.createStrategy());
-// // passport.use(new LocalStrategy(User.authenticate()));
-
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-// passport.serializeUser(function(user, done) {
-//     console.log(user, ' user ser');
-//   done(null, user.email);
-// });
- 
-// passport.deserializeUser(function(id, done) {
-//     console.log(id, ' id de');
-//   User.findByUsername(id, function (err, user) {
-//     done(err, user);
-//   });
-// });
-
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
@@ -147,13 +107,7 @@ let app = express();
         res.status(err.status || 500);
         res.render('error');
     });
-    // app.all('*', function(req, res) {
-    //     console.log('in here /')
-    //     res. header ("Access-Control-Allow-Origin", "http://localhost:3000"); //front-end domain name
-    //     res.header("Access-Control-Allow-Credentials",'true');
-    //     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    //     // next();
-    //    });
+
 })()
     .catch(err => { debug(`Failure: ${err}`); process.exit(0); });
 

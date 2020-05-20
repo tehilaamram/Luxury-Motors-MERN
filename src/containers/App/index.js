@@ -21,7 +21,8 @@ import Chat from '../../components/Chat/Chat';
 import Join from '../../components/Join/Join';
 import Footer from '../../components/Footer';
 import Button from '../../components/Button';
-
+import AppBar from '../../components/AppBar';
+import Drawer from '../../components/Drawer';
 import './style.css';
 class App extends React.Component {
     constructor(props) {
@@ -47,8 +48,9 @@ class App extends React.Component {
                         <Button css={"ChatButton"} onClick={this.renderChat} />
                     </div>
                     <SignUpModal />
-                    <Header />
+                    <AppBar/>
                     <LoginModal />
+                    <Drawer/>
                     <ResetPasswordModal />
                     <Switch>
                         <Route path="/join" exact component={Join} />

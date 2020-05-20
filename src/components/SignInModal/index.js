@@ -9,8 +9,6 @@ import Button from '../Button';
 import FlashMessage from '../FlashMessage';
 import { signIn } from '../../redux/user/actions';
 import AjaxService from '../../services/AjaxService';
-import { data } from 'jquery';
-
 
 const crypto = require('crypto');
 
@@ -25,9 +23,6 @@ class SignInModal extends React.Component {
             errorSubject: '',
             errorMessage: '',
         };
-        // let date = new Date();
-        // date.setTime(date.getTime() + (99 * 365 * 24 * 60 * 60 * 1000));
-    //  this.cookies.set('session', [], { path: '/', expires: data });
         autoBind(this);
     }
     onEmailChange(event) {
@@ -60,25 +55,25 @@ class SignInModal extends React.Component {
                     }
                 }).catch((err) => {
                     console.log(err);
-                    // if (err.response === undefined) {
-                    //     this.setState({
-                    //         error: true,
-                    //         errorMessage: 'Unable to connect the server, please try later.'
-                    //     });
-                    // } else {
-                    //     if (err.response.status === 401) {
-                    //         this.setState({
-                    //             error: true,
-                    //             errorMessage: 'email or password is incorrect'
-                    //         });
-                    //     } else {
-                    //         this.setState({
-                    //             error: true,
-                    //             errorMessage: err,
-                    //         });
-                    //     }
-                    // }
-                    // document.getElementById('SignInModalErrorFlash').style.display = "block";
+                    if (err.response === undefined) {
+                        this.setState({
+                            error: true,
+                            errorMessage: 'Unable to connect the server, please try later.'
+                        });
+                    } else {
+                        if (err.response.status === 401) {
+                            this.setState({
+                                error: true,
+                                errorMessage: 'email or password is incorrect'
+                            });
+                        } else {
+                            this.setState({
+                                error: true,
+                                errorMessage: err,
+                            });
+                        }
+                    }
+                    document.getElementById('SignInModalErrorFlash').style.display = "block";
                 });
         }
     }
