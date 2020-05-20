@@ -16,7 +16,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import autoBind from 'react-autobind';
 import { withStyles } from "@material-ui/core/styles";
-
+import Drawer from '../Drawer';
 const styles = ((theme) => ({
   grow: {
     flexGrow: 1,
@@ -90,6 +90,7 @@ class CustomAppBar extends React.Component {
             mobileMoreAnchorEl: null,
             isMenuOpen: false,
             isMobileMenuOpen: false,
+            drawer: false,
         }
         autoBind(this);
     }
@@ -175,6 +176,15 @@ class CustomAppBar extends React.Component {
         </Menu>
       );
      } 
+     toggleDrawer(event) {
+       console.log('in tog')
+      event.preventDefault();
+      if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        return;
+      }
+      console.log('after tog')
+      this.setState({drawer: !this.state.drawer});
+    };
       render() {
         const {classes } = this.props;
     return (
@@ -186,6 +196,7 @@ class CustomAppBar extends React.Component {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={this.toggleDrawer}
           >
             <MenuIcon />
           </IconButton>
@@ -243,6 +254,7 @@ class CustomAppBar extends React.Component {
       </AppBar>
       {this.state.isMobileMenuOpen && this.renderMobileMenu()}
       {this.state.isMenuOpen && this.renderMenu()}
+      <Drawer isOpen={this.state.drawer} toggleDrawer={this.toggleDrawer}/>
     </div>
   );
       }

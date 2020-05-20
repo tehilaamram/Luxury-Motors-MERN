@@ -13,7 +13,6 @@ import VehicleDetails from '../VehicleDetails';
 import ResetPassword from '../ResetPassword';
 import Cart from '../Cart';
 
-import Header from '../../components/Header';
 import SignUpModal from "../../components/SignUpModal";
 import LoginModal from "../../components/SignInModal";
 import ResetPasswordModal from '../../components/ResetPasswordModal';
@@ -22,7 +21,6 @@ import Join from '../../components/Join/Join';
 import Footer from '../../components/Footer';
 import Button from '../../components/Button';
 import AppBar from '../../components/AppBar';
-import Drawer from '../../components/Drawer';
 import './style.css';
 class App extends React.Component {
     constructor(props) {
@@ -50,7 +48,6 @@ class App extends React.Component {
                     <SignUpModal />
                     <AppBar/>
                     <LoginModal />
-                    <Drawer/>
                     <ResetPasswordModal />
                     <Switch>
                         <Route path="/join" exact component={Join} />
