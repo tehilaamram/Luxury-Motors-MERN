@@ -12,7 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import autoBind from 'react-autobind';
 import { withStyles } from "@material-ui/core/styles";
@@ -155,8 +155,8 @@ class CustomAppBar extends React.Component {
           </MenuItem>
           <MenuItem>
             <IconButton aria-label="show 11 new notifications" color="inherit">
-              <Badge badgeContent={11} color="secondary">
-                <NotificationsIcon />
+              <Badge badgeContent={0} color="secondary">
+              <ShoppingCartIcon />
               </Badge>
             </IconButton>
             <p>Notifications</p>
@@ -214,7 +214,7 @@ class CustomAppBar extends React.Component {
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+              <ShoppingCartIcon />
               </Badge>
             </IconButton>
             <IconButton
