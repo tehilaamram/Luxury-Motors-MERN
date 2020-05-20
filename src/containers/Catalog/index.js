@@ -2,6 +2,8 @@ import React from 'react';
 import { Cookies } from 'react-cookie';
 import autoBind from 'react-autobind';
 import './style.css';
+import { add } from '../../redux/Cart/actions';
+import { connect } from 'react-redux';
 import Card from '../../components/VehicleCard';
 import Filter from '../../components/Filter';
 import AjaxService from '../../services/AjaxService';
@@ -59,6 +61,7 @@ class Catalog extends React.Component {
                 return {new_vehicle_value: ''};
             }
             state.vehicleCart[state.next_id] = {id: state.next_id, vehicle: event._id};
+            this.props.onAdd();
             console.log(state.vehicleCart, ' vehicle cart');
             return {
                 new_vehicle_value: '',
@@ -97,4 +100,13 @@ class Catalog extends React.Component {
     }
 }
 
-export default Catalog;
+const mapStateToProps = (state) => ({
+    cart: state.cart,
+});
+
+const mapDispatchToProps = {
+    onAdd: add,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Catalog);
+// export default connectCatalog;

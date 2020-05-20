@@ -17,6 +17,10 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import autoBind from 'react-autobind';
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from '../Drawer';
+import { Cookies } from 'react-cookie';
+import { connect } from 'react-redux';
+
+
 const styles = ((theme) => ({
   grow: {
     flexGrow: 1,
@@ -93,6 +97,7 @@ class CustomAppBar extends React.Component {
             drawer: false,
         }
         autoBind(this);
+        this.cookies = new Cookies();
     }
     handleProfileMenuOpen = (event) => {
       console.log(event.currentTarget, ' cutt targ')
@@ -156,7 +161,7 @@ class CustomAppBar extends React.Component {
           </MenuItem>
           <MenuItem>
             <IconButton aria-label="show 11 new notifications" color="inherit">
-              <Badge badgeContent={0} color="secondary">
+              <Badge badgeContent={this.props.cart} color="secondary">
               <ShoppingCartIcon />
               </Badge>
             </IconButton>
@@ -224,7 +229,7 @@ class CustomAppBar extends React.Component {
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+              <Badge badgeContent={this.props.cart} color="secondary">
               <ShoppingCartIcon />
               </Badge>
             </IconButton>
@@ -260,4 +265,13 @@ class CustomAppBar extends React.Component {
       }
 }
 
-export default withStyles(styles)(CustomAppBar);
+const mapStateToProps = (state) => ({
+  cart: state.cart,
+});
+
+// const mapDispatchToProps = {
+//   onAdd: add,
+// };
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Catalog);
+export default connect(mapStateToProps, {})(withStyles(styles)(CustomAppBar));

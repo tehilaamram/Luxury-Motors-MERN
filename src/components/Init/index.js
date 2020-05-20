@@ -1,16 +1,17 @@
 import localStorage from "localforage";
 import React from 'react';
 import { connect } from 'react-redux';
+import { Cookies } from 'react-cookie';
 
 import { CONNECTED_USER } from '../../helpers/consts';
 import { updateFromLocalStorage } from '../../redux/user/actions';
-
+import { reload } from '../../redux/Cart/actions';
 class Init extends React.Component {
     constructor(props) {
         super(props);
         window.addEventListener('load', (e) => {
             this.updateStatesFromStorage();
-          });
+        });
     }
 
     hasLocalStorage() {
@@ -29,29 +30,36 @@ class Init extends React.Component {
             if (localForageSize < 3) {
                 return;
             }
+            this.cookies = new Cookies();
+            let oldVehicleCart = this.cookies.get('vehicles');
+            if (oldVehicleCart !== undefined) {
+                this.props.onReload(oldVehicleCart.length);
+            }
             localStorage.getItem(CONNECTED_USER.ROLE).then((currRole) => {
-              localStorage.getItem(CONNECTED_USER.EMAIL).then((currEmail) => {
-               localStorage.getItem(CONNECTED_USER.FULL_NAME).then((currFullName) => {
-                localStorage.getItem(CONNECTED_USER.ID).then((currId) => {
-                    this.props.onUpdateFromLocalStorage(currId, currRole, currEmail, currFullName);
+                localStorage.getItem(CONNECTED_USER.EMAIL).then((currEmail) => {
+                    localStorage.getItem(CONNECTED_USER.FULL_NAME).then((currFullName) => {
+                        localStorage.getItem(CONNECTED_USER.ID).then((currId) => {
+                            this.props.onUpdateFromLocalStorage(currId, currRole, currEmail, currFullName);
+                        });
+                    });
                 });
-               });
-              });
             });
         });
     }
 
-   render() {
-       return null;
-   }
+    render() {
+        return null;
+    }
 }
 
 const mapStateToProps = (state) => ({
     user: state.user,
+    cart: state.cart,
 });
 
 const mapDispatchToProps = {
     onUpdateFromLocalStorage: updateFromLocalStorage,
+    onReload: reload,
 };
 
 
