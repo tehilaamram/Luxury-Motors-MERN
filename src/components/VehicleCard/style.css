@@ -3,8 +3,8 @@
 .VehicleCard {
     margin: 10px;
     display: flex;
-    height: 200px;
-    width: 550px;
+    /* height: 200px;
+    width: 550px; */
     /* width: 80vw; */
     /* width: calc(100vw - 10px); */
     border-width: 1px;
@@ -53,3 +53,27 @@ margin: 10px 10px 10px 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
+.VehicleBF {
+    display: flex;
+}
+@media screen and (min-width: 769px) {
+    .VehicleCard {
+        height: 200px;
+        width: 550px;    }
+}
+@media screen and (max-width: 768px) {
+    .VehicleCard {   
+      flex-direction: column;
+     width: calc(200px * 4 / 3);
+     height: fit-content;
+    }
+    .HomeMainImageCSS {
+      width: 100%;
+      height: calc((100vw - 40px) * 9 / 16); 
+    }
+    .HomeImageText {
+      width: 100%;
+      height: calc((100vw - 40px) * 9 / 16); 
+      font-size: 9vw;
+    }
+  }

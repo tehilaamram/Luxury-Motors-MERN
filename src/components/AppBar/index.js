@@ -123,64 +123,56 @@ class CustomAppBar extends React.Component {
           isMobileMenuOpen: true
         });
       };
-     renderMenu() {
-       return (
-        <Menu
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          id={menuId}
-          keepMounted
-          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={this.state.isMenuOpen}
-          onClose={this.handleMenuClose}
-        >
-          <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-          <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-        </Menu>
-      );
-       }
+    //  renderMenu() {
+    //    return (
+    //     <Menu
+    //       anchorEl={this.state.anchorEl}
+    //       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //       id={menuId}
+    //       keepMounted
+    //       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //       open={this.state.isMenuOpen}
+    //       onClose={this.handleMenuClose}
+    //     >
+    //       <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+    //       <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+    //     </Menu>
+    //   );
+    //    }
     
-     renderMobileMenu() {
-      return (
-        <Menu
-          anchorEl={this.state.mobileMoreAnchorEl}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          id={mobileMenuId}
-          keepMounted
-          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={this.state.isMobileMenuOpen}
-          onClose={this.handleMobileMenuClose}
-        >
-          <MenuItem>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <p>Messages</p>
-          </MenuItem>
-          <MenuItem>
-            <IconButton aria-label="show 11 new notifications" color="inherit">
-              <Badge badgeContent={this.props.cart} color="secondary">
-              <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-            <p>Notifications</p>
-          </MenuItem>
-          <MenuItem onClick={this.handleProfileMenuOpen}>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-            <p>Profile</p>
-          </MenuItem>
-        </Menu>
-      );
-     } 
+    //  renderMobileMenu() {
+    //   return (
+    //     <Menu
+    //       anchorEl={this.state.mobileMoreAnchorEl}
+    //       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //       id={mobileMenuId}
+    //       keepMounted
+    //       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //       open={this.state.isMobileMenuOpen}
+    //       onClose={this.handleMobileMenuClose}
+    //     >
+    //       <MenuItem>
+    //         <IconButton aria-label="show 11 new notifications" color="inherit">
+    //           <Badge badgeContent={this.props.cart} color="secondary">
+    //           <ShoppingCartIcon />
+    //           </Badge>
+    //         </IconButton>
+    //         <p>Cart</p>
+    //       </MenuItem>
+    //       <MenuItem onClick={this.handleProfileMenuOpen}>
+    //         <IconButton
+    //           aria-label="account of current user"
+    //           aria-controls="primary-search-account-menu"
+    //           aria-haspopup="true"
+    //           color="inherit"
+    //         >
+    //           <AccountCircle />
+    //         </IconButton>
+    //         <p>Profile</p>
+    //       </MenuItem>
+    //     </Menu>
+    //   );
+    //  } 
      toggleDrawer(event) {
        console.log('in tog')
       event.preventDefault();
@@ -208,40 +200,12 @@ class CustomAppBar extends React.Component {
           <Typography className={classes.title} variant="h6" noWrap>
             Luxury Motors
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={this.props.cart} color="secondary">
               <ShoppingCartIcon />
               </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={this.handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
@@ -257,8 +221,6 @@ class CustomAppBar extends React.Component {
           </div>
         </Toolbar>
       </AppBar>
-      {this.state.isMobileMenuOpen && this.renderMobileMenu()}
-      {this.state.isMenuOpen && this.renderMenu()}
       <Drawer isOpen={this.state.drawer} toggleDrawer={this.toggleDrawer}/>
     </div>
   );
@@ -269,9 +231,4 @@ const mapStateToProps = (state) => ({
   cart: state.cart,
 });
 
-// const mapDispatchToProps = {
-//   onAdd: add,
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Catalog);
 export default connect(mapStateToProps, {})(withStyles(styles)(CustomAppBar));

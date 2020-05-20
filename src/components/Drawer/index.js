@@ -20,6 +20,9 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import { withStyles } from "@material-ui/core/styles";
 import autoBind from 'react-autobind';
 import { withRouter } from "react-router-dom";
+import Badge from '@material-ui/core/Badge';
+import { connect } from 'react-redux';
+
 
 
 const styles = ({
@@ -30,6 +33,7 @@ const styles = ({
     width: 'auto',
   },
 });
+
 
 class CustomDrawer extends React.Component {
   constructor(props) {
@@ -69,7 +73,9 @@ class CustomDrawer extends React.Component {
             <ListItemText primary={'Catalog'} />
           </ListItem>
           <ListItem button key={'Cart'}>
-            <ListItemIcon><ShoppingCartIcon /> </ListItemIcon>
+            <ListItemIcon> <Badge badgeContent={this.props.cart} color="secondary">
+            <ShoppingCartIcon />
+          </Badge></ListItemIcon>
             <ListItemText primary={'Cart'} />
           </ListItem>
         </List>
@@ -123,4 +129,8 @@ class CustomDrawer extends React.Component {
   }
 }
 
-export default withRouter(withStyles(styles)(CustomDrawer));
+const mapStateToProps = (state) => ({
+  cart: state.cart,
+});
+
+export default connect(mapStateToProps, {})(withRouter(withStyles(styles)(CustomDrawer)));

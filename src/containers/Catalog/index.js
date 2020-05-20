@@ -48,55 +48,63 @@ class Catalog extends React.Component {
         date.setTime(date.getTime() + (99 * 365 * 24 * 60 * 60 * 1000));
         console.log('in cookie');
         this.cookies.set('vehicles', this.state.vehicleCart, { path: '/', expires: date });
-        // this.nameInput.focus();
     }
 
 
     addToCart(event) {
         console.log(event, ' event');
-        this.setState(function(state, props){
-             console.log(state, ' state');
-            // todoList items should not be empty
+        this.setState(function (state, props) {
+            console.log(state, ' state');
             if (event === undefined) {
-                return {new_vehicle_value: ''};
+                return { new_vehicle_value: '' };
             }
-            state.vehicleCart[state.next_id] = {id: state.next_id, vehicle: event._id};
+            state.vehicleCart[state.next_id] = { id: state.next_id, vehicle: event._id };
             this.props.onAdd();
             console.log(state.vehicleCart, ' vehicle cart');
             return {
                 new_vehicle_value: '',
                 vehicleCart: state.vehicleCart,
                 count_total: state.count_total + 1,
-                // count_incomplete: state.count_incomplete + 1,
                 next_id: state.next_id + 1
             };
         }, this.setStateCallback);
     }
     renderVehicle() {
         return (
-            this.state.vehicleList.map((option, index)=>{
-                // console.log(option);
-                return(
+            this.state.vehicleList.map((option, index) => {
+                return (
                     <Card
-                    vehicle={option}
-                    key={index}
-                    addToCart={this.addToCart.bind(this, option)}
+                        vehicle={option}
+                        key={index}
+                        addToCart={this.addToCart.bind(this, option)}
                     />);
             })
         )
     }
 
+    renderFilter() {
+        return (
+            <div>
+            < Filter subject={"Transmission"} list={['Automatic', 'Manual']} />
+            < Filter subject={"Maker"} list={['Ferrari', 'Porsche']} />
+            < Filter subject={"Year"} list={['2020', '2019', '2018', '2017', '2016']} />
+            < Filter subject={"Doors"} list={['2', '4']} />
+            < Filter subject={"Seats"} list={['2', '3', '4', '5', '6']} />
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className={"CatalogContainer"}>
-            <div className="CatalogFilterDiv">
-            <Filter />
+                <div className="CatalogFilterDiv">
+                {this.renderFilter()}
+                </div>
+                <div className="CatalogCardsDiv">
+                    {this.renderVehicle()}
+                </div>
             </div>
-            <div className="CatalogCardsDiv">
-            {this.renderVehicle()}
-            </div>
-            </div>
-          );
+        );
     }
 }
 
@@ -109,4 +117,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog);
-// export default connectCatalog;

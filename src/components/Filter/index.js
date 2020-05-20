@@ -1,45 +1,65 @@
 import React from 'react';
 import autoBind from 'react-autobind';
-import { withRouter} from "react-router-dom";
-import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+import _ from "lodash";
 
 
 import './style.css';
 import Button from '../Button';
-import { signOut } from '../../redux/user/actions';
 
 class Filter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selected: false,
+            list: [],
         }
-        // this.state = {lockedPanel: false, panelState: 'minimize'};
         autoBind(this);
     }
-    changeState() {
-        this.setState({selected: !this.state.selected});
+    changeState(event) {
+        console.log(event, ' filter event');
+        // this.setState({selected: !this.state.selected});
+        if (this.state.list.includes(event)) {
+            // var index = _indexOf(this.state.list, event);
+            var evens = _.remove(this.state.list, function (n) {
+                return n === event;
+            });
+            console.log(this.state.list, ' after delte');
+            this.setState({
+                list: this.state.list,
+            })
+        } else {
+            this.setState({
+                list: [...this.state.list, event],
+            })
+        }
+
+    }
+    renderItems() {
+        return (
+            this.props.list.map((option, index) => {
+                return (
+                    <Button
+                        key={option}
+                        css={this.state.list.includes(option) ? "SelectedFilterButton" : "FilterButton"}
+                        title={option}
+                        onClick={this.changeState.bind(this, option)}
+                    />);
+            })
+        )
     }
     render() {
+        console.log(this.state.list, ' render');
         return (
             <div className="FilterContainer">
-                 <div className="FilterName">
-                 <span className="FilterNameText"> Transmission </span>
-                 </div>
-                 <div className="FilterSelection">
-                 <Button css={this.state.selected ? "SelectedFilterButton" : "FilterButton"} title="Automatic" onClick={this.changeState}/>
-                 <Button css={this.state.selected ? "SelectedFilterButton" : "FilterButton"} title="Manual" onClick={this.changeState}/>
-                 </div>
+                <div className="FilterName">
+                    <span className="FilterNameText"> {this.props.subject} </span>
+                </div>
+                <div className="FilterSelection">
+                    {this.renderItems()}
+                </div>
             </div>
         );
     }
 }
-const mapStateToProps = (state) => ({
-    user: state.user,
-});
-
-const mapDispatchToProps = {
-    onSignOut: signOut,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Filter));
+export default withRouter(Filter);
