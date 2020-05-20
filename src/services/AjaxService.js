@@ -1,5 +1,5 @@
 import axios from 'axios';
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 
 export default class AjaxService {
@@ -19,14 +19,7 @@ export default class AjaxService {
       url: process.env.REACT_APP_SERVER_URL + urlpath,
       method: 'post',
       config,
-      // headers: { /* custom HTTP headers here, if you need any */ },
-      // xhrFields: {
-          // withCredentials: true,
-      // },
-      withCredentials: true,
-    //   headers: {'content-type': 'application/json',
-    //         // withCredentials: true,
-    // },
+      // withCredentials: true,
       data,
     }).then((response) => {
         return response;
