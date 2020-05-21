@@ -1,0 +1,74 @@
+@import '../../css/variables.css';
+
+.CartItem {
+    margin: 10px;
+    display: flex;
+    border-width: 1px;
+    background-color: var(--white-color);
+}
+
+.MuiIconButton-colorPrimary {
+    color: var(--filter-color) !important;
+}
+
+.CartItemImage {
+    height: 100%;
+    width: calc(200px * 4 / 3);;
+    padding: 15px;}
+
+.VehicleCardHeader {
+    /* height: calc(353px * 9 / 16); */
+    /* width: 353px; */
+    flex: content;
+}
+
+.VehicleCardBody {
+flex: 85%;
+margin: 10px 10px 10px 20px;
+}
+
+.VehicleCardFooter {
+    background-color: transparent;
+    flex: 10%;
+    margin: 10px;
+    /* height: 40px; */
+}
+
+/* .VerticalHr {
+    flex: 5%;
+    border: none;
+    border-left: 1px solid hsl(200, 15%, 86%);
+    height: calc(100% - 20px);
+    width: 1px;
+} */
+
+.ModelText {
+    font-size: 20px;
+    font-family: var(--regular-font);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.VehicleBF {
+    display: flex;
+}
+@media screen and (min-width: 769px) {
+    .CartItem {
+        height: 200px;
+        width: 550px;    }
+}
+@media screen and (max-width: 768px) {
+    .CartItem {   
+      flex-direction: column;
+     width: calc(200px * 4 / 3);
+     height: fit-content;
+    }
+    .HomeMainImageCSS {
+      width: 100%;
+      height: calc((100vw - 40px) * 9 / 16); 
+    }
+    .HomeImageText {
+      width: 100%;
+      height: calc((100vw - 40px) * 9 / 16); 
+      font-size: 9vw;
+    }
+  }

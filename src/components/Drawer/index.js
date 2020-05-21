@@ -22,7 +22,9 @@ import autoBind from 'react-autobind';
 import { withRouter } from "react-router-dom";
 import Badge from '@material-ui/core/Badge';
 import { connect } from 'react-redux';
-
+import AjaxService from '../../services/AjaxService';
+import { ROLE } from '../../helpers/consts';
+import { signOut } from '../../redux/user/actions';
 
 
 const styles = ({
@@ -43,9 +45,31 @@ class CustomDrawer extends React.Component {
     }
     autoBind(this);
   }
+  openSignInModal() {
+    // this.props.closenav();
+    if (document.getElementById('signInModal').style.display === 'flex') {
+        document.getElementById('signInModal').style.display = 'none';
+    } else {
+        document.getElementById('signInModal').style.display = 'flex';
+    }
+}
+openSignUpModal() {
+    // this.props.closenav();
+    if (document.getElementById('signUpModal').style.display === 'flex') {
+        document.getElementById('signUpModal').style.display = 'none';
+    } else {
+        document.getElementById('signUpModal').style.display = 'flex';
+    }
+}
+signOut(){
+    AjaxService.get('/signOut', {data: {user: this.props.user.email}}).then((res) => {
+    this.props.onSignOut();
+    }).catch((err) => {
+        console.log('error in sign out ', err);
+    })
+}
   navigateTo(key) {
     console.log(key, ' navigate to');
-    // this.props.toggleDrawer()
     this.props.history.push(key);
   }
   list(anchor) {
@@ -72,7 +96,7 @@ class CustomDrawer extends React.Component {
             <ListItemIcon><ListIcon/> </ListItemIcon>
             <ListItemText primary={'Catalog'} />
           </ListItem>
-          <ListItem button key={'Cart'}>
+          <ListItem button onClick={this.navigateTo.bind(this, '/cart')} key={'Cart'}>
             <ListItemIcon> <Badge badgeContent={this.props.cart} color="secondary">
             <ShoppingCartIcon />
           </Badge></ListItemIcon>
@@ -100,15 +124,15 @@ class CustomDrawer extends React.Component {
         </List>
         <Divider />
         <List>
-          <ListItem button key={'Sign In'}>
+          <ListItem button onClick={this.openSignInModal} key={'Sign In'}>
             <ListItemIcon><PersonIcon /> </ListItemIcon>
             <ListItemText primary={'Sign In'} />
           </ListItem>
-          <ListItem button key={'Sign Up'}>
+          <ListItem button onClick={this.openSignUpModal} key={'Sign Up'}>
             <ListItemIcon><PersonAddIcon /> </ListItemIcon>
             <ListItemText primary={'Sign Up'} />
           </ListItem>
-          <ListItem button key={'Sign Out'}>
+          <ListItem button onClick={this.signOut} key={'Sign Out'}>
             <ListItemIcon><ExitToAppIcon /> </ListItemIcon>
             <ListItemText primary={'Sign Out'} />
           </ListItem>
@@ -131,6 +155,11 @@ class CustomDrawer extends React.Component {
 
 const mapStateToProps = (state) => ({
   cart: state.cart,
+  user: state.user,
 });
 
-export default connect(mapStateToProps, {})(withRouter(withStyles(styles)(CustomDrawer)));
+const mapDispatchToProps = {
+  onSignOut: signOut,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withStyles(styles)(CustomDrawer)));

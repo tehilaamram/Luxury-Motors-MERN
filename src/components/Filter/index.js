@@ -18,10 +18,8 @@ class Filter extends React.Component {
     }
     changeState(event) {
         console.log(event, ' filter event');
-        // this.setState({selected: !this.state.selected});
         if (this.state.list.includes(event)) {
-            // var index = _indexOf(this.state.list, event);
-            var evens = _.remove(this.state.list, function (n) {
+            _.remove(this.state.list, function (n) {
                 return n === event;
             });
             console.log(this.state.list, ' after delte');

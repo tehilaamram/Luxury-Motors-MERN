@@ -3,10 +3,10 @@ import { Cookies } from 'react-cookie';
 import autoBind from 'react-autobind';
 // import _ from 'lodash';
 import './style.css';
-import Card from '../../components/CartCard';
+import CartItem from '../../components/CartItem';
 import AjaxService from '../../services/AjaxService';
 
-class Catalog extends React.Component {
+class Cart extends React.Component {
     constructor(props) {
         super(props);
         this.cookies = new Cookies();
@@ -72,27 +72,27 @@ class Catalog extends React.Component {
             };
         }, this.setStateCallback);
     }
-    renderItems() {
-        return (
-            Object.values(this.state.vehicleCart).map((option, index)=>{
-                // console.log(option);
-                return(
-                    <Card
-                    vehicle={option}
-                    key={index}
-                    index={index}
-                    addToCart={this.removeFromCart.bind(this, option)}
-                    />);
-            })
-        )
-    }
+    // renderItems() {
+    //     return (
+    //         Object.values(this.state.vehicleCart).map((option, index)=>{
+    //             // console.log(option);
+    //             return(
+    //                 <Card
+    //                 vehicle={option}
+    //                 key={index}
+    //                 index={index}
+    //                 addToCart={this.removeFromCart.bind(this, option)}
+    //                 />);
+    //         })
+    //     )
+    // }
 
     render() {
         return (
             <div className={"CatalogContainer"}>
             {(this.state.vehicleList).map((option, index)=>{
                 return(
-                    <Card
+                    <CartItem
                     vehicle={option}
                     key={index}
                     index={index}
@@ -104,4 +104,4 @@ class Catalog extends React.Component {
     }
 }
 
-export default Catalog;
+export default Cart;
