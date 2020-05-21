@@ -19,8 +19,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Drawer from '../Drawer';
 import { Cookies } from 'react-cookie';
 import { connect } from 'react-redux';
-
-
+// import '../../css/materialUI.css';
+import './style.css';
 const styles = ((theme) => ({
   grow: {
     flexGrow: 1,

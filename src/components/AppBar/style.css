@@ -1,0 +1,5 @@
+@import '../../css/variables.css';
+
+.MuiAppBar-colorPrimary	 {
+    background-color:var(--silver-color) !important;
+}
