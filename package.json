@@ -53,6 +53,7 @@
     "react-scroll-to-bottom": "^2.0.0",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
+    "safer-buffer": "^2.1.2",
     "socket.io": "^2.3.0"
   },
   "scripts": {
@@ -61,6 +62,7 @@
     "clearDB": "node ./helpscripts/clearDB.js",
     "printUserList": "node ./helpscripts/userList.js",
     "printVehicleList": "node ./helpscripts/vehicleList.js",
+    "addVehicles": "node ./helpscripts/addVehicleList.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

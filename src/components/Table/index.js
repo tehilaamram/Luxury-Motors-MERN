@@ -12,8 +12,8 @@ class Table extends React.Component {
                 <td>{vehicle.model}</td>
               </tr>
               <tr>
-                <td>Make</td>
-                <td>{vehicle.make}</td>
+                <td>Maker</td>
+                <td>{vehicle.maker}</td>
               </tr>
               <tr>
                 <td>Year</td>

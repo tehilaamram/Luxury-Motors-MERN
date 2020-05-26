@@ -4,7 +4,7 @@ import _ from 'lodash';
 import FormData from 'form-data'
 
 import './style.css';
-import { MAKE, TRANSMISSION, VEHICLE } from '../../helpers/consts';
+import { MAKER, TRANSMISSION, VEHICLE } from '../../helpers/consts';
 import ImageUpload from '../../components/ImageUpload';
 import TextInput from '../../components/TextInput';
 import Picker from '../../components/Picker';
@@ -15,7 +15,7 @@ class AddVehicle extends React.Component {
     super(props);
     this.state = {
       model: '',
-      make: MAKE[0],
+      make: MAKER[0],
       year: 2020,
       color: 'black',
       doors: 2,
@@ -62,7 +62,7 @@ this.state.additionalImages.forEach(element => {
   data.append('file', element, element.name);
 });
 data.append(VEHICLE.MODEL, this.state.model);
-data.append(VEHICLE.MAKE, this.state.make);
+data.append(VEHICLE.MAKER, this.state.make);
 data.append(VEHICLE.DOORS, this.state.doors);
 data.append(VEHICLE.TRANSMISSION, this.state.transmission);
 data.append(VEHICLE.COLOR, this.state.color);
@@ -80,7 +80,7 @@ AjaxService.post('/vehicle/addVehicle', data , {headers: {'Content-Type': 'appli
         <div className={"AddVehicleContainer"}>
         <div className="AddVehicleDetailsContainer">
         <TextInput id={"model"} text={"Model"} type={"text"} onChange={this.onModelChange} value={this.state.model} />
-        <Picker id={"make"} text={"Make"} valueChanged={this.onMakeChange} list={MAKE} />
+        <Picker id={"maker"} text={"Maker"} valueChanged={this.onMakeChange} list={MAKER} />
         <TextInput id={"year"} text={"Year"} type={"number"} onChange={this.onYearChange} value={this.state.year} min={2000} max={2020}/>
         <TextInput id={"color"} text={"Color"} type={"color"} onChange={this.onColorChange} value={this.state.color} />
         <TextInput id={"doors"} text={"Doors"} type={"number"} onChange={this.onDoorsChange} value={this.state.doors} />

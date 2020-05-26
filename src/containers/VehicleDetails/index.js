@@ -28,13 +28,15 @@ class VehicleDetails extends React.Component {
       if (res.data.vehicle.mainImg !== undefined) {
         imgList.push({
           original: `data:image/jpeg;base64,${res.data.vehicle.mainImg.image}`,
-          thumbnail: `data:image/jpeg;base64,${res.data.vehicle.mainImg.image}`
+          thumbnail: `data:image/jpeg;base64,${res.data.vehicle.mainImg.image}`,
+          sizes: "(min-width: 900px) 100px",
         });
       }
       res.data.vehicle.additionalImg.forEach(element => {
         imgList.push({
           original: `data:image/jpeg;base64,${element.image}`,
-          thumbnail: `data:image/jpeg;base64,${element.image}`
+          thumbnail: `data:image/jpeg;base64,${element.image}`,
+          sizes: "(min-width: 900px) 100px",
         });
       });
       this.setState({
@@ -56,7 +58,6 @@ class VehicleDetails extends React.Component {
       <div className="VehicleDetailsImagesContainer">
         <ImageGallery imageList={this.state.imageList}/>
         </div>
-        
         <div className="VehicleDetailsButtons">
           <div className="SaveBottonAddVehicle">
             <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} />

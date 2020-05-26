@@ -36,7 +36,7 @@ router.post('/addVehicle', upload.array('file', 30), (req, res) => {
     image: new Buffer(encode_image, 'base64')
   };
   var newVehicle = new Vehicle({
-    make: req.body.make,
+    maker: req.body.maker,
     model: req.body.model,
     color: req.body.color,
     mainImg: finalImg,

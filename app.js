@@ -20,7 +20,7 @@ var orderRouter = require('./routes/order');
 let app = express();
 (async () => {
     let MongoStore = connectMongo(session);
-    let sessConnStr = "mongodb://127.0.0.1/buy-a-luxury-vehicle-sessions";
+    let sessConnStr = "mongodb://127.0.0.1/luxury-motors-sessions";
     let sessionConnect = mongoose.createConnection();
     try {
         await sessionConnect.openUri(sessConnStr, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -40,7 +40,7 @@ let app = express();
 
     app.use(logger('dev'));
     /* for saving session in client side and not blocking the request at server side */ 
-    app.use(cors({credentials: true, origin: ['http://localhost:3000', 'http://localhost:3001']}));
+    app.use(cors({credentials: true, origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003']}));
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 

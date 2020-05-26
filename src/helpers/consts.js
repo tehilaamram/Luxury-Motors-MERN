@@ -14,11 +14,11 @@ export const CONNECTED_USER = {
 
 export const TRANSMISSION = ['Manual', 'Automatic'];
 
-export const MAKE = ['Porsche', 'Ferrari'];
+export const MAKER = ['Porsche', 'Ferrari', 'Mercedes-Benz'];
 
 export const VEHICLE = {
     MODEL: 'model',
-    MAKE: 'make',
+    MAKER: 'maker',
     COLOR: 'color',
     MAIN_IMAGE: 'mainImage',
     ADDITIONAL_IMAGES: 'additionalImages',

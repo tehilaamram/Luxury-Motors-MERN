@@ -14,7 +14,7 @@ module.exports = db => {
         //     enum: AREA,
         //     required: true,
         // },
-        make: {
+        maker: {
             type: String,
             // enum: MANUFACTURER,
             required: true,

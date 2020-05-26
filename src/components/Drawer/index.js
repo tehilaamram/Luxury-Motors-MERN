@@ -73,7 +73,7 @@ signOut(){
     this.props.history.push(key);
   }
   list(anchor) {
-    const { classes } = this.props;
+    const { classes, user } = this.props;
     return (
       <div
         className={clsx(classes.list, {
@@ -104,26 +104,32 @@ signOut(){
           </ListItem>
         </List>
         <Divider />
-        <List>
+        { user.role !== ROLE.GUEST &&  <List>
         <ListItem button key={'Profile'}>
             <ListItemIcon><AccountBoxIcon /> </ListItemIcon>
             <ListItemText primary={'Profile'} />
-          </ListItem>
-          <ListItem button onClick={this.navigateTo.bind(this, '/add-vehicle')} key={'Add Vehicle'}>
-            <ListItemIcon><AddCircleIcon /> </ListItemIcon>
-            <ListItemText primary={'Add Vehicle'} />
-          </ListItem>
-          <ListItem button key={'Manage Users'}>
-            <ListItemIcon><PeopleIcon /> </ListItemIcon>
-            <ListItemText primary={'Manage Users'} />
           </ListItem>
           <ListItem button key={'Chat Rooms'}>
             <ListItemIcon><ChatIcon /> </ListItemIcon>
             <ListItemText primary={'Chat Rooms'} />
           </ListItem>
-        </List>
-        <Divider />
-        <List>
+        </List> }
+        { user.role !== ROLE.GUEST && <Divider /> }
+        { user.role !== ROLE.GUEST && user.role !== ROLE.USER && <List>
+          <ListItem button onClick={this.navigateTo.bind(this, '/add-vehicle')} key={'Add Vehicle'}>
+            <ListItemIcon><AddCircleIcon /> </ListItemIcon>
+            <ListItemText primary={'Add Vehicle'} />
+          </ListItem>
+        </List> }
+        { user.role !== ROLE.GUEST && user.role !== ROLE.USER &&  <Divider />}
+        { user.role === ROLE.ADMIN && <List>
+          <ListItem button key={'Manage Users'}>
+            <ListItemIcon><PeopleIcon /> </ListItemIcon>
+            <ListItemText primary={'Manage Users'} />
+          </ListItem>
+        </List> }
+        { user.role === ROLE.ADMIN &&  <Divider />}
+        { user.role === ROLE.GUEST && <List>
           <ListItem button onClick={this.openSignInModal} key={'Sign In'}>
             <ListItemIcon><PersonIcon /> </ListItemIcon>
             <ListItemText primary={'Sign In'} />
@@ -132,11 +138,13 @@ signOut(){
             <ListItemIcon><PersonAddIcon /> </ListItemIcon>
             <ListItemText primary={'Sign Up'} />
           </ListItem>
+        </List>}
+       { user.role !== ROLE.GUEST && <List>
           <ListItem button onClick={this.signOut} key={'Sign Out'}>
             <ListItemIcon><ExitToAppIcon /> </ListItemIcon>
             <ListItemText primary={'Sign Out'} />
           </ListItem>
-        </List>
+       </List> }
       </div>
     );
   }
