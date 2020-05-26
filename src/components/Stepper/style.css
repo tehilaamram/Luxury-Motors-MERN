@@ -1,0 +1,33 @@
+.StepperImage {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+    height: 300px;
+    width: 300px;
+    margin: 20px;
+    /* background-image: url(../../images/defaultprofile.png); */
+}
+
+.StepContainer {
+    text-align: center;
+}
+
+.UploadImageButton {
+
+}
+
+.ImagePreview {
+
+}
+
+.FirstStep {
+    margin: 20px;
+
+}
+
+.SecondStep {
+    display: inline-grid;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}

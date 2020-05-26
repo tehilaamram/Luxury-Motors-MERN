@@ -14,4 +14,16 @@ router.post('/resetPassword', async function (req, res) {
   });
 });
 
+router.get('/getUser/:uid', (req, res) => {
+  User.findById(req.params.uid, (err, user) => {
+    if (err) {
+      return res.sendStatus(404);
+    }
+    return res.json({
+      status: 200,
+      user,
+    });
+  });
+});
+
 module.exports = router;

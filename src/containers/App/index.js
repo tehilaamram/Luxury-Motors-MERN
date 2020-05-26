@@ -12,7 +12,7 @@ import AddVehicle from '../AddVehicle';
 import VehicleDetails from '../VehicleDetails';
 import ResetPassword from '../ResetPassword';
 import Cart from '../Cart';
-
+import CharRooms from '../ChatRooms';
 import SignUpModal from "../../components/SignUpModal";
 import LoginModal from "../../components/SignInModal";
 import ResetPasswordModal from '../../components/ResetPasswordModal';
@@ -59,6 +59,7 @@ class App extends React.Component {
                         <Route path='/vehicle/:id' component={VehicleDetails} />
                         <Route path='/reset/:token' component={ResetPassword} />
                         <Route path='/cart' component={Cart} />
+                        <Route path="/chat-rooms/:uid" component={CharRooms} />
                     </Switch>
                     <Footer />
                 </BrowserRouter>

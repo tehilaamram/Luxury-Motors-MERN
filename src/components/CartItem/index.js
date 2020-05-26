@@ -34,7 +34,7 @@ class CartItem extends React.Component {
     }
     render() {
         // import logo from `/src/images/make/${vehicle.make}.png`
-        const { vehicle, classes} = this.props;
+        const { vehicle} = this.props;
         var img = require(`../../images/make/${vehicle.maker}.png`);
         return (
             <div className={"CartItem"}>

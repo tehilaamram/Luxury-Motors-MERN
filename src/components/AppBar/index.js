@@ -82,7 +82,7 @@ const styles = ((theme) => ({
     },
   },
 }));
-var menuId = 'primary-search-account-menu';
+// var menuId = 'primary-search-account-menu';
 const mobileMenuId = 'primary-search-account-menu-mobile';
 class CustomAppBar extends React.Component {
   constructor(props) {

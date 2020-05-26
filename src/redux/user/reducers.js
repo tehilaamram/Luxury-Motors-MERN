@@ -35,6 +35,7 @@ export default function reducer(state = initialState, action) {
         case UPDATE_FROM_STORAGE:
             return {
                 ...state,
+                id: action.id,
                 role: action.role,
                 email: action.email,
                 fullName: action.fullName,

@@ -9,9 +9,11 @@ module.exports = db => {
             type: String,
             required: true,
         },
-        attemptsField: {
-            type: Number,
-            default: 0,
+        mainImg: { 
+            type: {
+                data: Buffer, contentType: String,
+            },
+            default: undefined,
         },
         username: {
             type: String,
@@ -41,6 +43,10 @@ module.exports = db => {
         },
         resetPasswordExpires: {
             type: Date,
+            default: undefined,
+        },
+        phone: {
+            type: Number,
             default: undefined,
         },
         rooms: [{

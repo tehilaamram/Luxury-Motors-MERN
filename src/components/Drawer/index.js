@@ -109,7 +109,7 @@ signOut(){
             <ListItemIcon><AccountBoxIcon /> </ListItemIcon>
             <ListItemText primary={'Profile'} />
           </ListItem>
-          <ListItem button key={'Chat Rooms'}>
+          <ListItem button onClick={this.navigateTo.bind(this, `/chat-rooms/${user.id}`)} key={'Chat Rooms'}>
             <ListItemIcon><ChatIcon /> </ListItemIcon>
             <ListItemText primary={'Chat Rooms'} />
           </ListItem>

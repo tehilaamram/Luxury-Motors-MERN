@@ -3,7 +3,7 @@ import io from "socket.io-client";
 // import moment from 'moment';
 import { connect } from 'react-redux';
 
-import TextContainer from '../TextContainer/TextContainer';
+// import TextContainer from '../TextContainer/TextContainer';
 import Messages from '../Messages/Messages';
 import InfoBar from '../InfoBar/InfoBar';
 import Input from '../Input/Input';
@@ -76,7 +76,7 @@ class Chat extends React.Component {
         }
       }
   render() {
-    const {room, messages, name, message, users} = this.state;
+    const {room, messages, name, message} = this.state;
     return (
      /** {       <div className="outerContainer">}**/
         <div className="ChatContainer">
