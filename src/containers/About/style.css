@@ -7,7 +7,7 @@
     display: flex;
     flex-wrap: wrap;
     background-color: var(--light-gray-color);
-    min-height: calc(100vh - 71.44px - 30px);
+    /* min-height: calc(100vh - 71.44px - 30px); */
 }
 
 .Title {

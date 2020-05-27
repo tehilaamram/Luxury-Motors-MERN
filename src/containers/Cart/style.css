@@ -4,7 +4,7 @@
 }
 .CatalogContainer {
   padding: 20px;
-  min-height: calc(100vh - 73px - 30px);
+  /* min-height: calc(100vh - 73px - 30px); */
   display: flex;
   flex-wrap: wrap;
   background-color: var(--light-gray-color);

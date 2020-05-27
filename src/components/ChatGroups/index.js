@@ -1,51 +1,92 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
-
-const useStyles = makeStyles((theme) => ({
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import AjaxService from '../../services/AjaxService';
+import _ from "lodash";
+import Button from '@material-ui/core/Button';
+import autoBind from "react-autobind";
+import Divider from '@material-ui/core/Divider';
+import './style.css';
+const classes = ((theme) => ({
   root: {
-    width: '100%',
-    maxWidth: 360,
+    width: 700,
+    margin: 'auto',
     backgroundColor: theme.palette.background.paper,
+    borderStyle: 'outset',
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.12)',
+    borderRadius: 6,
   },
+  rounded: {
+    color: '#fff',
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginRight: 10,
+  },
+  actions: {
+    textTransform: 'none',
+    color: '#616161',
+    borderColor: '#BDBDBD',
+    '&:hover': {
+    },
+  }
 }));
 
-export default function FolderList() {
-  const classes = useStyles();
-
-  return (
-    <List className={classes.root}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <WorkIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Work" secondary="Jan 7, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <BeachAccessIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
-    </List>
-  );
+class ChatGroups extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chatRoomsList: [],
+    };
+    autoBind(this);
+  }
+  componentDidMount() {
+    AjaxService.get("/chatRoom/getAll").then((res) => {
+      console.log(res, ' chat rooms res');
+      this.setState({
+        chatRoomsList: res.data,
+      });
+    }).catch((err) => {
+      console.log('chat rooms error', err);
+    })
+  }
+  renderChatRooms() {
+    const { classes } = this.props;
+    return (
+      this.state.chatRoomsList.map((option, index) => {
+        return (
+          <div key={index}>
+            {index !== 0 && <Divider />}
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar alt="group" src={`data:image/jpeg;base64,${option.img.image}`} className={classes.rounded}>
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={option.name} secondary={option.numMembers + " members"} />
+              <ListItemSecondaryAction>
+                <Button variant="outlined" color="primary" className={classes.actions}>
+                  Join
+      </Button>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </div>
+        );
+      })
+    );
+  }
+  render() {
+    const { classes } = this.props;
+    return (
+      <List className={classes.root}>
+        {this.renderChatRooms()}
+      </List>
+    );
+  }
 }
+
+export default withStyles(classes)(ChatGroups);

@@ -8,9 +8,9 @@ module.exports = db => {
             type: String,
             required: true,
         },
-        role: {
-            type: String,
-            required: true,
+        numMembers: {
+            type: Number,
+            default: 0,
         },
         img: { 
             type: {

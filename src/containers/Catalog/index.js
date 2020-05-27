@@ -79,7 +79,7 @@ class Catalog extends React.Component {
                         addToCart={this.addToCart.bind(this, option)}
                     />);
             })
-        )
+        );
     }
 
     renderFilter() {

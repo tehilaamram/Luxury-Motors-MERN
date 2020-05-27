@@ -16,6 +16,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var vehicleRouter = require('./routes/vehicle');
 var orderRouter = require('./routes/order');
+var chatRoomsRouter = require('./routes/chatRoom');
 
 let app = express();
 (async () => {
@@ -89,6 +90,7 @@ let app = express();
     app.use('/user', usersRouter);
     app.use('/vehicle', vehicleRouter);
     app.use('/order', orderRouter);
+    app.use('/chatRoom', chatRoomsRouter);
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {

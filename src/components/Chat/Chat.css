@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   /* height: 100vh; */
-  min-height: calc(100vh - 73px - 30px);
+  /* min-height: calc(100vh - 73px - 30px); */
   background-color: #1A1A1D;
 }
 

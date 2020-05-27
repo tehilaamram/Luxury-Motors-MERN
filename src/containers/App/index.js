@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import store from '../../store';
 import Init from '../../components/Init';
 import autoBind from 'react-autobind';
+import { connect } from 'react-redux';
 
 import Home from '../Home';
 import About from '../About';
@@ -21,6 +22,7 @@ import Join from '../../components/Join/Join';
 import Footer from '../../components/Footer';
 import Button from '../../components/Button';
 import AppBar from '../../components/AppBar';
+import PrivateRoute from './privateRoute';
 import './style.css';
 class App extends React.Component {
     constructor(props) {
@@ -37,14 +39,16 @@ class App extends React.Component {
         console.log('render chat')
     }
     render() {
+        console.log(store.getState(), ' store');
         return (
             <Provider store={store}>
                 <BrowserRouter>
+                <div className="AppContainer">
                     <Init />
-                    <div className={"ChatButtonDiv"}>
+                    {/* <div className={"ChatButtonDiv"}>
                 {this.state.chatOpened && <Chat />}
                         <Button css={"ChatButton"} onClick={this.renderChat} />
-                    </div>
+                    </div> */}
                     <SignUpModal />
                     <AppBar/>
                     <LoginModal />
@@ -59,13 +63,20 @@ class App extends React.Component {
                         <Route path='/vehicle/:id' component={VehicleDetails} />
                         <Route path='/reset/:token' component={ResetPassword} />
                         <Route path='/cart' component={Cart} />
-                        <Route path="/chat-rooms/:uid" component={CharRooms} />
+                        <PrivateRoute path="/chat-rooms/:uid" component={CharRooms} />
                     </Switch>
+                    </div>
                     <Footer />
                 </BrowserRouter>
             </Provider>
         );
     }
 }
+const mapStateToProps = (state) => ({
+    user: state.user,
+});
+
+// export default connect(mapStateToProps, {})(App);
+
 
 export default App;

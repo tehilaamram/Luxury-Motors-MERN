@@ -22,3 +22,6 @@
     /* margin: 10px; */
     /* padding: 16px; */
 }
+.AppContainer {
+  min-height: 100vh;
+}

@@ -64,6 +64,7 @@ openSignUpModal() {
 signOut(){
     AjaxService.get('/signOut', {data: {user: this.props.user.email}}).then((res) => {
     this.props.onSignOut();
+    this.props.history.push('/');
     }).catch((err) => {
         console.log('error in sign out ', err);
     })
