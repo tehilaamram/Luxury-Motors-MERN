@@ -4,10 +4,11 @@
   box-sizing: border-box;
 }
 .ChatRoomsContainer {
-  justify-content: center;
+  /* justify-content: center; */
   padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
+  height: 100%;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
   background-color: var(--light-gray-color);
   /* min-height: calc(100vh - var(--header-height) - var(--footer-height)); */
 }

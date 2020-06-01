@@ -5,6 +5,7 @@ import AjaxService from '../../services/AjaxService';
 import _ from 'lodash';
 import './style.css';
 import Stepper from '../../components/Stepper';
+import ChatGroups from '../../components/ChatGroup';
 // var defaultImg = require("../../images/defaultprofile.jpeg");
 
 class ChatRooms extends React.Component {
@@ -46,7 +47,10 @@ class ChatRooms extends React.Component {
     render() {
         return (
             <div className={"ChatRoomsContainer"}>
-                {this.state.user !== undefined && this.state.user.mainImg === undefined && this.renderStepper()}
+                            {/* // <div > */}
+
+                {/* {this.state.user !== undefined && this.state.user.mainImg === undefined && this.renderStepper()} */}
+                <ChatGroups />
             </div>
         );
     }

@@ -28,7 +28,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          chatOpened: false,
+            chatOpened: false,
         }
         autoBind(this);
     }
@@ -43,30 +43,39 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <BrowserRouter>
-                <div className="AppContainer">
-                    <Init />
-                    {/* <div className={"ChatButtonDiv"}>
+                <div className="box">
+                    {/* <div className="AppContainer"> */}
+                        <Init />
+                        {/* <div className={"ChatButtonDiv"}>
                 {this.state.chatOpened && <Chat />}
                         <Button css={"ChatButton"} onClick={this.renderChat} />
                     </div> */}
-                    <SignUpModal />
-                    <AppBar/>
-                    <LoginModal />
-                    <ResetPasswordModal />
-                    <Switch>
-                        <Route path="/join" exact component={Join} />
-                        <Route path="/chat" component={Chat} />
-                        <Route exact path='/' component={Home} />
-                        <Route path='/about' component={About} />
-                        <Route path='/catalog' component={Catalog} />
-                        <Route path='/add-vehicle' component={AddVehicle} />
-                        <Route path='/vehicle/:id' component={VehicleDetails} />
-                        <Route path='/reset/:token' component={ResetPassword} />
-                        <Route path='/cart' component={Cart} />
-                        <PrivateRoute path="/chat-rooms/:uid" component={CharRooms} />
-                    </Switch>
+                        <SignUpModal />
+                        <div className="row header">
+                        <AppBar />
+                        </div>
+                        <LoginModal />
+                        <ResetPasswordModal />
+                        <div className="row content">
+                        <Switch>
+                            <Route path="/join" exact component={Join} />
+                            <Route path="/chat" component={Chat} />
+                            <Route exact path='/' component={Home} />
+                            <Route path='/about' component={About} />
+                            <Route path='/catalog' component={Catalog} />
+                            <Route path='/add-vehicle' component={AddVehicle} />
+                            <Route path='/vehicle/:id' component={VehicleDetails} />
+                            <Route path='/reset/:token' component={ResetPassword} />
+                            <Route path='/cart' component={Cart} />
+                            <Route path="/chat-rooms/:uid" component={CharRooms} />
+                        </Switch>
+                        </div>
                     </div>
+                    {/* <div className="row footer"> */}
+
                     <Footer />
+                    {/* </div> */}
+                    {/* </div> */}
                 </BrowserRouter>
             </Provider>
         );

@@ -25,7 +25,7 @@ import { connect } from 'react-redux';
 import AjaxService from '../../services/AjaxService';
 import { ROLE } from '../../helpers/consts';
 import { signOut } from '../../redux/user/actions';
-
+import './style.css';
 
 const styles = ({
   list: {
