@@ -38,24 +38,24 @@ io.on('connect', (socket) => {
 		// add the client's username to the global list
 		usernames[username] = username;
 		// send client to room 1
-    socket.join('Luxury Motors');
-    console.log(socket.rooms, ' adduser');
-		// echo to client they've connected
-		socket.emit('updatechat', 'SERVER', 'you have connected to Luxury Motors');
-		// echo to room 1 that a person has connected to their room
-		socket.broadcast.to('Luxury Motors').emit('updatechat', 'SERVER', username + ' has connected to this room');
+    // socket.join('Luxury Motors');
+    // console.log(socket.rooms, ' adduser');
+		// // echo to client they've connected
+		// socket.emit('updatechat', 'SERVER', 'you have connected to Luxury Motors');
+		// // echo to room 1 that a person has connected to their room
+		// socket.broadcast.to('Luxury Motors').emit('updatechat', 'SERVER', username + ' has connected to this room');
 		// socket.emit('updaterooms', rooms, 'Luxury Motors');
   });
   socket.on('switchRoom', function(newroom){
     var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item!=socket.id);
-    console.log(socket.rooms, ' switch rooms', currentRoom);
+    // console.log(socket.rooms, ' switch rooms', currentRoom);
 		socket.leave(currentRoom[0]);
 		socket.join(newroom);
 		socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
 		// sent message to OLD room
 		socket.broadcast.to(currentRoom[0]).emit('updatechat', 'SERVER', socket.username +' has left this room');
 		// update socket session room title
-		socket.room = newroom;
+		// socket.room = newroom;
 		socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
 		// socket.emit('updaterooms', rooms, newroom);
 	});

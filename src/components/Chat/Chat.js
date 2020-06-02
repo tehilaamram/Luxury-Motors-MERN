@@ -88,10 +88,11 @@ class Chat extends React.Component {
   
   }
   // componentDidMount() {
-  //   socket.on('updatechat', function (username, data) {
-  //     console.log('in update chat', data)
-  //     // this.setState({ messages: [...this.state.messages, data] })
-  //   });
+  //   console.log('did mount');
+  //   // socket.on('updatechat', function (username, data) {
+  //   //   console.log('in update chat', data)
+  //   //   // this.setState({ messages: [...this.state.messages, data] })
+  //   // });
   // }
   // componentDidMount() {
   //   socket = io(ENDPOINT);
@@ -105,15 +106,18 @@ class Chat extends React.Component {
   //   });
   // // }
   componentDidUpdate(prevProps, prevState) {
+    console.log('in did update');
     if (prevProps.user.email === "" && this.props.user.email !== "") {
-      console.log('in did update', this.props.user);
+      console.log('in email')
+      // console.log('in did update', this.props.user);
         // socket.on('connect', function(){
       // call the server-side function 'adduser' and send one parameter (value of prompt)
       socket.emit('adduser', this.props.user.email);
     // });
     
     }
-    if (prevProps.group !== null && prevProps.group._id !== this.props.group._id) {
+    if (prevProps.group === null && this.props.group !== null || prevProps.group !== null &&  prevProps.group._id !== this.props.group._id) {
+      console.log('in group');
       socket.emit('switchRoom', this.props.group.name);
       this.setState({
         messages: [],
