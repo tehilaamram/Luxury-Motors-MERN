@@ -52,7 +52,13 @@ class Chat extends React.Component {
       message: '',
       messages: [],
     }
+    // console.log(this.props.user, ' in chat constructor');
     socket = io(ENDPOINT);
+    // socket.on('connect', function(){
+    //   // call the server-side function 'adduser' and send one parameter (value of prompt)
+    //   socket.emit('adduser', this.props.user.email);
+    // });
+  
     // setRoom(room);
     // setName(name)
     // if (this.props.group !== null) {
@@ -64,19 +70,29 @@ class Chat extends React.Component {
   //     alert(error);
   //   }
   // });
-  socket.on('message', message => {
-    this.setState({ messages: [...this.state.messages, message] })
-    // setMessages(messages => [ ...messages, message ]);
-  });
+  socket.on('updatechat', (username, data) => {
+    console.log('in ', data)
+    this.setState({ messages: [...this.state.messages, data] })
+	});
+  // socket.on('message', message => {
+  //   this.setState({ messages: [...this.state.messages, message] })
+  //   // setMessages(messages => [ ...messages, message ]);
+  // });
 
-  socket.on("roomData", ({ users }) => {
-    this.setState(users);
-    // console.log(users, ' users')
-    // setUsers(users);
-  });
+  // socket.on("roomData", ({ users }) => {
+  //   this.setState(users);
+  //   // console.log(users, ' users')
+  //   // setUsers(users);
+  // });
     // }
   
   }
+  // componentDidMount() {
+  //   socket.on('updatechat', function (username, data) {
+  //     console.log('in update chat', data)
+  //     // this.setState({ messages: [...this.state.messages, data] })
+  //   });
+  // }
   // componentDidMount() {
   //   socket = io(ENDPOINT);
   //   // setRoom(room);
@@ -89,23 +105,39 @@ class Chat extends React.Component {
   //   });
   // // }
   componentDidUpdate(prevProps, prevState) {
+    if (prevProps.user.email === "" && this.props.user.email !== "") {
+      console.log('in did update', this.props.user);
+        // socket.on('connect', function(){
+      // call the server-side function 'adduser' and send one parameter (value of prompt)
+      socket.emit('adduser', this.props.user.email);
+    // });
+    
+    }
     if (prevProps.group !== null && prevProps.group._id !== this.props.group._id) {
-      console.log(this.props.group, ' user from chat');
-      // const { user, group } = this.props;
-      const { email } = this.props.user;
-      const { _id } = this.props.group;
-      // socket.on('disconnect', (error) => {
-      //   if (error) {
-      //     alert(error);
-      //   }
-      // });
-      socket.emit('join', { name: email, room: _id }, (error) => {
-        if (error) {
-          alert(error);
-        }
+      socket.emit('switchRoom', this.props.group.name);
+      this.setState({
+        messages: [],
       });
     }
+    //   console.log(this.props.group, ' user from chat');
+    //   // const { user, group } = this.props;
+    //   const { email } = this.props.user;
+    //   const { _id } = this.props.group;
+    //   // socket.on('disconnect', (error) => {
+    //   //   if (error) {
+    //   //     alert(error);
+    //   //   }
+    //   // });
+    //   socket.emit('join', { name: email, room: _id }, (error) => {
+    //     if (error) {
+    //       alert(error);
+    //     }
+    //   });
+    // }
   }
+  // socket.on('updatechat', function (username, data) {
+	// 	// $('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+	// });
     // socket.on('message', message => {
     //   this.setState({messages: [...this.state.messages, message]})
     //   // setMessages(messages => [ ...messages, message ]);
@@ -123,7 +155,13 @@ class Chat extends React.Component {
     event.preventDefault();
 
     if (this.state.message) {
-      socket.emit('sendMessage', this.state.message, () => { this.setState({ message: '' }) });
+      console.log('send');
+      socket.emit('sendchat', this.state.message, () => {
+        this.setState({
+          message: '',
+        });
+      });
+      // socket.emit('sendMessage', this.state.message, () => { this.setState({ message: '' }) });
     }
   }
   render() {
@@ -155,9 +193,5 @@ const mapStateToProps = (state) => ({
   chat: state.chat,
   user: state.user,
 });
-
-// const mapDispatchToProps = {
-//   // onUpdateFromLocalStorage: updateFromLocalStorage,
-// };
 
 export default connect(mapStateToProps, {})(Chat);

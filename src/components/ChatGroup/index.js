@@ -45,7 +45,7 @@ class ChatGroups extends React.Component {
         super(props);
         this.state = {
             chatRoomsList: [],
-            selectedGroupIndex:0,
+            selectedGroupIndex: -1,
             selectedGroupDetails: null,
         };
         autoBind(this);
@@ -55,7 +55,7 @@ class ChatGroups extends React.Component {
             if (res.data.length > 0) {
                 this.setState({
                     chatRoomsList: res.data,
-                    selectedGroupDetails: res.data[0]
+                    // selectedGroupDetails: res.data[0]
                 });
             }
         }).catch((err) => {
