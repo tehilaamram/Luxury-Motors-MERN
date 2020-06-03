@@ -14,6 +14,7 @@ debug('Pending DB connection');
 require('./user')(db);
 require('./vehicle')(db);
 require('./order')(db);
-require('./room')(db);
+require('./chatRoom')(db);
+require('./chatMessage')(db);
 
 module.exports = model => db.model(model);

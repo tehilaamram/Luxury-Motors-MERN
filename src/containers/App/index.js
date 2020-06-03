@@ -43,8 +43,8 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <BrowserRouter>
-                <div className="box">
-                    {/* <div className="AppContainer"> */}
+                    <div className="box">
+                        {/* <div className="AppContainer"> */}
                         <Init />
                         {/* <div className={"ChatButtonDiv"}>
                 {this.state.chatOpened && <Chat />}
@@ -52,29 +52,29 @@ class App extends React.Component {
                     </div> */}
                         <SignUpModal />
                         <div className="row header">
-                        <AppBar />
+                            <AppBar />
                         </div>
                         <LoginModal />
                         <ResetPasswordModal />
                         <div className="row content">
-                        <Switch>
-                            <Route path="/join" exact component={Join} />
-                            <Route path="/chat" component={Chat} />
-                            <Route exact path='/' component={Home} />
-                            <Route path='/about' component={About} />
-                            <Route path='/catalog' component={Catalog} />
-                            <Route path='/add-vehicle' component={AddVehicle} />
-                            <Route path='/vehicle/:id' component={VehicleDetails} />
-                            <Route path='/reset/:token' component={ResetPassword} />
-                            <Route path='/cart' component={Cart} />
-                            <Route path="/chat-rooms/:uid" component={CharRooms} />
-                        </Switch>
+                            <Switch>
+                                <Route path="/join" exact component={Join} />
+                                <Route path="/chat" component={Chat} />
+                                <Route exact path='/' component={Home} />
+                                <Route path='/about' component={About} />
+                                <Route path='/catalog' component={Catalog} />
+                                <Route path='/add-vehicle' component={AddVehicle} />
+                                <Route path='/vehicle/:id' component={VehicleDetails} />
+                                <Route path='/reset/:token' component={ResetPassword} />
+                                <Route path='/cart' component={Cart} />
+                                <Route path="/chat-rooms/:uid" component={CharRooms} />
+                            </Switch>
+                        </div>
+                        <div className="row footer">
+
+                            <Footer />
                         </div>
                     </div>
-                    {/* <div className="row footer"> */}
-
-                    <Footer />
-                    {/* </div> */}
                     {/* </div> */}
                 </BrowserRouter>
             </Provider>

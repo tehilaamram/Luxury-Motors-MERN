@@ -44,3 +44,10 @@
 /* .MuiListItem-root {
   background-color: tomato !important;
 } */
+
+.MuiListItemAvatar-root {
+  display: contents !important;
+}
+.MuiListItemText-multiline {
+  margin-left: 10px !important;
+}

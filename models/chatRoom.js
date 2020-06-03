@@ -19,6 +19,6 @@ module.exports = db => {
         },
     }, { autoIndex: false });
 
-    db.model('Room', schema);
+    db.model('ChatRoom', schema);
     debug("Room model created");
 }

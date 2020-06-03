@@ -63,7 +63,9 @@ class ChatGroups extends React.Component {
         })
     }
     openChat(event, index) {
-        // console.log(event, ' group details', index);
+        // event.preventDefault();
+        document.getElementById('ChatContainerDiv').style.display = 'flex';
+        document.getElementById('GroupsContainer').style.display = 'none';
         this.setState({
             selectedGroupIndex: index,
             selectedGroupDetails: event,
@@ -100,12 +102,12 @@ class ChatGroups extends React.Component {
         const { selectedGroupDetails } = this.state;
         return (
             <div className="ChatGroupContainer">
-                <div className="GroupsContainer">
+                <div id="GroupsContainer" className="GroupsContainer" style={{display: "flex"}}>
                     <List className={classes.root}>
                         {this.renderChatRooms()}
                     </List>
                 </div>
-                <div className="ChatContainerDiv">
+                <div id="ChatContainerDiv" className="ChatContainerDiv"  style={{display: "none"}}>
                     <Chat group={selectedGroupDetails} />
                 </div>
             </div>

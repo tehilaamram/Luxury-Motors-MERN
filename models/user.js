@@ -50,8 +50,9 @@ module.exports = db => {
             default: undefined,
         },
         rooms: [{
-            type: mongo.Schema.Types.ObjectId,
-            ref: 'Room'
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            // ref: 'Room'
         }],
     }, { autoIndex: false });
 

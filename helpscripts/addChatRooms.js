@@ -10,19 +10,19 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage })
-const Room = require('../models')("Room");
+const ChatRoom = require('../models')("ChatRoom");
 
 (async () => {
-    // let room1 = new Room({
-    //     name: 'Luxury Motors',
-    //     img: {
-    //         contentType: mime.lookup('./ChatRoomImages/luxury_motors.jpg'),
-    //         image: new Buffer(fs.readFileSync('./ChatRoomImages/luxury_motors.jpg').toString('base64'), 'base64'),
-    //     },
-    //     numMembers: 0,
-    // });
-    // await room1.save();
-    let room2 = new Room({
+    let chatRoom1 = new ChatRoom({
+        name: 'Luxury Motors',
+        img: {
+            contentType: mime.lookup('./ChatRoomImages/luxury_motors.jpg'),
+            image: new Buffer(fs.readFileSync('./ChatRoomImages/luxury_motors.jpg').toString('base64'), 'base64'),
+        },
+        numMembers: 0,
+    });
+    await chatRoom1.save();
+    let chatRoom2 = new ChatRoom({
         name: 'Ferrari',
         img: {
             contentType: mime.lookup('./ChatRoomImages/Ferrari.png'),
@@ -30,6 +30,6 @@ const Room = require('../models')("Room");
         },
         numMembers: 0,
     });
-    await room2.save();
+    await chatRoom2.save();
     process.exit(0);
 })();

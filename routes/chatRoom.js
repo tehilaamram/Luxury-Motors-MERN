@@ -2,7 +2,7 @@ var express = require('express');
 var multer = require('multer');
 let fs = require("fs");
 var router = express.Router();
-var Room = require('../models')("Room");
+var ChatRoom = require('../models')("ChatRoom");
 var ObjectId = require('mongoose').Types.ObjectId;
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -35,7 +35,7 @@ router.post('/addRoom', upload.array('file', 1), (req, res) => {
         contentType: req.files[0].mimetype,
         image: new Buffer(encode_image, 'base64')
     };
-    var newRoom = new Room({
+    var newRoom = new ChatRoom({
         img: finalImg,
         name: req.body.name,
         numMembers: req.body.numMembers,
@@ -49,7 +49,7 @@ router.post('/addRoom', upload.array('file', 1), (req, res) => {
 });
 
 router.get('/getAll', (req, res) => {
-    return Room.find({}).then((rooms) => {
+    return ChatRoom.find({}).then((rooms) => {
         res.send(rooms);
     });
 });

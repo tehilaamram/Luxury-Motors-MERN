@@ -21,20 +21,14 @@
   .ChatGroupContainer {   
     flex-direction: column;
   }
+  /* .ChatContainerDiv {
+    display: none;
+  } */
 }
 
 @media screen and (min-width: 769px) {
-  .GroupsContainer {
-    /* padding-right: 10px; */
-  }
-  .HomeImageText {
-    width: calc(100% - 10px);
-    height: 100%;
-    font-size: 5.5vw;
-  }
-  .HomeMainImageCSS {
-    width: 100%;
-    height: 100%;
+   .ChatContainerDiv[style]{
+    display: flex !important;
   }
 }
 

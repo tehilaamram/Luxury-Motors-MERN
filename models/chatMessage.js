@@ -6,7 +6,7 @@ module.exports = db => {
     let schema = new mongo.Schema({
         room: {
             type: mongo.Schema.Types.ObjectId,
-            ref: "Room",
+            // ref: "Room",
         },
         sender: {
             type: mongo.Schema.Types.ObjectId,
@@ -22,6 +22,6 @@ module.exports = db => {
         },
     }, { autoIndex: false });
 
-    db.model('Chat', schema);
+    db.model('ChatMessage', schema);
     debug("Chat model created");
 }
