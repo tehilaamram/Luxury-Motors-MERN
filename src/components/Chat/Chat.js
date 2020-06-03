@@ -84,10 +84,10 @@ class Chat extends React.Component {
     return (
       <div className="ChatContainer">
         {group !== null && <ListItem className="ChatHeader">
-          <ListItemAvatar>
-          <IconButton onClick={this.return} edge="end" aria-label="delete">
+        <IconButton onClick={this.return} edge="end" aria-label="delete">
                       <ArrowBackIosIcon />
                     </IconButton>
+          <ListItemAvatar>
             <Avatar alt="group" src={`data:image/jpeg;base64,${group.img.image}`} className={classes.rounded}>
             </Avatar>
           </ListItemAvatar>
