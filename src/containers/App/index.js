@@ -18,7 +18,6 @@ import SignUpModal from "../../components/SignUpModal";
 import LoginModal from "../../components/SignInModal";
 import ResetPasswordModal from '../../components/ResetPasswordModal';
 import Chat from '../../components/Chat/Chat';
-import Join from '../../components/Join/Join';
 import Footer from '../../components/Footer';
 import Button from '../../components/Button';
 import AppBar from '../../components/AppBar';
@@ -58,7 +57,6 @@ class App extends React.Component {
                         <ResetPasswordModal />
                         <div className="row content">
                             <Switch>
-                                <Route path="/join" exact component={Join} />
                                 <Route path="/chat" component={Chat} />
                                 <Route exact path='/' component={Home} />
                                 <Route path='/about' component={About} />

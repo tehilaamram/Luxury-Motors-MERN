@@ -30,6 +30,9 @@
    .ChatContainerDiv[style]{
     display: flex !important;
   }
+  .GroupsContainer[style] {
+    display: flex !important;
+  }
 }
 
 /* .minimize {

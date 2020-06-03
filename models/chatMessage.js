@@ -6,11 +6,11 @@ module.exports = db => {
     let schema = new mongo.Schema({
         room: {
             type: mongo.Schema.Types.ObjectId,
-            // ref: "Room",
+            ref: "ChatRoom",
         },
         sender: {
             type: mongo.Schema.Types.ObjectId,
-            required: "User",
+            ref: "User",
         },
         message: { 
             type: String,

@@ -52,7 +52,7 @@ module.exports = db => {
         rooms: [{
             type: [mongo.Schema.Types.ObjectId],
             default: [],
-            // ref: 'Room'
+            ref: 'ChatRoom'
         }],
     }, { autoIndex: false });
 

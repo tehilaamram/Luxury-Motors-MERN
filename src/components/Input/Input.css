@@ -5,8 +5,8 @@
 
 .input {
   border: none;
-  border-radius: 0;
-  border-radius: 0 0 0 8px;
+  /* border-radius: 0; */
+  /* border-radius: 0 0 0 8px; */
   width: 80%;
   font-size: 14px;
   color: var(--chat-text-color);
@@ -17,7 +17,7 @@
 }
 
 .sendButton {
-  border-radius: 0 0 8px 0;
+  /* border-radius: 0 0 8px 0; */
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;

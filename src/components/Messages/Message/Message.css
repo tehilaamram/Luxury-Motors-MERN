@@ -1,12 +1,13 @@
 .messageBox {
   background: #F3F3F3;
-  border-radius: 20px;
-  padding: 5px 20px;
+  border-radius: 7.5px;
+  padding: 6px 9px 8px 7px;
+  /* padding: 5px 20px; */
   color: white;
   display: inline-block;
   max-width: 80%;
   width: fit-content;
-  line-height: 24px;
+  line-height: 22px;
 }
 
 .messageText {
@@ -28,6 +29,7 @@
   padding: 0 5%;
   margin-top: 3px;
   flex-direction: row;
+  margin-bottom: 12px;
 }
 
 .sentText {
@@ -38,6 +40,7 @@
   /* color: #828282; */
   letter-spacing: 0.3px;
   font-size: 12px;
+  margin: 6px 0px;
   /* width: fit-content; */
 }
 
@@ -58,7 +61,8 @@
 }
 
 .colorWhite {
-  color: white;
+  text-align: end;
+  color: var(--chat-text-color);
 }
 
 /* .colorDark {
@@ -66,7 +70,7 @@
 } */
 
 .backgroundBlue {
-  background: var(--red-color);
+  background: var(--outgoing-background);
   /* marker-end: 0; */
   align-self: flex-end;
 }
@@ -93,4 +97,7 @@
   justify-items: left;
   display: inline-grid;
   padding-left: 10px;
+}
+.sender {
+  font-weight: 500;
 }

@@ -8,10 +8,16 @@ module.exports = db => {
             type: String,
             required: true,
         },
-        numMembers: {
-            type: Number,
-            default: 0,
-        },
+        members: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'User',
+        }],
+        onlineMembers: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'User',
+        }],
         img: { 
             type: {
                 data: Buffer, contentType: String,

@@ -87,7 +87,7 @@ class ChatGroups extends React.Component {
                                 <Avatar alt="group" src={`data:image/jpeg;base64,${option.img.image}`} className={classes.rounded}>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={option.name} secondary={option.numMembers + " members"} />
+                            <ListItemText primary={option.name} secondary={option.members.length + " members"} />
                             <ListItemSecondaryAction>
                             </ListItemSecondaryAction>
                         </ListItem>

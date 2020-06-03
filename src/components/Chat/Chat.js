@@ -1,11 +1,8 @@
 import React from "react";
 import io from "socket.io-client";
-// import moment from 'moment';
 import { connect } from 'react-redux';
 
-// import TextContainer from '../TextContainer/TextContainer';
 import Messages from '../Messages/Messages';
-import InfoBar from '../InfoBar/InfoBar';
 import Input from '../Input/Input';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -38,20 +35,24 @@ class Chat extends React.Component {
     socket = io(ENDPOINT);
 
     socket.on('updatechat', (username, data) => {
-      console.log('in ', data)
-      this.setState({ messages: [...this.state.messages, data] })
+      this.setState({ messages: [...this.state.messages, data] });
     });
-
+    socket.on('updateOnlineMembers', (numOfOnline) => {
+      this.setState({ numOfOnline });
+    });
+    socket.on('getLast20Messages', (messages) => {
+      this.setState({ messages });
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.user.email === "" && this.props.user.email !== "") {
-      // call the server-side function 'adduser' and send one parameter (value of prompt)
-      socket.emit('adduser', this.props.user.email);
+      // call the server-side function 'join' and send one parameter (value of prompt)
+      socket.emit('join', this.props.user.email);
 
     }
     if (prevProps.group === null && this.props.group !== null || prevProps.group !== null && prevProps.group._id !== this.props.group._id) {
-      socket.emit('switchRoom', this.props.group.name);
+      socket.emit('switchRoom', this.props.group.name, this.props.user.id);
       this.setState({
         messages: [],
       });
@@ -63,8 +64,8 @@ class Chat extends React.Component {
     event.preventDefault();
 
     if (this.state.message) {
-      console.log('send');
-      socket.emit('sendchat', this.state.message, () => {
+      console.log('send', this.props.group.id);
+      socket.emit('sendchat', this.state.message, this.props.user.id, this.props.group._id, () => {
         this.setState({
           message: '',
         });
@@ -84,14 +85,14 @@ class Chat extends React.Component {
     return (
       <div className="ChatContainer">
         {group !== null && <ListItem className="ChatHeader">
-        <IconButton onClick={this.return} edge="end" aria-label="delete">
-                      <ArrowBackIosIcon />
-                    </IconButton>
+          <IconButton onClick={this.return} edge="end" aria-label="return">
+            <ArrowBackIosIcon />
+          </IconButton>
           <ListItemAvatar>
             <Avatar alt="group" src={`data:image/jpeg;base64,${group.img.image}`} className={classes.rounded}>
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary={group.name} secondary={group.numMembers + " members, " +  numOfOnline + " online"} />
+          <ListItemText primary={group.name} secondary={group.members.length + " members, " + numOfOnline + " online"} />
         </ListItem>}
         <Messages messages={messages} name={this.props.user.email} />
         <Input message={message} setMessage={(e) => { this.setState({ message: e }) }} sendMessage={this.sendMessage} />
