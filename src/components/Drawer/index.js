@@ -17,6 +17,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import PersonIcon from '@material-ui/icons/Person';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import RateReviewIcon from '@material-ui/icons/RateReview';
 import { withStyles } from "@material-ui/core/styles";
 import autoBind from 'react-autobind';
 import { withRouter } from "react-router-dom";
@@ -126,6 +127,10 @@ signOut(){
           <ListItem button key={'Manage Users'}>
             <ListItemIcon><PeopleIcon /> </ListItemIcon>
             <ListItemText primary={'Manage Users'} />
+          </ListItem>
+          <ListItem button onClick={this.navigateTo.bind(this, `/manage-rooms/${user.id}`)} key={'Manage Rooms'}>
+            <ListItemIcon><RateReviewIcon /> </ListItemIcon>
+            <ListItemText primary={'Manage Rooms'} />
           </ListItem>
         </List> }
         { user.role === ROLE.ADMIN &&  <Divider />}

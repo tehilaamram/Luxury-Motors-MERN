@@ -14,6 +14,7 @@ import VehicleDetails from '../VehicleDetails';
 import ResetPassword from '../ResetPassword';
 import Cart from '../Cart';
 import CharRooms from '../ChatRooms';
+import ManageRooms from '../ManageRooms';
 import SignUpModal from "../../components/SignUpModal";
 import LoginModal from "../../components/SignInModal";
 import ResetPasswordModal from '../../components/ResetPasswordModal';
@@ -66,6 +67,7 @@ class App extends React.Component {
                                 <Route path='/reset/:token' component={ResetPassword} />
                                 <Route path='/cart' component={Cart} />
                                 <Route path="/chat-rooms/:uid" component={CharRooms} />
+                                <Route path="/manage-rooms/:id" component={ManageRooms} />
                             </Switch>
                         </div>
                         <div className="row footer">

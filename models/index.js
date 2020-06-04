@@ -16,5 +16,6 @@ require('./vehicle')(db);
 require('./order')(db);
 require('./chatRoom')(db);
 require('./chatMessage')(db);
+require('./request')(db);
 
 module.exports = model => db.model(model);

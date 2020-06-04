@@ -1,0 +1,19 @@
+@import '../../css/variables.css';
+
+* {
+  box-sizing: border-box;
+}
+.ManageRoomsContainer {
+  /* justify-content: center; */
+  padding: 20px;
+  height: calc(100vh - 64px);
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  background-color: var(--light-gray-color);
+  /* min-height: calc(100vh - var(--header-height) - var(--footer-height)); */
+}
+.TabContentDiv {
+height: 100%;
+width: 100%;
+}
+

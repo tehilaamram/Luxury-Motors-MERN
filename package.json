@@ -67,6 +67,7 @@
     "printVehicleList": "node ./helpscripts/vehicleList.js",
     "addVehicles": "node ./helpscripts/addVehicleList.js",
     "addChatRooms": "node ./helpscripts/addChatRooms.js",
+    "addUsers": "node ./helpscripts/addUsers.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
