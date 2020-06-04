@@ -98,7 +98,6 @@ class CustomAppBar extends React.Component {
     this.cookies = new Cookies();
   }
   handleProfileMenuOpen = (event) => {
-    console.log(event.currentTarget, ' cutt targ')
     this.setState({ anchorEl: event.currentTarget, isMenuOpen: true });
   };
 
@@ -148,12 +147,10 @@ class CustomAppBar extends React.Component {
     );
   }
   toggleDrawer(event) {
-    console.log('in tog')
     event.preventDefault();
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    console.log('after tog')
     this.setState({ drawer: !this.state.drawer });
   };
   render() {

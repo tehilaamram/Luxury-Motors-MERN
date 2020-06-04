@@ -70,7 +70,6 @@ signOut(){
     })
 }
   navigateTo(key) {
-    console.log(key, ' navigate to');
     this.props.history.push(key);
   }
   list(anchor) {

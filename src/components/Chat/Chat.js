@@ -60,11 +60,8 @@ class Chat extends React.Component {
   }
 
   sendMessage = (event) => {
-    console.log('in dend message')
     event.preventDefault();
-
     if (this.state.message) {
-      console.log('send', this.props.group.id);
       socket.emit('sendchat', this.state.message, this.props.user.id, this.props.group._id, () => {
         this.setState({
           message: '',
@@ -79,9 +76,7 @@ class Chat extends React.Component {
   }
   render() {
     const { group } = this.props;
-    console.log(group, ' group');
     const { messages, message, numOfOnline } = this.state;
-    console.log(numOfOnline, ' num of online');
     return (
       <div className="ChatContainer">
         {group !== null && <ListItem className="ChatHeader">

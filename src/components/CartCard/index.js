@@ -23,7 +23,6 @@ class CartCard extends React.Component {
         this.props.history.push(`/vehicle/${this.props.vehicle._id}`);
     }
     render() {
-        console.log(this.props);
         // import logo from `/src/images/make/${vehicle.make}.png`
         const { vehicle } = this.props;
         var img = require(`../../images/make/${vehicle.make}.png`);

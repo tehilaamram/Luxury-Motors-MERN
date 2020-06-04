@@ -46,6 +46,7 @@
 .ChatContainerDiv {
   -ms-flex: 60%; /* IE10 */
   flex: 60%;
+  height: inherit;
   /* padding: 20px; */
 }
 
