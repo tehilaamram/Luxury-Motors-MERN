@@ -25,6 +25,8 @@
     align-self: center;
     border-radius: 10px;
     background-color: #fefefe;
+    max-height: 100%;
+    overflow: auto;
 }
 .SignInDivTitle {
     -webkit-text-stroke: var(--red-color);

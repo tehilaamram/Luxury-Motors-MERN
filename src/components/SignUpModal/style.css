@@ -25,6 +25,10 @@
     align-self: center;
     border-radius: 10px;
     background-color: #fefefe;
+    max-height: 100%;
+    overflow: auto;
+    max-height: 100%;
+    overflow: auto;
 }
 .SignUpDivTitle {
     -webkit-text-stroke: var(--red-color);
