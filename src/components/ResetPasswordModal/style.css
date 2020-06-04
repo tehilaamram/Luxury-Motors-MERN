@@ -76,3 +76,13 @@
     width: 100%;
     text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+    .ResetPasswordModalContent {
+        width: auto;
+        max-height: 100%;
+        left: 3px;
+        overflow: auto;
+        right: 3px;
+    }
+  }

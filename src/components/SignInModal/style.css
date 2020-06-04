@@ -76,3 +76,12 @@
     width: 100%;
     text-align: center;
 }
+@media screen and (max-width: 768px) {
+    .SignInModalContent {
+        width: auto;
+        left: 3px;
+        right: 3px;
+        max-height: 100%;
+    overflow: auto;
+    }
+  }
