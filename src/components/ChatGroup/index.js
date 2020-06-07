@@ -48,14 +48,14 @@ class ChatGroups extends React.Component {
             selectedGroupIndex: -1,
             selectedGroupDetails: null,
         };
+        console.log(this.props.userId, ' user');
         autoBind(this);
     }
     componentDidMount() {
-        AjaxService.get("/chatRoom/getAll").then((res) => {
+        AjaxService.get(`/chatRoom/getUserRooms/${this.props.userId}`).then((res) => {
             if (res.data.length > 0) {
                 this.setState({
                     chatRoomsList: res.data,
-                    // selectedGroupDetails: res.data[0]
                 });
             }
         }).catch((err) => {

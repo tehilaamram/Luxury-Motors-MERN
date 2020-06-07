@@ -86,9 +86,9 @@ class ManageRooms extends React.Component {
         return (
             <List className={classes.root}>
 
-                {/* {this.state.roomsList.map((option, index) => {
-                    return ( */}
-                        <div key={2}>
+                {this.state.requestsList.map((option, index) => {
+                    return (
+                        <div key={index}>
                             <ListItem
                             >
                                 <ListItemAvatar>
@@ -102,14 +102,12 @@ class ManageRooms extends React.Component {
                                     <MButton variant="outlined">Accept</MButton>
                                     <MButton variant="outlined">Reject</MButton>
                                     </div>
-                                {/* <Button css={"PrimaryButton"} title={"Accept"} onClick={this.save} />
-                                <Button css={"PrimaryButton"} title={"Reject"} onClick={this.save} /> */}
                                 </ListItemSecondaryAction>
                             </ListItem>
                             <Divider />
                         </div>
-                //     );
-                // })}
+                    );
+                })}
             </List>
         );
 
@@ -125,9 +123,10 @@ class ManageRooms extends React.Component {
         // console.log(this.state);
         let data = new FormData();
         data.append('file', this.state.roomImage[0], 'main');
-        this.state.additionalImages.forEach(element => {
-            data.append('file', element, element.name);
-        });
+        data.append('name', this.state.roomName);
+        // this.state.additionalImages.forEach(element => {
+        //     data.append('file', element, element.name);
+        // });
         AjaxService.post('/chatRoom/addRoom', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((res) => {
             //   this.props.history.push(`/vehicle/${res.data.id}`);
         }).catch((err) => {
@@ -142,6 +141,17 @@ class ManageRooms extends React.Component {
                 <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} />
             </div>
         );
+    }
+    getRooms() {
+         AjaxService.get("/chatRoom/getAll").then((res) => {
+            if (res.data.length > 0) {
+                this.setState({
+                    roomsList: res.data,
+                });
+            }
+        }).catch((err) => {
+            console.log('chat rooms error', err);
+        });     
     }
     renderRooms() {
         return (
@@ -173,6 +183,7 @@ class ManageRooms extends React.Component {
             case 1:
                 return this.renderNew();
             case 2:
+                        this.getRooms();
                 return this.renderRooms();
             default:
                 return;
