@@ -12,9 +12,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import AjaxService from '../../services/AjaxService';
+import TextInput from '../../components/TextInput';
+import ImageUpload from '../../components/ImageUpload';
 import _ from 'lodash';
 import './style.css';
-import { findRenderedComponentWithType } from 'react-dom/test-utils';
+import Button from '../../components/Button';
+import FormData from 'form-data';
+import MButton from '@material-ui/core/Button';
 
 const classes = ((theme) => ({
     root: {
@@ -50,6 +54,8 @@ class ManageRooms extends React.Component {
             requestsList: [],
             user: null,
             selectedTab: 0,
+            roomName: '',
+            roomImage: '',
         }
         autoBind(this);
     }
@@ -80,29 +86,60 @@ class ManageRooms extends React.Component {
         return (
             <List className={classes.root}>
 
-                {this.state.roomsList.map((option, index) => {
-                    return (
-                        <div key={index}>
+                {/* {this.state.roomsList.map((option, index) => {
+                    return ( */}
+                        <div key={2}>
                             <ListItem
                             >
                                 <ListItemAvatar>
-                                    <Avatar alt="group" src={`data:image/jpeg;base64,${option.img.image}`} className={classes.rounded}>
+                                    <Avatar alt="group" className={classes.rounded}>
+                                        TE
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText primary={option.name} secondary={option.members.length + " members"} />
+                                <ListItemText primary={'tehilaamr@gmail.com'} secondary={ 'Luxury Motors'} />
                                 <ListItemSecondaryAction>
+                                    <div className="RequestButtons">
+                                    <MButton variant="outlined">Accept</MButton>
+                                    <MButton variant="outlined">Reject</MButton>
+                                    </div>
+                                {/* <Button css={"PrimaryButton"} title={"Accept"} onClick={this.save} />
+                                <Button css={"PrimaryButton"} title={"Reject"} onClick={this.save} /> */}
                                 </ListItemSecondaryAction>
                             </ListItem>
                             <Divider />
                         </div>
-                    );
-                })}        </List>
+                //     );
+                // })}
+            </List>
         );
 
+    }
+    onRoomNameChange(event) {
+        this.setState({ roomName: event.target.value });
+    }
+    onRoomImageChange(event) {
+        console.log(event);
+        this.setState({ roomImage: _.cloneDeep(event) });
+    }
+    save() {
+        // console.log(this.state);
+        let data = new FormData();
+        data.append('file', this.state.roomImage[0], 'main');
+        this.state.additionalImages.forEach(element => {
+            data.append('file', element, element.name);
+        });
+        AjaxService.post('/chatRoom/addRoom', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((res) => {
+            //   this.props.history.push(`/vehicle/${res.data.id}`);
+        }).catch((err) => {
+            console.log(err, ' add chat room save error');
+        });
     }
     renderNew() {
         return (
             <div className="NewRoomContainer">
+                <TextInput id={"roomName"} text={"Name"} type={"text"} onChange={this.onRoomNameChange} value={this.state.roomName} />
+                <ImageUpload onValueChanged={this.onRoomImageChange} buttonText={"Upload Room Image"} singleImage={true} />
+                <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} />
             </div>
         );
     }

@@ -1,6 +1,7 @@
 @import '../../css/variables.css';
 
 .Alert {
+    z-index: 200;
     margin-top: 3px;
     padding: 7px 10px;
     margin-bottom: 20px;

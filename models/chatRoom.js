@@ -7,6 +7,7 @@ module.exports = db => {
         name: {
             type: String,
             required: true,
+            unique : true,
         },
         members: [{
             type: [mongo.Schema.Types.ObjectId],
