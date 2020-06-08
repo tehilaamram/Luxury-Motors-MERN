@@ -1,5 +1,6 @@
 const debug = require("debug")('car:model-chatRoom');
 const mongo = require("mongoose");
+mongo.set('useCreateIndex', true);
 
 module.exports = db => {
     // create a schema
@@ -15,7 +16,8 @@ module.exports = db => {
         date: { 
             type: Date,
         },
-    }, { autoIndex: false });
+    }, { autoIndex: true });
+    schema.index({ user: 1, room: 1 }, { unique: true });
 
     db.model('Request', schema);
     debug("Request model created");

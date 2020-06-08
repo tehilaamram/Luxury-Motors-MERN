@@ -54,6 +54,11 @@ module.exports = db => {
             default: [],
             ref: 'ChatRoom'
         }],
+        requests: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'Request'
+        }],
     }, { autoIndex: false });
 
     schema.plugin(passportLocalMongoose);

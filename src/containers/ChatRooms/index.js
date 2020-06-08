@@ -61,6 +61,20 @@ class ChatRooms extends React.Component {
             });
         });
     }
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.selectedTab === 1 && prevState.selectedTab !== 1) {
+            AjaxService.get('/chatRoom/getRoomsToJoin').then((res) => {
+                console.log(res.data, ' get rooms to join list');
+                if (res.data.list.length > 0) {
+                    this.setState({
+                        roomsToRequest: res.data.list,
+                    });
+                }
+            }).catch((err) => {
+                console.log('chat rooms error', err);
+            });
+        }
+    }
     renderStepper() {
         return (
             <div className="StepperContainerDiv">
@@ -76,36 +90,46 @@ class ChatRooms extends React.Component {
         );
     }
     getRoomsToJoin() {
+        // console.log(event, ' room to join');
         const { match: { params } } = this.props;
-        AjaxService.get(`/chatRoom/getRoomsToJoin/${params.uid}`).then((res) => {
-            if (res.data.length > 0) {
+        AjaxService.get('/chatRoom/getRoomsToJoin').then((res) => {
+            console.log(res.data, ' get rooms to join list');
+            if (res.data.list.length > 0) {
                 this.setState({
-                    roomsToRequest: res.data,
+                    roomsToRequest: res.data.list,
                 });
             }
         }).catch((err) => {
             console.log('chat rooms error', err);
         });
     }
+    sendRequest(room) {
+        // console.log(v, ' v');
+        AjaxService.post('/request/new', {
+            room
+        }).then((res) => {
+            // this.props.history.push(`/vehicle/${res.data.id}`);
+          }).catch((err) => {
+            console.log(err, ' add vehicle save error');
+          });
+    }
     renderRooms() {
+        console.log('in render rooms', this.state.roomsToRequest);
         return (
             <List className={classes.root}>
-
                 {this.state.roomsToRequest.map((option, index) => {
                     return (
                         <div key={index}>
                             <ListItem
                             >
                                 <ListItemAvatar>
-                                    <Avatar alt="group" className={classes.rounded}>
-                                        TE
+                                <Avatar alt="group" src={`data:image/jpeg;base64,${option.img.image}`} className={classes.rounded}>
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText primary={'tehilaamr@gmail.com'} secondary={'Luxury Motors'} />
+                                <ListItemText primary={option.name} secondary={option.members.length + ' members'} />
                                 <ListItemSecondaryAction>
                                     <div className="RequestButtons">
-                                        <MButton variant="outlined">Accept</MButton>
-                                        <MButton variant="outlined">Reject</MButton>
+                                        <MButton variant="outlined" onClick={this.sendRequest.bind(this, option._id)}>Join</MButton>
                                     </div>
                                 </ListItemSecondaryAction>
                             </ListItem>
@@ -117,12 +141,15 @@ class ChatRooms extends React.Component {
         );
 
     }
-    renderTab(index) {
-        switch (index) {
+    renderTab() {
+        // event.preventDefault();
+        // console.log(event, ' in render index', e);
+        switch (this.state.selectedTab) {
             case 0:
                 return this.renderChat();
             case 1:
-                this.getRoomsToJoin();
+                console.log('11111111111111111');
+                // this.getRoomsToJoin();
                 return this.renderRooms();
             default:
                 return;
@@ -150,7 +177,7 @@ class ChatRooms extends React.Component {
                     <Tab label="Join" />
                 </Tabs>
                 <div className="TabContentDiv">
-                    {this.renderTab(selectedTab)}
+                    {this.renderTab()}
                 </div>
             </div>
         );

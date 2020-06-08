@@ -24,7 +24,17 @@ module.exports = db => {
                 data: Buffer, contentType: String,
             }
         },
-    }, { autoIndex: false });
+        requests: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'Request',
+        }],
+        messages: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'ChatMessage',
+        }],
+        }, { autoIndex: false });
 
     db.model('ChatRoom', schema);
     debug("Room model created");

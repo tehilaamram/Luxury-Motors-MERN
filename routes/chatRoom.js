@@ -28,8 +28,8 @@ router.post('/addRoom', upload.array('file', 1), (req, res) => {
         var newRoom = new ChatRoom({
             img: finalImg,
             name: req.body.name,
-            numMembers: 1,
         });
+        newRoom.members.push(req.user._id);
         newRoom.save().then((room) => {
             req.user.rooms.push(room._id);
             req.user.save();
@@ -38,7 +38,6 @@ router.post('/addRoom', upload.array('file', 1), (req, res) => {
             });
         });
     } else {
-        // console.log('in else', req.isAuthenticated());
         res.json({
             status: 101,
         });
@@ -53,27 +52,34 @@ router.get('/getAll', (req, res) => {
 });
 
 router.get('/getUserRooms/:id', (req, res) => {
-    ChatRoom.findById(req.params.id, (err, vehicle) => {
-        if (err) {
-            return res.sendStatus(404);
-        }
+    ChatRoom.find({ _id: { $in: req.user.rooms } }, (err, list) => {
         return res.json({
             status: 200,
-            vehicle,
+            list,
+        });
+    });
+    // ChatRoom.findById(req.params.id, (err, vehicle) => {
+    //     if (err) {
+    //         return res.sendStatus(404);
+    //     }
+    //     return res.json({
+    //         status: 200,
+    //         vehicle,
+    //     });
+    // });
+});
+
+router.get('/getRoomsToJoin', (req, res) => {
+    // console.log('in get by id', JSON.parse(req.query.params));
+    // var userRoomList = req.user.rooms;
+    // var idJson = JSON.parse(req.query.params);
+    // var obj_ids = idJson.vid.map(function (element) { return ObjectId(element.vehicle); });
+    ChatRoom.find({ _id: { $nin: req.user.rooms } }, (err, list) => {
+        return res.json({
+            status: 200,
+            list,
         });
     });
 });
-
-// router.get('/getUserRooms/', (req, res) => {
-//     // console.log('in get by id', JSON.parse(req.query.params));
-//     var idJson = JSON.parse(req.query.params);
-//     var obj_ids = idJson.vid.map(function (element) { return ObjectId(element.vehicle); });
-//     Vehicle.find({ _id: { $in: obj_ids } }, (err, list) => {
-//         return res.json({
-//             status: 200,
-//             list,
-//         });
-//     })
-// });
 
 module.exports = router;

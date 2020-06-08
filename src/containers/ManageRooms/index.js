@@ -76,6 +76,19 @@ class ManageRooms extends React.Component {
             console.log('chat rooms error', err);
         })
     }
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.selectedTab === 2 && prevState.selectedTab !== 2) {
+            AjaxService.get("/chatRoom/getAll").then((res) => {
+                if (res.data.length > 0) {
+                    this.setState({
+                        roomsList: res.data,
+                    });
+                }
+            }).catch((err) => {
+                console.log('chat rooms error', err);
+            });    
+        }
+    }
     tabChanges(event, selectedTab) {
         event.preventDefault();
         this.setState({ selectedTab });
@@ -183,7 +196,7 @@ class ManageRooms extends React.Component {
             case 1:
                 return this.renderNew();
             case 2:
-                        this.getRooms();
+                        // this.getRooms();
                 return this.renderRooms();
             default:
                 return;

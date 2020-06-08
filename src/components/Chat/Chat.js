@@ -79,7 +79,8 @@ class Chat extends React.Component {
     const { messages, message, numOfOnline } = this.state;
     return (
       <div className="ChatContainer">
-        {group !== null && <ListItem className="ChatHeader">
+        {group !== null &&
+          <ListItem className="ChatHeader">
           <IconButton onClick={this.return} edge="end" aria-label="return">
             <ArrowBackIosIcon />
           </IconButton>
@@ -89,8 +90,9 @@ class Chat extends React.Component {
           </ListItemAvatar>
           <ListItemText primary={group.name} secondary={group.members.length + " members, " + numOfOnline + " online"} />
         </ListItem>}
-        <Messages messages={messages} name={this.props.user.email} />
-        <Input message={message} setMessage={(e) => { this.setState({ message: e }) }} sendMessage={this.sendMessage} />
+       <Messages messages={messages} name={this.props.user.email} />
+        {group !== null &&<Input message={message} setMessage={(e) => { this.setState({ message: e }) }} sendMessage={this.sendMessage} />
+    }
       </div>
     );
   }
