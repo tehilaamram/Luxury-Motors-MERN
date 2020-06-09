@@ -53,11 +53,11 @@ const classes = ((theme) => ({
         fontSize: theme.typography.pxToRem(15),
         flexBasis: '33.33%',
         flexShrink: 0,
-      },
-      secondaryHeading: {
+    },
+    secondaryHeading: {
         fontSize: theme.typography.pxToRem(15),
         color: theme.palette.text.secondary,
-      },
+    },
 }));
 
 class ManageRooms extends React.Component {
@@ -102,7 +102,7 @@ class ManageRooms extends React.Component {
                 }
             }).catch((err) => {
                 console.log('chat rooms error', err);
-            });    
+            });
         }
         if (this.state.selectedTab === 0 && prevState.selectedTab !== 0) {
             this.getAllRequests();
@@ -120,7 +120,7 @@ class ManageRooms extends React.Component {
             }
         }).catch((err) => {
             console.log('chat rooms error', err);
-        });    
+        });
     }
     tabChanges(event, selectedTab) {
         event.preventDefault();
@@ -131,12 +131,12 @@ class ManageRooms extends React.Component {
     handleExpandedChange = (panel) => (event, isExpanded) => {
         if (isExpanded) {
             this.setState({
-                expanded: [...this.state.expanded,panel],
+                expanded: [...this.state.expanded, panel],
             });
 
         } else {
             this.setState({
-                expanded: _.without(this.state.expanded,panel),
+                expanded: _.without(this.state.expanded, panel),
             });
         }
     }
@@ -149,25 +149,46 @@ class ManageRooms extends React.Component {
                 {groupedRequestList.map((option, index) => {
                     console.log(option, ' op');
                     return (
-<ExpansionPanel
-key={index}
-            expanded={expanded.indexOf(index) > -1 ? true : false} onChange={this.handleExpandedChange(index)}>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
-            >
-              <Typography id="THead" className={classes.heading}>{option[0].room.name}</Typography>
-                    <Typography id="SHead" className={classes.secondaryHeading}>{option.length + ' requests'}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              {this.getRoomRequestList(option)}
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+                        <ExpansionPanel
+                            key={index}
+                            expanded={expanded.indexOf(index) > -1 ? true : false} onChange={this.handleExpandedChange(index)}>
+                            <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1bh-content"
+                                id="panel1bh-header"
+                            >
+                                <Typography id="THead" className={classes.heading}>{option[0].room.name}</Typography>
+                                <Typography id="SHead" className={classes.secondaryHeading}>{option.length + ' requests'}</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                {this.getRoomRequestList(option)}
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
                     );
                 })}
-          </div>
+            </div>
         );
+    }
+    rejectRequest(requestToReject) {
+        AjaxService.post('/request/reject', {
+            request: {
+                _id: requestToReject._id,
+                user: {
+                    _id: requestToReject.user._id,
+                },
+                room: {
+                    _id: requestToReject.room._id
+                },
+            }
+            // request
+        }).then((res) => {
+            console.log('done rejecting');
+            this.getAllRequests();
+        });
+
+    }
+    acceptRequest(request) {
+
     }
     getRoomRequestList(lst) {
         console.log(lst, ' lsfifdfiekgbeigbe');
@@ -181,14 +202,14 @@ key={index}
                             >
                                 <ListItemAvatar>
                                     <Avatar alt="group" className={classes.rounded}>
-                                        {option.user.username.substring(0,2)}
+                                        {option.user.username.substring(0, 2)}
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText primary={option.user.username} secondary={new Date(option.date).toDateString() + ' ' + new Date(option.date).toLocaleTimeString()} />
                                 <ListItemSecondaryAction>
                                     <div className="RequestButtons">
-                                    <MButton variant="outlined">Accept</MButton>
-                                    <MButton variant="outlined">Reject</MButton>
+                                        <MButton variant="outlined" onClick={this.acceptRequest.bind(this, option)}>Accept</MButton>
+                                        <MButton variant="outlined" onClick={this.rejectRequest.bind(this, option)}>Reject</MButton>
                                     </div>
                                 </ListItemSecondaryAction>
                             </ListItem>
@@ -207,7 +228,7 @@ key={index}
         console.log(event);
         this.setState({ roomImage: _.cloneDeep(event) });
     }
-  
+
     save() {
         let data = new FormData();
         data.append('file', this.state.roomImage[0], 'main');
@@ -227,7 +248,7 @@ key={index}
         );
     }
     getRooms() {
-         AjaxService.get("/chatRoom/getAll").then((res) => {
+        AjaxService.get("/chatRoom/getAll").then((res) => {
             if (res.data.length > 0) {
                 this.setState({
                     roomsList: res.data,
@@ -235,7 +256,7 @@ key={index}
             }
         }).catch((err) => {
             console.log('chat rooms error', err);
-        });     
+        });
     }
     renderRooms() {
         return (

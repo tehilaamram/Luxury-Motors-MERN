@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Request = require('../models')("Request");
+var User = require('../models')("User");
 var ChatRoom = require('../models')("ChatRoom");
 var ObjectId = require('mongoose').Types.ObjectId;
 
@@ -46,15 +47,33 @@ router.post('/remove', (req, res) => {
             Request.deleteOne({_id: req.body.reqToRoomId}, (err) => {
                 res.json({
                     status: 200,
-                  //   user: req.user,
                 });
             });
-    //             res.json({
-    //        status: 200,
-    //      //   user: req.user,
-    //    });
         }
    });
+  });
+  router.post('/reject', (req, res) => {
+    User.findById(req.body.request.user._id, (err, userReq) => {
+        if (err) {
+            return;
+        } else {
+            userReq.requests.pop(req.body.request._id);
+            userReq.save();
+            ChatRoom.findById(req.body.request.room._id, (err, currentRoom) => {
+                if (err) {
+                    return;
+                } else {
+                    currentRoom.requests.pop(req.body.request._id);
+                    currentRoom.save();
+                    Request.deleteOne({_id: req.body.request._id}, (err) => {
+                        res.json({
+                            status: 200,
+                        });
+                    });
+                }
+           });
+        }
+    });
   });
 router.get('/getAll', (req, res) => {
    Request.find({}).populate('user').populate('room').exec((error, requests) => {
