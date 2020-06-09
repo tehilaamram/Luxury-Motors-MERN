@@ -70,7 +70,7 @@ class ManageRooms extends React.Component {
             selectedTab: 0,
             roomName: '',
             roomImage: '',
-            expanded: false,
+            expanded: [],
         }
         autoBind(this);
     }
@@ -106,16 +106,6 @@ class ManageRooms extends React.Component {
         }
         if (this.state.selectedTab === 0 && prevState.selectedTab !== 0) {
             this.getAllRequests();
-            // AjaxService.get("/request/getAll").then((res) => {
-            //     if (res.data.length > 0) {
-            //         console.log(res.data, ' req get all')
-            //         this.setState({
-            //             requestsList: res.data.requests,
-            //         });
-            //     }
-            // }).catch((err) => {
-            //     console.log('chat rooms error', err);
-            // });    
         }
     }
     getAllRequests() {
@@ -139,34 +129,19 @@ class ManageRooms extends React.Component {
 
     }
     handleExpandedChange = (panel) => (event, isExpanded) => {
-        console.log(' ex ', panel, event, isExpanded);
         if (isExpanded) {
             this.setState({
-                expanded: panel,
+                expanded: [...this.state.expanded,panel],
             });
 
         } else {
             this.setState({
-                expanded: false,
+                expanded: _.without(this.state.expanded,panel),
             });
         }
     }
     renderRequests() {
-        console.log(_.groupBy(this.state.requestsList, 'room.name'), ' group by');
         const { expanded } = this.state;
-        // return (
-        //     {_.groupBy(this.state.requestsList, 'room.name').map((option, index) => {
-        //         retrun (
-        //             <List className={classes.root}>
-        //             {option.forEach(element => {
-        //                 // return ();
-                        
-        //             })}
-        //             </List>
-        //         );
-               
-        //     })}
-        // );
         var groupedRequestList = _.groupBy(this.state.requestsList, 'room.name');
         groupedRequestList = _.toArray(groupedRequestList);
         return (
@@ -176,7 +151,7 @@ class ManageRooms extends React.Component {
                     return (
 <ExpansionPanel
 key={index}
-            expanded={expanded === index} onChange={this.handleExpandedChange(index)}>
+            expanded={expanded.indexOf(index) > -1 ? true : false} onChange={this.handleExpandedChange(index)}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1bh-content"
@@ -186,29 +161,11 @@ key={index}
                     <Typography id="SHead" className={classes.secondaryHeading}>{option.length + ' requests'}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-            {/* <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-            maximus est, id dignissim quam.
-          </Typography> */}
               {this.getRoomRequestList(option)}
             </ExpansionPanelDetails>
           </ExpansionPanel>
                     );
                 })}
-            {/* <ExpansionPanel
-            expanded={expanded === 'panel1'} onChange={this.handleExpandedChange('panel1')}>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
-            >
-              <Typography id="THead" className={classes.heading}>General settings</Typography>
-              <Typography id="SHead" className={classes.secondaryHeading}>I am an expansion panel</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              {this.getRoomRequestList()}
-            </ExpansionPanelDetails>
-          </ExpansionPanel> */}
           </div>
         );
     }
@@ -252,15 +209,10 @@ key={index}
     }
   
     save() {
-        // console.log(this.state);
         let data = new FormData();
         data.append('file', this.state.roomImage[0], 'main');
         data.append('name', this.state.roomName);
-        // this.state.additionalImages.forEach(element => {
-        //     data.append('file', element, element.name);
-        // });
         AjaxService.post('/chatRoom/addRoom', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((res) => {
-            //   this.props.history.push(`/vehicle/${res.data.id}`);
         }).catch((err) => {
             console.log(err, ' add chat room save error');
         });
@@ -315,7 +267,6 @@ key={index}
             case 1:
                 return this.renderNew();
             case 2:
-                        // this.getRooms();
                 return this.renderRooms();
             default:
                 return;
