@@ -53,7 +53,7 @@ class ChatGroups extends React.Component {
     }
     componentDidMount() {
         AjaxService.get(`/chatRoom/getUserRooms/${this.props.userId}`).then((res) => {
-            console.log(res.data, ' dsifhfesiffh');
+            // console.log(res.data, ' dsifhfesiffh');
             if (res.data.list.length > 0) {
                 this.setState({
                     chatRoomsList: res.data.list,

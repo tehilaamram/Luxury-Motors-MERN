@@ -32,11 +32,15 @@ var usernames = {};
 io.on('connect', (socket) => {
   // when the client emits 'join', this listens and executes
   socket.on('join', function (username) {
+    console.log(username, ' username in join');
     // store the username in the socket session for this client
     socket.username = username;
+    console.log('join ', socket.username);
+    socket.emit('username', 'SERVER', 'you have connected');
+
   });
   socket.on('switchRoom', function (newroom, userId) {
-    console.log(userId, ' in switch roomsa')
+    console.log(socket.username, 's u')
     var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
     ChatRoom.findOne({ name: currentRoom[0] }).exec().then((room) => {
       if (room !== null && room.onlineMembers.includes(userId)) {
@@ -47,15 +51,17 @@ io.on('connect', (socket) => {
           socket.broadcast.to(currentRoom[0]).emit('updateOnlineMembers', room.onlineMembers.length);
         }
       }
-      socket.leave(currentRoom[0]);
+      if (room !== null) {
+        socket.leave(currentRoom[0]);
+      }
       socket.join(newroom);
+      console.log(socket.username, 's j')
       ChatRoom.findOne({ name: newroom }).exec().then((roomJoin) => {
         if (roomJoin !== null) {
           // if (roomJoin.onlineMembers.includes(ObjectId(userId)))
           if (!(roomJoin.onlineMembers.includes(ObjectId(userId)))) {
             roomJoin.onlineMembers.push(ObjectId(userId));
             roomJoin.save();
-            console.log(roomJoin, ' room to join');
             ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', select: 'username'}).exec((err, list) => {
               socket.emit('getLast20Messages', list.slice(0,20));
             });
@@ -70,6 +76,7 @@ io.on('connect', (socket) => {
   });
   // when the client emits 'sendchat', this listens and executes
   socket.on('sendchat', (data, userId, groupId, callback) => {
+    console.log(socket.username, ' username');
     var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
     var currentChatMessage = new ChatMessage({
       sender: ObjectId(userId),
@@ -78,6 +85,7 @@ io.on('connect', (socket) => {
       message: data,
     });
     currentChatMessage.save().then((m) => {
+      console.log(socket.username, ' username to send');
       // we tell the client to execute 'updatechat' with 2 parameters
       io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username}, message: data, date: currentChatMessage.date });
       callback();{}
@@ -85,6 +93,7 @@ io.on('connect', (socket) => {
   });
   // when the user disconnects.. perform this
   socket.on('disconnect', function () {
+    console.log('in dissconnect');
     User.findOne({ username: socket.username }).exec().then((user) => {
       ChatRoom.find({ onlineMembers: { "$in" : [user._id]} }).exec((err, list) => {
         list.forEach(element => {

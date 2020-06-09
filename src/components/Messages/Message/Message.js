@@ -7,7 +7,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 const Message = ({ message: { message, sender, date }, name }) => {
   let isSentByCurrentUser = false;
-
+  console.log(sender, ' sender');
   const trimmedName = sender.username.trim().toLowerCase();
   // console.log(user, ' trimmed ', trimmedName);
   if(name === trimmedName) {

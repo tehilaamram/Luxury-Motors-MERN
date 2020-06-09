@@ -35,7 +35,12 @@ class Chat extends React.Component {
     socket = io(ENDPOINT);
 
     socket.on('updatechat', (username, data) => {
+      console.log(data, ' datanupdatechat');
       this.setState({ messages: [...this.state.messages, data] });
+    });
+    socket.on('username', (username, data) => {
+      console.log(data, ' data');
+      // this.setState({ messages: [...this.state.messages, data] });
     });
     socket.on('updateOnlineMembers', (numOfOnline) => {
       this.setState({ numOfOnline });
@@ -44,14 +49,24 @@ class Chat extends React.Component {
       this.setState({ messages });
     });
   }
-
+  componentWillUnmount() {
+    socket.emit('disconnect');
+  }
   componentDidUpdate(prevProps, prevState) {
+    console.log('in did update');
     if (prevProps.user.email === "" && this.props.user.email !== "") {
       // call the server-side function 'join' and send one parameter (value of prompt)
       socket.emit('join', this.props.user.email);
 
     }
-    if (prevProps.group === null && this.props.group !== null || prevProps.group !== null && prevProps.group._id !== this.props.group._id) {
+    if (prevProps.group === null && this.props.group !== null) {
+      socket.emit('join', this.props.user.email);
+      socket.emit('switchRoom', this.props.group.name, this.props.user.id);
+      this.setState({
+        messages: [],
+      });
+    }
+    if ( (prevProps.group !== null && prevProps.group._id !== this.props.group._id)) {
       socket.emit('switchRoom', this.props.group.name, this.props.user.id);
       this.setState({
         messages: [],
