@@ -112,12 +112,12 @@ class ManageRooms extends React.Component {
         console.log('in all requests');
         AjaxService.get("/request/getAll").then((res) => {
             console.log('in req', res.data.requests);
-            if (res.data.requests.length > 0) {
+            // if (res.data.requests.length > 0) {
                 console.log(res.data, ' req get all')
                 this.setState({
                     requestsList: res.data.requests,
                 });
-            }
+            // }
         }).catch((err) => {
             console.log('chat rooms error', err);
         });
@@ -182,12 +182,25 @@ class ManageRooms extends React.Component {
             }
             // request
         }).then((res) => {
-            console.log('done rejecting');
             this.getAllRequests();
         });
 
     }
-    acceptRequest(request) {
+    acceptRequest(requestToAccept) {
+        AjaxService.post('/request/accept', {
+            request: {
+                _id: requestToAccept._id,
+                user: {
+                    _id: requestToAccept.user._id,
+                },
+                room: {
+                    _id: requestToAccept.room._id
+                },
+            }
+            // request
+        }).then((res) => {
+            this.getAllRequests();
+        });
 
     }
     getRoomRequestList(lst) {
