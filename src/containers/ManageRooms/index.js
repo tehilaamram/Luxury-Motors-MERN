@@ -19,6 +19,11 @@ import './style.css';
 import Button from '../../components/Button';
 import FormData from 'form-data';
 import MButton from '@material-ui/core/Button';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const classes = ((theme) => ({
     root: {
@@ -37,13 +42,22 @@ const classes = ((theme) => ({
         height: theme.spacing(7),
         marginRight: 10,
     },
-    actions: {
-        textTransform: 'none',
-        color: '#616161',
-        borderColor: '#BDBDBD',
-        '&:hover': {
-        },
-    }
+    // actions: {
+    //     textTransform: 'none',
+    //     color: '#616161',
+    //     borderColor: '#BDBDBD',
+    //     '&:hover': {
+    //     },
+    // },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        flexBasis: '33.33%',
+        flexShrink: 0,
+      },
+      secondaryHeading: {
+        fontSize: theme.typography.pxToRem(15),
+        color: theme.palette.text.secondary,
+      },
 }));
 
 class ManageRooms extends React.Component {
@@ -56,10 +70,12 @@ class ManageRooms extends React.Component {
             selectedTab: 0,
             roomName: '',
             roomImage: '',
+            expanded: false,
         }
         autoBind(this);
     }
     componentDidMount() {
+        this.getAllRequests();
         const { match: { params } } = this.props;
         AjaxService.get(`/user/getUser/${params.id}`).then((res) => {
             this.setState({
@@ -88,6 +104,33 @@ class ManageRooms extends React.Component {
                 console.log('chat rooms error', err);
             });    
         }
+        if (this.state.selectedTab === 0 && prevState.selectedTab !== 0) {
+            this.getAllRequests();
+            // AjaxService.get("/request/getAll").then((res) => {
+            //     if (res.data.length > 0) {
+            //         console.log(res.data, ' req get all')
+            //         this.setState({
+            //             requestsList: res.data.requests,
+            //         });
+            //     }
+            // }).catch((err) => {
+            //     console.log('chat rooms error', err);
+            // });    
+        }
+    }
+    getAllRequests() {
+        console.log('in all requests');
+        AjaxService.get("/request/getAll").then((res) => {
+            console.log('in req', res.data.requests);
+            if (res.data.requests.length > 0) {
+                console.log(res.data, ' req get all')
+                this.setState({
+                    requestsList: res.data.requests,
+                });
+            }
+        }).catch((err) => {
+            console.log('chat rooms error', err);
+        });    
     }
     tabChanges(event, selectedTab) {
         event.preventDefault();
@@ -95,21 +138,96 @@ class ManageRooms extends React.Component {
         console.log(selectedTab, ' event');
 
     }
+    handleExpandedChange = (panel) => (event, isExpanded) => {
+        console.log(' ex ', panel, event, isExpanded);
+        if (isExpanded) {
+            this.setState({
+                expanded: panel,
+            });
+
+        } else {
+            this.setState({
+                expanded: false,
+            });
+        }
+    }
     renderRequests() {
+        console.log(_.groupBy(this.state.requestsList, 'room.name'), ' group by');
+        const { expanded } = this.state;
+        // return (
+        //     {_.groupBy(this.state.requestsList, 'room.name').map((option, index) => {
+        //         retrun (
+        //             <List className={classes.root}>
+        //             {option.forEach(element => {
+        //                 // return ();
+                        
+        //             })}
+        //             </List>
+        //         );
+               
+        //     })}
+        // );
+        var groupedRequestList = _.groupBy(this.state.requestsList, 'room.name');
+        groupedRequestList = _.toArray(groupedRequestList);
+        return (
+            <div>
+                {groupedRequestList.map((option, index) => {
+                    console.log(option, ' op');
+                    return (
+<ExpansionPanel
+key={index}
+            expanded={expanded === index} onChange={this.handleExpandedChange(index)}>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography id="THead" className={classes.heading}>{option[0].room.name}</Typography>
+                    <Typography id="SHead" className={classes.secondaryHeading}>{option.length + ' requests'}</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+            {/* <Typography>
+            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
+            maximus est, id dignissim quam.
+          </Typography> */}
+              {this.getRoomRequestList(option)}
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+                    );
+                })}
+            {/* <ExpansionPanel
+            expanded={expanded === 'panel1'} onChange={this.handleExpandedChange('panel1')}>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography id="THead" className={classes.heading}>General settings</Typography>
+              <Typography id="SHead" className={classes.secondaryHeading}>I am an expansion panel</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              {this.getRoomRequestList()}
+            </ExpansionPanelDetails>
+          </ExpansionPanel> */}
+          </div>
+        );
+    }
+    getRoomRequestList(lst) {
+        console.log(lst, ' lsfifdfiekgbeigbe');
         return (
             <List className={classes.root}>
 
-                {this.state.requestsList.map((option, index) => {
+                {lst.map((option, index) => {
                     return (
                         <div key={index}>
                             <ListItem
                             >
                                 <ListItemAvatar>
                                     <Avatar alt="group" className={classes.rounded}>
-                                        TE
+                                        {option.user.username.substring(0,2)}
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText primary={'tehilaamr@gmail.com'} secondary={ 'Luxury Motors'} />
+                                <ListItemText primary={option.user.username} secondary={new Date(option.date).toDateString() + ' ' + new Date(option.date).toLocaleTimeString()} />
                                 <ListItemSecondaryAction>
                                     <div className="RequestButtons">
                                     <MButton variant="outlined">Accept</MButton>
@@ -132,6 +250,7 @@ class ManageRooms extends React.Component {
         console.log(event);
         this.setState({ roomImage: _.cloneDeep(event) });
     }
+  
     save() {
         // console.log(this.state);
         let data = new FormData();

@@ -7,14 +7,23 @@ var ObjectId = require('mongoose').Types.ObjectId;
 router.post('/new', (req, res) => {
   var newRequest = new Request({
     user: req.user._id,
-    room: req.body.room,
+    room: ObjectId(req.body.room),
     date: new Date(),
   });
   newRequest.save().then((requsetAdded, err) => {
     req.user.requests.push(requsetAdded._id);
     req.user.save();
-    res.json({
-      status: 200,
+    ChatRoom.findById(req.body.room, (err, currentRoom) => {
+       if (err) {
+           return;
+       } else {
+           currentRoom.requests.push(requsetAdded._id);
+           currentRoom.save();
+               res.json({
+          status: 200,
+        //   user: req.user,
+      });
+       }
   });
   }).catch((err) => {
       res.sendStatus(409);
@@ -24,12 +33,37 @@ router.post('/new', (req, res) => {
     //   });
   });
 });
-
-// router.get('/getAll', (req, res) => {
-//   return Vehicle.find({}).then((vehicles) => {
-//     res.send(vehicles);
-//   });
-// });
+router.post('/remove', (req, res) => {
+    console.log(req.body, ' body')
+    req.user.requests.pop(req.body.reqToRoomId);
+    req.user.save();
+    ChatRoom.findById(req.body.room, (err, currentRoom) => {
+        if (err) {
+            return;
+        } else {
+            currentRoom.requests.pop(req.body.reqToRoomId);
+            currentRoom.save();
+            Request.deleteOne({_id: req.body.reqToRoomId}, (err) => {
+                res.json({
+                    status: 200,
+                  //   user: req.user,
+                });
+            });
+    //             res.json({
+    //        status: 200,
+    //      //   user: req.user,
+    //    });
+        }
+   });
+  });
+router.get('/getAll', (req, res) => {
+   Request.find({}).populate('user').populate('room').exec((error, requests) => {
+      return res.json({
+          status: 200,
+          requests,
+      });
+});
+});
 
 // router.get('/getVehicle/:id', (req, res) => {
 //   Vehicle.findById(req.params.id, (err, vehicle) => {

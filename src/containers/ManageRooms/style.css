@@ -48,3 +48,21 @@
 .PrivateTabIndicator-colorPrimary-162 {
   background-color: var(--silver-color) !important;
 }
+/* .MuiTypography-body1 {
+  font-size: 0.9375rem !important;
+    flex-basis: 33.33% !important;
+    flex-shrink: 0 !important;
+} */
+#THead {
+  font-size: 0.9375rem !important;
+    flex-basis: 33.33% !important;
+    flex-shrink: 0 !important;
+}
+
+#SHead {
+  color: rgba(0, 0, 0, 0.54) !important;
+    font-size: 0.9375rem !important;
+}
+.MuiList-padding {
+  width: 100% !important;
+}

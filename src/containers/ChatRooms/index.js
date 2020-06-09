@@ -63,16 +63,17 @@ class ChatRooms extends React.Component {
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.state.selectedTab === 1 && prevState.selectedTab !== 1) {
-            AjaxService.get('/chatRoom/getRoomsToJoin').then((res) => {
-                console.log(res.data, ' get rooms to join list');
-                if (res.data.list.length > 0) {
-                    this.setState({
-                        roomsToRequest: res.data.list,
-                    });
-                }
-            }).catch((err) => {
-                console.log('chat rooms error', err);
-            });
+            this.getRoomsToJoin()
+            // AjaxService.get('/chatRoom/getRoomsToJoin').then((res) => {
+            //     console.log(res.data, ' get rooms to join list');
+            //     if (res.data.list.length > 0) {
+            //         this.setState({
+            //             roomsToRequest: res.data.list,
+            //         });
+            //     }
+            // }).catch((err) => {
+            //     console.log('chat rooms error', err);
+            // });
         }
     }
     renderStepper() {
@@ -104,14 +105,27 @@ class ChatRooms extends React.Component {
         });
     }
     sendRequest(room) {
-        // console.log(v, ' v');
-        AjaxService.post('/request/new', {
-            room
-        }).then((res) => {
-            // this.props.history.push(`/vehicle/${res.data.id}`);
-          }).catch((err) => {
-            console.log(err, ' add vehicle save error');
-          });
+        if (room.requests.length > 0) {
+            AjaxService.post('/request/remove', {
+                room: room._id,
+                reqToRoomId: room.requests[0]._id,
+            }).then((res) => {
+                this.getRoomsToJoin();
+                // this.props.history.push(`/vehicle/${res.data.id}`);
+              }).catch((err) => {
+                console.log(err, ' add vehicle save error');
+              });
+        } else {
+            AjaxService.post('/request/new', {
+                room: room._id,
+            }).then((res) => {
+                this.getRoomsToJoin();
+                // this.props.history.push(`/vehicle/${res.data.id}`);
+              }).catch((err) => {
+                console.log(err, ' add vehicle save error');
+              });
+        }
+        
     }
     renderRooms() {
         console.log('in render rooms', this.state.roomsToRequest);
@@ -129,7 +143,7 @@ class ChatRooms extends React.Component {
                                 <ListItemText primary={option.name} secondary={option.members.length + ' members'} />
                                 <ListItemSecondaryAction>
                                     <div className="RequestButtons">
-                                        <MButton variant="outlined" onClick={this.sendRequest.bind(this, option._id)}>Join</MButton>
+                    <MButton variant="outlined" onClick={this.sendRequest.bind(this, option)}>{option.requests.length > 0 ? 'Delete' : 'Join'}</MButton>
                                     </div>
                                 </ListItemSecondaryAction>
                             </ListItem>

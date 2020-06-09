@@ -74,12 +74,17 @@ router.get('/getRoomsToJoin', (req, res) => {
     // var userRoomList = req.user.rooms;
     // var idJson = JSON.parse(req.query.params);
     // var obj_ids = idJson.vid.map(function (element) { return ObjectId(element.vehicle); });
-    ChatRoom.find({ _id: { $nin: req.user.rooms } }, (err, list) => {
+    ChatRoom.find({_id: { $nin: req.user.rooms }}).populate({ path: 'requests', match: {user: req.user._id}}).exec((err, list) => {
         return res.json({
             status: 200,
             list,
-        });
-    });
+        });      });
+    // ChatRoom.find({ _id: { $nin: req.user.rooms } }, (err, list) => {
+    //     return res.json({
+    //         status: 200,
+    //         list,
+    //     });
+    // });
 });
 
 module.exports = router;
