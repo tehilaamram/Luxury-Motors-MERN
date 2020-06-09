@@ -23,6 +23,7 @@ import Footer from '../../components/Footer';
 import Button from '../../components/Button';
 import AppBar from '../../components/AppBar';
 import PrivateRoute from './privateRoute';
+import ManageUsers from '../ManageUsers';
 import './style.css';
 class App extends React.Component {
     constructor(props) {
@@ -66,6 +67,7 @@ class App extends React.Component {
                                 <Route path='/vehicle/:id' component={VehicleDetails} />
                                 <Route path='/reset/:token' component={ResetPassword} />
                                 <Route path='/cart' component={Cart} />
+                                <Route path='/manage-users' component={ManageUsers} />
                                 <Route path="/chat-rooms/:uid" component={CharRooms} />
                                 <Route path="/manage-rooms/:id" component={ManageRooms} />
                             </Switch>

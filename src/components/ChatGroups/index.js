@@ -52,7 +52,7 @@ class ChatGroups extends React.Component {
       });
     }).catch((err) => {
       console.log('chat rooms error', err);
-    })
+    });
   }
   renderChatRooms() {
     const { classes } = this.props;

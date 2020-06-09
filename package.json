@@ -22,6 +22,8 @@
     "crypto-js": "^4.0.0",
     "date-fns": "^2.14.0",
     "debug": "~2.6.9",
+    "devextreme": "^20.1.4",
+    "devextreme-react": "20.1.4",
     "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",

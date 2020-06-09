@@ -124,7 +124,7 @@ signOut(){
         </List> }
         { user.role !== ROLE.GUEST && user.role !== ROLE.USER &&  <Divider />}
         { user.role === ROLE.ADMIN && <List>
-          <ListItem button key={'Manage Users'}>
+          <ListItem button onClick={this.navigateTo.bind(this, '/manage-users')} key={'Manage Users'}>
             <ListItemIcon><PeopleIcon /> </ListItemIcon>
             <ListItemText primary={'Manage Users'} />
           </ListItem>
