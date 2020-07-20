@@ -7,6 +7,8 @@ import AjaxService from '../../services/AjaxService';
 import Button from '../../components/Button';
 import ImageGallery from '../../components/ImageGallery';
 import Table from '../../components/Table';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 class VehicleDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,7 @@ class VehicleDetails extends React.Component {
         model: '',
         make: '',
         year: 2020,
+        selectedTab: 0,
       },
       imageList: [],
     }
@@ -48,20 +51,59 @@ class VehicleDetails extends React.Component {
 
     });
   }
+  tabChanges(event, selectedTab) {
+    event.preventDefault();
+    this.setState({ selectedTab });
+    console.log(selectedTab, ' event');
+
+}
+  renderOverview() {
+    return (
+      <Table vehicle={this.state.vehicle} />
+    );
+  }
+  renderTab(index) {
+    switch (index) {
+        case 0:
+            return this.renderOverview();
+        case 1:
+            return this.renderCustomersReview();
+        default:
+            return;
+    }
+}
   render() {
+    const { selectedTab } = this.state;
     console.log(this.state, ' state');
     return (
       <div className={"VehicleDetailsContainer"}>
-      <div className="DetailsVehicleDetailsContainer">
-         <Table vehicle={this.state.vehicle}/>
+        
+        <div className="VehicleDetailsImagesContainer">
+          <ImageGallery imageList={this.state.imageList} />
         </div>
-      <div className="VehicleDetailsImagesContainer">
-        <ImageGallery imageList={this.state.imageList}/>
+        <div className="DetailsVehicleDetailsContainer">
+          <Table vehicle={this.state.vehicle} />
         </div>
         <div className="VehicleDetailsButtons">
-          <div className="SaveBottonAddVehicle">
-            <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} />
-          </div>
+          {/* <div className="SaveBottonAddVehicle"> */}
+          <div className={"ManageRoomsContainer"}>
+            <Tabs
+                value={selectedTab}
+                indicatorColor="primary"
+                textColor="primary"
+                onChange={this.tabChanges}
+                aria-label="disabled tabs example"
+                variant="fullWidth"
+            >
+                <Tab label="OverView" />
+                <Tab label="Customers Reviews" />
+            </Tabs>
+            <div className="TabContentDiv">
+                {this.renderTab(selectedTab)}
+            </div>
+        </div>
+            {/* <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} /> */}
+          {/* </div> */}
         </div>
       </div>
     );

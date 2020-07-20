@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import autoBind from 'react-autobind';
 import {Cookies}  from 'react-cookie';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import './style.css';
 import TextInput from '../TextInput';
@@ -89,6 +90,7 @@ class SignInModal extends React.Component {
     render() {
         return (
             <div id='signInModal' className="SignInModal">
+                      {/* <CircularProgress /> */}
                 {this.state.error && <FlashMessage id={'SignInModalErrorFlash'} css={"Error"} subject={'Error!'} message={this.state.errorMessage} />}
                 <div id='signInModalContent' className="SignInModalContent">
                     <div className="SignInDivTitle">

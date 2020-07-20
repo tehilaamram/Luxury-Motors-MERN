@@ -1,4 +1,5 @@
 import React from 'react';
+import Linkify from 'react-linkify';
 
 import './Message.css';
 import i from './try.svg';
@@ -21,7 +22,11 @@ const Message = ({ message: { message, sender, date }, name }) => {
         <div className="avatarMessageMe">
           <div className="messageBox backgroundBlue">
       <div className="messageText colorWhite sender">{sender.username}</div>
-            <div className="messageText colorWhite">{ReactEmoji.emojify(message)}</div>
+            <div className="messageText colorWhite">
+            {/* <Linkify>{ReactEmoji.emojify(message)}</Linkify> */}
+            <Linkify>{message}</Linkify>
+{/* {ReactEmoji.emojify(message)} */}
+</div>
           </div>
           <div className="sentText pr-10 justifyEnd">{new Date(date).toDateString()} {new Date(date).toLocaleTimeString()}</div>
           </div>
@@ -40,7 +45,10 @@ const Message = ({ message: { message, sender, date }, name }) => {
           <div className="avatarMessageOther">
             <div className="messageBox backgroundLight">
             <div className="messageText colorDark sender">{sender.username}</div>
-              <div className="messageText colorDark">{ReactEmoji.emojify(message)}</div>
+              <div className="messageText colorDark">
+                {/* {ReactEmoji.emojify(message)} */}
+                <Linkify>{message}</Linkify>
+                </div>
             </div>
             <div className="sentText pr-10 justifyStart">{new Date(date).toDateString()} {new Date(date).toLocaleTimeString()}</div>
             </div>
