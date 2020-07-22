@@ -28,14 +28,16 @@ router.post('/signUp', function (req, res) {
   });
 });
 router.post('/signIn', passport.authenticate('local'), (req, res) => {
-  return res.json({
-    status: 200,
-    user: {
-      id: req.user.id,
-      fullName: req.user.fullName,
-      role: req.user.role,
-    },
-  });
+  setTimeout(() => {
+    return res.json({
+      status: 200,
+      user: {
+        id: req.user.id,
+        fullName: req.user.fullName,
+        role: req.user.role,
+      },
+    });
+  }, 5000);
 });
 
 router.get('/signOut', function (req, res) {

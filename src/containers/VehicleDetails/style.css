@@ -37,3 +37,14 @@
     flex-direction: column;
   }
 }
+.vehicle-details-review {
+  margin-bottom: 12px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 25px;
+}
+.vehicle-details-review .review-details {
+  margin-left: 8px;
+}

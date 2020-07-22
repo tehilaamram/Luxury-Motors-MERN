@@ -9,6 +9,9 @@ import ImageGallery from '../../components/ImageGallery';
 import Table from '../../components/Table';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import ImageViewer from '../../components/ImageViewer';
+import Rating from '@material-ui/lab/Rating';
+
 class VehicleDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -20,13 +23,15 @@ class VehicleDetails extends React.Component {
         selectedTab: 0,
       },
       imageList: [],
+      imgV: [],
     }
     autoBind(this);
   }
   componentDidMount() {
     const { match: { params } } = this.props;
     AjaxService.get(`/vehicle/getVehicle/${params.id}`).then((res) => {
-      console.log(res.data.vehicle);
+      // console.log(res.data.vehicle);
+      console.log([res.data.vehicle.mainImg, ...res.data.vehicle.additionalImg], 'image to imageviewer');
       var imgList = [];
       if (res.data.vehicle.mainImg !== undefined) {
         imgList.push({
@@ -45,6 +50,7 @@ class VehicleDetails extends React.Component {
       this.setState({
         vehicle: res.data.vehicle,
         imageList: imgList,
+        imgV: [res.data.vehicle.mainImg, ...res.data.vehicle.additionalImg],
       });
 
     }).catch((err) => {
@@ -79,10 +85,17 @@ class VehicleDetails extends React.Component {
       <div className={"VehicleDetailsContainer"}>
         
         <div className="VehicleDetailsImagesContainer">
-          <ImageGallery imageList={this.state.imageList} />
+          <ImageViewer images={this.state.imgV}/>
+          {/* <ImageGallery imageList={this.state.imageList} /> */}
         </div>
         <div className="DetailsVehicleDetailsContainer">
-          <Table vehicle={this.state.vehicle} />
+          <div className="vehicle-details-review">
+          <Rating id="rating" name="read-only" value={3} readOnly />
+          <span className="rating-avg">3.5</span>
+          <span className="review-details">80 Reviews</span>
+          <span className="review-details">80 orders</span>
+            </div>
+          {/* <Table vehicle={this.state.vehicle} /> */}
         </div>
         <div className="VehicleDetailsButtons">
           {/* <div className="SaveBottonAddVehicle"> */}

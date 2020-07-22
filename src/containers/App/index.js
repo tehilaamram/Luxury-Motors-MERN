@@ -70,6 +70,7 @@ class App extends React.Component {
                                 <Route path='/manage-users' component={ManageUsers} />
                                 <Route path="/chat-rooms/:uid" component={CharRooms} />
                                 <Route path="/manage-rooms/:id" component={ManageRooms} />
+                                <Route component={Home} />
                             </Switch>
                         </div>
                         <div className="row footer">
