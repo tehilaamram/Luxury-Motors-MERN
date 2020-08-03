@@ -86,20 +86,27 @@ signOut(){
       >
         <List>
           <ListItem button onClick={this.navigateTo.bind(this, '/')} key={'Home'}>
-            <ListItemIcon><HomeIcon /> </ListItemIcon>
+            <ListItemIcon>
+              {/* <HomeIcon />  */}
+              </ListItemIcon>
             <ListItemText primary={'Home'} />
           </ListItem>
           <ListItem button onClick={this.navigateTo.bind(this, '/about')} key={'About'}>
-            <ListItemIcon> <InfoIcon/></ListItemIcon>
+            <ListItemIcon>
+               {/* <InfoIcon/> */}
+               </ListItemIcon>
             <ListItemText primary={'About'} />
           </ListItem>
           <ListItem button onClick={this.navigateTo.bind(this, '/catalog')} key={'Catalog'}>
-            <ListItemIcon><ListIcon/> </ListItemIcon>
+            <ListItemIcon>
+              {/* <ListIcon/> */}
+               </ListItemIcon>
             <ListItemText primary={'Catalog'} />
           </ListItem>
           <ListItem button onClick={this.navigateTo.bind(this, '/cart')} key={'Cart'}>
-            <ListItemIcon> <Badge badgeContent={this.props.cart} color="secondary">
-            <ShoppingCartIcon />
+            <ListItemIcon> 
+              <Badge badgeContent={this.props.cart} color="secondary">
+            {/* <ShoppingCartIcon /> */}
           </Badge></ListItemIcon>
             <ListItemText primary={'Cart'} />
           </ListItem>
@@ -107,46 +114,62 @@ signOut(){
         <Divider />
         { user.role !== ROLE.GUEST &&  <List>
         <ListItem button key={'Profile'}>
-            <ListItemIcon><AccountBoxIcon /> </ListItemIcon>
+            <ListItemIcon>
+              {/* <AccountBoxIcon />  */}
+              </ListItemIcon>
             <ListItemText primary={'Profile'} />
           </ListItem>
           <ListItem button onClick={this.navigateTo.bind(this, `/chat-rooms/${user.id}`)} key={'Chat Rooms'}>
-            <ListItemIcon><ChatIcon /> </ListItemIcon>
+            <ListItemIcon>
+              {/* <ChatIcon />  */}
+              </ListItemIcon>
             <ListItemText primary={'Chat Rooms'} />
           </ListItem>
         </List> }
         { user.role !== ROLE.GUEST && <Divider /> }
         { user.role !== ROLE.GUEST && user.role !== ROLE.USER && <List>
           <ListItem button onClick={this.navigateTo.bind(this, '/add-vehicle')} key={'Add Vehicle'}>
-            <ListItemIcon><AddCircleIcon /> </ListItemIcon>
+            <ListItemIcon>
+              {/* <AddCircleIcon /> */}
+               </ListItemIcon>
             <ListItemText primary={'Add Vehicle'} />
           </ListItem>
         </List> }
         { user.role !== ROLE.GUEST && user.role !== ROLE.USER &&  <Divider />}
         { user.role === ROLE.ADMIN && <List>
           <ListItem button onClick={this.navigateTo.bind(this, '/manage-users')} key={'Manage Users'}>
-            <ListItemIcon><PeopleIcon /> </ListItemIcon>
+            <ListItemIcon>
+              {/* <PeopleIcon />  */}
+              </ListItemIcon>
             <ListItemText primary={'Manage Users'} />
           </ListItem>
           <ListItem button onClick={this.navigateTo.bind(this, `/manage-rooms/${user.id}`)} key={'Manage Rooms'}>
-            <ListItemIcon><RateReviewIcon /> </ListItemIcon>
+            <ListItemIcon>
+              {/* <RateReviewIcon />  */}
+              </ListItemIcon>
             <ListItemText primary={'Manage Rooms'} />
           </ListItem>
         </List> }
         { user.role === ROLE.ADMIN &&  <Divider />}
         { user.role === ROLE.GUEST && <List>
           <ListItem button onClick={this.openSignInModal} key={'Sign In'}>
-            <ListItemIcon><PersonIcon /> </ListItemIcon>
+            <ListItemIcon>
+              {/* <PersonIcon />  */}
+              </ListItemIcon>
             <ListItemText primary={'Sign In'} />
           </ListItem>
           <ListItem button onClick={this.openSignUpModal} key={'Sign Up'}>
-            <ListItemIcon><PersonAddIcon /> </ListItemIcon>
+            <ListItemIcon>
+              {/* <PersonAddIcon />  */}
+              </ListItemIcon>
             <ListItemText primary={'Sign Up'} />
           </ListItem>
         </List>}
        { user.role !== ROLE.GUEST && <List>
           <ListItem button onClick={this.signOut} key={'Sign Out'}>
-            <ListItemIcon><ExitToAppIcon /> </ListItemIcon>
+            <ListItemIcon>
+              {/* <ExitToAppIcon />  */}
+              </ListItemIcon>
             <ListItemText primary={'Sign Out'} />
           </ListItem>
        </List> }

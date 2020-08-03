@@ -44,7 +44,7 @@ class ImageViewer extends React.Component {
             <div className="image-viewer">
                 <div className="image-view-magnifier-wrap">
                 {images !== undefined && images.length > 0 && 
-                 <img class="magnifier-image" src={`data:image/jpeg;base64,${this.props.images[selectedImageIndex].image}`} 
+                 <img className="magnifier-image" src={`data:image/jpeg;base64,${this.props.images[selectedImageIndex].image}`} 
                 // style="top: 0px; left: 0px; width: 100%; height: auto;"
                 />}
                     {/* <div id="magnifier-image" className="magnifier-cover" data-spm-anchor-id="a2g0o.detail.1000017.i0.1af71b40GsAS38"></div> */}

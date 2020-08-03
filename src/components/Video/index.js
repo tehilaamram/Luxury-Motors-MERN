@@ -1,6 +1,8 @@
 import React from 'react';
 import './style.css';
-import startVideo from "../../videos/video.mp4";
+// import startVideo from "../../videos/video.mp4";
+import startVideo from "./video.mp4";
+
 class Video extends React.Component {
     // constructor(props) {
     //     super(props);

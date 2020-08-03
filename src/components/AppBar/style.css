@@ -1,5 +1,9 @@
 @import '../../css/variables.css';
 
 .MuiAppBar-colorPrimary	 {
-    background-color:var(--silver-color) !important;
+    background-color:var(--black-color) !important;
+}
+
+#logoLM {
+    margin-left: 10px;
 }

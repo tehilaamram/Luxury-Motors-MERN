@@ -3,9 +3,10 @@
 * {
   box-sizing: border-box;
 }
+
 .VehicleDetailsContainer {
   /* margin: auto; */
-    /* width: 80%; */
+  /* width: 80%; */
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -14,11 +15,11 @@
 }
 
 .VehicleDetailsImagesContainer {
-  flex: 30%;
+  /* flex: 30%; */
 }
 
 .DetailsVehicleDetailsContainer {
-  flex: 30%;
+  /* flex: 30%; */
   padding: 0 20px;
   text-align: center;
 }
@@ -33,10 +34,11 @@
 }
 
 @media screen and (max-width: 768px) {
-  .VehicleDetailsContainer {   
+  .VehicleDetailsContainer {
     flex-direction: column;
   }
 }
+
 .vehicle-details-review {
   margin-bottom: 12px;
   display: -ms-flexbox;
@@ -45,6 +47,209 @@
   align-items: center;
   height: 25px;
 }
+
 .vehicle-details-review .review-details {
   margin-left: 8px;
+}
+
+.vehicle-title {
+  margin-bottom: 8px;
+}
+
+.split-line-thin {
+  width: 100%;
+  height: 2px;
+  background: #f9f9f9;
+}
+
+.vehicle-main {
+  width: 100%;
+  background: #fff;
+  padding-top: 28px;
+  min-height: 588px;
+  display: flex;
+  justify-content: center;
+}
+
+.vehicle-price {
+  margin: 16px 0 12px;
+  display: flex;
+}
+
+.current-vehicle-price {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: 700;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.vehicle-quantity {
+  margin-top: 15px;
+  font-size: 12px;
+  display: table;
+}
+
+.vehicle-quantity .vehicle-quantity-title {
+  margin-bottom: 8px;
+  display: inherit;
+}
+
+.plus-minus-quantity {
+  display: inline-table;
+  border-collapse: separate;
+  border-spacing: 0;
+  line-height: 0;
+  width: 80px;
+  height: 36px;
+}
+
+.vehicle-actions {
+  justify-content: space-around;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.vehicle-tabs-container {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  background-color: var(--white-color);
+}
+
+.specifications-container {
+  display: inline;
+}
+
+.vehicle-specs-list {
+  padding: 20px;
+  list-style: none;
+  display: flow-root;
+  /* display: -webkit-box; */
+}
+
+.vehicle-specs-list-li {
+  position: relative;
+  width: 50%;
+  float: left;
+  line-height: 28px;
+  list-style: none;
+  margin-left: 0;
+  /* display: inline-block; */
+  max-width: 50%;
+}
+
+.vehicle-specs-list-li .property-title {
+  color: #999;
+  font-size: 14px;
+
+}
+
+.vehicle-specs-list-li .property-specs {
+  cursor: pointer;
+  display: inline-block;
+  max-width: 300px;
+  font-size: 14px;
+  color: #151515;
+  vertical-align: bottom;
+}
+
+.quantity-to-order {
+  font-size: 14px;
+  display: inline-table;
+  width: 32px;
+}
+
+.vehicle-quantity-info {
+  float: right;
+  /* display: -ms-flexbox; */
+  display: contents;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 36px;
+}
+
+.quantity-available {
+  color: #999;
+  margin-left: 8px;
+}
+
+.vehicle-rate-details {
+  padding: 0 20px 10px;
+  display: grid;
+}
+
+.vehicle-rate-list {
+  float: left;
+  width: 350px;
+  color: #333;
+  padding: 0;
+}
+
+.vehicle-rate-list li {
+    list-style: none;
+    min-height: 20px;
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    zoom: 1;
+}
+.vehicle-rate-list span{
+  float: left;
+  vertical-align: middle;
+}
+.vehicle-rate-title {
+  text-align: left;
+    width: auto;
+    min-width: 65px;
+    padding-right: 0;
+    /* vertical-align: middle; */
+}
+
+.vehicle-rate-graph {
+  /* vertical-align: middle; */
+  width: 200px;
+    margin: 7px 10px 0 0;
+    height: 3px;
+    background-color: #E9E9E9;
+    /* float: right; */
+    display: grid;
+}
+
+.comments-container {
+  display: flow-root;
+}
+
+.vehicle-graph-scroller {
+  background-color: #FF4747;
+}
+
+.vehicle-rate-number {
+  width: 50px;
+    height: 20px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    /* float: right; */
+    /* vertical-align: middle; */
+}
+.feedback-container {
+  padding: 0 20px;
+  font-size: 13px;
+  line-height: 18px;
+}
+@media screen and (min-width: 1200px) {
+  .vehicle-main-wrap {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }

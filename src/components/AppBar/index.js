@@ -16,7 +16,8 @@ import Drawer from '../Drawer';
 import { Cookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-
+import Avatar from '@material-ui/core/Avatar';
+import logoLM from "../../images/luxury_motors.jpg";
 // import '../../css/materialUI.css';
 import './style.css';
 const styles = ((theme) => ({
@@ -32,6 +33,10 @@ const styles = ((theme) => ({
       display: 'block',
     },
   },
+  // square: {
+  //   color: theme.palette.getContrastText(deepOrange[500]),
+  //   // backgroundColor: deepOrange[500],
+  // },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -171,6 +176,7 @@ class CustomAppBar extends React.Component {
             <Typography className={classes.title} variant="h6" noWrap>
               Luxury Motors
           </Typography>
+          <Avatar alt="Remy Sharp"  src={logoLM} className={classes.large} id="logoLM"/>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton aria-label="show 17 new notifications" color="inherit">

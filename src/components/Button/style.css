@@ -1,75 +1,76 @@
 @import '../../css/variables.css';
 
-.navButton{
-    padding-inline-start: 12px;
-    margin: 8px 2px;
-    align-self: baseline;
-    cursor: pointer;
-    color: #fff;
-    font-family: var(--regular-font);
-     font-size: 20px;
-     border: none;
-     outline:none;
-     background-color: transparent;
-  }
+.navButton {
+  padding-inline-start: 12px;
+  margin: 8px 2px;
+  align-self: baseline;
+  cursor: pointer;
+  color: #fff;
+  font-family: var(--regular-font);
+  font-size: 20px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
 
-  .SignUpButton {
-    margin-top: 35px;
-  }
+.SignUpButton {
+  margin-top: 35px;
+}
 
-  .PrimaryButton {
-    font-family: var(--regular-font);
-    align-self: center;
-    width: 100%;
-    height: 50px;
-    background-color: var(--red-color);
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    border-radius: 7px;
-    cursor: pointer;
-    border: hidden;
-    border: 2px solid var(--red-color);
-  }
-  .PrimaryButton:hover:not([disabled]) {
+.PrimaryButton {
+  font-family: var(--regular-font);
+  align-self: center;
+  /* width: 100%; */
+  height: 50px;
+  background-color: var(--red-color);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 7px;
+  cursor: pointer;
+  border: hidden;
+  border: 2px solid var(--red-color);
+}
+
+/* .PrimaryButton:hover:not([disabled]) {
     background-color: white;
     color: var(--black-color);
     border: 2px solid var(--red-color);
-}
+} */
 
 .RoundCloseButton {
-    margin-top: 10px;
-    border-radius: 50%;
-    color: var(--black-color);
-    cursor: pointer;
-    height: 25px;
-    width: 29px;
-    background-color: transparent;
-    border-width: 2px;
-    text-align: center;
-    font-weight: 900;
-    font-size: 25px;
-    font-weight: 900;
-    border-color: var(--black-color);
-    align-self: center;
-    line-height: 0.7;
+  margin-top: 10px;
+  border-radius: 50%;
+  color: var(--black-color);
+  cursor: pointer;
+  height: 25px;
+  width: 29px;
+  background-color: transparent;
+  border-width: 2px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 25px;
+  font-weight: 900;
+  border-color: var(--black-color);
+  align-self: center;
+  line-height: 0.7;
 }
 
 .VehicleCardButton {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .LinkButton {
-    width: 100%;
-    border: none;
-    background-color: transparent;
-    color: var(--red-color);
-    font-size: 15px;
-    font-family: var(--regular-font);
-    cursor: pointer;
-    margin-top: 10px;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  color: var(--red-color);
+  font-size: 15px;
+  font-family: var(--regular-font);
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 .ChatButton {
@@ -77,43 +78,43 @@
   position: relative;
   height: 60px;
   width: 60px;
-   background-image: url(../../images/chat.svg);
-   border-radius: 50%;
-   border-width: initial;
-    border-style: none;
-    border-color: initial;
-    border-image: initial;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: var(--red-color);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px;
-    background-size: 30px 30px;
+  background-image: url(../../images/chat.svg);
+  border-radius: 50%;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--red-color);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px;
+  background-size: 30px 30px;
 }
 
 .FilterButton {
   font-family: var(--regular-font);
-    align-self: center;
-    width: fit-content;
-    height: 30px;
-    background-color: var(--filter-color);
-    color: var(--black-color);
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    border-radius: 2px;
-    cursor: pointer;
-    /* border: hidden; */
-    border: 1px solid var(--filter-color);
-    margin: 3px;
+  align-self: center;
+  width: fit-content;
+  height: 30px;
+  background-color: var(--filter-color);
+  color: var(--black-color);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 2px;
+  cursor: pointer;
+  /* border: hidden; */
+  border: 1px solid var(--filter-color);
+  margin: 3px;
 }
 
-.SelectedFilterButton{
+.SelectedFilterButton {
   margin: 3px;
   font-family: var(--regular-font);
   width: fit-content;
-    height: 30px;
-    background-color: var(--filter-color);
+  height: 30px;
+  background-color: var(--filter-color);
   color: var(--red-color);
   border-radius: 2px;
   text-align: center;
@@ -121,4 +122,20 @@
   display: inline-block;
   font-size: 15px;
   border: 1px solid var(--red-color);
+}
+
+.rounded-plus {
+  border-radius: 50% !important;
+  border: none;
+  background: #f2f2f2;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.w150px {
+  width: 150px;
+}
+
+*,*:focus,*:hover{
+  outline:none;
 }

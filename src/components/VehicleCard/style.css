@@ -36,6 +36,7 @@ margin: 10px 10px 10px 20px;
     flex: 10%;
     border-radius: 0 5px 5px 0;
     margin: 10px;
+    display: grid;
     /* height: 40px; */
 }
 

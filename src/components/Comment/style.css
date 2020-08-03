@@ -1,0 +1,29 @@
+.comment-main {
+    position: relative;
+    padding: 15px 0 10px;
+    min-height: 100px;
+    /* padding-left: 125px; */
+    border-bottom: 1px solid #E9E9E9;
+}
+
+.writer-name-container {
+    display: flex;
+    position: relative;
+    max-width: calc(100% - 7vw);
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+}
+
+.writer-name-title {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.comment-date-container {
+    display: flex;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+}
