@@ -107,7 +107,7 @@ class SignUpModal extends React.Component {
                         <TextInput id={"email"} text={"Email"} type={"email"} onChange={this.onEmailChange} value={this.state.email} />
                         <TextInput id={"password"} text={"Password"} type={"password"} onChange={this.onPasswordChange} value={this.state.password} />
                         <TextInput id={"confirmPassword"} text={"Confirm Password"} type={"password"} onChange={this.onConfirmPasswordChange} value={this.state.confirmPassword} />
-                        <Button css={"PrimaryButton SignUpButton"} title={"Sign Up"} onClick={this.signUp} />
+                        <Button css={"PrimaryButton SignUpButton"} title={"Sign Up"} onClick={this.signUp} width={"w100percent"} />
                         <div className="CloseSignUpModalDiv">
                         <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
                         </div>

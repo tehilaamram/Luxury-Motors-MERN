@@ -27,3 +27,58 @@
     -ms-flex-align: baseline;
     align-items: baseline;
 }
+
+.comment-date-container span {
+    color: #999;
+}
+
+.comment-text {
+    font-size: 13px;
+    /* margin-right: 1px; */
+}
+
+.comment-likes-container {
+    margin-top: 10px;
+    display: -webkit-inline-box;
+    -webkit-box-pack: end;
+    width: 100%;
+}
+
+.comment-likes-container svg {
+/* stroke: #999; */
+height: 16px;
+width: 16px;
+margin: 5px;
+}
+
+.comment-like svg {
+    transform: translateY(-3px);
+
+}
+
+#checked svg{
+    stroke: #0242AE;
+
+}
+#unchecked svg {
+    stroke: #999;
+
+}
+.comment-likes-comtainer svg  {
+    stroke: #999;
+
+}
+.comment-dislike {
+    display: inline-flex;
+}
+.comment-like {
+    display: inline-flex;
+}
+.comment-dislike-num {
+    display: inline-flex;
+
+}
+.comment-like-num {
+    display: inline-flex;
+
+}

@@ -26,7 +26,7 @@ class VehicleDetails extends React.Component {
       },
       imageList: [],
       imgV: [],
-      selectedTab: 1,
+      selectedTab: 0,
       quantityToOrder: 0,
       totalQuantity: 5,
     }
@@ -70,11 +70,11 @@ class VehicleDetails extends React.Component {
       this.setState({ selectedTab });
     }
   }
-  renderOverview() {
-    return (
-      <Table vehicle={this.state.vehicle} />
-    );
-  }
+  // renderOverview() {
+  //   return (
+  //     <Table vehicle={this.state.vehicle} />
+  //   );
+  // }
   renderCustomersReview() {
     return (
       <div className="comments-container">
@@ -118,8 +118,13 @@ class VehicleDetails extends React.Component {
           </ul>
         </div>
         <div className="feedback-container">
-          <Comment/>
+          <div className="vehicle-new-comment">
           </div>
+          <div className="vehicle-comments-list">
+            <Comment />
+            <Comment />
+          </div>
+        </div>
       </div>
     );
   }
@@ -163,10 +168,8 @@ class VehicleDetails extends React.Component {
   renderTab(index) {
     switch (index) {
       case 0:
-        return this.renderOverview();
-      case 1:
         return this.renderCustomersReview();
-      case 2:
+      case 1:
         return this.renderSpecifications();
       default:
         return this.renderOverview();
@@ -241,7 +244,7 @@ class VehicleDetails extends React.Component {
               aria-label="disabled tabs example"
             // variant="fullWidth"
             >
-              <Tab label="OverView" />
+              {/* <Tab label="OverView" /> */}
               <Tab label="Customers Reviews" />
               <Tab label="Specifications" />
             </Tabs>

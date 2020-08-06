@@ -57,6 +57,11 @@ class Catalog extends React.Component {
             console.log(state, ' state');
             if (event === undefined) {
                 return { new_vehicle_value: '' };
+            } else {
+                const isInCart = this.state.vehicleCart.filter(element => element.vehicle === event._id)
+                if (isInCart.length > 0) {
+                    return;
+                }
             }
             state.vehicleCart[state.next_id] = { id: state.next_id, vehicle: event._id };
             this.props.onAdd();

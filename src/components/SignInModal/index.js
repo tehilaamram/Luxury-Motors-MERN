@@ -101,7 +101,7 @@ class SignInModal extends React.Component {
                     <div className='SignInModalRealContent'>
                         <TextInput id={"email"} text={"Email"} type={"email"} onChange={this.onEmailChange} value={this.state.email} />
                         <TextInput id={"password"} text={"Password"} type={"password"} onChange={this.onPasswordChange} value={this.state.password} />
-                        <Button disabled={false} css={"PrimaryButton SignUpButton"} title={"Sign In"} onClick={this.signIn} />
+                        <Button disabled={false} css={"PrimaryButton SignUpButton"} title={"Sign In"} onClick={this.signIn} width={"w100percent"}/>
                         <div className="CloseSignUpModalDiv">
                         <Button  css={"LinkButton"} title={"Forgot Your Password?"} onClick={this.openResetPasswordModal} />
                         <Button  css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />

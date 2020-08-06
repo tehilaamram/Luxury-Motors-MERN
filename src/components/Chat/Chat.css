@@ -22,6 +22,10 @@
   /* height: calc(100vh - 73px - 30px); */
 }
 
+.MuiListItem-container {
+  list-style: none;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   .outerContainer {
     height: 100%;
@@ -33,11 +37,17 @@
   } */
 }
 
-@media (min-width: 480px) and (max-width: 1200px) {
+@media screen and (min-width: 769px) {
   .container {
     width: 60%;
   }
+  #return-chat {
+    display: none;
+  }
 }
+/* @media screen and (min-width: 1200px) {
+
+} */
 .ChatHeader {
   background-color: #3f42572b;
 }

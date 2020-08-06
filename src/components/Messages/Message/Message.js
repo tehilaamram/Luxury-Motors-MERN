@@ -5,13 +5,17 @@ import './Message.css';
 import i from './try.svg';
 import ReactEmoji from 'react-emoji';
 import Avatar from '@material-ui/core/Avatar';
+import { connect } from 'react-redux';
+var Highlight = require('react-highlighter');
 
-const Message = ({ message: { message, sender, date }, name }) => {
-  let isSentByCurrentUser = false;
+class Message extends React.Component {
+  render() {
+    const { message: {message, sender, date}, name} = this.props;
+    let isSentByCurrentUser = false;
   console.log(sender, ' sender');
   const trimmedName = sender.username.trim().toLowerCase();
   // console.log(user, ' trimmed ', trimmedName);
-  if(name === trimmedName) {
+  if (name === trimmedName) {
     isSentByCurrentUser = true;
   }
 
@@ -19,43 +23,49 @@ const Message = ({ message: { message, sender, date }, name }) => {
     isSentByCurrentUser
       ? (
         <div className="messageContainer justifyEnd">
-        <div className="avatarMessageMe">
-          <div className="messageBox backgroundBlue">
-      <div className="messageText colorWhite sender">{sender.username}</div>
-            <div className="messageText colorWhite">
-            {/* <Linkify>{ReactEmoji.emojify(message)}</Linkify> */}
-            <Linkify>{message}</Linkify>
-{/* {ReactEmoji.emojify(message)} */}
-</div>
-          </div>
-          <div className="sentText pr-10 justifyEnd">{new Date(date).toDateString()} {new Date(date).toLocaleTimeString()}</div>
+          <div className="avatarMessageMe">
+            <div className="messageBox backgroundBlue">
+              <div className="messageText colorWhite sender">{sender.username}</div>
+              <div className="messageText colorWhite">
+                <Linkify><Highlight search={this.props.filter.strSearch}>{message}</Highlight></Linkify>
+              </div>
+            </div>
+            <div className="sentText pr-10 justifyEnd">{new Date(date).toDateString()} {new Date(date).toLocaleTimeString()}</div>
           </div>
           <div>
-          <Avatar>{sender.username.substring(0,2).toLocaleUpperCase()}</Avatar>
-          {/* <img src={i} alt="Avatar" className="avatar"/> */}
+            <Avatar>{sender.username.substring(0, 2).toLocaleUpperCase()}</Avatar>
+            {/* <img src={i} alt="Avatar" className="avatar"/> */}
           </div>
         </div>
-        )
-        : (
-          <div className="messageContainer justifyStart">
+      )
+      : (
+        <div className="messageContainer justifyStart">
           <div>
-        <Avatar>{sender.username.substring(0,2).toLocaleUpperCase()}</Avatar>
+            <Avatar>{sender.username.substring(0, 2).toLocaleUpperCase()}</Avatar>
             {/* <img src={i} alt="Avatar" className="avatar"/> */}
-            </div>
+          </div>
           <div className="avatarMessageOther">
             <div className="messageBox backgroundLight">
-            <div className="messageText colorDark sender">{sender.username}</div>
+              <div className="messageText colorDark sender">{sender.username}</div>
               <div className="messageText colorDark">
                 {/* {ReactEmoji.emojify(message)} */}
-                <Linkify>{message}</Linkify>
-                </div>
+                <Linkify><Highlight search={this.props.filter.strSearch}>{message}</Highlight></Linkify>
+              </div>
             </div>
             <div className="sentText pr-10 justifyStart">{new Date(date).toDateString()} {new Date(date).toLocaleTimeString()}</div>
-            </div>
-            
           </div>
-        )
+
+        </div>
+      )
   );
+  }
 }
 
-export default Message;
+const mapStateToProps = (state) => ({
+  // chat: state.chat,
+  // user: state.user,
+  filter: state.filter,
+});
+
+// export default Message;
+export default connect(mapStateToProps, {})(Message);

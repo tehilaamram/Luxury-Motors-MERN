@@ -83,7 +83,7 @@ class ResetPasswordModal extends React.Component {
                     </div>
                     <div className='ResetPasswordModalRealContent'>
                         <TextInput id={"email"} text={"Email"} type={"email"} onChange={this.onEmailChange} value={this.state.email} />
-                        <Button css={"PrimaryButton SignUpButton"} title={"Send"} onClick={this.resetPassword} />
+                        <Button css={"PrimaryButton SignUpButton"} title={"Send"} onClick={this.resetPassword} width={"w100percent"}/>
                         
                         <div className="CloseResetPasswordModalDiv">
                         <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />

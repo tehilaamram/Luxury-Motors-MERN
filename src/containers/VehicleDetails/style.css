@@ -33,12 +33,6 @@
   margin: auto;
 }
 
-@media screen and (max-width: 768px) {
-  .VehicleDetailsContainer {
-    flex-direction: column;
-  }
-}
-
 .vehicle-details-review {
   margin-bottom: 12px;
   display: -ms-flexbox;
@@ -65,7 +59,7 @@
 .vehicle-main {
   width: 100%;
   background: #fff;
-  padding-top: 28px;
+  /* padding-top: 28px; */
   min-height: 588px;
   display: flex;
   justify-content: center;
@@ -244,6 +238,19 @@
   font-size: 13px;
   line-height: 18px;
 }
+@media screen and (max-width: 768px) {
+  .VehicleDetailsContainer {
+    flex-direction: column;
+  }
+  .vehicle-main {
+    padding-bottom: 10px;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .vehicle-main {
+    padding-bottom: 10px;
+  }
+}
 @media screen and (min-width: 1200px) {
   .vehicle-main-wrap {
     position: relative;
@@ -251,5 +258,6 @@
     margin: 0 auto;
     display: -ms-flexbox;
     display: flex;
+    justify-content: center;
   }
 }

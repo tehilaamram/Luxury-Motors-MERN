@@ -88,8 +88,38 @@ io.on('connect', (socket) => {
       console.log(socket.username, ' username to send');
       // we tell the client to execute 'updatechat' with 2 parameters
       io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username}, message: data, date: currentChatMessage.date });
-      callback();{}
+      callback();
+      // callback();{}
+
     })
+  });
+  socket.on('loadMore', (lastMessage) => {
+    console.log(lastMessage, ' username');
+        var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
+    ChatMessage.find({room: currentRoom.id}).populate({ path: 'sender', select: 'username'}).exec((err, list) => {
+      const isTheSameId = (element) => element._id === lastMessage._id;
+      const index = list.findIndex(isTheSameId);
+      if (index > 15) {
+        socket.emit('loadMoreMessages', list.slice(index - 16, index));
+      } else {
+        socket.emit('loadMoreMessages', list.slice(0, index));
+      }
+      // callback()
+    });
+    // var currentChatMessage = new ChatMessage({
+    //   sender: ObjectId(userId),
+    //   room: ObjectId(groupId),
+    //   date: new Date(),
+    //   message: data,
+    // });
+    // currentChatMessage.save().then((m) => {
+    //   console.log(socket.username, ' username to send');
+    //   // we tell the client to execute 'updatechat' with 2 parameters
+    //   io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username}, message: data, date: currentChatMessage.date });
+    //   callback();
+    //   // callback();{}
+
+    // })
   });
   // when the user disconnects.. perform this
   socket.on('disconnect', function () {
