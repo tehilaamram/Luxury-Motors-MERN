@@ -15,7 +15,7 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { withStyles, fade } from "@material-ui/core/styles";
-import { update } from '../../redux/filter/actions';
+import { update } from '../../redux/chatFilter/actions';
 import autoBind from 'react-autobind';
 
 

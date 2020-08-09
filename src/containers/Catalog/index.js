@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Card from '../../components/VehicleCard';
 import Filter from '../../components/Filter';
 import AjaxService from '../../services/AjaxService';
+import { addTransmission } from '../../redux/catalogFilter/actions';
 
 class Catalog extends React.Component {
     constructor(props) {
@@ -19,7 +20,8 @@ class Catalog extends React.Component {
                 count_total: 0,
                 vehicleCart: oldVehicleCart,
                 next_id: 0,
-                new_vehicle_value: ''
+                new_vehicle_value: '',
+                transmissionFilter: [],
             };
         } else {
             this.state = {
@@ -27,7 +29,8 @@ class Catalog extends React.Component {
                 vehicleList: [],
                 count_total: 0,
                 next_id: 0,
-                new_vehicle_value: ''
+                new_vehicle_value: '',
+                transmissionFilter: [],
             };
         }
         autoBind(this);
@@ -75,26 +78,51 @@ class Catalog extends React.Component {
         }, this.setStateCallback);
     }
     renderVehicle() {
+        const { transmissionFilter} = this.state;
         return (
             this.state.vehicleList.map((option, index) => {
+                // console.log(this.state.transmissionFilter.length)
+                // if (this.state.transmissionFilter.length > 0 && 
+                //     !this.state.transmissionFilter.includes(option.transmission)) {
+                //         // return;
+                //     }
+                console.log('in trans')
+                // { this.state.transmissionFilter.length > 0 && 
+                // this.state.transmissionFilter.includes(option.transmission)}
                 return (
                     <Card
                         vehicle={option}
                         key={index}
                         addToCart={this.addToCart.bind(this, option)}
+                        // visible={false}
+                        // visible= {this.props.catalogFilter.transmission.length > 0 && this.props.catalogFilter.transmission.includes(option.transmission) }
                     />);
             })
         );
     }
-
+    filterChanged(h) {
+        console.log (h,  ' j');
+        console.log(this.state.transmissionFilter);
+    }
+    transmissionFilterChange(option) {
+        // if (this.props.catalogFilter.transmission.includes(option)) {
+        //     console.log('already ibcludes');
+        // } else {
+            console.log('in changdsgggggggggggggggggggggggggggggse', option)
+            this.props.onAddTransmission(option);
+        // }
+        // this.setState({
+        //     transmissionFilter: [this.state.transmissionFilter, option],
+        // });
+    }
     renderFilter() {
         return (
             <div>
-            < Filter subject={"Transmission"} list={['Automatic', 'Manual']} />
-            < Filter subject={"Maker"} list={['Ferrari', 'Porsche']} />
-            < Filter subject={"Year"} list={['2020', '2019', '2018', '2017', '2016']} />
-            < Filter subject={"Doors"} list={['2', '4']} />
-            < Filter subject={"Seats"} list={['2', '3', '4', '5', '6']} />
+            < Filter subject={"Transmission"} list={['Automatic', 'Manual']} onFilterClick={this.transmissionFilterChange} filter={"transmission"} />
+            < Filter subject={"Maker"} list={['Ferrari', 'Porsche']} onFilterClick={this.filterChanged} filter={"maker"} />
+            < Filter subject={"Year"} list={['2020', '2019', '2018', '2017', '2016']} onFilterClick={this.filterChanged} filter={"year"} />
+            < Filter subject={"Doors"} list={['2', '4']} onFilterClick={this.filterChanged} filter={"doors"} />
+            < Filter subject={"Seats"} list={['2', '3', '4', '5', '6']} onFilterClick={this.filterChanged} filter={"seats"}/>
             </div>
         );
     }
@@ -106,7 +134,40 @@ class Catalog extends React.Component {
                 {this.renderFilter()}
                 </div>
                 <div className="CatalogCardsDiv">
-                    {this.renderVehicle()}
+                {/* {this.state.vehicleList.map((option, index) => {
+                console.log(this.state.transmissionFilter.length)
+                if (this.state.transmissionFilter.length > 0 && 
+                    !this.state.transmissionFilter.includes(option.transmission)) {
+                        console.log('in return')
+                        return;
+                    }
+                // { this.state.transmissionFilter.length > 0 && 
+                // this.state.transmissionFilter.includes(option.transmission)}
+                return (
+                    <Card
+                        vehicle={option}
+                        key={index}
+                        addToCart={this.addToCart.bind(this, option)}
+                    />);
+            })} */}
+                    {/* {this.renderVehicle()} */}
+                    { this.state.vehicleList.map((option, index) => {
+                // console.log(this.state.transmissionFilter.length)
+                // if (this.state.transmissionFilter.length > 0 && 
+                //     !this.state.transmissionFilter.includes(option.transmission)) {
+                //         // return;
+                //     }
+                console.log('in trans')
+                // { this.state.transmissionFilter.length > 0 && 
+                // this.state.transmissionFilter.includes(option.transmission)}
+                return (
+                    <Card
+                        vehicle={option}
+                        key={index}
+                        addToCart={this.addToCart.bind(this, option)}
+                        visible= {this.state.transmissionFilter.length > 0 && this.state.transmissionFilter.includes(option.transmission) }
+                    />);
+            })}
                 </div>
             </div>
         );
@@ -115,10 +176,12 @@ class Catalog extends React.Component {
 
 const mapStateToProps = (state) => ({
     cart: state.cart,
+    catalogFilter: state.catalogFilter,
 });
 
 const mapDispatchToProps = {
     onAdd: add,
+    onAddTransmission: addTransmission,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog);

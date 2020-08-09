@@ -1,0 +1,10 @@
+export const ADD_TRANSMISSION = 'ADD_TRANSMISSION';
+export const DELETE_TRANSMISSION = 'DELETE_TRANSMISSION';
+export const ADD_MAKER = 'ADD_MAKER';
+export const DELETE_MAKER = 'DELETE_MAKER';
+export const ADD_YEAR = 'ADD_YEAR';
+export const DELETE_YEAR = 'DELETE_YEAR';
+export const ADD_DOORS = 'ADD_DOORS';
+export const DELETE_DOORS = 'DELETE_DOORS';
+export const ADD_SEATS = 'ADD_SEATS';
+export const DELETE_SEATS = 'DELETE_SEATS';

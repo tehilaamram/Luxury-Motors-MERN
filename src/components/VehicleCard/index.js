@@ -2,6 +2,7 @@ import React from 'react';
 // import _ from 'lodash';
 import { withRouter} from "react-router-dom";
 import autoBind from 'react-autobind';
+import { connect } from 'react-redux';
 
 
 import './style.css';
@@ -22,13 +23,28 @@ class VehicleCard extends React.Component {
     viewDetails() {
         this.props.history.push(`/vehicle/${this.props.vehicle._id}`);
     }
+    isDisplay() {
+        const { vehicle } = this.props;
+        return (
+            ((this.props.catalogFilter.transmission.length > 0 && this.props.catalogFilter.transmission.includes(vehicle.transmission)) ||
+              (this.props.catalogFilter.transmission.length === 0)) &&
+              ((this.props.catalogFilter.maker.length > 0 && this.props.catalogFilter.maker.includes(vehicle.maker)) ||
+              (this.props.catalogFilter.maker.length === 0)) &&
+              ((this.props.catalogFilter.year.length > 0 && this.props.catalogFilter.year.includes(vehicle.year.toString())) ||
+              (this.props.catalogFilter.year.length === 0)) &&
+              ((this.props.catalogFilter.doors.length > 0 && this.props.catalogFilter.doors.includes(vehicle.doors.toString())) ||
+              (this.props.catalogFilter.doors.length === 0)) &&
+              ((this.props.catalogFilter.seats.length > 0 && this.props.catalogFilter.seats.includes(vehicle.seats.toString())) ||
+              (this.props.catalogFilter.seats.length === 0))
+        )
+    }
     render() {
         // import logo from `/src/images/make/${vehicle.make}.png`
         const { vehicle } = this.props;
-        console.log(vehicle.maker, ' vehicle');
+        // console.log(vehicle.maker, ' vehicle');
         var img = require(`../../images/make/${vehicle.maker}.png`);
         return (
-            <div className={"VehicleCard"}>
+             <div className={"VehicleCard"} style={{display: this.isDisplay() ? 'flex' : 'none'}}>
                 <div className="VehicleCardHeader">
                     <img src={`data:image/jpeg;base64,${vehicle.mainImg.image}`} alt="Vehicle" className={"VehicleCardImage"} />
                 </div>
@@ -51,7 +67,20 @@ class VehicleCard extends React.Component {
     }
 }
 
-export default withRouter(VehicleCard);
+const mapStateToProps = (state) => ({
+    // cart: state.cart,
+    catalogFilter: state.catalogFilter,
+});
+
+// const mapDispatchToProps = {
+//     onAdd: add,
+//     onAddTransmission: addTransmission,
+// };
+
+export default connect(mapStateToProps, {})(withRouter(VehicleCard));
+
+
+// export default withRouter(VehicleCard);
 
 
 
