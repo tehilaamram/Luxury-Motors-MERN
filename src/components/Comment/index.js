@@ -2,7 +2,6 @@ import React from 'react';
 // import _ from 'lodash';
 import { withRouter } from "react-router-dom";
 import autoBind from 'react-autobind';
-import likeImage from "../../images/like.svg";
 import './style.css';
 
 class Comment extends React.Component {

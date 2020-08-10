@@ -8,6 +8,8 @@ import AjaxService from '../../services/AjaxService';
 import { connect } from 'react-redux';
 import { sub } from '../../redux/Cart/actions';
 
+import emptyCartImage from '../../images/empty_cart.png';
+
 class Cart extends React.Component {
     constructor(props) {
         super(props);
@@ -76,6 +78,13 @@ class Cart extends React.Component {
     render() {
         return (
             <div className={"CatalogContainer"}>
+                {/* <div> */}
+                {this.state.vehicleList.length === 0 ? 
+                     <div>
+                    <img src={emptyCartImage} className="empty-cart-image"/>
+                    </div> : <div> </div>
+                }
+                {/* </div> */}
             {(this.state.vehicleList).map((option, index)=>{
                 return(
                     <CartItem

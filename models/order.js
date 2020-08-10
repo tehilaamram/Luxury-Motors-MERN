@@ -1,34 +1,27 @@
-const debug = require("debug")('lab7:model-user');
+const debug = require("debug")('car:model-order');
 const mongo = require("mongoose");
+// mongo.set('useCreateIndex', true);
 
 module.exports = db => {
     // create a schema
     let schema = new mongo.Schema({
-        userEmail: {
-            type: String,
-            required: true,
+        user: {
+            type: mongo.Schema.Types.ObjectId,
+            ref: 'User',
         },
-        vehicleNumber: {
-            type: String,
-            required: true,
+        vehicle: {
+            type: mongo.Schema.Types.ObjectId,
+            ref: 'Vehicle',
         },
-        orderDate: {
+        date: { 
             type: Date,
-            required: true,
         },
-        shippingAddress: {
-            type: String,
-            required: true,
+        quantity: {
+            type: Number,
+            default: 1,
         },
-        creditCard: {
-            type: [String],
-            required: true,
-        },
-        status: {
-            type: String,
-            default: true,
-        },
-    }, { autoIndex: false });
+    }, { autoIndex: true });
+    // schema.index({ user: 1, vehicle: 1 }, { unique: true });
 
     db.model('Order', schema);
     debug("Order model created");

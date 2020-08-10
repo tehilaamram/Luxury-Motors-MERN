@@ -1,10 +1,11 @@
 import React from 'react';
 // import _ from 'lodash';
-import { withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import autoBind from 'react-autobind';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from "@material-ui/core/styles";
+import Button from '../../components/Button';
 
 import './style.css';
 
@@ -19,22 +20,37 @@ import yearImg from '../../images/year.png';
 
 const useStyles = ((theme) => ({
     button: {
-      margin: theme.spacing(1),
+        margin: theme.spacing(1),
     },
-  }));
+}));
 
 
 class CartItem extends React.Component {
     constructor(props) {
         super(props);
         autoBind(this);
+        console.log(this.props, " this.props");
     }
     viewDetails() {
         this.props.history.push(`/vehicle/${this.props.vehicle._id}`);
     }
+    quantityPlus(event) {
+        if (this.state.quantityToOrder < this.state.totalQuantity) {
+            this.setState({
+                quantityToOrder: this.state.quantityToOrder + 1,
+            });
+        }
+    }
+    quantityMinus(event) {
+        if (this.state.quantityToOrder > 0) {
+            this.setState({
+                quantityToOrder: this.state.quantityToOrder - 1,
+            });
+        }
+    }
     render() {
         // import logo from `/src/images/make/${vehicle.make}.png`
-        const { vehicle} = this.props;
+        const { vehicle } = this.props;
         var img = require(`../../images/make/${vehicle.maker}.png`);
         return (
             <div className={"CartItem"}>
@@ -50,14 +66,40 @@ class CartItem extends React.Component {
                     <IconText text={vehicle.transmission} imgUrl={transmissionImg} />
                 </div>
                 <div className="VehicleCardBody">
-                    <div> Quantity </div>
-                    <div> 3 </div>
-</div>
-                {/* <hr className="VerticalHr" /> */}
+                    <div className="cart-quantity">
+                        <div className="cart-quantity-title">
+                            Quantity:
+                  </div>
+                        <span className="plus-minus-quantity">
+                            <Button css={"rounded-plus"} title={"-"} id={"minus"} onClick={this.quantityMinus} />
+                            <span className="quantity-to-order">{this.props.quantity}</span>
+                            <Button css={"rounded-plus"} title={"+"} id={"plus"} onClick={this.quantityPlus} />
+                        </span>
+                        <div className="cart-quantity-info">
+                            <span className="quantity-available">{this.props.quantity} avaiable</span>
+                        </div>
+                    </div>
+                    </div>
+                    <div className="VehicleCardBody">
+                    <div className="cart-price">
+                        <div className="cart-price-title">
+                            Price:
+                  </div>
+                        <span className="cart-vehicle-price">
+                            <span className="cart-vehicle-total-price">{this.props.quantity}</span>
+                        </span>
+                        <div className="cart-quantity-info">
+                            <span className="cart-quantity-available">{this.props.quantity} avaiable</span>
+                        </div>
+                    </div>
+                    {/* <div className="cart-vehicle-price">
+                <span className="current-vehicle-price"> 180$ </span>
+              </div> */}
+                </div>
                 <div className="VehicleCardFooter">
-                <IconButton aria-label="delete" color="primary" onClick={this.props.removeFromCart}>
-  <CloseIcon />
-</IconButton>
+                    <IconButton aria-label="delete" color="primary" onClick={this.props.removeFromCart}>
+                        <CloseIcon />
+                    </IconButton>
                 </div>
             </div>
         );

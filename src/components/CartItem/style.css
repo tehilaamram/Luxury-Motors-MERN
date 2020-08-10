@@ -51,10 +51,42 @@ margin: 10px 10px 10px 20px;
 .VehicleBF {
     display: flex;
 }
+.cart-quantity {
+    margin-top: 15px;
+    font-size: 12px;
+    display: table;
+}
+.cart-quantity-title {
+    margin-bottom: 8px;
+    display: inherit;
+}
+
+.cart-quantity-info {
+    float: right;
+    /* display: -ms-flexbox; */
+    display: contents;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 36px;
+}
+.cart-price {
+    margin: 16px 0 12px;
+    display: flex;
+}
+.cart-price-title {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 10px;
+    vertical-align: middle;
+}
 @media screen and (min-width: 769px) {
     .CartItem {
         height: 200px;
-        width: 550px;    }
+        /* width: 550px;    */
+     }
 }
 @media screen and (max-width: 768px) {
     .CartItem {   

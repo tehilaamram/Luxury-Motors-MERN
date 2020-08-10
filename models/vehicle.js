@@ -4,24 +4,12 @@ const mongo = require("mongoose");
 module.exports = db => {
     // create a schema
     let schema = new mongo.Schema({
-        // number: {
-        //     type: String,
-        //     required: true,
-        //     unique: true,
-        // },
-        // area: {
-        //     type: String,
-        //     enum: AREA,
-        //     required: true,
-        // },
         maker: {
             type: String,
-            // enum: MANUFACTURER,
             required: true,
         },
         model: {
             type: String,
-            // enum: MODEL,
             required: true,
         },
         color: {
@@ -41,14 +29,6 @@ module.exports = db => {
             type: [],
             default: [],
         },
-        // image: {
-        //     type: String,
-        //     required: true,
-        // },
-        // engineCapacity: {
-        //     type: Number,
-        //     required: true,
-        // },
         seats: {
             type: Number,
             required: true,
@@ -57,16 +37,28 @@ module.exports = db => {
             type: Number,
             required: true,
         },
-        // engineType: {
-        //     type: String,
-        //     enum: ENGINE_TYPE,
-        //     required: true,
-        // },
+        price: {
+            type: Number,
+            default: 1,
+        },
         transmission: {
             type: String,
-            // enum: GEARBOX,
             required: true,
         },
+        quantity: {
+            type: Number,
+            default: 0,
+        },
+        comments: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'Comment',
+        }],
+        orders: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'Order',
+        }],
         status: {
             type: Boolean,
             default: true,
