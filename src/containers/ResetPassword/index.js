@@ -62,7 +62,9 @@ class ResetPassword extends React.Component {
             <div className={"ResetPasswordContainer"}>
             <TextInput id={"password"} text={"Password"} type={"password"} onChange={this.onPasswordChange} value={this.state.password} />
             <TextInput id={"confirmPassword"} text={"Confirm Password"} type={"password"} onChange={this.onConfirmPasswordChange} value={this.state.confirmPassword} />
-            <Button css={"PrimaryButton SignUpButton"} title={"Reset"} onClick={this.resetPassword} />
+            <div className="reset-password-button-div">
+            <Button css={"PrimaryButton SignUpButton"} title={"Reset"} onClick={this.resetPassword} width={"w100px"}/>
+            </div>
             </div>
         );
     }

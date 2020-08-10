@@ -1,10 +1,12 @@
 import React from 'react';
 import { Cookies } from 'react-cookie';
 import autoBind from 'react-autobind';
-// import _ from 'lodash';
+import _ from 'lodash';
 import './style.css';
 import CartItem from '../../components/CartItem';
 import AjaxService from '../../services/AjaxService';
+import { connect } from 'react-redux';
+import { sub } from '../../redux/Cart/actions';
 
 class Cart extends React.Component {
     constructor(props) {
@@ -46,47 +48,31 @@ class Cart extends React.Component {
         });
     }
     setStateCallback() {
-        console.log(this.state.vehicleCart, ' vehicle cart update cookie');
+        console.log(this.state.vehicleList, ' vehicle cart update cookie');
         let date = new Date();
         date.setTime(date.getTime() + (99 * 365 * 24 * 60 * 60 * 1000));
         console.log('in cookie');
         this.cookies.set('vehicles', this.state.vehicleCart, { path: '/', expires: date });
     }
     removeFromCart(key) {
-        console.log(key)
+        console.log(key, ' key')
         // console.log(event, ' event');
         this.setState(function(state, props){
-            // var newCart = _.remove(this.state.vehicleCart, function(n) {
-            //     console.log(n.vehicle === event._id);
-            //     console.log(event._id)
-            //     return n.vehicle !== event._id;
-            //   });
-            delete state.vehicleCart[key];
-            delete state.vehicleList[key];
-            //   console.log(newCart, 'new Cart')
+            var newCart = _.remove(this.state.vehicleCart, function(n) {
+                return n.vehicle !== key._id;
+              });
+              var newList = _.remove(this.state.vehicleList, function(n) {
+                  console.log(n, ' n')
+                return n._id !== key._id;
+              });
+              this.props.onSub();
             return {
-                vehicleCart: state.vehicleCart,
-                vehicleList: state.vehicleList,
+                vehicleCart: newCart,
+                vehicleList: newList,
                 count_total: state.count_total - 1,
-                // count_incomplete: state.count_incomplete + (is_completed ? 0 : -1)
             };
         }, this.setStateCallback);
     }
-    // renderItems() {
-    //     return (
-    //         Object.values(this.state.vehicleCart).map((option, index)=>{
-    //             // console.log(option);
-    //             return(
-    //                 <Card
-    //                 vehicle={option}
-    //                 key={index}
-    //                 index={index}
-    //                 addToCart={this.removeFromCart.bind(this, option)}
-    //                 />);
-    //         })
-    //     )
-    // }
-
     render() {
         return (
             <div className={"CatalogContainer"}>
@@ -96,7 +82,7 @@ class Cart extends React.Component {
                     vehicle={option}
                     key={index}
                     index={index}
-                    addToCart={this.removeFromCart.bind(this)}
+                    removeFromCart={this.removeFromCart.bind(this, option)}
                     />);
             })}
             </div>
@@ -104,4 +90,16 @@ class Cart extends React.Component {
     }
 }
 
-export default Cart;
+const mapStateToProps = (state) => ({
+    cart: state.cart,
+    // catalogFilter: state.catalogFilter,
+});
+
+const mapDispatchToProps = {
+    onSub: sub,
+    // onAddTransmission: addTransmission,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+
+// export default Cart;

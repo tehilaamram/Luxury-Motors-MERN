@@ -49,9 +49,13 @@ class CartItem extends React.Component {
                     <IconText text={vehicle.doors} imgUrl={doorsImg} />
                     <IconText text={vehicle.transmission} imgUrl={transmissionImg} />
                 </div>
+                <div className="VehicleCardBody">
+                    <div> Quantity </div>
+                    <div> 3 </div>
+</div>
                 {/* <hr className="VerticalHr" /> */}
                 <div className="VehicleCardFooter">
-                <IconButton aria-label="delete" color="primary">
+                <IconButton aria-label="delete" color="primary" onClick={this.props.removeFromCart}>
   <CloseIcon />
 </IconButton>
                 </div>
