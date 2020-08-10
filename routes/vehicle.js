@@ -62,7 +62,22 @@ router.get('/getAll', (req, res) => {
 });
 
 router.get('/getVehicle/:id', (req, res) => {
-  Vehicle.findById(req.params.id, (err, vehicle) => {
+  // Project.findOne({name: req.query.name})
+  //   .populate({
+  //       path: 'threads',
+  //       populate: {
+  //           path: 'messages', 
+  //           model: 'Message',
+  //           populate: {
+  //               path: 'user',
+  //               model: 'User'
+  //           }
+  //       }
+  //   })
+  Vehicle.findById(req.params.id).populate({ path: 'comments', populate: {
+    path: 'user',
+    model: 'User',
+  }}).exec((err, vehicle) => {
     if (err) {
       return res.sendStatus(404);
     }
@@ -71,6 +86,15 @@ router.get('/getVehicle/:id', (req, res) => {
       vehicle,
     });
   });
+  // Vehicle.findById(req.params.id, (err, vehicle) => {
+  //   if (err) {
+  //     return res.sendStatus(404);
+  //   }
+  //   return res.json({
+  //     status: 200,
+  //     vehicle,
+  //   });
+  // });
 });
 
 router.get('/getVehiclesById/', (req, res) => {

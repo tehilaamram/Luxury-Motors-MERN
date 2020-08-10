@@ -86,11 +86,8 @@ class CartItem extends React.Component {
                             Price:
                   </div>
                         <span className="cart-vehicle-price">
-                            <span className="cart-vehicle-total-price">{this.props.quantity}</span>
+                            <span className="cart-vehicle-total-price">{this.props.quantity} 80 $</span>
                         </span>
-                        <div className="cart-quantity-info">
-                            <span className="cart-quantity-available">{this.props.quantity} avaiable</span>
-                        </div>
                     </div>
                     {/* <div className="cart-vehicle-price">
                 <span className="current-vehicle-price"> 180$ </span>

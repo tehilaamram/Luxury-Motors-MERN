@@ -10,7 +10,7 @@ class Comment extends React.Component {
         autoBind(this);
     }
     render() {
-        const { comment } = this.props;
+        // const { comment } = this.props;
         return (
             <div className="comment-main">
                 <div className="writer-name-container">

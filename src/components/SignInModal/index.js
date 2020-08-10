@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import autoBind from 'react-autobind';
 import {Cookies}  from 'react-cookie';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 
 import './style.css';
 import TextInput from '../TextInput';

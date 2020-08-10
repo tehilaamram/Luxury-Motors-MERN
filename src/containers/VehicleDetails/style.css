@@ -229,7 +229,7 @@
     line-height: 18px;
     border-radius: 3px;
     border: 1px solid #ccc;
-    cursor: pointer;
+    /* cursor: pointer; */
     /* float: right; */
     /* vertical-align: middle; */
 }
@@ -237,6 +237,23 @@
   padding: 0 20px;
   font-size: 13px;
   line-height: 18px;
+}
+.comment-text-to-post {
+  resize: none;
+  width: 100%;
+  border: 1px solid #ccc;
+  font-family: var(--regular-font);
+  line-height: 1.6;
+}
+.comment-post-title {  
+  font-family: var(--regular-font);
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: bold;
+}
+.comment-post-buttons {
+  width: 100%;
+  text-align: end;
 }
 @media screen and (max-width: 768px) {
   .VehicleDetailsContainer {

@@ -1,17 +1,17 @@
 import React from 'react';
 
 import ScrollToBottom from 'react-scroll-to-bottom';
-import * as Scroll from 'react-scroll';
-import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+// import * as Scroll from 'react-scroll';
+// import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import Message from './Message/Message';
 import Button from '../Button';
 import './Messages.css';
 
 class Messages extends React.Component {
-  constructor(props) {
-    super(props);
-    // scroll.scrollToBottom({containerId: "messages-list"});
-  }
+  // constructor(props) {
+  //   super(props);
+  //   // scroll.scrollToBottom({containerId: "messages-list"});
+  // }
   // scrollToTop() {
   //   scroll.scrollToTop();
   //   scroll.scrollToBottom();

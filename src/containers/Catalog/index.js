@@ -78,7 +78,7 @@ class Catalog extends React.Component {
         }, this.setStateCallback);
     }
     renderVehicle() {
-        const { transmissionFilter} = this.state;
+        // const { transmissionFilter} = this.state;
         return (
             this.state.vehicleList.map((option, index) => {
                 // console.log(this.state.transmissionFilter.length)

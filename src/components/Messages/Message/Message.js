@@ -2,8 +2,8 @@ import React from 'react';
 import Linkify from 'react-linkify';
 
 import './Message.css';
-import i from './try.svg';
-import ReactEmoji from 'react-emoji';
+// import i from './try.svg';
+// import ReactEmoji from 'react-emoji';
 import Avatar from '@material-ui/core/Avatar';
 import { connect } from 'react-redux';
 var Highlight = require('react-highlighter');

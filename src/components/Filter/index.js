@@ -1,7 +1,7 @@
 import React from 'react';
 import autoBind from 'react-autobind';
 import { withRouter } from "react-router-dom";
-import _ from "lodash";
+// import _ from "lodash";
 import { addTransmission, deleteTransmission, addMaker, deleteMaker, addYear, deleteYear, addDoors, deleteDoors, addSeats, deleteSeats} from '../../redux/catalogFilter/actions';
 import { connect } from 'react-redux';
 

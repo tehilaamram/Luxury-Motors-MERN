@@ -1,0 +1,43 @@
+@import '../../css/variables.css';
+* {
+  box-sizing: border-box;
+}
+
+.order-completed-main {
+    text-align: center;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.order-completed-title {
+    text-align: center;
+}
+.order-completed-body {
+    text-align: center;
+}
+#received-icon {
+    color:  #00c400;
+    height: 100px;
+    width: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    .order-completed-title {
+        font-size: 30px;
+    }
+    .order-completed-body {
+        font-size: 15px;
+    }
+}
+@media screen and (min-width: 769px) {
+    .order-completed-main {
+        margin-top: 30px;
+    }
+    .order-completed-title {
+        font-size: 50px;
+    }
+    .order-completed-body {
+        font-size: 25px;
+    }
+}

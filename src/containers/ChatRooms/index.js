@@ -92,7 +92,7 @@ class ChatRooms extends React.Component {
     }
     getRoomsToJoin() {
         // console.log(event, ' room to join');
-        const { match: { params } } = this.props;
+        // const { match: { params } } = this.props;
         AjaxService.get('/chatRoom/getRoomsToJoin').then((res) => {
             console.log(res.data, ' get rooms to join list');
             if (res.data.list.length > 0) {

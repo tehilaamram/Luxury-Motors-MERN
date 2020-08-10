@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import store from '../../store';
 import Init from '../../components/Init';
 import autoBind from 'react-autobind';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 import Home from '../Home';
 import About from '../About';
@@ -20,10 +20,11 @@ import LoginModal from "../../components/SignInModal";
 import ResetPasswordModal from '../../components/ResetPasswordModal';
 import Chat from '../../components/Chat/Chat';
 import Footer from '../../components/Footer';
-import Button from '../../components/Button';
+// import Button from '../../components/Button';
 import AppBar from '../../components/AppBar';
-import PrivateRoute from './privateRoute';
+// import PrivateRoute from './privateRoute';
 import ManageUsers from '../ManageUsers';
+import OrderCompleted from '../OrderCompleted';
 import './style.css';
 class App extends React.Component {
     constructor(props) {
@@ -59,8 +60,9 @@ class App extends React.Component {
                         <ResetPasswordModal />
                         <div className="row content">
                             <Switch>
+                            {/* <Redirect exact from="/cart" to="/order-completed" /> */}
                                 <Route path="/chat" component={Chat} />
-                                <Route exact path='/' component={Home} />
+                                {/* <Route exact path='/' component={Home} /> */}
                                 <Route path='/about' component={About} />
                                 <Route path='/catalog' component={Catalog} />
                                 <Route path='/add-vehicle' component={AddVehicle} />
@@ -70,6 +72,7 @@ class App extends React.Component {
                                 <Route path='/manage-users' component={ManageUsers} />
                                 <Route path="/chat-rooms/:uid" component={CharRooms} />
                                 <Route path="/manage-rooms/:id" component={ManageRooms} />
+                                <Route path="/order-completed" component={OrderCompleted}/>
                                 <Route component={Home} />
                             </Switch>
                         </div>
@@ -84,9 +87,9 @@ class App extends React.Component {
         );
     }
 }
-const mapStateToProps = (state) => ({
-    user: state.user,
-});
+// const mapStateToProps = (state) => ({
+//     user: state.user,
+// });
 
 // export default connect(mapStateToProps, {})(App);
 

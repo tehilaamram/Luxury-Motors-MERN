@@ -7,6 +7,8 @@ import CartItem from '../../components/CartItem';
 import AjaxService from '../../services/AjaxService';
 import { connect } from 'react-redux';
 import { sub } from '../../redux/Cart/actions';
+import Button from '../../components/Button';
+import { withRouter } from "react-router-dom";
 
 import emptyCartImage from '../../images/empty_cart.png';
 
@@ -37,10 +39,11 @@ class Cart extends React.Component {
     }
     componentDidMount() {
         AjaxService.get('/vehicle/getVehiclesById/', {
-            params: 
+            params:
             {
                 vid: this.state.vehicleCart,
-        }}).then((res) => {
+            }
+        }).then((res) => {
             console.log(res, ' res get all vehicles');
             this.setState({
                 vehicleList: res.data.list,
@@ -59,15 +62,15 @@ class Cart extends React.Component {
     removeFromCart(key) {
         console.log(key, ' key')
         // console.log(event, ' event');
-        this.setState(function(state, props){
-            var newCart = _.remove(this.state.vehicleCart, function(n) {
+        this.setState(function (state, props) {
+            var newCart = _.remove(this.state.vehicleCart, function (n) {
                 return n.vehicle !== key._id;
-              });
-              var newList = _.remove(this.state.vehicleList, function(n) {
-                  console.log(n, ' n')
+            });
+            var newList = _.remove(this.state.vehicleList, function (n) {
+                console.log(n, ' n')
                 return n._id !== key._id;
-              });
-              this.props.onSub();
+            });
+            this.props.onSub();
             return {
                 vehicleCart: newCart,
                 vehicleList: newList,
@@ -75,27 +78,31 @@ class Cart extends React.Component {
             };
         }, this.setStateCallback);
     }
+    buy() {
+        this.props.history.push('/order-completed');
+    }
     render() {
         return (
             <div className={"CatalogContainer"}>
-                {/* <div> */}
-                {this.state.vehicleList.length === 0 ? 
-                     <div>
-                    <img src={emptyCartImage} className="empty-cart-image"/>
-                    </div> : <div> </div>
+                {this.state.vehicleList.length === 0 ?
+                    <div>
+                        <img src={emptyCartImage} className="empty-cart-image" alt={"empty cart"} />
+                    </div> : <div className="cart-items-to-buy-main">{(this.state.vehicleList).map((option, index) => {
+                        return (
+                            <CartItem
+                                vehicle={option}
+                                key={index}
+                                index={index}
+                                removeFromCart={this.removeFromCart.bind(this, option)}
+                            />);
+                    })}
+                        <div className="cart-buy">
+                            <Button title={"Buy"} css={"PrimaryButton"} width={"w150px"} onClick={this.buy} />
+                        </div>
+                    </div>
                 }
-                {/* </div> */}
-            {(this.state.vehicleList).map((option, index)=>{
-                return(
-                    <CartItem
-                    vehicle={option}
-                    key={index}
-                    index={index}
-                    removeFromCart={this.removeFromCart.bind(this, option)}
-                    />);
-            })}
             </div>
-          );
+        );
     }
 }
 
@@ -109,6 +116,6 @@ const mapDispatchToProps = {
     // onAddTransmission: addTransmission,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cart));
 
 // export default Cart;

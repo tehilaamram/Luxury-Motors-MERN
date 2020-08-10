@@ -7,7 +7,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import AjaxService from '../../services/AjaxService';
-import _ from "lodash";
+// import _ from "lodash";
 import Button from '@material-ui/core/Button';
 import autoBind from "react-autobind";
 import Divider from '@material-ui/core/Divider';

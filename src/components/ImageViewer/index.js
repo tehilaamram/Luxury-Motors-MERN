@@ -27,7 +27,7 @@ class ImageViewer extends React.Component {
                 return (
                     <li id={'vehicleImageViewer' + index} key={index} onClick={this.onSelect.bind(this, index)} className="">
                         <div className="images-view-item">
-                            <img  src={`data:image/jpeg;base64,${element.image}`} />
+                            <img  src={`data:image/jpeg;base64,${element.image}`} alt="vehicle"/>
                         </div>
                     </li>
                 );
@@ -44,7 +44,7 @@ class ImageViewer extends React.Component {
             <div className="image-viewer">
                 <div className="image-view-magnifier-wrap">
                 {images !== undefined && images.length > 0 && 
-                 <img className="magnifier-image" src={`data:image/jpeg;base64,${this.props.images[selectedImageIndex].image}`} 
+                 <img alt="vehicle" className="magnifier-image" src={`data:image/jpeg;base64,${this.props.images[selectedImageIndex].image}`} 
                 // style="top: 0px; left: 0px; width: 100%; height: auto;"
                 />}
                     {/* <div id="magnifier-image" className="magnifier-cover" data-spm-anchor-id="a2g0o.detail.1000017.i0.1af71b40GsAS38"></div> */}

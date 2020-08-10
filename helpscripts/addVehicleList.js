@@ -83,6 +83,9 @@ const Vehicle = require('../models')("Vehicle");
         doors: 2,
         transmission: 'Automatic',
         year: 2020,
+        price: 355209,
+        quantity: 5,
+
     });
     await vehicle1.save();
     additionalImagesList = [];
@@ -155,6 +158,8 @@ const Vehicle = require('../models')("Vehicle");
         doors: 2,
         transmission: 'Automatic',
         year: 2018,
+        price: 132400,
+        quantity: 10,
     });
     await vehicle2.save();
     additionalImagesList = [];
@@ -243,6 +248,8 @@ const Vehicle = require('../models')("Vehicle");
         doors: 4,
         transmission: 'Automatic',
         year: 2020,
+        price: 100000,
+        quantity: 20,
     });
     await vehicle3.save();
     process.exit(0);

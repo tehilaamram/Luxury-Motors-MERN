@@ -15,7 +15,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+// import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import './style.css';
 import ChatGroups from '../ChatGroups';
 var defaultImg = require("../../images/defaultprofile.jpeg");
@@ -104,7 +104,7 @@ class CustomStepper extends React.Component {
   render() {
     console.log(DateFnsUtils, ' try');
     const { classes, steps } = this.props;
-    const { activeStep, gender, date } = this.state;
+    const { activeStep, gender } = this.state;
     return (
       <div className={classes.root}>
         <Stepper activeStep={activeStep} alternativeLabel>

@@ -1,17 +1,13 @@
 import React from 'react';
 import autoBind from 'react-autobind';
-
-import './style.css';
-
 import AjaxService from '../../services/AjaxService';
 import Button from '../../components/Button';
-import ImageGallery from '../../components/ImageGallery';
-import Table from '../../components/Table';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import ImageViewer from '../../components/ImageViewer';
 import Rating from '@material-ui/lab/Rating';
 import Comment from '../../components/Comment';
+import './style.css';
 class VehicleDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -23,12 +19,15 @@ class VehicleDetails extends React.Component {
         color: '',
         transmission: '',
         seats: '',
+        comments: [],
+        quantity: 0,
       },
       imageList: [],
       imgV: [],
       selectedTab: 0,
       quantityToOrder: 0,
       totalQuantity: 5,
+      comment: '',
     }
     autoBind(this);
   }
@@ -50,6 +49,7 @@ class VehicleDetails extends React.Component {
           sizes: "(min-width: 900px) 100px",
         });
       });
+      console.log(res.data.vehicle, ' vehicle details print ')
       this.setState({
         vehicle: res.data.vehicle,
         imageList: imgList,
@@ -70,11 +70,10 @@ class VehicleDetails extends React.Component {
       this.setState({ selectedTab });
     }
   }
-  // renderOverview() {
-  //   return (
-  //     <Table vehicle={this.state.vehicle} />
-  //   );
-  // }
+  postComment() {
+
+  }
+
   renderCustomersReview() {
     return (
       <div className="comments-container">
@@ -119,6 +118,11 @@ class VehicleDetails extends React.Component {
         </div>
         <div className="feedback-container">
           <div className="vehicle-new-comment">
+            <span className="comment-post-title">Add Comment </span>
+            <textarea rows="4" className="comment-text-to-post"></textarea>
+            <div className="comment-post-buttons">
+            <Button title={"Post"} onClick={this.postComment} css={"PrimaryButton"} width={"w100px"}/>
+              </div>
           </div>
           <div className="vehicle-comments-list">
             <Comment />
@@ -205,12 +209,12 @@ class VehicleDetails extends React.Component {
               <div className="vehicle-details-review">
                 <Rating id="rating" name="read-only" value={3} readOnly />
                 <span className="rating-avg">3.5</span>
-                <span className="review-details">80 Reviews</span>
+                <span className="review-details">{vehicle.comments.length} Reviews</span>
                 <span className="review-details">80 orders</span>
               </div>
               <div className="split-line-thin" />
               <div className="vehicle-price">
-                <span className="current-vehicle-price"> 180$ </span>
+    <span className="current-vehicle-price"> {Number(vehicle.price).toLocaleString()} $ </span>
               </div>
               <div className="split-line-thin" />
               <div className="vehicle-quantity">
@@ -223,7 +227,7 @@ class VehicleDetails extends React.Component {
                   <Button css={"rounded-plus"} title={"+"} id={"plus"} onClick={this.quantityPlus} />
                 </span>
                 <div className="vehicle-quantity-info">
-                  <span className="quantity-available">{this.state.totalQuantity} avaiable</span>
+                  <span className="quantity-available">{vehicle.quantity} avaiable</span>
                 </div>
               </div>
               <div className="vehicle-actions">
@@ -242,9 +246,7 @@ class VehicleDetails extends React.Component {
               textColor="primary"
               onChange={this.tabChanges}
               aria-label="disabled tabs example"
-            // variant="fullWidth"
             >
-              {/* <Tab label="OverView" /> */}
               <Tab label="Customers Reviews" />
               <Tab label="Specifications" />
             </Tabs>
@@ -252,8 +254,6 @@ class VehicleDetails extends React.Component {
               {this.renderTab(selectedTab)}
             </div>
           </div>
-          {/* <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} /> */}
-          {/* </div> */}
         </div>
       </div>
     );
