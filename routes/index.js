@@ -37,7 +37,7 @@ router.post('/signIn', passport.authenticate('local'), (req, res) => {
         role: req.user.role,
       },
     });
-  }, 5000);
+  }, 0);
 });
 
 router.get('/signOut', function (req, res) {

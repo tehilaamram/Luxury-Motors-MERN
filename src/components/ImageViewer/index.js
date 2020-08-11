@@ -38,8 +38,8 @@ class ImageViewer extends React.Component {
     render() {
         const { images } = this.props;
         const { selectedImageIndex } = this.state;
-        console.log(this.props.images, ' props of image viewer');
-        console.log(this.props.images[selectedImageIndex], ' img');
+        // console.log(this.props.images, ' props of image viewer');
+        // console.log(this.props.images[selectedImageIndex], ' img');
         return (
             <div className="image-viewer">
                 <div className="image-view-magnifier-wrap">

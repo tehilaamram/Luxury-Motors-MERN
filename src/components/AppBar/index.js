@@ -179,7 +179,7 @@ class CustomAppBar extends React.Component {
           <Avatar alt="Remy Sharp"  src={logoLM} className={classes.large} id="logoLM"/>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton aria-label="show 17 new notifications" color="inherit">
+              <IconButton aria-label="show 17 new notifications" color="inherit" onClick={this.navigateTo.bind(this, '/cart')}>
                 <Badge badgeContent={this.props.cart} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>

@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import autoBind from 'react-autobind';
 import AjaxService from '../../services/AjaxService';
 import Button from '../../components/Button';
@@ -7,6 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import ImageViewer from '../../components/ImageViewer';
 import Rating from '@material-ui/lab/Rating';
 import Comment from '../../components/Comment';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 import './style.css';
 class VehicleDetails extends React.Component {
   constructor(props) {
@@ -21,13 +23,15 @@ class VehicleDetails extends React.Component {
         seats: '',
         comments: [],
         quantity: 0,
+        _id: '',
+        orders: [],
       },
       imageList: [],
       imgV: [],
       selectedTab: 0,
       quantityToOrder: 0,
-      totalQuantity: 5,
       comment: '',
+      postRate: 1,
     }
     autoBind(this);
   }
@@ -71,10 +75,45 @@ class VehicleDetails extends React.Component {
     }
   }
   postComment() {
+    const commentToPost = document.getElementById("user-comment-post").value;
+    // AjaxService.post('/comment/new')
+    AjaxService.post('/comment/new', {
+      vehicle: this.state.vehicle._id,
+      text: commentToPost,
+      rate: this.state.postRate,
+      // comment: commentToPost,
+  }).then((res) => {
+          if (res.status === 200) {
+              console.log('comment posted');
+              document.getElementById("user-comment-post").value = "";
+              this.setState({
+                postRate: 1,
+              });
+          } else {
+            console.log('comment post error check out')
+              // alert(res.data.error.errmsg);
+          }
+      }).catch((err) => {
+        console.log('error with post comment', err, err.response.status);
+      });
+    console.log(commentToPost);
+  }
 
+  rateChange(event, postRate) {
+    this.setState({postRate});
   }
 
   renderCustomersReview() {
+    var rateArray = _.groupBy(this.state.vehicle.comments, (item) => {
+      return item.rate;
+    });
+    // console.log(_.groupBy(this.state.vehicle.comments, (item) => {
+    //   return item.rate;
+    // }));
+    console.log(rateArray[4], ' array 4 length', rateArray[5])
+    if (rateArray[4] !== undefined) {
+      console.log(rateArray[4].length, ' 4 len')
+    }
     return (
       <div className="comments-container">
         <div className="vehicle-rate-details">
@@ -82,44 +121,57 @@ class VehicleDetails extends React.Component {
             <li >
               <span className="vehicle-rate-title">5 Stars</span>
               <span className="vehicle-rate-graph">
-                <b className="vehicle-graph-scroller" style={{ width: "88.0%" }}></b>
+                <b className="vehicle-graph-scroller" style={{ width: String(rateArray[5] === undefined ? 0 : Number(100 * rateArray[5].length/this.state.vehicle.comments.length).toPrecision(4)) + "%"}}></b>
               </span>
-              <span className="vehicle-rate-number">88%</span>
+    <span className="vehicle-rate-number">{rateArray[5] === undefined ? 0 : Number(100 * rateArray[5].length/this.state.vehicle.comments.length).toPrecision(4)}%</span>
             </li>
             <li >
               <span className="vehicle-rate-title">4 Stars</span>
               <span className="vehicle-rate-graph">
-                <b className="vehicle-graph-scroller" style={{ width: "88.0%" }}></b>
+                <b className="vehicle-graph-scroller" style={{ width: String(rateArray[4] === undefined ? 0 : Number(100 * rateArray[4].length/this.state.vehicle.comments.length).toPrecision(4)) + "%"}}></b>
               </span>
-              <span className="vehicle-rate-number">88%</span>
+    <span className="vehicle-rate-number">{rateArray[4] === undefined ? 0 : Number(100 * rateArray[4].length/this.state.vehicle.comments.length).toPrecision(4)}%</span>
             </li>
             <li >
               <span className="vehicle-rate-title">3 Stars</span>
               <span className="vehicle-rate-graph">
-                <b className="vehicle-graph-scroller" style={{ width: "88.0%" }}></b>
+                <b className="vehicle-graph-scroller" style={{ width: String(rateArray[3] === undefined ? 0 : Number(100 * rateArray[3].length/this.state.vehicle.comments.length).toPrecision(4)) + "%" }}></b>
               </span>
-              <span className="vehicle-rate-number">88%</span>
+    <span className="vehicle-rate-number">{rateArray[3] === undefined ? 0 : Number(100 * rateArray[3].length/this.state.vehicle.comments.length).toPrecision(4)}%</span>
             </li>
             <li >
               <span className="vehicle-rate-title">2 Stars</span>
               <span className="vehicle-rate-graph">
-                <b className="vehicle-graph-scroller" style={{ width: "88.0%" }}></b>
+                <b className="vehicle-graph-scroller" style={{ width: String(rateArray[2] === undefined ? 0 : Number(100 * rateArray[2].length/this.state.vehicle.comments.length).toPrecision(4)+ "%") }}></b>
               </span>
-              <span className="vehicle-rate-number">88%</span>
+    <span className="vehicle-rate-number">{rateArray[2] === undefined ? 0 : Number(100 * rateArray[2].length/this.state.vehicle.comments.length).toPrecision(4)}%</span>
             </li>
             <li >
               <span className="vehicle-rate-title">1 Stars</span>
               <span className="vehicle-rate-graph">
-                <b className="vehicle-graph-scroller" style={{ width: "0.0%" }}></b>
+                <b className="vehicle-graph-scroller" style={{ width: String(rateArray[1] === undefined ? 0 : Number(100 * rateArray[1].length/this.state.vehicle.comments.length).toPrecision(4)+"%") }}></b>
               </span>
-              <span className="vehicle-rate-number">88%</span>
+    <span className="vehicle-rate-number">{rateArray[1] === undefined ? 0 : Number(100 * rateArray[1].length/this.state.vehicle.comments.length).toPrecision(4)}%</span>
             </li>
           </ul>
         </div>
         <div className="feedback-container">
           <div className="vehicle-new-comment">
+            
             <span className="comment-post-title">Add Comment </span>
-            <textarea rows="4" className="comment-text-to-post"></textarea>
+            <div className="comment-post-rating">
+            <Rating
+            value={this.state.postRate}
+          name="customized-empty"
+          defaultValue={1}
+          precision={1}
+          onChange={this.rateChange}
+          emptyIcon={<StarBorderIcon fontSize="inherit" />}
+        />
+              </div>
+              <div>
+            <textarea rows="4" className="comment-text-to-post" id="user-comment-post"></textarea>
+            </div>
             <div className="comment-post-buttons">
             <Button title={"Post"} onClick={this.postComment} css={"PrimaryButton"} width={"w100px"}/>
               </div>
@@ -180,7 +232,7 @@ class VehicleDetails extends React.Component {
     }
   }
   quantityPlus(event) {
-    if (this.state.quantityToOrder < this.state.totalQuantity) {
+    if (this.state.quantityToOrder < this.state.vehicle.quantity) {
       this.setState({
         quantityToOrder: this.state.quantityToOrder + 1,
       });
@@ -195,6 +247,10 @@ class VehicleDetails extends React.Component {
   }
   render() {
     const { selectedTab, vehicle } = this.state;
+    var rateAvg = 0;
+    this.state.vehicle.comments.forEach(comment => {
+      rateAvg += comment.rate;
+    });
     return (
       <div className={"VehicleDetailsContainer"}>
         <div className="vehicle-main">
@@ -207,10 +263,10 @@ class VehicleDetails extends React.Component {
                 <h1> {vehicle.maker} {vehicle.model} {vehicle.year}</h1>
               </div>
               <div className="vehicle-details-review">
-                <Rating id="rating" name="read-only" value={3} readOnly />
-                <span className="rating-avg">3.5</span>
+                <Rating id="rating" name="read-only" value={vehicle.comments.length === 0 ? 0 : rateAvg/vehicle.comments.length} readOnly />
+    <span className="rating-avg">{vehicle.comments.length === 0 ? 0 : Number(rateAvg/vehicle.comments.length).toPrecision(3)}</span>
                 <span className="review-details">{vehicle.comments.length} Reviews</span>
-                <span className="review-details">80 orders</span>
+                <span className="review-details">{vehicle.orders.length} orders</span>
               </div>
               <div className="split-line-thin" />
               <div className="vehicle-price">

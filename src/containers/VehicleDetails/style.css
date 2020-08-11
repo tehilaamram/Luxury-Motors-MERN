@@ -57,6 +57,8 @@
 }
 
 .vehicle-main {
+  max-width: 1200px;
+  margin: auto;
   width: 100%;
   background: #fff;
   /* padding-top: 28px; */

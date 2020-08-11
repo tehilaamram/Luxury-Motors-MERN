@@ -2,6 +2,7 @@ var express = require('express');
 var multer = require('multer');
 let fs = require("fs");
 var router = express.Router();
+const { ensureAuthenticated } = require('./middleware');
 var Vehicle = require('../models')("Vehicle");
 var ObjectId = require('mongoose').Types.ObjectId;
 var storage = multer.diskStorage({
@@ -14,7 +15,7 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({ storage: storage })
-router.post('/addVehicle', upload.array('file', 30), (req, res) => {
+router.post('/addVehicle', [ensureAuthenticated, upload.array('file', 30)], (req, res) => {
   console.log(req.files);
   var additionalImagesList = [];
   for (var i =1; i < req.files.length; i++) {

@@ -18,6 +18,7 @@ var vehicleRouter = require('./routes/vehicle');
 var orderRouter = require('./routes/order');
 var chatRoomsRouter = require('./routes/chatRoom');
 var requestRouter = require('./routes/request');
+var commentRouter = require('./routes/comment');
 // var chatMessageRouter = require('./routes/')
 
 let app = express();
@@ -65,7 +66,7 @@ let app = express();
         saveUninitialized: false,  // do we need to save an 'empty' session object? - mandatory option
         rolling: true,             // do we send the session ID cookie with each response?
         store: new MongoStore({ mongooseConnection: sessionConnect }), // session storage backend
-        cookie: { maxAge: 1000 * 60 * 15, httpOnly: true, sameSite: true}  // cookie parameters
+        cookie: { maxAge: 1000 * 60 * 150, httpOnly: true, sameSite: true}  // cookie parameters
         // NB: maxAge is used for session object expiry setting in the storage backend as well
     }));
     var User = require('./models')("User");
@@ -94,7 +95,7 @@ let app = express();
     app.use('/order', orderRouter);
     app.use('/chatRoom', chatRoomsRouter);
     app.use('/request', requestRouter);
-
+    app.use('/comment', commentRouter);
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
         let err = new Error('Not Found');
