@@ -9,6 +9,7 @@ import ImageViewer from '../../components/ImageViewer';
 import Rating from '@material-ui/lab/Rating';
 import Comment from '../../components/Comment';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { connect } from 'react-redux';
 import './style.css';
 class VehicleDetails extends React.Component {
   constructor(props) {
@@ -106,7 +107,76 @@ class VehicleDetails extends React.Component {
   rateChange(event, postRate) {
     this.setState({postRate});
   }
-
+  onDislikeChange(event) {
+    console.log(event, ' event')
+    if(event.dislike.includes(this.props.user.id)) {
+      AjaxService.post('/comment/removeDislike', {
+        comment: event._id,
+        vehicle: event.vehicle,
+      }).then((res) => {
+        if(res.data.status === 200) {
+          res.data.vehicle.comments = _.reverse(res.data.vehicle.comments);
+              this.setState({
+                // postRate: 1,
+                vehicle: res.data.vehicle,
+              });
+        }
+      }).catch((err) => {
+        console.log('remove dislike error ', err);
+      });
+    } else {
+      console.log('in else')
+      AjaxService.post('/comment/addDislike', {
+        comment: event._id,
+        vehicle: event.vehicle,
+      }).then((res) => {
+        if(res.data.status === 200) {
+          res.data.vehicle.comments = _.reverse(res.data.vehicle.comments);
+              this.setState({
+                // postRate: 1,
+                vehicle: res.data.vehicle,
+              });
+        }
+      }).catch((err) => {
+        console.log('add dislike error ', err);
+      });
+    }
+  }
+  onLikeChange(event) {
+    console.log(event, ' event')
+    if(event.like.includes(this.props.user.id)) {
+      AjaxService.post('/comment/removeLike', {
+        comment: event._id,
+        vehicle: event.vehicle,
+      }).then((res) => {
+        if(res.data.status === 200) {
+          res.data.vehicle.comments = _.reverse(res.data.vehicle.comments);
+              this.setState({
+                // postRate: 1,
+                vehicle: res.data.vehicle,
+              });
+        }
+      }).catch((err) => {
+        console.log('remove like error ', err);
+      });
+    } else {
+      console.log('in else')
+      AjaxService.post('/comment/addLike', {
+        comment: event._id,
+        vehicle: event.vehicle,
+      }).then((res) => {
+        if(res.data.status === 200) {
+          res.data.vehicle.comments = _.reverse(res.data.vehicle.comments);
+              this.setState({
+                // postRate: 1,
+                vehicle: res.data.vehicle,
+              });
+        }
+      }).catch((err) => {
+        console.log('add like error ', err);
+      });
+    }
+  }
   renderCustomersReview() {
     var rateArray = _.groupBy(this.state.vehicle.comments, (item) => {
       return item.rate;
@@ -184,7 +254,17 @@ class VehicleDetails extends React.Component {
             {
               this.state.vehicle.comments.map((element, index) => {
                 return (
-                  <Comment key={index} name={element.user.username} date={element.date} text={element.text} like={element.like} dislike={element.dislike} rate={element.rate}/>
+                  <Comment key={index}
+                  name={element.user.username}
+                  date={element.date}
+                  text={element.text}
+                  like={element.like}
+                  dislike={element.dislike}
+                  rate={element.rate}
+                  id={element._id}
+                  dislikeChange={this.onDislikeChange.bind(this, element)}
+                  likeChange={this.onLikeChange.bind(this, element)}
+                  />
                 )
               })
             }
@@ -324,5 +404,9 @@ class VehicleDetails extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
 
-export default VehicleDetails;
+export default connect(mapStateToProps, {})(VehicleDetails);
+// export default VehicleDetails;

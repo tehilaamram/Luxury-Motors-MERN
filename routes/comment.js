@@ -44,78 +44,105 @@ router.post('/new', ensureAuthenticated, (req, res) => {
                     });
                   });
             });
-            // res.sendStatus(200);
         });
     });
-    // if (req.isAuthenticated() && req.user.role === 'admin') {
-    //     console.log(req.user, ' user req');
-    //     var img = fs.readFileSync(req.files[0].path);
-    //     var encode_image = img.toString('base64');
-    //     // Define a JSONobject for the image attributes for saving to database
-    //     var finalImg = {
-    //         contentType: req.files[0].mimetype,
-    //         image: new Buffer(encode_image, 'base64')
-    //     };
-    //     var newRoom = new ChatRoom({
-    //         img: finalImg,
-    //         name: req.body.name,
-    //     });
-    //     newRoom.members.push(req.user._id);
-    //     newRoom.save().then((room) => {
-    //         req.user.rooms.push(room._id);
-    //         req.user.save();
-    //         res.json({
-    //             status: 200,
-    //         });
-    //     });
-    // } else {
-    //     res.json({
-    //         status: 101,
-    //     });
-    // }
-   
 });
 
-router.get('/getAll', (req, res) => {
-    return ChatRoom.find({}).then((rooms) => {
-        res.send(rooms);
+
+router.post('/addDislike', ensureAuthenticated, (req, res) => {
+   Comment.findById(req.body.comment, (err, commentToUpdate) => {
+       if(err) {
+           res.sendStatus(400);
+       } else {
+           commentToUpdate.dislike.push(req.user._id);
+           commentToUpdate.save().then((savedComment) => {
+            Vehicle.findById(req.body.vehicle).populate({ path: 'comments', populate: {
+                path: 'user',
+                model: 'User',
+              }}).exec((err, vehicle) => {
+                if (err) {
+                  return res.sendStatus(404);
+                }
+                return res.json({
+                  status: 200,
+                  vehicle,
+                });
+              });
+           })
+       }
+   });
+});
+
+router.post('/removeDislike', ensureAuthenticated, (req, res) => {
+    Comment.findById(req.body.comment, (err, commentToUpdate) => {
+        if(err) {
+            res.sendStatus(400);
+        } else {
+            commentToUpdate.dislike.pop(req.user._id);
+            commentToUpdate.save().then((savedComment) => {
+             Vehicle.findById(req.body.vehicle).populate({ path: 'comments', populate: {
+                 path: 'user',
+                 model: 'User',
+               }}).exec((err, vehicle) => {
+                 if (err) {
+                   return res.sendStatus(404);
+                 }
+                 return res.json({
+                   status: 200,
+                   vehicle,
+                 });
+               });
+            })
+        }
     });
-});
+ });
 
-router.get('/getUserRooms/:id', (req, res) => {
-    ChatRoom.find({ _id: { $in: req.user.rooms } }, (err, list) => {
-        return res.json({
-            status: 200,
-            list,
-        });
+ router.post('/addLike', ensureAuthenticated, (req, res) => {
+    Comment.findById(req.body.comment, (err, commentToUpdate) => {
+        if(err) {
+            res.sendStatus(400);
+        } else {
+            commentToUpdate.like.push(req.user._id);
+            commentToUpdate.save().then((savedComment) => {
+             Vehicle.findById(req.body.vehicle).populate({ path: 'comments', populate: {
+                 path: 'user',
+                 model: 'User',
+               }}).exec((err, vehicle) => {
+                 if (err) {
+                   return res.sendStatus(404);
+                 }
+                 return res.json({
+                   status: 200,
+                   vehicle,
+                 });
+               });
+            })
+        }
     });
-    // ChatRoom.findById(req.params.id, (err, vehicle) => {
-    //     if (err) {
-    //         return res.sendStatus(404);
-    //     }
-    //     return res.json({
-    //         status: 200,
-    //         vehicle,
-    //     });
-    // });
-});
-
-router.get('/getRoomsToJoin', (req, res) => {
-    // console.log('in get by id', JSON.parse(req.query.params));
-    // var userRoomList = req.user.rooms;
-    // var idJson = JSON.parse(req.query.params);
-    // var obj_ids = idJson.vid.map(function (element) { return ObjectId(element.vehicle); });
-    ChatRoom.find({_id: { $nin: req.user.rooms }}).populate({ path: 'requests', match: {user: req.user._id}}).exec((err, list) => {
-        return res.json({
-            status: 200,
-            list,
-        });      });
-    // ChatRoom.find({ _id: { $nin: req.user.rooms } }, (err, list) => {
-    //     return res.json({
-    //         status: 200,
-    //         list,
-    //     });
-    // });
-});
+ });
+ 
+ router.post('/removeLike', ensureAuthenticated, (req, res) => {
+     Comment.findById(req.body.comment, (err, commentToUpdate) => {
+         if(err) {
+             res.sendStatus(400);
+         } else {
+             commentToUpdate.like.pop(req.user._id);
+             commentToUpdate.save().then((savedComment) => {
+              Vehicle.findById(req.body.vehicle).populate({ path: 'comments', populate: {
+                  path: 'user',
+                  model: 'User',
+                }}).exec((err, vehicle) => {
+                  if (err) {
+                    return res.sendStatus(404);
+                  }
+                  return res.json({
+                    status: 200,
+                    vehicle,
+                  });
+                });
+             })
+         }
+     });
+  });
 
 module.exports = router;
