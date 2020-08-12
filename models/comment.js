@@ -27,6 +27,16 @@ module.exports = db => {
         text: {
             type: String
         },
+        like: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'User',
+        }],
+        dislike: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'User',
+        }],
     }, { autoIndex: true });
     // schema.index({ user: 1, vehicle: 1 }, { unique: true });
 

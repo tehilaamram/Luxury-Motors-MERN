@@ -54,6 +54,7 @@ class VehicleDetails extends React.Component {
         });
       });
       console.log(res.data.vehicle, ' vehicle details print ')
+      res.data.vehicle.comments = _.reverse(res.data.vehicle.comments);
       this.setState({
         vehicle: res.data.vehicle,
         imageList: imgList,
@@ -83,11 +84,14 @@ class VehicleDetails extends React.Component {
       rate: this.state.postRate,
       // comment: commentToPost,
   }).then((res) => {
-          if (res.status === 200) {
+    console.log(res, ' res');
+          if (res.data.status === 200) {
               console.log('comment posted');
               document.getElementById("user-comment-post").value = "";
+              res.data.vehicle.comments = _.reverse(res.data.vehicle.comments);
               this.setState({
                 postRate: 1,
+                vehicle: res.data.vehicle,
               });
           } else {
             console.log('comment post error check out')
@@ -177,8 +181,13 @@ class VehicleDetails extends React.Component {
               </div>
           </div>
           <div className="vehicle-comments-list">
-            <Comment />
-            <Comment />
+            {
+              this.state.vehicle.comments.map((element, index) => {
+                return (
+                  <Comment key={index} name={element.user.username} date={element.date} text={element.text} like={element.like} dislike={element.dislike} rate={element.rate}/>
+                )
+              })
+            }
           </div>
         </div>
       </div>

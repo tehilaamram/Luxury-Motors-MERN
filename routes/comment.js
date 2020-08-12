@@ -25,11 +25,26 @@ router.post('/new', ensureAuthenticated, (req, res) => {
         rate: req.body.rate,
         text: req.body.text,
     });
+    
     newComment.save().then((savedComment) => {
+     
         Vehicle.findById(req.body.vehicle, (err, vehicleToUpdate) => {
             vehicleToUpdate.comments.push(savedComment._id);
-            vehicleToUpdate.save();
-            res.sendStatus(200);
+            vehicleToUpdate.save().then((savedVehicle) => {
+                Vehicle.findById(req.body.vehicle).populate({ path: 'comments', populate: {
+                    path: 'user',
+                    model: 'User',
+                  }}).exec((err, vehicle) => {
+                    if (err) {
+                      return res.sendStatus(404);
+                    }
+                    return res.json({
+                      status: 200,
+                      vehicle,
+                    });
+                  });
+            });
+            // res.sendStatus(200);
         });
     });
     // if (req.isAuthenticated() && req.user.role === 'admin') {

@@ -49,11 +49,11 @@
 height: 16px;
 width: 16px;
 margin: 5px;
+cursor: pointer;
 }
 
 .comment-like svg {
     transform: translateY(-3px);
-
 }
 
 #checked svg{
@@ -64,10 +64,7 @@ margin: 5px;
     stroke: #999;
 
 }
-.comment-likes-comtainer svg  {
-    stroke: #999;
 
-}
 .comment-dislike {
     display: inline-flex;
 }
@@ -81,4 +78,8 @@ margin: 5px;
 .comment-like-num {
     display: inline-flex;
 
+}
+
+#custom-user-rate {
+    font-size: 1.3rem;
 }
