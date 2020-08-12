@@ -24,7 +24,7 @@ import Footer from '../../components/Footer';
 import AppBar from '../../components/AppBar';
 // import PrivateRoute from './privateRoute';
 import ManageUsers from '../ManageUsers';
-import OrderCompleted from '../OrderCompleted';
+import Buy from '../Buy';
 import './style.css';
 class App extends React.Component {
     constructor(props) {
@@ -72,7 +72,7 @@ class App extends React.Component {
                                 <Route path='/manage-users' component={ManageUsers} />
                                 <Route path="/chat-rooms/:uid" component={CharRooms} />
                                 <Route path="/manage-rooms/:id" component={ManageRooms} />
-                                <Route path="/order-completed" component={OrderCompleted}/>
+                                <Route path="/buy" component={Buy}/>
                                 <Route component={Home} />
                             </Switch>
                         </div>

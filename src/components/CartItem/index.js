@@ -29,13 +29,16 @@ class CartItem extends React.Component {
     constructor(props) {
         super(props);
         autoBind(this);
+        this.state = {
+            quantityToOrder: this.props.quantityToOrder,
+        };
         console.log(this.props, " this.props");
     }
     viewDetails() {
         this.props.history.push(`/vehicle/${this.props.vehicle._id}`);
     }
     quantityPlus(event) {
-        if (this.state.quantityToOrder < this.state.totalQuantity) {
+        if (this.state.quantityToOrder < this.props.vehicle.quantity) {
             this.setState({
                 quantityToOrder: this.state.quantityToOrder + 1,
             });
@@ -72,11 +75,11 @@ class CartItem extends React.Component {
                   </div>
                         <span className="plus-minus-quantity">
                             <Button css={"rounded-plus"} title={"-"} id={"minus"} onClick={this.quantityMinus} />
-                            <span className="quantity-to-order">{this.props.quantity}</span>
+                            <span className="quantity-to-order">{this.state.quantityToOrder}</span>
                             <Button css={"rounded-plus"} title={"+"} id={"plus"} onClick={this.quantityPlus} />
                         </span>
                         <div className="cart-quantity-info">
-                            <span className="quantity-available">{this.props.quantity} avaiable</span>
+                            <span className="quantity-available">{vehicle.quantity} avaiable</span>
                         </div>
                     </div>
                     </div>
@@ -86,7 +89,7 @@ class CartItem extends React.Component {
                             Price:
                   </div>
                         <span className="cart-vehicle-price">
-                            <span className="cart-vehicle-total-price">{this.props.quantity} 80 $</span>
+                            <span className="cart-vehicle-total-price">{Number(vehicle.price * this.state.quantityToOrder).toLocaleString()} $</span>
                         </span>
                     </div>
                     {/* <div className="cart-vehicle-price">

@@ -157,6 +157,7 @@
   font-size: 14px;
   display: inline-table;
   width: 32px;
+  text-align: center;
 }
 
 .vehicle-quantity-info {

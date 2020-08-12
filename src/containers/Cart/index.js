@@ -79,21 +79,31 @@ class Cart extends React.Component {
         }, this.setStateCallback);
     }
     buy() {
-        this.props.history.push('/order-completed');
+        var vehicleArray = _.groupBy(this.state.vehicleCart, (item) => {
+            return item.vehicle;
+          });
+        this.props.history.push({pathname: '/buy', state: {vehicles: this.state.vehicleList, list: vehicleArray }});
     }
     render() {
+        console.log(this.props.cart, ' cart from redux')
+        var vehicleArray = _.groupBy(this.state.vehicleCart, (item) => {
+            return item.vehicle;
+          });
+          console.log(vehicleArray, ' vehicle Array')
         return (
             <div className={"CatalogContainer"}>
                 {this.state.vehicleList.length === 0 ?
                     <div>
                         <img src={emptyCartImage} className="empty-cart-image" alt={"empty cart"} />
                     </div> : <div className="cart-items-to-buy-main">{(this.state.vehicleList).map((option, index) => {
+                        console.log(index)
                         return (
                             <CartItem
                                 vehicle={option}
                                 key={index}
                                 index={index}
                                 removeFromCart={this.removeFromCart.bind(this, option)}
+                                quantityToOrder={vehicleArray[option._id].length}
                             />);
                     })}
                         <div className="cart-buy">

@@ -20,6 +20,10 @@ module.exports = db => {
             type: Number,
             default: 1,
         },
+        price: {
+            type: Number,
+            default: 1,
+        },
     }, { autoIndex: true });
     // schema.index({ user: 1, vehicle: 1 }, { unique: true });
 

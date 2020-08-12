@@ -50,7 +50,7 @@ class Catalog extends React.Component {
         let date = new Date();
         date.setTime(date.getTime() + (99 * 365 * 24 * 60 * 60 * 1000));
         console.log('in cookie');
-        this.cookies.set('vehicles', this.state.vehicleCart, { path: '/', expires: date });
+        this.cookies.set('vehicles', this.state.vehicleCart, { path: '/', maxAge: 60 * 60 * 24 * 365 });
     }
 
 
@@ -60,12 +60,13 @@ class Catalog extends React.Component {
             console.log(state, ' state');
             if (event === undefined) {
                 return { new_vehicle_value: '' };
-            } else {
-                const isInCart = this.state.vehicleCart.filter(element => element.vehicle === event._id)
-                if (isInCart.length > 0) {
-                    return;
-                }
             }
+            // else {
+            //     const isInCart = this.state.vehicleCart.filter(element => element.vehicle === event._id)
+            //     if (isInCart.length > 0) {
+            //         return;
+            //     }
+            // }
             state.vehicleCart[state.next_id] = { id: state.next_id, vehicle: event._id };
             this.props.onAdd();
             console.log(state.vehicleCart, ' vehicle cart');
