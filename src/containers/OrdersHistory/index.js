@@ -13,19 +13,24 @@ class OrdersHistory extends React.Component {
         this.state ={
             orders: [],
         }
+        console.log('in order history')
         autoBind(this);
     }
     componentDidMount() {
         const { match: { params } } = this.props;
         AjaxService.get('/order/getUserOrders').then((res) => {
-
+          console.log('user orders response')
+          console.log(res)
+          this.setState({
+            orders: res.data.list
+          })
         }).catch((err) => {
             this.props.history.push('/404');
         });
     }
-     cellRender(data) {
+     cellImageRender(data) {
          console.log(data,  'data')
-        return <img alt="vehicle" className="buy-vehicle-image" src={`data:image/jpeg;base64,${data.data.mainImg.image}`} />;
+        return <img alt="vehicle" className="buy-vehicle-image" src={`data:image/jpeg;base64,${data.data.vehicle.mainImg.image}`} />;
       }
       cellQuantityRender(data) {
         //   return
@@ -40,31 +45,58 @@ class OrdersHistory extends React.Component {
         // .toLocaleString();
     }
       renderOrders(order) {
+        console.log(order, ' order in table')
         return (
-            <DataGrid id="gridContainer"
-            dataSource={order}
+            <DataGrid
+            key={order._id}
+             id="gridContainer"
+            dataSource={order.vehicles}
             showBorders={true}
             columnAutoWidth={true}
             columnMinWidth={100}
             columnResizingMode={'nextColumn'}
+            showRowLines={true}
+            rowAlternationEnabled={true}
           >
-            <Column dataField="mainImg"
+            <Column dataField="vehicle.mainImg"
             caption=""
-              allowSorting={false}
-              cellRender={this.cellRender}
+            cellRender={this.cellImageRender}
             />
-            <Column dataField="maker"
-              caption="Maker"
+            <Column dataField="vehicle.maker"
+            caption="Maker"
             />
-            <Column dataField="model" caption="Model"/>
-            <Column dataField="year" caption="Year"/>
-            <Column dataField="quantity1" calculateCellValue={this.quantityCellValue} caption="Quantity" />
-            <Column dataField="price" calculateCellValue={this.priceCellValue} caption="Price" format="currency" />
+            <Column dataField="vehicle.model"
+            caption="Model"
+            />
+            <Column dataField="vehicle.year"
+            caption="Year"
+            />
+            <Column dataField="vehicle.color"
+            caption="Color"
+            />
+            <Column dataField="quantity"
+            caption="Quantity"
+            />
+            <Column dataField="price"
+            caption="Price"
+            format="currency"
+            />
             <Summary>
             <TotalItem
               column="price"
               summaryType="sum"
-              valueFormat="currency" />
+              valueFormat="currency"
+              displayFormat={'Sum: {0}'}
+
+               />
+               <TotalItem
+               valueFormat="currency"
+               displayFormat={`Date: ${new Date(order.date).toLocaleString()}`}
+               showInColumn="price" />
+               <TotalItem
+                valueFormat="currency"
+                displayFormat={`Order Number: ${order._id}`}
+                showInColumn="price" />
           </Summary>
             <Scrolling columnRenderingMode="virtual" />
           </DataGrid>

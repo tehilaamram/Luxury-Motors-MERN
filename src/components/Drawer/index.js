@@ -112,12 +112,12 @@ signOut(){
           </ListItem>
         </List>
         <Divider />
-        { user.role !== ROLE.GUEST &&  <List>
-        <ListItem button key={'Profile'}>
+        { (user.role === ROLE.ADMIN || user.role === ROLE.USER || user.role === ROLE.WORKER) && <List>
+        <ListItem button onClick={this.navigateTo.bind(this, '/orders-history')} key={'OrdersHistory'}>
             <ListItemIcon>
               {/* <AccountBoxIcon />  */}
               </ListItemIcon>
-            <ListItemText primary={'Profile'} />
+            <ListItemText primary={'Orders'} />
           </ListItem>
           <ListItem button onClick={this.navigateTo.bind(this, `/chat-rooms/${user.id}`)} key={'Chat Rooms'}>
             <ListItemIcon>
@@ -126,8 +126,8 @@ signOut(){
             <ListItemText primary={'Chat Rooms'} />
           </ListItem>
         </List> }
-        { user.role !== ROLE.GUEST && <Divider /> }
-        { user.role !== ROLE.GUEST && user.role !== ROLE.USER && <List>
+        {(user.role === ROLE.ADMIN || user.role === ROLE.USER || user.role === ROLE.WORKER) && <Divider /> }
+        { (user.role === ROLE.ADMIN || user.role === ROLE.WORKER) && <List>
           <ListItem button onClick={this.navigateTo.bind(this, '/add-vehicle')} key={'Add Vehicle'}>
             <ListItemIcon>
               {/* <AddCircleIcon /> */}
@@ -135,7 +135,7 @@ signOut(){
             <ListItemText primary={'Add Vehicle'} />
           </ListItem>
         </List> }
-        { user.role !== ROLE.GUEST && user.role !== ROLE.USER &&  <Divider />}
+        { (user.role === ROLE.WORKER || user.role === ROLE.ADMIN) &&  <Divider />}
         { user.role === ROLE.ADMIN && <List>
           <ListItem button onClick={this.navigateTo.bind(this, '/manage-users')} key={'Manage Users'}>
             <ListItemIcon>
@@ -165,7 +165,7 @@ signOut(){
             <ListItemText primary={'Sign Up'} />
           </ListItem>
         </List>}
-       { user.role !== ROLE.GUEST && <List>
+       { (user.role === ROLE.USER || user.role === ROLE.WORKER || user.role === ROLE.ADMIN )&& <List>
           <ListItem button onClick={this.signOut} key={'Sign Out'}>
             <ListItemIcon>
               {/* <ExitToAppIcon />  */}
