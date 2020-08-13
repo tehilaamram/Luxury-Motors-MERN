@@ -12,6 +12,11 @@ module.exports = db => {
         date: { 
             type: Date,
         },
+        vehicles: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'VehicleOrder',
+        }],
     }, { autoIndex: true });
     // schema.index({ user: 1, vehicle: 1 }, { unique: true });
 

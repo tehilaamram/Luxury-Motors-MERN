@@ -113,11 +113,11 @@ signOut(){
         </List>
         <Divider />
         { user.role !== ROLE.GUEST &&  <List>
-        <ListItem button key={'Profile'}>
+        <ListItem button onClick={this.navigateTo.bind(this, '/orders-history')} key={'OrdersHistory'}>
             <ListItemIcon>
               {/* <AccountBoxIcon />  */}
               </ListItemIcon>
-            <ListItemText primary={'Profile'} />
+            <ListItemText primary={'Orders'} />
           </ListItem>
           <ListItem button onClick={this.navigateTo.bind(this, `/chat-rooms/${user.id}`)} key={'Chat Rooms'}>
             <ListItemIcon>

@@ -14,15 +14,39 @@ router.post('/new', ensureAuthenticated, (req, res) => {
     newOrder.save().then((savedOrder) => {
         req.user.orders.push(savedOrder._id);
         req.user.save();
-        req.body.vehicles.forEach(element => {
-            var newVehicleOrder = new VehicleOrder({
-                        order: savedOrder._id,
-                        vehicle: element.id,
-                        quantity: element.quantity,
-                        price: element.price,
-                    });
-                    newVehicleOrder.save();
-        });
+        Order.findById(savedOrder._id, (err, orderToUpdate) => {
+            if (err) {
+                res.sendStatus(404);
+            } else {
+                req.body.vehicles.forEach(element => {
+                    var newVehicleOrder = new VehicleOrder({
+                                order: savedOrder._id,
+                                vehicle: element.id,
+                                quantity: element.quantity,
+                                price: element.price,
+                            });
+                            newVehicleOrder.save().then((savedVehicleOrder) => {
+                                orderToUpdate.vehicles.push(savedVehicleOrder._id);
+                                orderToUpdate.save();
+                            });
+                });
+            }
+        })
+        // req.body.vehicles.forEach(element => {
+        //     var newVehicleOrder = new VehicleOrder({
+        //                 order: savedOrder._id,
+        //                 vehicle: element.id,
+        //                 quantity: element.quantity,
+        //                 price: element.price,
+        //             });
+        //             newVehicleOrder.save().then((savedVehicleOrder) => {
+        //                 savedOrder.vehicles.push(savedVehicleOrder._id);
+        //                 savedOrder.save();
+        //             });
+        // });
+        // savedOrder.save().then((s) => {
+            res.sendStatus(200);
+        // });
         // req.body.vehicles.foreach((element) => {
         //     var newVehicleOrder = new VehicleOrder({
         //         order: savedOrder._id,
@@ -32,12 +56,12 @@ router.post('/new', ensureAuthenticated, (req, res) => {
         //     });
         //     newVehicleOrder.save();
         // });
-        res.sendStatus(200);
     });
 });
-router.get('/getUserOrders/:id', ensureAuthenticated, (req, res) => {
-    Order.find({user: req.user._id}).populate({ path: 'user', model: 'User'})
-    .populate({path: 'vehicle', model: 'Vehicle'}).exec((err, list) => {
+router.get('/getUserOrders', ensureAuthenticated, (req, res) => {
+    Order.find({user: req.user._id}).populate({ path: 'vehicles', model: "VehicleOrder", populate: {
+        path: "vehicle", model: "Vehicle"
+    }}).exec((err, list) => {
         if(err) {
             res.sendStatus(404);
         } else {
@@ -46,7 +70,17 @@ router.get('/getUserOrders/:id', ensureAuthenticated, (req, res) => {
                 list,
             });
         }
-      });
+    });
+    // .populate({path: 'vehicle', model: 'Vehicle'}).exec((err, list) => {
+    //     if(err) {
+    //         res.sendStatus(404);
+    //     } else {
+    //         res.json({
+    //             status: 200,
+    //             list,
+    //         });
+    //     }
+    //   });
   });
 
 module.exports = router;
