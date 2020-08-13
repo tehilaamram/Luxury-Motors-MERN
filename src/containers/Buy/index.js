@@ -33,6 +33,7 @@ class Buy extends React.Component {
             activeStep: 0,
         }
         autoBind(this);
+        console.log(this.props.location.state);
     }
     handleNext() {
         if (this.state.activeStep === 1) {

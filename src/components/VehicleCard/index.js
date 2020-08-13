@@ -1,6 +1,5 @@
 import React from 'react';
-// import _ from 'lodash';
-import { withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 
@@ -13,7 +12,6 @@ import IconText from '../IconText';
 import capaciryImg from '../../images/capacity.png';
 import doorsImg from '../../images/doors.png';
 import transmissionImg from '../../images/transmission.png';
-// import ferrari from '../../images/make/logo-scuderia-ferrari.svg';
 import yearImg from '../../images/year.png';
 class VehicleCard extends React.Component {
     constructor(props) {
@@ -27,24 +25,27 @@ class VehicleCard extends React.Component {
         const { vehicle } = this.props;
         return (
             ((this.props.catalogFilter.transmission.length > 0 && this.props.catalogFilter.transmission.includes(vehicle.transmission)) ||
-              (this.props.catalogFilter.transmission.length === 0)) &&
-              ((this.props.catalogFilter.maker.length > 0 && this.props.catalogFilter.maker.includes(vehicle.maker)) ||
-              (this.props.catalogFilter.maker.length === 0)) &&
-              ((this.props.catalogFilter.year.length > 0 && this.props.catalogFilter.year.includes(vehicle.year.toString())) ||
-              (this.props.catalogFilter.year.length === 0)) &&
-              ((this.props.catalogFilter.doors.length > 0 && this.props.catalogFilter.doors.includes(vehicle.doors.toString())) ||
-              (this.props.catalogFilter.doors.length === 0)) &&
-              ((this.props.catalogFilter.seats.length > 0 && this.props.catalogFilter.seats.includes(vehicle.seats.toString())) ||
-              (this.props.catalogFilter.seats.length === 0))
+                (this.props.catalogFilter.transmission.length === 0)) &&
+            ((this.props.catalogFilter.maker.length > 0 && this.props.catalogFilter.maker.includes(vehicle.maker)) ||
+                (this.props.catalogFilter.maker.length === 0)) &&
+            ((this.props.catalogFilter.year.length > 0 && this.props.catalogFilter.year.includes(vehicle.year.toString())) ||
+                (this.props.catalogFilter.year.length === 0)) &&
+            ((this.props.catalogFilter.doors.length > 0 && this.props.catalogFilter.doors.includes(vehicle.doors.toString())) ||
+                (this.props.catalogFilter.doors.length === 0)) &&
+            ((this.props.catalogFilter.seats.length > 0 && this.props.catalogFilter.seats.includes(vehicle.seats.toString())) ||
+                (this.props.catalogFilter.seats.length === 0))
         )
     }
+    buy() {
+        var currentVehicle = this.props.vehicle._id;
+        var list = '{ "' + currentVehicle.toString() + '":' + '[' + 8 + ']}';
+        this.props.history.push({ pathname: '/buy', state: { vehicles: [this.props.vehicle], list: JSON.parse(list) } });
+    }
     render() {
-        // import logo from `/src/images/make/${vehicle.make}.png`
         const { vehicle } = this.props;
-        // console.log(vehicle.maker, ' vehicle');
         var img = require(`../../images/make/${vehicle.maker}.png`);
         return (
-             <div className={"VehicleCard"} style={{display: this.isDisplay() ? 'flex' : 'none'}}>
+            <div className={"VehicleCard"} style={{ display: this.isDisplay() ? 'flex' : 'none' }}>
                 <div className="VehicleCardHeader">
                     <img src={`data:image/jpeg;base64,${vehicle.mainImg.image}`} alt="Vehicle" className={"VehicleCardImage"} />
                 </div>
@@ -59,7 +60,7 @@ class VehicleCard extends React.Component {
                 <hr className="VerticalHr" />
                 <div className="VehicleCardFooter">
                     <Button title={"View Details"} id={"viewDetailsButton"} css={"PrimaryButton VehicleCardButton"} onClick={() => { this.viewDetails() }} />
-                    <Button title={"Buy Now"} id={"buyNowButton"} css={"PrimaryButton VehicleCardButton"} onClick={() => { console.log('here') }} />
+                    <Button title={"Buy Now"} id={"buyNowButton"} css={"PrimaryButton VehicleCardButton"} onClick={this.buy} />
                     <Button title={"Add to Cart"} id={"addToCartButton"} css={"PrimaryButton VehicleCardButton"} onClick={() => { this.props.addToCart(vehicle.id) }} />
                 </div>
             </div>
@@ -68,21 +69,8 @@ class VehicleCard extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    // cart: state.cart,
     catalogFilter: state.catalogFilter,
 });
 
-// const mapDispatchToProps = {
-//     onAdd: add,
-//     onAddTransmission: addTransmission,
-// };
 
 export default connect(mapStateToProps, {})(withRouter(VehicleCard));
-
-
-// export default withRouter(VehicleCard);
-
-
-
-
-

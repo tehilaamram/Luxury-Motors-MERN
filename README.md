@@ -13,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser. <
 * JQuery: SlideShow component
 * Socket.io: Chat
 * Passport: User authentication
-* Nodemailer: reset password
+* Nodemailer: Reset password
 * Media query: PWA
 * Material-UI: AppBar and other components
 * MongoDB: Database
@@ -22,3 +22,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser. <
 * Axios: HTTP requests
 * JavaScript: Programming language
 * CSS: Design
+* Cookie: Cart
+* Session: HTTP requests authentication

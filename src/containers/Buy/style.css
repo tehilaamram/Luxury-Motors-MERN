@@ -3,10 +3,6 @@
   box-sizing: border-box;
 }
 
-.buy-main {
-
-}
-
 .buy-button-div {
     display: flex;
     justify-content: space-between;
