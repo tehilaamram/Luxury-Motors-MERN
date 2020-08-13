@@ -32,30 +32,7 @@ router.post('/new', ensureAuthenticated, (req, res) => {
                 });
             }
         })
-        // req.body.vehicles.forEach(element => {
-        //     var newVehicleOrder = new VehicleOrder({
-        //                 order: savedOrder._id,
-        //                 vehicle: element.id,
-        //                 quantity: element.quantity,
-        //                 price: element.price,
-        //             });
-        //             newVehicleOrder.save().then((savedVehicleOrder) => {
-        //                 savedOrder.vehicles.push(savedVehicleOrder._id);
-        //                 savedOrder.save();
-        //             });
-        // });
-        // savedOrder.save().then((s) => {
             res.sendStatus(200);
-        // });
-        // req.body.vehicles.foreach((element) => {
-        //     var newVehicleOrder = new VehicleOrder({
-        //         order: savedOrder._id,
-        //         vehicle: element._id,
-        //         quantity: element.quantity,
-        //         price: element.price,
-        //     });
-        //     newVehicleOrder.save();
-        // });
     });
 });
 router.get('/getUserOrders', ensureAuthenticated, (req, res) => {
@@ -71,16 +48,22 @@ router.get('/getUserOrders', ensureAuthenticated, (req, res) => {
             });
         }
     });
-    // .populate({path: 'vehicle', model: 'Vehicle'}).exec((err, list) => {
-    //     if(err) {
-    //         res.sendStatus(404);
-    //     } else {
-    //         res.json({
-    //             status: 200,
-    //             list,
-    //         });
-    //     }
-    //   });
   });
+
+  router.get('/getAll', ensureAuthenticated, (req, res) => {
+    Order.find({}).populate({ path: 'vehicles user', populate: {
+        path: "vehicle", model: "Vehicle"
+    }}).exec((err, list) => {
+        if(err) {
+            res.sendStatus(404);
+        } else {
+            res.json({
+                status: 200,
+                list,
+            });
+        }
+    });
+  });
+
 
 module.exports = router;

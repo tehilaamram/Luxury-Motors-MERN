@@ -99,11 +99,12 @@ io.on('connect', (socket) => {
     ChatMessage.find({room: currentRoom.id}).populate({ path: 'sender', select: 'username'}).exec((err, list) => {
       const isTheSameId = (element) => element._id === lastMessage._id;
       const index = list.findIndex(isTheSameId);
-      if (index > 15) {
-        socket.emit('loadMoreMessages', list.slice(index - 16, index));
-      } else {
-        socket.emit('loadMoreMessages', list.slice(0, index));
-      }
+          socket.emit('loadMoreMessages', list);
+      // if (index > 15) {
+      //   socket.emit('loadMoreMessages', list.slice(index - 16, index));
+      // } else {
+      //   socket.emit('loadMoreMessages', list.slice(0, index));
+      // }
       // callback()
     });
     // var currentChatMessage = new ChatMessage({

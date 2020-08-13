@@ -134,6 +134,12 @@ signOut(){
                </ListItemIcon>
             <ListItemText primary={'Add Vehicle'} />
           </ListItem>
+          <ListItem button onClick={this.navigateTo.bind(this, '/all-orders')} key={'Manage Rooms'}>
+          <ListItemIcon>
+            {/* <RateReviewIcon />  */}
+            </ListItemIcon>
+          <ListItemText primary={'All Orders'} />
+        </ListItem>
         </List> }
         { (user.role === ROLE.WORKER || user.role === ROLE.ADMIN) &&  <Divider />}
         { user.role === ROLE.ADMIN && <List>
@@ -149,9 +155,10 @@ signOut(){
               </ListItemIcon>
             <ListItemText primary={'Manage Rooms'} />
           </ListItem>
+        
         </List> }
         { user.role === ROLE.ADMIN &&  <Divider />}
-        { user.role === ROLE.GUEST && <List>
+        { (user.role !== ROLE.ADMIN && user.role !== ROLE.WORKER && user.role !== ROLE.USER) && <List>
           <ListItem button onClick={this.openSignInModal} key={'Sign In'}>
             <ListItemIcon>
               {/* <PersonIcon />  */}

@@ -46,6 +46,8 @@ router.post('/addVehicle', [ensureAuthenticated, upload.array('file', 30)], (req
     doors: req.body.doors,
     transmission: req.body.transmission,
     year: req.body.year,
+    price: req.body.price,
+    quantity: req.body.quantity,
   });
   newVehicle.save().then((vehicle) => {
     console.log(vehicle, ' vehicle saved');
