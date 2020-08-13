@@ -20,3 +20,10 @@ export function reload(sum) {
         sum,
     };
 }
+
+export function restart(sum) {
+    return {
+        type: types.RESTART,
+        sum,
+    };
+}
