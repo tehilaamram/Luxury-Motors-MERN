@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage })
+const upload = multer({ storage: storage });
 router.post('/addVehicle', [ensureAuthenticated, upload.array('file', 30)], (req, res) => {
   console.log(req.files);
   var additionalImagesList = [];
@@ -24,7 +24,7 @@ router.post('/addVehicle', [ensureAuthenticated, upload.array('file', 30)], (req
     // Define a JSONobject for the image attributes for saving to database
     var finalImg = {
       contentType: req.files[i].mimetype,
-      image: new Buffer(encode_image, 'base64')
+      image: Buffer.from(encode_image, 'base64')
     };
     additionalImagesList.push(finalImg);
   }

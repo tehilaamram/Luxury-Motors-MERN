@@ -12,9 +12,29 @@ export const CONNECTED_USER = {
     ID: 'id',
 }
 
-export const TRANSMISSION = ['Manual', 'Automatic'];
+export const TRANSMISSION = ['Manual',
+    'automaton',
+    'Tifronic',
+    'Robotic'];
 
-export const MAKER = ['Porsche', 'Ferrari', 'Mercedes-Benz'];
+export const MAKER = ['Acura',
+    'Alfa_Romeo', 'Audi','BMW','Bentley','Buick','Cadillac','Chevrolet','Chrysler','Dodge','Fiat', 'Ford',
+    'GMC', 'Genesis', 'Honda', 'Hyundai','Infiniti','Jaguar','Jeep','Kia', 'Land','Lexus',
+    'Lincoln', 'Lotus','Maserati','Mazda',   'Mercedes','Mercury',    'Mini','Mitsubishi','Nissan',
+    'Polestar','Pontiac', 'Porsche','Ram','Rivian',    'Rolls-Royce','Saab','Saturn',
+    'Scion',    'Smart','Subaru','Suzuki',  'Tesla','Toyota','Volkswagen','Volvo','Acura',
+    'Alfa_Romeo', 'Audi','BMW','Bentley','Buick','Cadillac','Chevrolet','Chrysler','Dodge','Fiat', 'Ford',
+    'GMC', 'Genesis', 'Honda', 'Hyundai','Infiniti','Jaguar','Jeep','Kia', 'Land','Lexus',
+    'Lincoln', 'Lotus','Maserati','Mazda',   'Mercedes','Mercury',    'Mini','Mitsubishi','Nissan',
+    'Polestar','Pontiac', 'Porsche','Ram','Rivian',    'Rolls-Royce','Saab','Saturn',
+    'Scion',    'Smart','Subaru','Suzuki',  'Tesla','Toyota','Volkswagen','Volvo'];
+
+export const MODEL_TO_MANUFACTURER=[
+    {manufacturer:'acura', models:['A4','A5','A6','Q5','SQ5','Q7','Q8']},
+    {manufacturer:'audi', models:['A4','A5','A6','Q5','SQ5','Q7','Q8']},
+    {manufacturer: 'bmw', models: ['X1','X2','X3','X3 M','X4', 'X4','X4 M']},
+    {manufacturer: 'buick', models: ['REGAL SPORTBACK', 'REGAL GS','REGAL AVENIR','REGAL TOURX']}
+];
 
 export const VEHICLE = {
     MODEL: 'model',

@@ -17,7 +17,7 @@ const ChatRoom = require('../models')("ChatRoom");
         name: 'Luxury Motors',
         img: {
             contentType: mime.lookup('./ChatRoomImages/luxury_motors.jpg'),
-            image: new Buffer(fs.readFileSync('./ChatRoomImages/luxury_motors.jpg').toString('base64'), 'base64'),
+            image: Buffer.from(fs.readFileSync('./ChatRoomImages/luxury_motors.jpg').toString('base64'), 'base64'),
         },
         numMembers: 0,
     });
@@ -26,7 +26,7 @@ const ChatRoom = require('../models')("ChatRoom");
         name: 'Ferrari',
         img: {
             contentType: mime.lookup('./ChatRoomImages/Ferrari.png'),
-            image: new Buffer(fs.readFileSync('./ChatRoomImages/Ferrari.png').toString('base64'), 'base64'),
+            image: Buffer.from(fs.readFileSync('./ChatRoomImages/Ferrari.png').toString('base64'), 'base64'),
         },
         numMembers: 0,
     });
