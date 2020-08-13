@@ -54,6 +54,11 @@ module.exports = db => {
             default: [],
             ref: 'ChatRoom'
         }],
+        orders: [{
+            type: [mongo.Schema.Types.ObjectId],
+            default: [],
+            ref: 'Order'
+        }],
         requests: [{
             type: [mongo.Schema.Types.ObjectId],
             default: [],

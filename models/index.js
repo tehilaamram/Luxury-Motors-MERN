@@ -18,5 +18,6 @@ require('./chatRoom')(db);
 require('./chatMessage')(db);
 require('./request')(db);
 require('./comment')(db);
+require('./vehicleOrder')(db);
 
 module.exports = model => db.model(model);

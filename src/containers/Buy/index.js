@@ -9,6 +9,11 @@ import DataGrid, { Column, Scrolling ,Summary, TotalItem } from 'devextreme-reac
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import paymentImg from '../../images/payment.png';
 import AjaxService from '../../services/AjaxService';
+import { Cookies } from 'react-cookie';
+import { connect } from 'react-redux';
+import { restart } from '../../redux/Cart/actions';
+
+
 
 import './style.css';
 
@@ -122,6 +127,31 @@ class Buy extends React.Component {
                 </div>
         );
       }
+      commitOrder() {
+
+          var vehicleArray = this.props.location.state.vehicles.map((element, index) => {
+              return {
+                  id: element._id,
+                  price: element.price,
+                  quantity: this.props.location.state.list[element._id].length
+              };
+          });
+          console.log("vehicle array")
+          console.log(vehicleArray)
+        //   this
+          AjaxService.post('/order/new', {
+            vehicles: vehicleArray,
+            // quantities: this.props.location.state.list,
+          }).then((res) => {
+              console.log("ordre done");
+              this.cookies = new Cookies();
+              this.cookies.remove('vehicles');
+              this.props.onRestart(0);
+            //   cookies.set('vehicles', name, { expires: 0 });
+          }).catch((err) => {
+              console.log(err, " order failed");
+          });
+      }
       renderStep() {
           console.log('in stepper', this.props.location.state)
         switch (this.state.activeStep) {
@@ -131,9 +161,14 @@ class Buy extends React.Component {
             case 1:
               return this.renderPayment();
             case 2:
-              return this.renderComplete();
+                return;
+            //   return this.renderComplete();
+              case 3:
+                this.commitOrder();
+                return this.renderComplete();
             default:
-                return this.renderComplete();          }
+                return;
+            }
       }
     render() {
         const { classes } = this.props;
@@ -171,4 +206,17 @@ class Buy extends React.Component {
           );
     }
 }
-export default withStyles(useStyles)(Buy);
+
+const mapStateToProps = (state) => ({
+    cart: state.cart,
+    // catalogFilter: state.catalogFilter,
+});
+
+const mapDispatchToProps = {
+    onRestart: restart,
+    // onAdd: add,
+    // onAddTransmission: addTransmission,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Buy));
+// export default withStyles(useStyles)(Buy);

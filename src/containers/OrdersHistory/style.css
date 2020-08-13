@@ -1,0 +1,67 @@
+@import '../../css/variables.css';
+* {
+  box-sizing: border-box;
+}
+
+.buy-button-div {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px;
+}
+
+.Buy-button-145 {
+margin-right: 0 !important;
+}
+.MuiStepIcon-root.MuiStepIcon-active {
+    color: var(--red-color) !important;
+}
+
+.MuiStepIcon-root.MuiStepIcon-completed {
+    color: var(--success-green-color) !important;
+}
+.buy-vehicle-image {
+    width: 150px;
+}
+.dx-widget {
+    text-align-last: center;
+}
+
+.order-completed-main {
+    text-align: center;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.order-completed-title {
+    text-align: center;
+}
+.order-completed-body {
+    text-align: center;
+    margin-bottom: 100px;
+}
+#received-icon {
+    color:  #00c400;
+    height: 100px;
+    width: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    .order-completed-title {
+        font-size: 30px;
+    }
+    .order-completed-body {
+        font-size: 15px;
+    }
+}
+@media screen and (min-width: 769px) {
+    .order-completed-main {
+        margin-top: 30px;
+    }
+    .order-completed-title {
+        font-size: 50px;
+    }
+    .order-completed-body {
+        font-size: 25px;
+    }
+}

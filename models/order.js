@@ -9,20 +9,8 @@ module.exports = db => {
             type: mongo.Schema.Types.ObjectId,
             ref: 'User',
         },
-        vehicle: {
-            type: mongo.Schema.Types.ObjectId,
-            ref: 'Vehicle',
-        },
         date: { 
             type: Date,
-        },
-        quantity: {
-            type: Number,
-            default: 1,
-        },
-        price: {
-            type: Number,
-            default: 1,
         },
     }, { autoIndex: true });
     // schema.index({ user: 1, vehicle: 1 }, { unique: true });

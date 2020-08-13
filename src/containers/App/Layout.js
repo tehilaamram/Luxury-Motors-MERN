@@ -71,6 +71,7 @@ class Layout extends React.Component {
       const { match, user } = this.props;
       return(
         <>
+         {/*
           <IdleTimer
             ref={ref => { this.idleTimer = ref }}
             element={document}
@@ -80,6 +81,8 @@ class Layout extends React.Component {
             debounce={250}
             timeout={this.state.timeout} />
 
+        */} 
+        
             <div className="">
                 <Switch>
                     {(user.role !== ROLE.GUEST) && <Route 

@@ -55,7 +55,7 @@ let app = express();
         })
     )
     app.use(cookieParser(secret));
-    app.use(bodyParser.json())
+    app.use(bodyParser.json({limit: '50mb'}));
 
     app.use(session({
         // cookieName: 'session', // automatically used by passport sessions
