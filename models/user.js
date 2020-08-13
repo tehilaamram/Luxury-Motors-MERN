@@ -9,12 +9,6 @@ module.exports = db => {
             type: String,
             required: true,
         },
-        mainImg: { 
-            type: {
-                data: Buffer, contentType: String,
-            },
-            default: undefined,
-        },
         username: {
             type: String,
         },
@@ -26,10 +20,6 @@ module.exports = db => {
             required: true,
         },
         cart: {
-            type: [String],
-            default: [],
-        },
-        wishList: {
             type: [String],
             default: [],
         },

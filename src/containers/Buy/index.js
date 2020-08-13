@@ -128,6 +128,8 @@ class Buy extends React.Component {
         );
       }
       commitOrder() {
+          console.log('this.props.location.state.vehicles-----------');
+          console.log(this.props.location.state.vehicles);
 
           var vehicleArray = this.props.location.state.vehicles.map((element, index) => {
               return {
@@ -138,16 +140,22 @@ class Buy extends React.Component {
           });
           console.log("vehicle array")
           console.log(vehicleArray)
-        //   this
+          //   this
           AjaxService.post('/order/new', {
-            vehicles: vehicleArray,
-            // quantities: this.props.location.state.list,
+              vehicles: vehicleArray,
+              // quantities: this.props.location.state.list,
           }).then((res) => {
-              console.log("ordre done");
-              this.cookies = new Cookies();
-              this.cookies.remove('vehicles');
-              this.props.onRestart(0);
-            //   cookies.set('vehicles', name, { expires: 0 });
+              AjaxService.post('/vehicle/updateVehicle', {
+                  id: this.props.location.state.vehicles[0]._id,
+                  update: {quantity: this.props.location.state.vehicles[0].quantity - 1}
+              })
+                  .then((res) => {
+                      console.log("ordre done");
+                      this.cookies = new Cookies();
+                      this.cookies.remove('vehicles');
+                      this.props.onRestart(0);
+                  });
+              //   cookies.set('vehicles', name, { expires: 0 });
           }).catch((err) => {
               console.log(err, " order failed");
           });

@@ -6,15 +6,15 @@ const { ensureAuthenticated } = require('./middleware');
 var Vehicle = require('../models')("Vehicle");
 var ObjectId = require('mongoose').Types.ObjectId;
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploadedImages');
-  },
+  // destination: function (req, file, cb) {
+  //   cb(null, 'uploadedImages');
+  // },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now());
   }
 })
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage })
 router.post('/addVehicle', [ensureAuthenticated, upload.array('file', 30)], (req, res) => {
   console.log(req.files);
   var additionalImagesList = [];
@@ -46,6 +46,8 @@ router.post('/addVehicle', [ensureAuthenticated, upload.array('file', 30)], (req
     doors: req.body.doors,
     transmission: req.body.transmission,
     year: req.body.year,
+    price: req.body.price,
+    quantity: req.body.quantity,
   });
   newVehicle.save().then((vehicle) => {
     console.log(vehicle, ' vehicle saved');
@@ -97,7 +99,14 @@ router.get('/getVehicle/:id', (req, res) => {
   //   });
   // });
 });
-
+router.post('/updateVehicle', (req, res) => {
+  const { id, update } = req.body;
+  Vehicle.findByIdAndUpdate(id, update, (err) => {
+    console.log(id);
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
 router.get('/getVehiclesById/', (req, res) => {
 // console.log('in get by id', JSON.parse(req.query.params));
 var idJson = JSON.parse(req.query.params);

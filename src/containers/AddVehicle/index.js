@@ -24,6 +24,8 @@ class AddVehicle extends React.Component {
             additionalImages: [],
             seats: 2,
             modelsList:['A4','A5','A6','Q5','SQ5','Q7','Q8'],
+            quantity: 1,
+            price: 0,
         }
         autoBind(this);
     }
@@ -56,6 +58,12 @@ class AddVehicle extends React.Component {
     onSeatsChange(event) {
         this.setState({seats: event.target.value});
     }
+    onPriceChange(event) {
+        this.setState({price: event.target.value});
+    }
+    onQuantityChange(event) {
+        this.setState({quantity: event.target.value});
+    }
 
     onTransmissionChange(event) {
         this.setState({transmission: event});
@@ -75,7 +83,9 @@ class AddVehicle extends React.Component {
             this.state.doors===''||
             this.state.mainImage===''||
             this.state.additionalImages===[]||
-            this.state.seats===''
+            this.state.seats===''||
+            this.state.quantity===''||
+            this.state.price===''
         ) {
             alert('Fill all records');
         } else {
@@ -91,6 +101,8 @@ class AddVehicle extends React.Component {
             data.append(VEHICLE.COLOR, this.state.color);
             data.append(VEHICLE.YEAR, this.state.year);
             data.append(VEHICLE.SEATS, this.state.seats);
+            data.append(VEHICLE.QUANTITY, this.state.quantity);
+            data.append(VEHICLE.PRICE, this.state.price);
 
             AjaxService.post('/vehicle/addVehicle', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res) => {
                 this.props.history.push(`/vehicle/${res.data.id}`);
@@ -116,6 +128,10 @@ class AddVehicle extends React.Component {
                             valueChanged={this.onTransmissionChange}/>
                     <TextInput id={"seats"} text={"Seats"} type={"number"} onChange={this.onSeatsChange}
                                value={this.state.seats}/>
+                    <TextInput id={"price"} text={"Price"} type={"number"} onChange={this.onPriceChange}
+                               value={this.state.price}/>
+                    <TextInput id={"quantity"} text={"Quantity"} type={"number"} onChange={this.onQuantityChange}
+                               value={this.state.quantity}/>
 
                 </div>
                 <div className="AddVehicleUploadImagesContainer">

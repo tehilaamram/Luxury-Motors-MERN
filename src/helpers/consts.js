@@ -46,6 +46,8 @@ export const VEHICLE = {
     DOORS: 'doors',
     TRANSMISSION: 'transmission',
     YEAR: 'year',
+    PRICE: 'price',
+    QUANTITY: 'quantity',
 }
 
 export const CHAT = {

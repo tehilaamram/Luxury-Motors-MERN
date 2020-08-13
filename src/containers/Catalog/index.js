@@ -38,8 +38,13 @@ class Catalog extends React.Component {
     componentDidMount() {
         AjaxService.get('/vehicle/getAll').then((res) => {
             console.log(res, ' res get all vehicles');
+            const temp =[];
+            res.data.forEach((item)=>{
+                if(item.status && item.quantity !== 0)
+                    temp.push(item);
+            });
             this.setState({
-                vehicleList: res.data,
+                vehicleList: temp,
             });
         }).catch((err) => {
             console.log('err get all vehicles', err);
