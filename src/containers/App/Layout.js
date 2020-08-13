@@ -86,15 +86,15 @@ class Layout extends React.Component {
         
             <div className="">
                 <Switch>
-                    {(user.role !== ROLE.GUEST) && <Route 
+                    {(user.role === ROLE.ADMIN || user.role === ROLE.USER || user.role === ROLE.WORKER) && <Route 
                         exact path={`${match.path}chat-rooms/:uid`}
                         render={(props) => <CharRooms {...props} /> }
                     />}
-                    {(user.role !== ROLE.GUEST) && <Route 
+                    {(user.role === ROLE.ADMIN || user.role === ROLE.USER || user.role === ROLE.WORKER) && <Route 
                       exact path={`${match.path}orders-history`}
                       render={(props) => <OrdersHistory {...props} /> }
                   />}
-                    {(user.role !== ROLE.GUEST) && <Route 
+                    {(user.role === ROLE.ADMIN || user.role === ROLE.USER || user.role === ROLE.WORKER) && <Route 
                         exact path={`${match.path}buy`}
                         render={(props) => <Buy {...props} /> }
                     />}

@@ -58,61 +58,29 @@ class OrdersHistory extends React.Component {
             showRowLines={true}
             rowAlternationEnabled={true}
           >
-           
-            
             <Column dataField="vehicle.mainImg"
             caption=""
             cellRender={this.cellImageRender}
-
-              // allowSorting={false}
-              // cellRender={this.cellRender}
             />
             <Column dataField="vehicle.maker"
             caption="Maker"
-              // allowSorting={false}
-              // cellRender={this.cellRender}
             />
             <Column dataField="vehicle.model"
             caption="Model"
-              // allowSorting={false}
-              // cellRender={this.cellRender}
             />
             <Column dataField="vehicle.year"
             caption="Year"
-              // allowSorting={false}
-              // cellRender={this.cellRender}
             />
             <Column dataField="vehicle.color"
             caption="Color"
-              // allowSorting={false}
-              // cellRender={this.cellRender}
             />
             <Column dataField="quantity"
             caption="Quantity"
-              // allowSorting={false}
-              // cellRender={this.cellRender}
             />
             <Column dataField="price"
             caption="Price"
             format="currency"
-              // allowSorting={false}
-              // cellRender={this.cellRender}
             />
-            {/*
-               <Column dataField="date"
-              caption="Date"
-            />
-            <Column dataField="model" caption="Model"/>
-            <Column dataField="year" caption="Year"/>
-            <Column dataField="quantity1" calculateCellValue={this.quantityCellValue} caption="Quantity" />
-            <Column dataField="price" calculateCellValue={this.priceCellValue} caption="Price" format="currency" />
-            <Summary>
-            <TotalItem
-              column="price"
-              summaryType="sum"
-              valueFormat="currency" />
-          </Summary>
-            */}
             <Summary>
             <TotalItem
               column="price"
@@ -122,14 +90,10 @@ class OrdersHistory extends React.Component {
 
                />
                <TotalItem
-              //  name="SelectedRowsSummary"
-              //  summaryType="custom"
                valueFormat="currency"
                displayFormat={`Date: ${new Date(order.date).toLocaleString()}`}
                showInColumn="price" />
                <TotalItem
-               //  name="SelectedRowsSummary"
-                // summaryType="custom"
                 valueFormat="currency"
                 displayFormat={`Order Number: ${order._id}`}
                 showInColumn="price" />
