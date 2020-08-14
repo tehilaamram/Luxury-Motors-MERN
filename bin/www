@@ -44,7 +44,7 @@ io.on('connect', (socket) => {
     var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
     ChatRoom.findOne({ name: currentRoom[0] }).exec().then((room) => {
       if (room !== null && room.onlineMembers.includes(userId)) {
-        var index = room.onlineMembers.indexOf(ObjectId(userId));
+        var index = room.onlineMembers.indexOf(userId);
         if (index > -1) {
           room.onlineMembers.splice(index, 1);
           room.save();
@@ -57,13 +57,14 @@ io.on('connect', (socket) => {
       socket.join(newroom);
       console.log(socket.username, 's j')
       ChatRoom.findOne({ name: newroom }).exec().then((roomJoin) => {
+        console.log(roomJoin, ' roomJoin')
         if (roomJoin !== null) {
           // if (roomJoin.onlineMembers.includes(ObjectId(userId)))
-          if (!(roomJoin.onlineMembers.includes(ObjectId(userId)))) {
-            roomJoin.onlineMembers.push(ObjectId(userId));
+          if (!(roomJoin.onlineMembers.includes(userId))) {
+            roomJoin.onlineMembers.push(userId);
             roomJoin.save();
-            ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', select: 'username'}).exec((err, list) => {
-              socket.emit('getLast20Messages', list.slice(0,20));
+            ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', model: 'User', select: 'username role'}).exec((err, list) => {
+              socket.emit('getLast20Messages', list);
             });
             // socket.emit('updateOnlineMembers', roomJoin.onlineMembers.length);
             // socket.broadcast.to(newroom).emit('updateOnlineMembers', roomJoin.onlineMembers.length);
@@ -79,16 +80,27 @@ io.on('connect', (socket) => {
     console.log(socket.username, ' username');
     var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
     var currentChatMessage = new ChatMessage({
-      sender: ObjectId(userId),
-      room: ObjectId(groupId),
+      sender: userId,
+      room: groupId,
       date: new Date(),
       message: data,
     });
     currentChatMessage.save().then((m) => {
-      console.log(socket.username, ' username to send');
+      // console.log(socket.username, ' username to send');
+      User.findOne({ username: socket.username }).exec().then((user) => {
+        io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username, role: user.role}, message: data, date: currentChatMessage.date });
+        callback();
+        // ChatRoom.find({ onlineMembers: { "$in" : [user._id]} }).exec((err, list) => {
+        //   list.forEach(element => {
+        //     element.onlineMembers.pop(user._id);
+        //     element.save();
+        //     socket.broadcast.to(element.name).emit('updateOnlineMembers', element.onlineMembers.length);
+        //   });
+        // });
+      });
       // we tell the client to execute 'updatechat' with 2 parameters
-      io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username}, message: data, date: currentChatMessage.date });
-      callback();
+      // io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username}, message: data, date: currentChatMessage.date });
+      // callback();
       // callback();{}
 
     })
@@ -97,8 +109,8 @@ io.on('connect', (socket) => {
     console.log(lastMessage, ' username');
         var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
     ChatMessage.find({room: currentRoom.id}).populate({ path: 'sender', select: 'username'}).exec((err, list) => {
-      const isTheSameId = (element) => element._id === lastMessage._id;
-      const index = list.findIndex(isTheSameId);
+      // const isTheSameId = (element) => element._id === lastMessage._id;
+      // const index = list.findIndex(isTheSameId);
           socket.emit('loadMoreMessages', list);
       // if (index > 15) {
       //   socket.emit('loadMoreMessages', list.slice(index - 16, index));

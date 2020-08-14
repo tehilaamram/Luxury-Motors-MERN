@@ -17,6 +17,7 @@ class Messages extends React.Component {
   //   scroll.scrollToBottom();
   // }
   render() {
+    console.log(this.props.messages, ' messages');
     return (
       <ScrollToBottom className="messages">
       {/* <div className="messages" id="messages-list"> */}
