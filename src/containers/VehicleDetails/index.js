@@ -10,6 +10,10 @@ import Rating from '@material-ui/lab/Rating';
 import Comment from '../../components/Comment';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { connect } from 'react-redux';
+import { addMany } from '../../redux/Cart/actions';
+import { Cookies } from 'react-cookie';
+import { ROLE } from '../../helpers/consts';
+
 import './style.css';
 class VehicleDetails extends React.Component {
   constructor(props) {
@@ -34,9 +38,11 @@ class VehicleDetails extends React.Component {
       comment: '',
       postRate: 1,
     }
+    this.cookies = new Cookies();
     autoBind(this);
   }
   componentDidMount() {
+    console.log("role ", this.props.user.role)
     const { match: { params } } = this.props;
     AjaxService.get(`/vehicle/getVehicle/${params.id}`).then((res) => {
       var imgList = [];
@@ -177,6 +183,36 @@ class VehicleDetails extends React.Component {
       });
     }
   }
+  addToCart() {
+    let date = new Date();
+    date.setTime(date.getTime() + (99 * 365 * 24 * 60 * 60 * 1000));
+    // console.log('in cookie');
+    var arrayToCookie = [];
+    for(var i=0; i< this.state.quantityToOrder; i++) {
+      arrayToCookie.push({
+        id: i,
+        vehicle: this.state.vehicle._id,
+      });
+    }
+    this.cookies.set('vehicles', arrayToCookie, { path: '/', maxAge: 60 * 60 * 24 * 365 });
+    this.props.onAddMany(this.state.quantityToOrder);
+  }
+  buy() {
+    var currentVehicle = this.state.vehicle._id;
+    var list = '{ "' + currentVehicle.toString() + '":[';
+    //  + '[' + 8 + ']}';
+    for(var i=0; i< this.state.quantityToOrder; i++) {
+      if (i === 0) {
+        list += 8;
+      } else {
+        list += ',' + 8;
+      }
+    }
+    // if (this.state.quantityToOrder > 0) {
+      list += ']}'
+    // } else 
+    this.props.history.push({ pathname: '/buy', state: { vehicles: [this.state.vehicle], list: JSON.parse(list), fromCart: false } });
+}
   renderCustomersReview() {
     var rateArray = _.groupBy(this.state.vehicle.comments, (item) => {
       return item.rate;
@@ -230,7 +266,7 @@ class VehicleDetails extends React.Component {
           </ul>
         </div>
         <div className="feedback-container">
-          <div className="vehicle-new-comment">
+          { (this.props.user.role !== ROLE.GUEST &&this.props.user.role !== null ) && <div className="vehicle-new-comment">
             
             <span className="comment-post-title">Add Comment </span>
             <div className="comment-post-rating">
@@ -249,7 +285,7 @@ class VehicleDetails extends React.Component {
             <div className="comment-post-buttons">
             <Button title={"Post"} onClick={this.postComment} css={"PrimaryButton"} width={"w100px"}/>
               </div>
-          </div>
+          </div>}
           <div className="vehicle-comments-list">
             {
               this.state.vehicle.comments.map((element, index) => {
@@ -376,8 +412,8 @@ class VehicleDetails extends React.Component {
                 </div>
               </div>
               <div className="vehicle-actions">
-                <Button css={"PrimaryButton"} width={"w150px"} title={"Buy Now"} onClick={this.save} />
-                <Button css={"PrimaryButton"} title={"Add to Cart"} width={"w150px"} onClick={this.save} />
+                <Button css={"PrimaryButton"} width={"w150px"} title={"Buy Now"} onClick={this.buy} />
+                <Button css={"PrimaryButton"} title={"Add to Cart"} width={"w150px"} onClick={this.addToCart} />
 
               </div>
             </div>
@@ -406,7 +442,14 @@ class VehicleDetails extends React.Component {
 }
 const mapStateToProps = (state) => ({
   user: state.user,
+  cart: state.cart
 });
 
-export default connect(mapStateToProps, {})(VehicleDetails);
+const mapDispatchToProps = {
+  onAddMany: addMany,
+  // onAdd: add,
+  // onAddTransmission: addTransmission,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(VehicleDetails);
 // export default VehicleDetails;

@@ -9,8 +9,11 @@ import localStorage from "localforage";
 
 const initialState =
 {
-    role: localStorage.getItem("role"),
-    // ROLE.GUEST,
+    // role: localStorage.getItem("role"),
+    // role: localStorage.getItem("role").then((userRole) => {
+    //     return userRole;
+    // }),
+    role: ROLE.GUEST,
     email: '',
     fullName: '',
     id: '',

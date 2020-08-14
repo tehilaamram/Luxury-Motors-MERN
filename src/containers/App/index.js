@@ -41,10 +41,10 @@ class App extends React.Component {
         console.log(store.getState(), ' store');
         return (
             <Provider store={store}>
+            <Init />
                 <BrowserRouter>
                     <div className="box">
                         {/* <div className="AppContainer"> */}
-                        <Init />
                         {/* <div className={"ChatButtonDiv"}>
                 {this.state.chatOpened && <Chat />}
                         <Button css={"ChatButton"} onClick={this.renderChat} />

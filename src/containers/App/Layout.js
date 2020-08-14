@@ -116,6 +116,7 @@ class Layout extends React.Component {
                       render={(props) => <AllOrders {...props} /> }
                   />}
                     <Route path='/404' component={Error404} />
+                    <Redirect from='*' to='/404' />
                     {/*
                                           <Redirect from='*' to='/404' />
                     */}
