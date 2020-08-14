@@ -19,11 +19,14 @@ import ResetPasswordModal from '../../components/ResetPasswordModal';
 import Footer from '../../components/Footer';
 // import Button from '../../components/Button';
 import AppBar from '../../components/AppBar';
+import PrivateRoute from './PrivateRoute';
+
 // import PrivateRoute from './privateRoute';
 import ManageUsers from '../ManageUsers';
 import ManageOrders from '../ManageOrders';
 import Buy from '../Buy';
 import './style.css';
+import ChatRooms from '../ChatRooms';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -64,8 +67,9 @@ class App extends React.Component {
                                  <Route path='/about' component={About} />
                                 <Route path="/cart" component={Cart} />
                                 <Route path='/vehicle/:id' component={VehicleDetails} />
-                                <Route path='/' render={(props) => <Layout {...props} /> } />
+                                <PrivateRoute component={ChatRooms} path="/chat-rooms/:uid" exact />
                               {/* 
+                                                                <Route path='/' render={(props) => <Layout {...props} /> } />
                              <Route path='/reset/:token' component={ResetPassword} />
                             <Route path='/manage-users' component={ManageUsers} />
                             <Route path="/chat-rooms/:uid" component={CharRooms} />

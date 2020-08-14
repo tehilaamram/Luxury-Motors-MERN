@@ -1,4 +1,4 @@
-import localStorage from "localforage";
+// import localStorage from "localforage";
 
 import * as types from './types';
 import { VEHICLE } from '../../helpers/consts';
