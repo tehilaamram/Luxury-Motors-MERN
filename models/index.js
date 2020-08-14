@@ -4,7 +4,7 @@ const mongo = require('mongoose');
 let db = mongo.createConnection();
 (async () => {
     try {
-        await db.openUri('mongodb://localhost/luxury-motors', {useNewUrlParser: true, useUnifiedTopology: true});
+        await db.openUri('mongodb://localhost/luxury-motors', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
     } catch (err) {
         debug('Error connecting to DB: ' + err);
     }
