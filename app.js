@@ -66,7 +66,8 @@ let app = express();
         saveUninitialized: false,  // do we need to save an 'empty' session object? - mandatory option
         rolling: true,             // do we send the session ID cookie with each response?
         store: new MongoStore({ mongooseConnection: sessionConnect }), // session storage backend
-        cookie: { maxAge: 1000 * 60 * 150, httpOnly: true, sameSite: true}  // cookie parameters
+        cookie: {  httpOnly: true, sameSite: true}  // cookie parameters
+        // maxAge: 1000 * 60 * 150,
         // NB: maxAge is used for session object expiry setting in the storage backend as well
     }));
     var User = require('./models')("User");
