@@ -6,6 +6,7 @@ import AddVehicle from '../AddVehicle';
 import CharRooms from '../ChatRooms';
 import ManageRooms from '../ManageRooms';
 import ManageUsers from '../ManageUsers';
+import ManageOrders from '../ManageOrders';
 import Buy from '../Buy';
 import OrdersHistory from '../OrdersHistory';
 // import Chat from '../../components/Chat/Chat';
@@ -109,6 +110,10 @@ class Layout extends React.Component {
                     {(user.role === ROLE.ADMIN) && <Route 
                         exact path={`${match.path}manage-users`}
                         render={(props) => <ManageUsers {...props} /> }
+                    />}
+                    {(user.role === ROLE.ADMIN) && <Route
+                        exact path={`${match.path}manage-orders`}
+                        render={(props) => <ManageOrders {...props} /> }
                     />}
                     <Route path='/404' component={Error404} />
                     <Redirect from='*' to='/404' />

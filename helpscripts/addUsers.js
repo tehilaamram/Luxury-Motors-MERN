@@ -13,4 +13,10 @@ const crypto = require('crypto');
         }
         process.exit(0);
     });
+    User.register(new User({ username: 'lital@gmail.com', role: 'admin', fullName: 'Lital Maudah' }), encryptedPassword, function (err, user) {
+        if (err) {
+            console.log(err, ' error');
+        }
+        process.exit(0);
+    });
 })();

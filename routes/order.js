@@ -20,15 +20,16 @@ router.post('/new', ensureAuthenticated, (req, res) => {
             } else {
                 req.body.vehicles.forEach(element => {
                     var newVehicleOrder = new VehicleOrder({
-                                order: savedOrder._id,
-                                vehicle: element.id,
-                                quantity: element.quantity,
-                                price: element.price,
-                            });
-                            newVehicleOrder.save().then((savedVehicleOrder) => {
-                                orderToUpdate.vehicles.push(savedVehicleOrder._id);
-                                orderToUpdate.save();
-                            });
+                        order: savedOrder._id,
+                        vehicle: element.id,
+                        quantity: element.quantity,
+                        price: element.price,
+                        status: 'On hold',
+                    });
+                    newVehicleOrder.save().then((savedVehicleOrder) => {
+                        orderToUpdate.vehicles.push(savedVehicleOrder._id);
+                        orderToUpdate.save();
+                    });
                 });
             }
         })
@@ -45,7 +46,7 @@ router.post('/new', ensureAuthenticated, (req, res) => {
         //             });
         // });
         // savedOrder.save().then((s) => {
-            res.sendStatus(200);
+        res.sendStatus(200);
         // });
         // req.body.vehicles.foreach((element) => {
         //     var newVehicleOrder = new VehicleOrder({
@@ -58,6 +59,47 @@ router.post('/new', ensureAuthenticated, (req, res) => {
         // });
     });
 });
+router.get('/getAll', (req, res) => {
+    Order.find().populate({ path: 'vehicles', model: "VehicleOrder", populate: {
+            path: "vehicle", model: "Vehicle"
+        }}).exec((err, list) => {
+        if(err) {
+            res.sendStatus(404);
+        } else {
+            res.json({
+                status: 200,
+                list,
+            });
+        }
+    });
+});
+
+    router.post('/update', function (req, res) {
+        const { id, update } = req.body;
+        VehicleOrder.findByIdAndUpdate(id, update, (err) => {
+            console.log(id);
+            if (err) return res.json({ success: false, error: err });
+            return res.json({ success: true });
+        });
+        // VehicleOrder.findOneAndUpdate({ order: req.body.order._id }, req.body.order, { new: true }, function(err, doc) {
+        //     if(err) {
+        //         res.sendStatus(400);
+        //     } else {
+        //         res.sendStatus(200);
+        //     }
+        // });
+        // User.findOne({ resetPasswordToken: req.body.userToken }, (err, user) => {
+        //   if (err) {
+        //     res.sendStatus(404);
+        //   }
+        // });
+    });
+    //
+    // console.log('req.body===');
+    // console.log(req.body);
+    // const { id, update } = req.body;
+
+
 router.get('/getUserOrders', ensureAuthenticated, (req, res) => {
     Order.find({user: req.user._id}).populate({ path: 'vehicles', model: "VehicleOrder", populate: {
         path: "vehicle", model: "Vehicle"

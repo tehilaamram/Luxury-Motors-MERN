@@ -21,6 +21,10 @@ module.exports = db => {
             type: Number,
             default: 1,
         },
+        status: {
+            type: String,
+            required: true,
+        },
     }, { autoIndex: true });
     schema.index({ order: 1, vehicle: 1 }, { unique: true });
 

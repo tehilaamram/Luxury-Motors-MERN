@@ -21,6 +21,7 @@ import Footer from '../../components/Footer';
 import AppBar from '../../components/AppBar';
 // import PrivateRoute from './privateRoute';
 import ManageUsers from '../ManageUsers';
+import ManageOrders from '../ManageOrders';
 import Buy from '../Buy';
 import './style.css';
 class App extends React.Component {

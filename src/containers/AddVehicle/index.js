@@ -104,9 +104,11 @@ class AddVehicle extends React.Component {
             data.append(VEHICLE.QUANTITY, this.state.quantity);
             data.append(VEHICLE.PRICE, this.state.price);
 
-            AjaxService.post('/vehicle/addVehicle', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res) => {
-                this.props.history.push(`/vehicle/${res.data.id}`);
-            }).catch((err) => {
+            AjaxService.post('/vehicle/addVehicle', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+                .then((res) => {
+                    console.log('---------');
+                    this.props.history.push(`/vehicle/${res.data.id}`);
+                }).catch((err) => {
                 console.log(err, ' add vehicle save error');
             });
         }

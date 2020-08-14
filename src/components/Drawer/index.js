@@ -143,6 +143,12 @@ signOut(){
               </ListItemIcon>
             <ListItemText primary={'Manage Users'} />
           </ListItem>
+            <ListItem button onClick={this.navigateTo.bind(this, '/manage-orders')} key={'Manage Orders'}>
+            <ListItemIcon>
+              {/* <PeopleIcon />  */}
+              </ListItemIcon>
+            <ListItemText primary={'Manage Orders'} />
+          </ListItem>
           <ListItem button onClick={this.navigateTo.bind(this, `/manage-rooms/${user.id}`)} key={'Manage Rooms'}>
             <ListItemIcon>
               {/* <RateReviewIcon />  */}

@@ -97,6 +97,10 @@ class OrdersHistory extends React.Component {
                 valueFormat="currency"
                 displayFormat={`Order Number: ${order._id}`}
                 showInColumn="price" />
+                <TotalItem
+                valueFormat="currency"
+                displayFormat={`Order status: ${order.vehicles[0].status}`}
+                showInColumn="price" />
           </Summary>
             <Scrolling columnRenderingMode="virtual" />
           </DataGrid>
