@@ -36,9 +36,25 @@ class Buy extends React.Component {
         super(props);
         this.state = {
             activeStep: 0,
+            isEnoughQuantity: false,
         }
         autoBind(this);
         console.log(this.props.location.state);
+    }
+    componentDidMount() {
+      var vehicleArray = this.props.location.state.vehicles.map((element, index) => {
+        if (element.quantity < this.props.location.state.list[element._id].length) {
+          this.setState({
+            isEnoughQuantity: true,
+          });
+        }
+        return {
+            id: element._id,
+            price: element.price,
+            quantity: this.props.location.state.list[element._id].length,
+            oldQuantity: element.quantity,
+        };
+    });
     }
     handleNext() {
         if (this.state.activeStep === 1) {
@@ -53,6 +69,8 @@ class Buy extends React.Component {
        
     }
     handleBack() {
+
+
         this.setState({
             activeStep: this.state.activeStep - 1,
         });
@@ -128,14 +146,13 @@ class Buy extends React.Component {
         );
       }
       commitOrder() {
-          console.log('this.props.location.state.vehicles-----------');
-          console.log(this.props.location.state.vehicles);
 
           var vehicleArray = this.props.location.state.vehicles.map((element, index) => {
               return {
                   id: element._id,
                   price: element.price,
-                  quantity: this.props.location.state.list[element._id].length
+                  quantity: this.props.location.state.list[element._id].length,
+                  oldQuantity: element.quantity,
               };
           });
           console.log("vehicle array")
@@ -150,10 +167,11 @@ class Buy extends React.Component {
                   update: {quantity: this.props.location.state.vehicles[0].quantity - 1}
               })
                   .then((res) => {
-                      console.log("ordre done");
-                      this.cookies = new Cookies();
-                      this.cookies.remove('vehicles');
-                      this.props.onRestart(0);
+                      if (this.props.location.state.fromCart === true) {
+                          this.cookies = new Cookies();
+                          this.cookies.remove('vehicles');
+                          this.props.onRestart(0);
+                      }
                   });
               //   cookies.set('vehicles', name, { expires: 0 });
           }).catch((err) => {
@@ -200,6 +218,7 @@ class Buy extends React.Component {
                         Back
                       </Button>
                       <Button
+                      disabled={this.state.isEnoughQuantity}
                         variant="contained"
                         color="primary"
                         onClick={this.handleNext}

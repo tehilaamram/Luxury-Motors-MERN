@@ -9,6 +9,7 @@ import ManageUsers from '../ManageUsers';
 import ManageOrders from '../ManageOrders';
 import Buy from '../Buy';
 import OrdersHistory from '../OrdersHistory';
+import AllOrders from '../AllOrders';
 // import Chat from '../../components/Chat/Chat';
 import { connect } from 'react-redux';
 import Error404 from '../Error404';
@@ -112,11 +113,18 @@ class Layout extends React.Component {
                         render={(props) => <ManageUsers {...props} /> }
                     />}
                     {(user.role === ROLE.ADMIN) && <Route
+                      exact path={`${match.path}all-orders`}
+                      render={(props) => <AllOrders {...props} /> }
+                  />}
+                    {(user.role === ROLE.ADMIN) && <Route
                         exact path={`${match.path}manage-orders`}
                         render={(props) => <ManageOrders {...props} /> }
                     />}
                     <Route path='/404' component={Error404} />
                     <Redirect from='*' to='/404' />
+                    {/*
+                                          <Redirect from='*' to='/404' />
+                    */}
                 </Switch>
             </div>
         </>

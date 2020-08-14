@@ -25,7 +25,10 @@ class Message extends React.Component {
         <div className="messageContainer justifyEnd">
           <div className="avatarMessageMe">
             <div className="messageBox backgroundBlue">
+            <div className="message-header message-header-blue">
               <div className="messageText colorWhite sender">{sender.username}</div>
+              <div className="messageText colorWhite role"> {sender.role}</div>
+              </div>
               <div className="messageText colorWhite">
                 <Linkify><Highlight search={this.props.filter.strSearch}>{message}</Highlight></Linkify>
               </div>
@@ -46,7 +49,10 @@ class Message extends React.Component {
           </div>
           <div className="avatarMessageOther">
             <div className="messageBox backgroundLight">
+            <div className="message-header message-header-light">
               <div className="messageText colorDark sender">{sender.username}</div>
+              <div className="messageText colorWhite role"> {sender.role}</div>
+              </div>
               <div className="messageText colorDark">
                 {/* {ReactEmoji.emojify(message)} */}
                 <Linkify><Highlight search={this.props.filter.strSearch}>{message}</Highlight></Linkify>

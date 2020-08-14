@@ -1,5 +1,5 @@
 import {
-   ADD, SUB, RELOAD, RESTART
+   ADD, SUB, RELOAD, RESTART, ADD_MANY
 } from './types';
 
 export default function reducer(state = 0, action) {
@@ -12,6 +12,8 @@ export default function reducer(state = 0, action) {
             return action.sum;
         case RESTART:
             return action.sum;
+        case ADD_MANY:
+            return state + action.sum;
         default:
             return state;
     }

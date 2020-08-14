@@ -82,7 +82,7 @@ class Cart extends React.Component {
         var vehicleArray = _.groupBy(this.state.vehicleCart, (item) => {
             return item.vehicle;
           });
-        this.props.history.push({pathname: '/buy', state: {vehicles: this.state.vehicleList, list: vehicleArray }});
+        this.props.history.push({pathname: '/buy', state: {vehicles: this.state.vehicleList, list: vehicleArray, fromCart: true }});
     }
     render() {
         console.log(this.props.cart, ' cart from redux')

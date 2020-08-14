@@ -256,7 +256,7 @@ class ManageRooms extends React.Component {
             <div className="NewRoomContainer">
                 <TextInput id={"roomName"} text={"Name"} type={"text"} onChange={this.onRoomNameChange} value={this.state.roomName} />
                 <ImageUpload onValueChanged={this.onRoomImageChange} buttonText={"Upload Room Image"} singleImage={true} />
-                <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} />
+                <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} width={"w100px"}/>
             </div>
         );
     }

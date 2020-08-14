@@ -27,3 +27,10 @@ export function restart(sum) {
         sum,
     };
 }
+
+export function addMany(sum) {
+    return {
+        type: types.ADD_MANY,
+        sum,
+    }
+}

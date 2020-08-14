@@ -17,10 +17,13 @@ class Messages extends React.Component {
   //   scroll.scrollToBottom();
   // }
   render() {
+    console.log(this.props.messages, ' messages');
     return (
       <ScrollToBottom className="messages">
       {/* <div className="messages" id="messages-list"> */}
-        <Button title={"Load More"} css={"load-more"} width={"w100percent"} onClick={this.props.loadMore}/>
+       {/*
+         <Button title={"Load More"} css={"load-more"} width={"w100percent"} onClick={this.props.loadMore}/>
+      */}
         {this.props.messages.map((message, i) => <div key={i}><Message message={message} name={this.props.name} /></div>)}
       </ScrollToBottom>
     );
