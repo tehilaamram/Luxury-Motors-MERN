@@ -60,12 +60,15 @@ io.on('connect', (socket) => {
           if (!(roomJoin.onlineMembers.includes(userId))) {
             roomJoin.onlineMembers.push(userId);
             roomJoin.save();
-            ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', model: 'User', select: 'username role'}).exec((err, list) => {
-              socket.emit('getLast20Messages', list);
-            });
+            // ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', model: 'User', select: 'username role'}).exec((err, list) => {
+            //   socket.emit('getLast20Messages', list);
+            // });
             // socket.emit('updateOnlineMembers', roomJoin.onlineMembers.length);
             // socket.broadcast.to(newroom).emit('updateOnlineMembers', roomJoin.onlineMembers.length);
           }
+          ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', model: 'User', select: 'username role'}).exec((err, list) => {
+            socket.emit('getLast20Messages', list);
+          });
           socket.emit('updateOnlineMembers', roomJoin.onlineMembers.length);
           socket.broadcast.to(newroom).emit('updateOnlineMembers', roomJoin.onlineMembers.length);
         }
