@@ -13,7 +13,8 @@ const initialState =
     // role: localStorage.getItem("role").then((userRole) => {
     //     return userRole;
     // }),
-    role: ROLE.GUEST,
+    role: localStorage.getItem("role"),
+    // role: ROLE.GUEST,
     email: '',
     fullName: '',
     id: '',

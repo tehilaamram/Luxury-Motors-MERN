@@ -1,17 +1,22 @@
 import React from 'react';
 import { Provider } from "react-redux";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import store from '../../store';
 import Init from '../../components/Init';
 import autoBind from 'react-autobind';
 // import { connect } from 'react-redux';
-import Layout from './Layout';
 import Home from '../Home';
 import About from '../About';
 import Catalog from '../Catalog';
 import VehicleDetails from '../VehicleDetails';
 import ResetPassword from '../ResetPassword';
 import Cart from '../Cart';
+import Error404 from '../Error404';
+import AddVehicle from '../AddVehicle';
+import OrdersHistory from '../OrdersHistory';
+import Buy from '../Buy';
+import ManageRooms from '../ManageRooms';
+import AllOrders from '../AllOrders';
 
 import SignUpModal from "../../components/SignUpModal";
 import LoginModal from "../../components/SignInModal";
@@ -20,13 +25,15 @@ import Footer from '../../components/Footer';
 // import Button from '../../components/Button';
 import AppBar from '../../components/AppBar';
 import PrivateRoute from './PrivateRoute';
-
+import PrivateWorkerRoute from './PrivateWorkerRoute';
+import PrivateAdminRoute from './PrivateAdminRoute';
 // import PrivateRoute from './privateRoute';
 import ManageUsers from '../ManageUsers';
 import ManageOrders from '../ManageOrders';
-import Buy from '../Buy';
 import './style.css';
 import ChatRooms from '../ChatRooms';
+import { isWorker } from '../../utils';
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -48,11 +55,6 @@ class App extends React.Component {
             <Init />
                 <BrowserRouter>
                     <div className="box">
-                        {/* <div className="AppContainer"> */}
-                        {/* <div className={"ChatButtonDiv"}>
-                {this.state.chatOpened && <Chat />}
-                        <Button css={"ChatButton"} onClick={this.renderChat} />
-                    </div> */}
                         <SignUpModal />
                         <div className="row header">
                             <AppBar />
@@ -68,6 +70,15 @@ class App extends React.Component {
                                 <Route path="/cart" component={Cart} />
                                 <Route path='/vehicle/:id' component={VehicleDetails} />
                                 <PrivateRoute component={ChatRooms} path="/chat-rooms/:uid" exact />
+                                <PrivateRoute component={OrdersHistory} path="/orders-history" exact />
+                                <PrivateRoute component={Buy} path="/buy" exact />
+                                <PrivateWorkerRoute component={AddVehicle} path="/add-vehicle" exact />
+                                <PrivateWorkerRoute component={AllOrders} path="/all-orders" exact />
+                                <PrivateAdminRoute component={ManageUsers} path="/manage-users" exact />
+                                <PrivateAdminRoute component={ManageRooms} path="/manage-rooms/:id" exact />
+                                <PrivateAdminRoute component={ManageOrders} path="/manage-orders" exact />
+                                <Route path='/404' component={Error404} />
+                                <Redirect from='*' to='/404' />
                               {/* 
                                                                 <Route path='/' render={(props) => <Layout {...props} /> } />
                              <Route path='/reset/:token' component={ResetPassword} />
