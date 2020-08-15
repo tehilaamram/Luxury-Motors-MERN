@@ -65,3 +65,38 @@ margin-right: 0 !important;
         font-size: 25px;
     }
 }
+
+.tracking-progress-bar {
+    flex-direction: column;
+}
+
+.tracking-progress-bar__item {
+    background: #E5E7ED;
+    border-radius: 50%;
+    color: #768CAD;
+    font-family: sans-serif;
+    height: 10px;
+    line-height: 30px;
+    position: relative;
+    text-align: center;
+    width: 10px;
+}
+
+.tracking-progress-bar__item__bar {
+    background: #E5E7ED;
+    display: block;
+    height: 30px;
+    width: 3px;
+    margin-left: 3.5px;
+}
+.tracking-progress-bar__item__bar--active {
+    background: #00c400;
+}
+
+.tracking-progress-bar__item--active {
+    background: #00c400;
+    color: #fff;
+}
+.tracker-text {
+    align-self: baseline;
+}

@@ -47,7 +47,7 @@ router.post('/new', ensureAuthenticated, (req, res) => {
         res.sendStatus(200);
     });
 });
-router.get('/getAll', (req, res) => {
+router.get('/getAllOrders', (req, res) => {
     Order.find().populate({ path: 'vehicles', model: "VehicleOrder", populate: {
             path: "vehicle", model: "Vehicle"
         }}).exec((err, list) => {

@@ -19,10 +19,10 @@ const statuses= [{
     r: 'Pending supplier'
 }, {
     id: 2,
-    r: 'confirmed'
+    r: 'Confirmed'
 }, {
     id: 3,
-    r: 'on process'
+    r: 'On process'
 }, {
     id: 4,
     r: 'Done'
@@ -38,7 +38,7 @@ class ManageUsers extends React.Component {
         this.getOrdersList();
     }
     getOrdersList() {
-        AjaxService.get("/order/getAll").then((res) => {
+        AjaxService.get("/order/getAllOrders").then((res) => {
             console.log(res,'==========');
             this.setState({
                 ordersList: res.data.list,
