@@ -2,6 +2,7 @@
     position: relative;
     padding: 15px 0 10px;
     min-height: 100px;
+    text-align: start;
     /* padding-left: 125px; */
     border-bottom: 1px solid #E9E9E9;
 }

@@ -9,7 +9,11 @@ router.post('/resetPassword', async function (req, res) {
       res.sendStatus(404);
     }
     User.updatePassword(user, req.body.newPassword, () => {
-      res.sendStatus(200);
+      User.findOneAndUpdate({ resetPasswordToken: req.body.userToken }, { resetPasswordExpires: Date.now() }, { new: true }, function (err, doc) {
+        if (err) {
+            res.sendStatus(400);
+        }
+    });      res.sendStatus(200);
     });
   });
 });

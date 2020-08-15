@@ -164,7 +164,7 @@ class Buy extends React.Component {
                       if (this.props.location.state.fromCart === true) {
                           this.cookies = new Cookies();
                           this.cookies.remove('vehicles');
-                          this.props.onRestart(0);
+                          // this.props.onRestart(0);
                       }
           }).catch((err) => {
               console.log(err, " order failed");

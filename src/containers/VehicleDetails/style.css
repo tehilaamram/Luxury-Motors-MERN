@@ -258,6 +258,10 @@
   width: 100%;
   text-align: end;
 }
+.vehicle-new-comment-header {
+  width: 100%;
+  text-align: start;
+}
 @media screen and (max-width: 768px) {
   .VehicleDetailsContainer {
     flex-direction: column;
