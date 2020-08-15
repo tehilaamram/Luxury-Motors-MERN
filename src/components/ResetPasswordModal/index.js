@@ -34,13 +34,13 @@ class ResetPasswordModal extends React.Component {
             AjaxService.post('/resetPassword', {
                 email: this.state.email,
             }).then((res) => {
-                    if (res.status === 200) {
-                        console.log(res, ' session', res);
+                    // if (res.status === 200) {
+                        // console.log(res, ' session', res);
                         this.props.onSignUp(res.data.user.id, this.state.email, this.state.fullName);
                         this.closeModal();
-                    } else {
-                        alert(res.data.error.errmsg);
-                    }
+                    // } else {
+                    //     alert(res.data.error.errmsg);
+                    // }
                 }).catch((err) => {
                     if (err.response === undefined) {
                         this.setState({

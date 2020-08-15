@@ -267,7 +267,7 @@ class VehicleDetails extends React.Component {
         </div>
         <div className="feedback-container">
           { (this.props.user.role !== ROLE.GUEST &&this.props.user.role !== null ) && <div className="vehicle-new-comment">
-            
+            <div className="vehicle-new-comment-header">
             <span className="comment-post-title">Add Comment </span>
             <div className="comment-post-rating">
             <Rating
@@ -278,6 +278,7 @@ class VehicleDetails extends React.Component {
           onChange={this.rateChange}
           emptyIcon={<StarBorderIcon fontSize="inherit" />}
         />
+              </div>
               </div>
               <div>
             <textarea rows="4" className="comment-text-to-post" id="user-comment-post"></textarea>
