@@ -17,22 +17,19 @@ import OrdersHistory from '../OrdersHistory';
 import Buy from '../Buy';
 import ManageRooms from '../ManageRooms';
 import AllOrders from '../AllOrders';
-
 import SignUpModal from "../../components/SignUpModal";
 import LoginModal from "../../components/SignInModal";
 import ResetPasswordModal from '../../components/ResetPasswordModal';
 import Footer from '../../components/Footer';
-// import Button from '../../components/Button';
 import AppBar from '../../components/AppBar';
 import PrivateRoute from './PrivateRoute';
 import PrivateWorkerRoute from './PrivateWorkerRoute';
 import PrivateAdminRoute from './PrivateAdminRoute';
-// import PrivateRoute from './privateRoute';
 import ManageUsers from '../ManageUsers';
 import ManageOrders from '../ManageOrders';
-import './style.css';
 import ChatRooms from '../ChatRooms';
-import { isWorker } from '../../utils';
+
+import './style.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -46,7 +43,6 @@ class App extends React.Component {
         this.setState({
             chatOpened: !this.state.chatOpened,
         });
-        console.log('render chat')
     }
     render() {
         console.log(store.getState(), ' store');
@@ -79,18 +75,6 @@ class App extends React.Component {
                                 <PrivateAdminRoute component={ManageOrders} path="/manage-orders" exact />
                                 <Route path='/404' component={Error404} />
                                 <Redirect from='*' to='/404' />
-                              {/* 
-                                                                <Route path='/' render={(props) => <Layout {...props} /> } />
-                             <Route path='/reset/:token' component={ResetPassword} />
-                            <Route path='/manage-users' component={ManageUsers} />
-                            <Route path="/chat-rooms/:uid" component={CharRooms} />
-
-                                <Route path="/manage-rooms/:id" component={ManageRooms} />
-                                <Route path="/buy" component={Buy}/>
-                                <Route component={Home} />
-
-
-                            */}  
                             </Switch>
                         </div>
                         <div className="row footer">
@@ -98,21 +82,10 @@ class App extends React.Component {
                             <Footer />
                         </div>
                     </div>
-                    {/* </div> */}
                 </BrowserRouter>
             </Provider>
         );
     }
 }
-// const mapStateToProps = (state) => ({
-//     user: state.user,
-// });
-
-// export default connect(mapStateToProps, {})(App);
-
-// App.propTypes = {
-//     match: PropTypes.any.isRequired,
-//     history: PropTypes.func.isRequired
-// }
 
 export default App;

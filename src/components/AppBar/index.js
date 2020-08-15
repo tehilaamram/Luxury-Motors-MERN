@@ -33,10 +33,6 @@ const styles = ((theme) => ({
       display: 'block',
     },
   },
-  // square: {
-  //   color: theme.palette.getContrastText(deepOrange[500]),
-  //   // backgroundColor: deepOrange[500],
-  // },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -66,7 +62,6 @@ const styles = ((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -87,7 +82,6 @@ const styles = ((theme) => ({
     },
   },
 }));
-// var menuId = 'primary-search-account-menu';
 const mobileMenuId = 'primary-search-account-menu-mobile';
 class CustomAppBar extends React.Component {
   constructor(props) {

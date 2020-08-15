@@ -3,8 +3,7 @@ var multer = require('multer');
 let fs = require("fs");
 var router = express.Router();
 var ChatRoom = require('../models')("ChatRoom");
-// var User = require('../models')("User");
-var ObjectId = require('mongoose').Types.ObjectId;
+const { ensureAuthenticated, ensureAdminAuthenticated} = require('./middleware');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploadedImages');
@@ -15,7 +14,7 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({ storage: storage })
-router.post('/addRoom', upload.array('file', 1), (req, res) => {
+router.post('/addRoom', [ensureAdminAuthenticated, upload.array('file', 1)], (req, res) => {
     if (req.isAuthenticated() && req.user.role === 'admin') {
         console.log(req.user, ' user req');
         var img = fs.readFileSync(req.files[0].path);
@@ -45,46 +44,27 @@ router.post('/addRoom', upload.array('file', 1), (req, res) => {
    
 });
 
-router.get('/getAll', (req, res) => {
+router.get('/getAll', ensureAuthenticated, (req, res) => {
     return ChatRoom.find({}).then((rooms) => {
         res.send(rooms);
     });
 });
 
-router.get('/getUserRooms/:id', (req, res) => {
+router.get('/getUserRooms/:id', ensureAuthenticated, (req, res) => {
     ChatRoom.find({ _id: { $in: req.user.rooms } }, (err, list) => {
         return res.json({
             status: 200,
             list,
         });
     });
-    // ChatRoom.findById(req.params.id, (err, vehicle) => {
-    //     if (err) {
-    //         return res.sendStatus(404);
-    //     }
-    //     return res.json({
-    //         status: 200,
-    //         vehicle,
-    //     });
-    // });
 });
 
-router.get('/getRoomsToJoin', (req, res) => {
-    // console.log('in get by id', JSON.parse(req.query.params));
-    // var userRoomList = req.user.rooms;
-    // var idJson = JSON.parse(req.query.params);
-    // var obj_ids = idJson.vid.map(function (element) { return ObjectId(element.vehicle); });
+router.get('/getRoomsToJoin', ensureAdminAuthenticated, (req, res) => {
     ChatRoom.find({_id: { $nin: req.user.rooms }}).populate({ path: 'requests', match: {user: req.user._id}}).exec((err, list) => {
         return res.json({
             status: 200,
             list,
         });      });
-    // ChatRoom.find({ _id: { $nin: req.user.rooms } }, (err, list) => {
-    //     return res.json({
-    //         status: 200,
-    //         list,
-    //     });
-    // });
 });
 
 module.exports = router;

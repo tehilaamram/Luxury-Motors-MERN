@@ -1,15 +1,21 @@
 module.exports = {
     ensureAuthenticated: function(req, res, next) {
       if (req.isAuthenticated()) {
+        console.log(req.user)
         return next();
       }
-    //   req.flash('error_msg', 'Please log in to view that resource');
       res.sendStatus(401);
     },
-    // forwardAuthenticated: function(req, res, next) {
-    //   if (!req.isAuthenticated()) {
-    //     return next();
-    //   }
-    //   res.redirect('/dashboard');      
-    // }
-  };
+    ensureWorkerAuthenticated: function(req, res, next) {
+      if (req.isAuthenticated() && (req.user.role === "worker" || req.user.role === "admin")) {
+        return next();
+      }
+      res.sendStatus(401);
+    },
+    ensureAdminAuthenticated: function(req, res, next) {
+      if (req.isAuthenticated() && req.user.role === "admin") {
+        return next();
+      }
+      res.sendStatus(401);
+    },
+};
