@@ -252,5 +252,130 @@ const Vehicle = require('../models')("Vehicle");
         quantity: 20,
     });
     await vehicle3.save();
+
+    additionalImagesList = [];
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/6faf373f-62bd-41f4-be90-5bff11701f09.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/6faf373f-62bd-41f4-be90-5bff11701f09.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/7fe20c84-580c-4c7c-8e22-f4b8dafee187.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/7fe20c84-580c-4c7c-8e22-f4b8dafee187.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/19897613-29cc-436b-b17f-eec1cf75b577.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/19897613-29cc-436b-b17f-eec1cf75b577.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/10a66c47-45da-4e9f-8927-ae7e34df301d.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/10a66c47-45da-4e9f-8927-ae7e34df301d.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/64bb2bad-a2cc-43ae-b4b8-35d5280c3f7e.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/64bb2bad-a2cc-43ae-b4b8-35d5280c3f7e.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/755d3aae-170c-437a-90aa-4cc44892b338.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/755d3aae-170c-437a-90aa-4cc44892b338.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/0823edf7-fae2-4f4e-903e-26daf0062c17.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/0823edf7-fae2-4f4e-903e-26daf0062c17.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/1216d480-6049-4f68-a9c9-306321df189a.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/1216d480-6049-4f68-a9c9-306321df189a.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/a3891255-691f-4c2b-b8fc-a5e6796a1f89.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/a3891255-691f-4c2b-b8fc-a5e6796a1f89.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/b5341a97-bda0-416c-9088-26bfd824f894.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/b5341a97-bda0-416c-9088-26bfd824f894.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Range Rover Sport SVR 2020/d8199391-d796-43c3-bfa8-c98be2a83f89.jpg'),
+        image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/d8199391-d796-43c3-bfa8-c98be2a83f89.jpg').toString('base64'), 'base64'),
+    });
+
+    let vehicle4 = new Vehicle({
+        maker: 'RANGE ROVER',
+        model: 'Sport SVR',
+        color: 'white',
+        mainImg: {
+            contentType: mime.lookup('./Range Rover Sport SVR 2020/e0f7b702-9a4a-4238-8bf7-04292d11ce06.jpg'),
+            image: Buffer.from(fs.readFileSync('./Range Rover Sport SVR 2020/e0f7b702-9a4a-4238-8bf7-04292d11ce06.jpg').toString('base64'), 'base64'),
+        },
+        additionalImg: additionalImagesList,
+        seats: 5,
+        doors: 4,
+        transmission: 'Automatic',
+        year: 2020,
+        price: 900000,
+        quantity: 20,
+    });
+    await vehicle4.save();
+
+
+    additionalImagesList = [];
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/cf69193d-3861-4e4b-9536-6b4af382bf2a.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/cf69193d-3861-4e4b-9536-6b4af382bf2a.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/b654f1f7-e218-4e3d-bdb0-bc35e03ecc33.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/b654f1f7-e218-4e3d-bdb0-bc35e03ecc33.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/c8cfcaf3-b1a6-45ed-bbac-0aaccd3aeccc.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/c8cfcaf3-b1a6-45ed-bbac-0aaccd3aeccc.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/86bab565-59d5-4b86-92af-be82b2f8ef2e.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/86bab565-59d5-4b86-92af-be82b2f8ef2e.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/14e8b648-5986-4a40-8217-1cb2e28d3f02.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/14e8b648-5986-4a40-8217-1cb2e28d3f02.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/9c8e1b80-2ea9-4d97-ab46-e978eb17ad66.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/9c8e1b80-2ea9-4d97-ab46-e978eb17ad66.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/7aba571a-a014-4f49-baa8-07b8ecd47964.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/7aba571a-a014-4f49-baa8-07b8ecd47964.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/6e62bfad-89e0-4f39-be0c-1b7dc395a95a.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/6e62bfad-89e0-4f39-be0c-1b7dc395a95a.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/04ad2f3e-a16a-431f-9d4e-1834ee6c68d8.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/04ad2f3e-a16a-431f-9d4e-1834ee6c68d8.jpg').toString('base64'), 'base64'),
+    });
+    additionalImagesList.push({
+        contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/00a56ecb-3d04-4b3c-819b-8c035d941bcd.jpg'),
+        image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/00a56ecb-3d04-4b3c-819b-8c035d941bcd.jpg').toString('base64'), 'base64'),
+    });
+    let vehicle5 = new Vehicle({
+        maker: 'Mercedes-Benz',
+        model: 'GT-C ROADSTER',
+        color: 'black',
+        mainImg: {
+            contentType: mime.lookup('./Mercedes-Benz GT-C ROADSTER 2020/282932ad-e679-4a16-9874-cf280c1b373d-1024x768.jpg'),
+            image: Buffer.from(fs.readFileSync('./Mercedes-Benz GT-C ROADSTER 2020/282932ad-e679-4a16-9874-cf280c1b373d-1024x768.jpg').toString('base64'), 'base64'),
+        },
+        additionalImg: additionalImagesList,
+        seats: 2,
+        doors: 2,
+        transmission: 'Automatic',
+        year: 2018,
+        price: 150000,
+        quantity: 10,
+    });
+    await vehicle5.save();
+
     process.exit(0);
 })();

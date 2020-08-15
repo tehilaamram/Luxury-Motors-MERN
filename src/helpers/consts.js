@@ -19,7 +19,7 @@ export const TRANSMISSION = ['Manual',
 
 export const MAKER = ['Acura',
     'Alfa_Romeo', 'Audi','BMW','Bentley','Buick','Cadillac','Chevrolet','Chrysler','Dodge','Fiat', 'Ford',
-    'GMC', 'Genesis', 'Honda', 'Hyundai','Infiniti','Jaguar','Jeep','Kia', 'Land','Lexus',
+    'GMC', 'Genesis', 'Honda', 'Hyundai','Infiniti','Jaguar','Jeep','Kia','Lamburgini', 'Land','Lexus',
     'Lincoln', 'Lotus','Maserati','Mazda',   'Mercedes','Mercury',    'Mini','Mitsubishi','Nissan',
     'Polestar','Peugeot', 'Pontiac', 'Porsche','Ram','Rivian',    'Rolls-Royce','Saab','Saturn',
     'Scion',    'Smart','Subaru','Suzuki',  'Tesla','Toyota','Volkswagen','Volvo','Acura',
