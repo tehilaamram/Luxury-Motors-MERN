@@ -2,7 +2,7 @@ var express = require('express');
 var multer = require('multer');
 let fs = require("fs");
 var router = express.Router();
-const { ensureAuthenticated } = require('./middleware');
+const { ensureWorkerAuthenticated} = require('./middleware');
 var Vehicle = require('../models')("Vehicle");
 var ObjectId = require('mongoose').Types.ObjectId;
 var storage = multer.diskStorage({
@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
 })
 
 const upload = multer({ storage: storage })
-router.post('/addVehicle', [ensureAuthenticated, upload.array('file', 30)], (req, res) => {
+router.post('/addVehicle', [ensureWorkerAuthenticated, upload.array('file', 30)], (req, res) => {
   console.log(req.files);
   var additionalImagesList = [];
   for (var i =1; i < req.files.length; i++) {
@@ -65,18 +65,6 @@ router.get('/getAll', (req, res) => {
 });
 
 router.get('/getVehicle/:id', (req, res) => {
-  // Project.findOne({name: req.query.name})
-  //   .populate({
-  //       path: 'threads',
-  //       populate: {
-  //           path: 'messages', 
-  //           model: 'Message',
-  //           populate: {
-  //               path: 'user',
-  //               model: 'User'
-  //           }
-  //       }
-  //   })
   Vehicle.findById(req.params.id).populate({ path: 'comments', populate: {
     path: 'user',
     model: 'User',
@@ -89,15 +77,7 @@ router.get('/getVehicle/:id', (req, res) => {
       vehicle,
     });
   });
-  // Vehicle.findById(req.params.id, (err, vehicle) => {
-  //   if (err) {
-  //     return res.sendStatus(404);
-  //   }
-  //   return res.json({
-  //     status: 200,
-  //     vehicle,
-  //   });
-  // });
+  
 });
 router.post('/updateVehicle', (req, res) => {
   const { id, update } = req.body;

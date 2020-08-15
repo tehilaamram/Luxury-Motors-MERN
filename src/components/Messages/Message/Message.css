@@ -91,7 +91,7 @@
 .avatarMessageMe {
   width: 100%;
   justify-items: right;
-  display: inline-grid;
+  display: grid;
   padding-right: 10px;
 }
 .avatarMessageOther {

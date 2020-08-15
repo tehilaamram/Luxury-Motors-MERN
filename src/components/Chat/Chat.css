@@ -26,11 +26,13 @@
   list-style: none;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .outerContainer {
     height: 100%;
   }
-
+  .MuiListItemSecondaryAction-root {
+    display: none !important;
+  }
   /* .container {
     width: 100%;
     height: 100%;
@@ -44,6 +46,9 @@
   #return-chat {
     display: none;
   }
+  /* .MuiListItemSecondaryAction-root {
+    display: none !important;
+  } */
 }
 /* @media screen and (min-width: 1200px) {
 

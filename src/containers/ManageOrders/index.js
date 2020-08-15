@@ -92,7 +92,7 @@ class ManageUsers extends React.Component {
                     <Column allowEditing={false} dataField="date" caption="Order date"
                             dataType={'datetime'}
                     />
-                    <Column allowEditing={false} dataField="user" caption="Client id"/>
+                    <Column allowEditing={false} dataField="user._id" caption="Client id"/>
                     <Column allowEditing={false} dataField="vehicles[0].price" caption="Order price"/>
                     <Column allowEditing={false} dataField="vehicles[0].vehicle.maker" caption="Manufacturer"/>
                     <Column allowEditing={false} dataField="vehicles[0].vehicle.model" caption="Model"/>

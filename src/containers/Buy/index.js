@@ -160,20 +160,12 @@ class Buy extends React.Component {
           //   this
           AjaxService.post('/order/new', {
               vehicles: vehicleArray,
-              // quantities: this.props.location.state.list,
           }).then((res) => {
-              AjaxService.post('/vehicle/updateVehicle', {
-                  id: this.props.location.state.vehicles[0]._id,
-                  update: {quantity: this.props.location.state.vehicles[0].quantity - 1}
-              })
-                  .then((res) => {
                       if (this.props.location.state.fromCart === true) {
                           this.cookies = new Cookies();
                           this.cookies.remove('vehicles');
                           this.props.onRestart(0);
                       }
-                  });
-              //   cookies.set('vehicles', name, { expires: 0 });
           }).catch((err) => {
               console.log(err, " order failed");
           });
@@ -183,12 +175,10 @@ class Buy extends React.Component {
         switch (this.state.activeStep) {
             case 0:
                 return this.renderVehicles();
-            //   return 'Select campaign settings...';
             case 1:
               return this.renderPayment();
             case 2:
                 return;
-            //   return this.renderComplete();
               case 3:
                 this.commitOrder();
                 return this.renderComplete();
@@ -236,14 +226,10 @@ class Buy extends React.Component {
 
 const mapStateToProps = (state) => ({
     cart: state.cart,
-    // catalogFilter: state.catalogFilter,
 });
 
 const mapDispatchToProps = {
     onRestart: restart,
-    // onAdd: add,
-    // onAddTransmission: addTransmission,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Buy));
-// export default withStyles(useStyles)(Buy);

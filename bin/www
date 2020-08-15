@@ -55,20 +55,20 @@ io.on('connect', (socket) => {
         socket.leave(currentRoom[0]);
       }
       socket.join(newroom);
-      console.log(socket.username, 's j')
       ChatRoom.findOne({ name: newroom }).exec().then((roomJoin) => {
-        console.log(roomJoin, ' roomJoin')
         if (roomJoin !== null) {
-          // if (roomJoin.onlineMembers.includes(ObjectId(userId)))
           if (!(roomJoin.onlineMembers.includes(userId))) {
             roomJoin.onlineMembers.push(userId);
             roomJoin.save();
-            ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', model: 'User', select: 'username role'}).exec((err, list) => {
-              socket.emit('getLast20Messages', list);
-            });
+            // ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', model: 'User', select: 'username role'}).exec((err, list) => {
+            //   socket.emit('getLast20Messages', list);
+            // });
             // socket.emit('updateOnlineMembers', roomJoin.onlineMembers.length);
             // socket.broadcast.to(newroom).emit('updateOnlineMembers', roomJoin.onlineMembers.length);
           }
+          ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', model: 'User', select: 'username role'}).exec((err, list) => {
+            socket.emit('getLast20Messages', list);
+          });
           socket.emit('updateOnlineMembers', roomJoin.onlineMembers.length);
           socket.broadcast.to(newroom).emit('updateOnlineMembers', roomJoin.onlineMembers.length);
         }

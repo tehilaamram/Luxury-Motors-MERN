@@ -247,6 +247,10 @@ class ManageRooms extends React.Component {
         data.append('file', this.state.roomImage[0], 'main');
         data.append('name', this.state.roomName);
         AjaxService.post('/chatRoom/addRoom', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((res) => {
+            this.setState({
+                roomName: '',
+                roomImage: '',
+            })
         }).catch((err) => {
             console.log(err, ' add chat room save error');
         });

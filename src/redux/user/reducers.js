@@ -5,7 +5,7 @@ import {
     UPDATE_FROM_STORAGE,
 } from './types';
 import { ROLE } from '../../helpers/consts';
-import localStorage from "localforage";
+// import localStorage from "localforage";
 
 const initialState =
 {
@@ -13,7 +13,8 @@ const initialState =
     // role: localStorage.getItem("role").then((userRole) => {
     //     return userRole;
     // }),
-    role: ROLE.GUEST,
+    role: localStorage.getItem("role"),
+    // role: ROLE.GUEST,
     email: '',
     fullName: '',
     id: '',

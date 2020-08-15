@@ -3,3 +3,6 @@
   overflow: auto;
   flex: auto;
 }
+.css-y1c0xs, [data-css-y1c0xs] {
+  overflow-x: hidden;
+}

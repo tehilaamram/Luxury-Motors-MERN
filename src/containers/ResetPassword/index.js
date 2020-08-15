@@ -1,5 +1,6 @@
 import React from 'react';
 import autoBind from 'react-autobind';
+import { withRouter } from "react-router-dom";
 
 import './style.css';
 
@@ -27,7 +28,8 @@ class ResetPassword extends React.Component {
         AjaxService.get(`/resetPassword/${params.token}`).then((res) => {
             if (res.status === 419) {
                 console.log('need to create expired token page');
-            }
+                this.props.history.push('/');
+            } 
         }).catch((err) => {
             console.log(err);
         });
@@ -50,7 +52,7 @@ class ResetPassword extends React.Component {
                 newPassword: encryptedPassword,
                 userToken: params.token,
             }).then((res) => {
-
+                this.props.history.push('/');
             }).catch((err) => {
 
             });
@@ -70,4 +72,4 @@ class ResetPassword extends React.Component {
     }
 }
 
-export default ResetPassword;
+export default withRouter(ResetPassword);

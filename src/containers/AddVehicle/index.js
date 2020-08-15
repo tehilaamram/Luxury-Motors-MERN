@@ -14,7 +14,7 @@ class AddVehicle extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            model: 'A4',
+            model: '',
             make: MAKER[0],
             year: 2020,
             color: 'black',
@@ -23,7 +23,7 @@ class AddVehicle extends React.Component {
             mainImage: '',
             additionalImages: [],
             seats: 2,
-            modelsList:['A4','A5','A6','Q5','SQ5','Q7','Q8'],
+            // modelsList:['A4','A5','A6','Q5','SQ5','Q7','Q8'],
             quantity: 1,
             price: 0,
         }
@@ -31,16 +31,17 @@ class AddVehicle extends React.Component {
     }
 
     onModelChange(event) {
-        this.setState({model: event});
+        this.setState({model: event.target.value});
     }
 
     onMakeChange(event) {
-        let list = [];
-        MODEL_TO_MANUFACTURER.forEach((item)=>{
-            if(item.manufacturer === event.toLowerCase())
-                list = item.models
-        });
-        this.setState({make: event, modelsList: list});
+        // let list = [];
+        // MODEL_TO_MANUFACTURER.forEach((item)=>{
+        //     if(item.manufacturer === event.toLowerCase())
+        //         list = item.models
+        // });
+        // this.setState({make: event, modelsList: list});
+        this.setState({make: event});
     }
 
     onYearChange(event) {
@@ -119,7 +120,10 @@ class AddVehicle extends React.Component {
             <div className={"AddVehicleContainer"}>
                 <div className="AddVehicleDetailsContainer">
                     <Picker id={"maker"} text={"Maker"} valueChanged={this.onMakeChange} list={MAKER}/>
+                    <TextInput id={"model"} text={"Model"} type={"text"} onChange={this.onModelChange} value={this.state.model} />
+                   {/*
                     <Picker id={"model"} text={"Model"} list={this.state.modelsList} valueChanged={this.onModelChange}/>
+                */} 
                     <TextInput id={"year"} text={"Year"} type={"number"} onChange={this.onYearChange}
                                value={this.state.year} min={2000} max={2020}/>
                     <TextInput id={"color"} text={"Color"} type={"color"} onChange={this.onColorChange}
@@ -144,7 +148,7 @@ class AddVehicle extends React.Component {
                 </div>
                 <div className="AddVehicleButton">
                     <div className="SaveBottonAddVehicle">
-                        <Button css={"PrimaryButton"} title={"Save"} onClick={this.save}/>
+                        <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} width={"w100px"}/>
                     </div>
                 </div>
             </div>

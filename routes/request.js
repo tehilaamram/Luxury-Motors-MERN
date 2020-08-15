@@ -3,12 +3,12 @@ var router = express.Router();
 var Request = require('../models')("Request");
 var User = require('../models')("User");
 var ChatRoom = require('../models')("ChatRoom");
-var ObjectId = require('mongoose').Types.ObjectId;
+const { ensureAuthenticated, ensureAdminAuthenticated } = require('./middleware');
 
-router.post('/new', (req, res) => {
+router.post('/new',ensureAuthenticated, (req, res) => {
     var newRequest = new Request({
         user: req.user._id,
-        room: ObjectId(req.body.room),
+        room: req.body.room,
         date: new Date(),
     });
     newRequest.save().then((requsetAdded, err) => {
@@ -22,20 +22,14 @@ router.post('/new', (req, res) => {
                 currentRoom.save();
                 res.json({
                     status: 200,
-                    //   user: req.user,
                 });
             }
         });
     }).catch((err) => {
         res.sendStatus(409);
-        //   res.json({
-        //       status: 409,
-        //       user: req.user,
-        //   });
     });
 });
-router.post('/remove', (req, res) => {
-    console.log(req.body, ' body')
+router.post('/remove', ensureAuthenticated, (req, res) => {
     req.user.requests.pop(req.body.reqToRoomId);
     req.user.save();
     ChatRoom.findById(req.body.room, (err, currentRoom) => {
@@ -52,7 +46,7 @@ router.post('/remove', (req, res) => {
         }
     });
 });
-router.post('/reject', (req, res) => {
+router.post('/reject',ensureAdminAuthenticated, (req, res) => {
     User.findById(req.body.request.user._id, (err, userReq) => {
         if (err) {
             return;
@@ -75,13 +69,13 @@ router.post('/reject', (req, res) => {
         }
     });
 });
-router.post('/accept', (req, res) => {
+router.post('/accept', ensureAdminAuthenticated, (req, res) => {
     User.findById(req.body.request.user._id, (err, userReq) => {
         if (err) {
             return;
         } else {
             userReq.requests.pop(req.body.request._id);
-            userReq.rooms.push(ObjectId(req.body.request.room._id));
+            userReq.rooms.push(req.body.request.room._id);
             userReq.save();
             ChatRoom.findById(req.body.request.room._id, (err, currentRoom) => {
                 if (err) {
@@ -100,7 +94,7 @@ router.post('/accept', (req, res) => {
         }
     });
 });
-router.get('/getAll', (req, res) => {
+router.get('/getAll', ensureAdminAuthenticated, (req, res) => {
     Request.find({}).populate('user').populate('room').exec((error, requests) => {
         return res.json({
             status: 200,

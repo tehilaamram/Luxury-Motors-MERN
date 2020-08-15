@@ -3,8 +3,7 @@ var router = express.Router();
 var Order = require('../models')("Order");
 var Vehicle = require('../models')("Vehicle");
 var VehicleOrder = require('../models')("VehicleOrder");
-var ObjectId = require('mongoose').Types.ObjectId;
-const { ensureAuthenticated } = require('./middleware');
+const { ensureAuthenticated, ensureWorkerAuthenticated, ensureAdminAuthenticated } = require('./middleware');
 
 router.post('/new', ensureAuthenticated, (req, res) => {
     var newOrder = new Order({
@@ -19,15 +18,10 @@ router.post('/new', ensureAuthenticated, (req, res) => {
                 res.sendStatus(404);
             } else {
                 req.body.vehicles.forEach(element => {
-                    console.log(element, ' element')
                     Vehicle.findOneAndUpdate({ _id: element.id }, { quantity: element.oldQuantity - element.quantity }, { new: true }, function (err, doc) {
                         if (err) {
                             res.sendStatus(400);
                         }
-                        console.log(doc)
-                        // else {
-                        //   res.sendStatus(200);
-                        // }
                     });
                     var newVehicleOrder = new VehicleOrder({
                         order: savedOrder._id,
@@ -62,30 +56,14 @@ router.get('/getAllOrders', (req, res) => {
     });
 });
 
-    router.post('/update', function (req, res) {
-        const { id, update } = req.body;
-        VehicleOrder.findByIdAndUpdate(id, update, (err) => {
-            console.log(id);
-            if (err) return res.json({ success: false, error: err });
-            return res.json({ success: true });
-        });
-        // VehicleOrder.findOneAndUpdate({ order: req.body.order._id }, req.body.order, { new: true }, function(err, doc) {
-        //     if(err) {
-        //         res.sendStatus(400);
-        //     } else {
-        //         res.sendStatus(200);
-        //     }
-        // });
-        // User.findOne({ resetPasswordToken: req.body.userToken }, (err, user) => {
-        //   if (err) {
-        //     res.sendStatus(404);
-        //   }
-        // });
+
+router.post('/update', ensureAdminAuthenticated, function (req, res) {
+    const { id, update } = req.body;
+    VehicleOrder.findByIdAndUpdate(id, update, (err) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true });
     });
-    //
-    // console.log('req.body===');
-    // console.log(req.body);
-    // const { id, update } = req.body;
+});
 
 
 router.get('/getUserOrders', ensureAuthenticated, (req, res) => {
@@ -105,7 +83,7 @@ router.get('/getUserOrders', ensureAuthenticated, (req, res) => {
     });
 });
 
-router.get('/getAll', ensureAuthenticated, (req, res) => {
+router.get('/getAll', ensureWorkerAuthenticated, (req, res) => {
     Order.find({}).populate({
         path: 'vehicles user', populate: {
             path: "vehicle", model: "Vehicle"
