@@ -6,8 +6,8 @@ var nodemailer = require('nodemailer');
 var waterfall = require('async-waterfall');
 const crypto = require('crypto');
 
-var serverEmailAddress = 'buy.a.luxury.vehicle';
-var serverEmailPassword = 'tehila1997';
+var serverEmailAddress = 'YOUR_GMAIL_MAIL';
+var serverEmailPassword = 'YOUR_GMAIL_MAIL_PASSWORD';
 
 router.post('/signUp', function (req, res) {
   var mykey = crypto.createDecipher('aes-128-cbc', 'luxury');
