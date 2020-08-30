@@ -1,4 +1,10 @@
 # Luxury Motors
+## Run the project
+### 1. Go to routes -> index.js <br />
+#### Define email for reset password process
+Write your Gmail email address at "serverEmailAddress" (line 9) <br />
+Write your email password at "serverEmailPassword" (line 10) <br />
+At your email account security settings enable control access to less secure apps
 
 ### `npm run server_start`
 
@@ -14,7 +20,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser. <
 * Socket.io: Chat
 * Passport: User authentication
 * Nodemailer: Reset password
-* Media query: PWA
+* Media query: Responsive web application
 * Material-UI: AppBar and other components
 * MongoDB: Database
 * React: Client side
