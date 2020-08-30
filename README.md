@@ -2,6 +2,7 @@
 This project is a web for buying luxury vehicles. In this application you can add vehicles, register with email and password, reset password by email that is being sent to your email, open chat rooms, real-time chat, cart, manage orders, manage users and so on. <br />
 All pages are responsive. <br />
 #### Home page
+<img src="https://raw.githubusercontent.com/tehilaamram/Luxury-Motors-MERN/master/screenshots/sign%20in%20modal.png?token=AISN2FMHUX6WLZSLPRWKHNK7JPM7K" data-canonical-src="https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/catalog%20page%20-%20mobile.png" width="400" height="400" />
 ![home](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/home%20page.png)
 <br />
 #### Catalog page <br />
