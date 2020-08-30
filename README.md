@@ -12,10 +12,9 @@ All pages are responsive. <br />
 ![tablet view](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/catalog%20page%20-%20tablet.png)
 <br /> <br />
 * Mobile <br /> <br />
-![mobile](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/catalog%20page%20-%20mobile.png)
+<img src="https://raw.githubusercontent.com/tehilaamram/Luxury-Motors-MERN/master/screenshots/catalog%20page%20-%20mobile.png?token=AISN2FMQT432G74BK2ALGUK7JPSSW" data-canonical-src="https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/catalog%20page%20-%20mobile.png" width="200" height="550" />
 <br /> <br />
-#### Sign in modal
-<br />
+#### Sign in modal <br />
 ![sign in modal](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/sign%20in%20modal.png)
 <br />
 #### Cart page
@@ -46,17 +45,25 @@ All pages are responsive. <br />
 * Search in chat
 <br/><br/>
 ![chat search](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/chat%20search.png)
-<br/>
+<br/><br/>
 #### Orders history page <br />
 ![history orders](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/orders%20history%20page.png)
 <br/>
 #### Manage orders page <br/>
 ![manage orders page](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/manage%20orders%20page.png)
+<br/>
+#### Add Vehicle page
+![add vehicle](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/add%20vehicle%20page.png)
+<br/>
+#### Error page
+![error](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/error%20page.png)
+<br/>
 ## Run the project
 ### 1. Go to routes -> index.js <br />
 #### Define email for reset password process
 Write your Gmail email address at "serverEmailAddress" (line 9) <br />
 Write your email password at "serverEmailPassword" (line 10) <br />
+[routes/index.js](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/routes/index.js) <br/>
 At your email account security settings enable control access to less secure apps
 ### 2. Make sure that MongoDB service is running
 ### 3. Create new folder named "uploadedImages" in the root directory (same level as src, routes etc.)
