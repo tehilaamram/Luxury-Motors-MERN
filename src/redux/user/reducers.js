@@ -46,6 +46,7 @@ export default function reducer(state = initialState, action) {
                 role: ROLE.GUEST,
                 email: '',
                 fullName: '',
+                id: '',
             };
 
         default:
