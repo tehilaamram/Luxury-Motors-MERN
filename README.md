@@ -3,7 +3,7 @@ This project is a web for buying luxury vehicles. In this application you can ad
 All pages are responsive. <br />
 #### Home page
 ![home](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/home%20page.png)
-<br /> <br />
+<br />
 #### Catalog page <br />
 * Desktop <br /> <br />
 ![desktop view](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/catalog%20page%20-%20desktop.png)
@@ -15,9 +15,9 @@ All pages are responsive. <br />
 ![mobile](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/catalog%20page%20-%20mobile.png)
 <br /> <br />
 #### Sign in modal
-<br /> <br />
+<br />
 ![sign in modal](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/sign%20in%20modal.png)
-<br /> <br />
+<br />
 #### Cart page
 <br /> <br />
 ![cart page](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/cart%20page.png)
@@ -46,12 +46,11 @@ All pages are responsive. <br />
 * Search in chat
 <br/><br/>
 ![chat search](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/chat%20search.png)
-<br/> <br/>
-#### Orders history page
-<br />
-![orders history page](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/orders%20history%20page.png)
-#### Manage orders page
 <br/>
+#### Orders history page <br />
+![history orders](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/orders%20history%20page.png)
+<br/>
+#### Manage orders page <br/>
 ![manage orders page](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/manage%20orders%20page.png)
 ## Run the project
 ### 1. Go to routes -> index.js <br />
