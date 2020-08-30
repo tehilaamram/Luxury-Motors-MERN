@@ -3,7 +3,6 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import AjaxService from '../../services/AjaxService';
 import _ from 'lodash';
-import './style.css';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Stepper from '../../components/Stepper';
@@ -17,6 +16,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import MButton from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from "@material-ui/core/styles";
+import './style.css';
 
 const classes = ((theme) => ({
     root: {
@@ -64,16 +64,6 @@ class ChatRooms extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.state.selectedTab === 1 && prevState.selectedTab !== 1) {
             this.getRoomsToJoin()
-            // AjaxService.get('/chatRoom/getRoomsToJoin').then((res) => {
-            //     console.log(res.data, ' get rooms to join list');
-            //     if (res.data.list.length > 0) {
-            //         this.setState({
-            //             roomsToRequest: res.data.list,
-            //         });
-            //     }
-            // }).catch((err) => {
-            //     console.log('chat rooms error', err);
-            // });
         }
     }
     renderStepper() {
@@ -86,22 +76,18 @@ class ChatRooms extends React.Component {
     renderChat() {
         const { match: { params } } = this.props;
         return (
-            <ChatGroups userId={params.uid}/>
+            <ChatGroups userId={params.uid} />
 
         );
     }
     getRoomsToJoin() {
-        // console.log(event, ' room to join');
-        // const { match: { params } } = this.props;
         AjaxService.get('/chatRoom/getRoomsToJoin').then((res) => {
-            console.log(res.data, ' get rooms to join list');
             if (res.data.list.length > 0) {
                 this.setState({
                     roomsToRequest: res.data.list,
                 });
             }
         }).catch((err) => {
-            console.log('chat rooms error', err);
         });
     }
     sendRequest(room) {
@@ -111,24 +97,19 @@ class ChatRooms extends React.Component {
                 reqToRoomId: room.requests[0]._id,
             }).then((res) => {
                 this.getRoomsToJoin();
-                // this.props.history.push(`/vehicle/${res.data.id}`);
-              }).catch((err) => {
-                console.log(err, ' add vehicle save error');
-              });
+            }).catch((err) => {
+            });
         } else {
             AjaxService.post('/request/new', {
                 room: room._id,
             }).then((res) => {
                 this.getRoomsToJoin();
-                // this.props.history.push(`/vehicle/${res.data.id}`);
-              }).catch((err) => {
-                console.log(err, ' add vehicle save error');
-              });
+            }).catch((err) => {
+            });
         }
-        
+
     }
     renderRooms() {
-        console.log('in render rooms', this.state.roomsToRequest);
         return (
             <List className={classes.root}>
                 {this.state.roomsToRequest.map((option, index) => {
@@ -137,13 +118,13 @@ class ChatRooms extends React.Component {
                             <ListItem
                             >
                                 <ListItemAvatar>
-                                <Avatar alt="group" src={`data:image/jpeg;base64,${option.img.image}`} className={classes.rounded}>
+                                    <Avatar alt="group" src={`data:image/jpeg;base64,${option.img.image}`} className={classes.rounded}>
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText primary={option.name} secondary={option.members.length + ' members'} />
                                 <ListItemSecondaryAction>
                                     <div className="RequestButtons">
-                    <MButton variant="outlined" onClick={this.sendRequest.bind(this, option)}>{option.requests.length > 0 ? 'Delete' : 'Join'}</MButton>
+                                        <MButton variant="outlined" onClick={this.sendRequest.bind(this, option)}>{option.requests.length > 0 ? 'Delete' : 'Join'}</MButton>
                                     </div>
                                 </ListItemSecondaryAction>
                             </ListItem>
@@ -156,14 +137,10 @@ class ChatRooms extends React.Component {
 
     }
     renderTab() {
-        // event.preventDefault();
-        // console.log(event, ' in render index', e);
         switch (this.state.selectedTab) {
             case 0:
                 return this.renderChat();
             case 1:
-                console.log('11111111111111111');
-                // this.getRoomsToJoin();
                 return this.renderRooms();
             default:
                 return;
@@ -172,8 +149,6 @@ class ChatRooms extends React.Component {
     tabChanges(event, selectedTab) {
         event.preventDefault();
         this.setState({ selectedTab });
-        console.log(selectedTab, ' event');
-
     }
     render() {
         const { selectedTab } = this.state;

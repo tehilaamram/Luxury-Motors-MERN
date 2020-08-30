@@ -7,11 +7,11 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import AjaxService from '../../services/AjaxService';
-// import _ from "lodash";
 import Button from '@material-ui/core/Button';
 import autoBind from "react-autobind";
 import Divider from '@material-ui/core/Divider';
 import './style.css';
+
 const classes = ((theme) => ({
   root: {
     width: 700,
@@ -51,7 +51,6 @@ class ChatGroups extends React.Component {
         chatRoomsList: res.data,
       });
     }).catch((err) => {
-      console.log('chat rooms error', err);
     });
   }
   renderChatRooms() {

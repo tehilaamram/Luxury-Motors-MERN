@@ -13,34 +13,25 @@
 
 .CartItemImage {
     height: 100%;
-    width: calc(200px * 4 / 3);;
-    padding: 15px;}
+    width: calc(200px * 4 / 3);
+    ;
+    padding: 15px;
+}
 
 .VehicleCardHeader {
-    /* height: calc(353px * 9 / 16); */
-    /* width: 353px; */
     flex: content;
 }
 
 .VehicleCardBody {
-flex: 85%;
-margin: 10px 10px 10px 20px;
+    flex: 85%;
+    margin: 10px 10px 10px 20px;
 }
 
 .VehicleCardFooter {
     background-color: transparent;
     flex: 10%;
     margin: 10px;
-    /* height: 40px; */
 }
-
-/* .VerticalHr {
-    flex: 5%;
-    border: none;
-    border-left: 1px solid hsl(200, 15%, 86%);
-    height: calc(100% - 20px);
-    width: 1px;
-} */
 
 .ModelText {
     font-size: 20px;
@@ -48,14 +39,15 @@ margin: 10px 10px 10px 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
 .VehicleBF {
     display: flex;
 }
+
 .cart-quantity {
-    /* margin-top: 15px; */
-    /* font-size: 12px; */
     display: table;
 }
+
 .cart-quantity-title {
     margin-bottom: 8px;
     display: inherit;
@@ -65,8 +57,6 @@ margin: 10px 10px 10px 20px;
 }
 
 .cart-quantity-info {
-    /* float: right; */
-    /* display: -ms-flexbox; */
     display: block;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -76,10 +66,11 @@ margin: 10px 10px 10px 20px;
     font-size: 12px;
 
 }
+
 .cart-price {
-    /* margin: 16px 0 12px; */
     display: grid;
 }
+
 .cart-price-title {
     display: inline-block;
     font-size: 20px;
@@ -88,26 +79,29 @@ margin: 10px 10px 10px 20px;
     vertical-align: middle;
     margin-bottom: 10px;
 }
+
 @media screen and (min-width: 769px) {
     .CartItem {
         height: 200px;
         width: 100%;
-        /* width: 550px;    */
-     }
+    }
 }
+
 @media screen and (max-width: 768px) {
-    .CartItem {   
-      flex-direction: column;
-     width: calc(200px * 4 / 3);
-     height: fit-content;
+    .CartItem {
+        flex-direction: column;
+        width: calc(200px * 4 / 3);
+        height: fit-content;
     }
+
     .HomeMainImageCSS {
-      width: 100%;
-      height: calc((100vw - 40px) * 9 / 16); 
+        width: 100%;
+        height: calc((100vw - 40px) * 9 / 16);
     }
+
     .HomeImageText {
-      width: 100%;
-      height: calc((100vw - 40px) * 9 / 16); 
-      font-size: 9vw;
+        width: 100%;
+        height: calc((100vw - 40px) * 9 / 16);
+        font-size: 9vw;
     }
-  }
+}

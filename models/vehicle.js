@@ -20,12 +20,12 @@ module.exports = db => {
             type: Number,
             required: true,
         },
-        mainImg: { 
+        mainImg: {
             type: {
                 data: Buffer, contentType: String,
             }
         },
-        additionalImg: { 
+        additionalImg: {
             type: [],
             default: [],
         },

@@ -1,22 +1,16 @@
 import React from 'react';
-// import _ from 'lodash';
 import { withRouter } from "react-router-dom";
 import autoBind from 'react-autobind';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from "@material-ui/core/styles";
 import Button from '../../components/Button';
-
-import './style.css';
-
-
-// import Button from '../Button';
 import IconText from '../IconText';
 import capaciryImg from '../../images/capacity.png';
 import doorsImg from '../../images/doors.png';
 import transmissionImg from '../../images/transmission.png';
-// import ferrari from '../../images/make/logo-scuderia-ferrari.svg';
 import yearImg from '../../images/year.png';
+import './style.css';
 
 const useStyles = ((theme) => ({
     button: {
@@ -32,7 +26,6 @@ class CartItem extends React.Component {
         this.state = {
             quantityToOrder: this.props.quantityToOrder,
         };
-        console.log(this.props, " this.props");
     }
     viewDetails() {
         this.props.history.push(`/vehicle/${this.props.vehicle._id}`);
@@ -52,7 +45,6 @@ class CartItem extends React.Component {
         }
     }
     render() {
-        // import logo from `/src/images/make/${vehicle.make}.png`
         const { vehicle } = this.props;
         var img = require(`../../images/make/${vehicle.maker}.png`);
         return (
@@ -82,8 +74,8 @@ class CartItem extends React.Component {
                             <span className="quantity-available">{vehicle.quantity} avaiable</span>
                         </div>
                     </div>
-                    </div>
-                    <div className="VehicleCardBody">
+                </div>
+                <div className="VehicleCardBody">
                     <div className="cart-price">
                         <div className="cart-price-title">
                             Price:
@@ -92,9 +84,6 @@ class CartItem extends React.Component {
                             <span className="cart-vehicle-total-price">{Number(vehicle.price * this.state.quantityToOrder).toLocaleString()} $</span>
                         </span>
                     </div>
-                    {/* <div className="cart-vehicle-price">
-                <span className="current-vehicle-price"> 180$ </span>
-              </div> */}
                 </div>
                 <div className="VehicleCardFooter">
                     <IconButton aria-label="delete" color="primary" onClick={this.props.removeFromCart}>

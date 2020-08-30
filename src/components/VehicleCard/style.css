@@ -2,33 +2,27 @@
 
 .VehicleCard {
     margin: 10px;
-    /* display: flex; */
-    /* height: 200px;
-    width: 550px; */
-    /* width: 80vw; */
-    /* width: calc(100vw - 10px); */
     border-width: 1px;
     background-color: var(--white-color);
     border-color: turquoise;
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .VehicleCardImage {
     height: 100%;
-    width: calc(200px * 4 / 3);;
+    width: calc(200px * 4 / 3);
+    ;
     border-radius: 5px 0 0 5px;
 }
 
 .VehicleCardHeader {
-    /* height: calc(353px * 9 / 16); */
-    /* width: 353px; */
     flex: content;
 }
 
 .VehicleCardBody {
-flex: 85%;
-margin: 10px 10px 10px 20px;
+    flex: 85%;
+    margin: 10px 10px 10px 20px;
 }
 
 .VehicleCardFooter {
@@ -37,7 +31,6 @@ margin: 10px 10px 10px 20px;
     border-radius: 0 5px 5px 0;
     margin: 10px;
     display: grid;
-    /* height: 40px; */
 }
 
 .VerticalHr {
@@ -54,27 +47,33 @@ margin: 10px 10px 10px 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
 .VehicleBF {
     display: flex;
 }
+
 @media screen and (min-width: 769px) {
     .VehicleCard {
         height: 200px;
-        width: 550px;    }
+        width: 550px;
+    }
 }
+
 @media screen and (max-width: 768px) {
-    .VehicleCard {   
-      flex-direction: column;
-     width: calc(200px * 4 / 3);
-     height: fit-content;
+    .VehicleCard {
+        flex-direction: column;
+        width: calc(200px * 4 / 3);
+        height: fit-content;
     }
+
     .HomeMainImageCSS {
-      width: 100%;
-      height: calc((100vw - 40px) * 9 / 16); 
+        width: 100%;
+        height: calc((100vw - 40px) * 9 / 16);
     }
+
     .HomeImageText {
-      width: 100%;
-      height: calc((100vw - 40px) * 9 / 16); 
-      font-size: 9vw;
+        width: 100%;
+        height: calc((100vw - 40px) * 9 / 16);
+        font-size: 9vw;
     }
-  }
+}

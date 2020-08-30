@@ -13,16 +13,15 @@ export default class AjaxService {
       return res;
     });
   }
-   static async post(urlpath, data, config) {
+  static async post(urlpath, data, config) {
 
     return axios({
       url: process.env.REACT_APP_SERVER_URL + urlpath,
       method: 'post',
       config,
-      // withCredentials: true,
       data,
     }).then((response) => {
-        return response;
-      });
+      return response;
+    });
   }
 }

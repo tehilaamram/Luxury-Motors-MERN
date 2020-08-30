@@ -14,38 +14,13 @@ class Init extends React.Component {
         });
     }
 
-    // hasLocalStorage() {
-    //     return localStorage.length((err, numberOfKeys) => {
-    //         if (err === null) {
-    //             if (numberOfKeys > 0) {
-    //                 return numberOfKeys;
-    //             }
-    //         }
-    //         return 0;
-    //     });
-    // }
-
     updateStatesFromStorage() {
-        // this.hasLocalStorage().then((localForageSize) => {
-            // if (localForageSize < 3) {
-            //     return;
-            // }
-            this.cookies = new Cookies();
-            let oldVehicleCart = this.cookies.get('vehicles');
-            if (oldVehicleCart !== undefined) {
-                this.props.onReload(oldVehicleCart.length);
-            }
-            this.props.onUpdateFromLocalStorage(localStorage.getItem(CONNECTED_USER.ID), localStorage.getItem(CONNECTED_USER.ROLE), localStorage.getItem(CONNECTED_USER.EMAIL), localStorage.getItem(CONNECTED_USER.FULL_NAME));
-
-            // localStorage.getItem(CONNECTED_USER.ROLE).then((currRole) => {
-            //     localStorage.getItem(CONNECTED_USER.EMAIL).then((currEmail) => {
-            //         localStorage.getItem(CONNECTED_USER.FULL_NAME).then((currFullName) => {
-            //             localStorage.getItem(CONNECTED_USER.ID).then((currId) => {
-            //             });
-            //         });
-            //     });
-            // });
-        // });
+        this.cookies = new Cookies();
+        let oldVehicleCart = this.cookies.get('vehicles');
+        if (oldVehicleCart !== undefined) {
+            this.props.onReload(oldVehicleCart.length);
+        }
+        this.props.onUpdateFromLocalStorage(localStorage.getItem(CONNECTED_USER.ID), localStorage.getItem(CONNECTED_USER.ROLE), localStorage.getItem(CONNECTED_USER.EMAIL), localStorage.getItem(CONNECTED_USER.FULL_NAME));
     }
 
     render() {

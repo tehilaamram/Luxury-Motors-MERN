@@ -3,66 +3,63 @@
 * {
   box-sizing: border-box;
 }
+
 .ManageRoomsContainer {
-  /* justify-content: center; */
   padding: 20px;
   min-height: calc(100vh - 64px);
-  /* display: flex; */
-  /* flex-wrap: wrap; */
   background-color: var(--light-gray-color);
-  /* min-height: calc(100vh - var(--header-height) - var(--footer-height)); */
 }
+
 .TabContentDiv {
   height: calc(100% - 48px);
   width: 100%;
-text-align: -webkit-center;
+  text-align: -webkit-center;
 }
 
 .NewRoomContainer {
   margin-top: 50px;
-    height: 100%;
-    max-width: 500px;
-    margin: auto;
+  height: 100%;
+  max-width: 500px;
+  margin: auto;
 
 }
+
 .RequestButtons {
   flex-direction: row;
-    display: flex;
-    width: 200px;
-    justify-content: space-around;
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
 }
+
 @media screen and (max-width: 768px) {
   .MuiListItemSecondaryAction-root {
     margin-top: 10px !important;
-      text-align: -webkit-right !important;
-      transform: translateY(-50%);
-      position: relative !important;
+    text-align: -webkit-right !important;
+    transform: translateY(-50%);
+    position: relative !important;
   }
-  
+
 }
-/* .MuiListItemSecondaryAction-root {
-} */
+
 .MuiTab-textColorPrimary.Mui-selected {
   color: var(--silver-color) !important;
 }
+
 .PrivateTabIndicator-colorPrimary-162 {
   background-color: var(--silver-color) !important;
 }
-/* .MuiTypography-body1 {
-  font-size: 0.9375rem !important;
-    flex-basis: 33.33% !important;
-    flex-shrink: 0 !important;
-} */
+
 #THead {
   font-size: 0.9375rem !important;
-    flex-basis: 33.33% !important;
-    flex-shrink: 0 !important;
+  flex-basis: 33.33% !important;
+  flex-shrink: 0 !important;
 }
 
 #SHead {
   color: rgba(0, 0, 0, 0.54) !important;
-    font-size: 0.9375rem !important;
+  font-size: 0.9375rem !important;
 }
+
 .MuiList-padding {
   width: 100% !important;
 }

@@ -1,5 +1,5 @@
 import {
-   ADD, SUB, RELOAD, RESTART, ADD_MANY
+    ADD, SUB, RELOAD, RESTART, ADD_MANY
 } from './types';
 
 export default function reducer(state = 0, action) {

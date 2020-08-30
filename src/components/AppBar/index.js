@@ -170,7 +170,7 @@ class CustomAppBar extends React.Component {
             <Typography className={classes.title} variant="h6" noWrap>
               Luxury Motors
           </Typography>
-          <Avatar alt="Remy Sharp"  src={logoLM} className={classes.large} id="logoLM"/>
+            <Avatar alt="Remy Sharp" src={logoLM} className={classes.large} id="logoLM" />
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton aria-label="show 17 new notifications" color="inherit" onClick={this.navigateTo.bind(this, '/cart')}>

@@ -19,7 +19,7 @@ class ImageUpload extends React.Component {
     render() {
         return (
             <ImageUploader
-            style={{ margin: "0 0 10px 0" }}
+                style={{ margin: "0 0 10px 0" }}
                 withIcon={true}
                 buttonText={this.props.buttonText}
                 onChange={this.onDrop}

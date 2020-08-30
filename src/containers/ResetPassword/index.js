@@ -1,12 +1,10 @@
 import React from 'react';
 import autoBind from 'react-autobind';
 import { withRouter } from "react-router-dom";
-
-import './style.css';
-
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import AjaxService from '../../services/AjaxService';
+import './style.css';
 
 const crypto = require('crypto');
 
@@ -22,17 +20,14 @@ class ResetPassword extends React.Component {
         };
         autoBind(this);
     }
-    componentDidMount(){
-        console.log(window.location);
+    componentDidMount() {
         const { match: { params } } = this.props;
         AjaxService.get(`/resetPassword/${params.token}`).then((res) => {
             if (res.status === 419) {
-                console.log('need to create expired token page');
                 this.props.history.push('/');
-            } 
+            }
         }).catch((err) => {
             this.props.history.push('/404');
-            console.log(err);
         });
     }
     onPasswordChange(event) {
@@ -42,8 +37,7 @@ class ResetPassword extends React.Component {
         this.setState({ confirmPassword: event.target.value });
     }
     resetPassword() {
-        if ( this.state.confirmPassword !== this.state.password) {
-            console.log('take care of it later');
+        if (this.state.confirmPassword !== this.state.password) {
         } else {
             const { match: { params } } = this.props;
             var mykey = crypto.createCipher('aes-128-cbc', 'luxury');
@@ -60,14 +54,13 @@ class ResetPassword extends React.Component {
         }
     }
     render() {
-        console.log()
         return (
             <div className={"ResetPasswordContainer"}>
-            <TextInput id={"password"} text={"Password"} type={"password"} onChange={this.onPasswordChange} value={this.state.password} />
-            <TextInput id={"confirmPassword"} text={"Confirm Password"} type={"password"} onChange={this.onConfirmPasswordChange} value={this.state.confirmPassword} />
-            <div className="reset-password-button-div">
-            <Button css={"PrimaryButton SignUpButton"} title={"Reset"} onClick={this.resetPassword} width={"w100px"}/>
-            </div>
+                <TextInput id={"password"} text={"Password"} type={"password"} onChange={this.onPasswordChange} value={this.state.password} />
+                <TextInput id={"confirmPassword"} text={"Confirm Password"} type={"password"} onChange={this.onConfirmPasswordChange} value={this.state.confirmPassword} />
+                <div className="reset-password-button-div">
+                    <Button css={"PrimaryButton SignUpButton"} title={"Reset"} onClick={this.resetPassword} width={"w100px"} />
+                </div>
             </div>
         );
     }

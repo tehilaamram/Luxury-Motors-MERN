@@ -3,7 +3,6 @@
     padding: 15px 0 10px;
     min-height: 100px;
     text-align: start;
-    /* padding-left: 125px; */
     border-bottom: 1px solid #E9E9E9;
 }
 
@@ -35,7 +34,6 @@
 
 .comment-text {
     font-size: 13px;
-    /* margin-right: 1px; */
 }
 
 .comment-likes-container {
@@ -46,21 +44,21 @@
 }
 
 .comment-likes-container svg {
-/* stroke: #999; */
-height: 16px;
-width: 16px;
-margin: 5px;
-cursor: pointer;
+    height: 16px;
+    width: 16px;
+    margin: 5px;
+    cursor: pointer;
 }
 
 .comment-like svg {
     transform: translateY(-3px);
 }
 
-#checked svg{
+#checked svg {
     stroke: #0242AE;
 
 }
+
 #unchecked svg {
     stroke: #999;
 
@@ -69,13 +67,16 @@ cursor: pointer;
 .comment-dislike {
     display: inline-flex;
 }
+
 .comment-like {
     display: inline-flex;
 }
+
 .comment-dislike-num {
     display: inline-flex;
 
 }
+
 .comment-like-num {
     display: inline-flex;
 

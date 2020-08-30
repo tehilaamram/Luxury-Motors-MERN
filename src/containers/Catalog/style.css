@@ -1,31 +1,31 @@
 @import '../../css/variables.css';
+
 * {
   box-sizing: border-box;
 }
+
 .CatalogContainer {
   padding: 20px;
-  /* min-height: calc(100vh - 73px - 30px); */
   display: flex;
   flex-wrap: wrap;
   background-color: var(--light-gray-color);
   justify-content: center;
 }
+
 @media screen and (max-width: 700px) {
-  .CatalogContainer {   
+  .CatalogContainer {
     flex-direction: column;
   }
 }
 
 .CatalogFilterDiv {
   flex: 20%;
-  /* background-color: yellow; */
 }
 
 .CatalogCardsDiv {
   text-align: -webkit-center;
-flex: 80%;
-/* background-color: violet; */
-flex-wrap: wrap;
-display: inherit;
-justify-content: center;
+  flex: 80%;
+  flex-wrap: wrap;
+  display: inherit;
+  justify-content: center;
 }

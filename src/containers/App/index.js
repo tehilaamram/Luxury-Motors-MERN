@@ -4,7 +4,6 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import store from '../../store';
 import Init from '../../components/Init';
 import autoBind from 'react-autobind';
-// import { connect } from 'react-redux';
 import Home from '../Home';
 import About from '../About';
 import Catalog from '../Catalog';
@@ -28,7 +27,6 @@ import PrivateAdminRoute from './PrivateAdminRoute';
 import ManageUsers from '../ManageUsers';
 import ManageOrders from '../ManageOrders';
 import ChatRooms from '../ChatRooms';
-
 import './style.css';
 
 class App extends React.Component {
@@ -45,10 +43,9 @@ class App extends React.Component {
         });
     }
     render() {
-        console.log(store.getState(), ' store');
         return (
             <Provider store={store}>
-            <Init />
+                <Init />
                 <BrowserRouter>
                     <div className="box">
                         <SignUpModal />
@@ -59,10 +56,10 @@ class App extends React.Component {
                         <ResetPasswordModal />
                         <div className="row content">
                             <Switch>
-                                 <Route exact path='/' component={Home} /> 
-                                 <Route path='/catalog' component={Catalog} />
-                                 <Route path='/reset/:token' component={ResetPassword} />
-                                 <Route path='/about' component={About} />
+                                <Route exact path='/' component={Home} />
+                                <Route path='/catalog' component={Catalog} />
+                                <Route path='/reset/:token' component={ResetPassword} />
+                                <Route path='/about' component={About} />
                                 <Route path="/cart" component={Cart} />
                                 <Route path='/vehicle/:id' component={VehicleDetails} />
                                 <PrivateRoute component={ChatRooms} path="/chat-rooms/:uid" exact />

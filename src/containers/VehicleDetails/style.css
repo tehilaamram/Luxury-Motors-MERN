@@ -5,21 +5,13 @@
 }
 
 .VehicleDetailsContainer {
-  /* margin: auto; */
-  /* width: 80%; */
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
   background-color: var(--light-gray-color);
-  /* min-height: calc(100vh - var(--header-height) - var(--footer-height)); */
-}
-
-.VehicleDetailsImagesContainer {
-  /* flex: 30%; */
 }
 
 .DetailsVehicleDetailsContainer {
-  /* flex: 30%; */
   padding: 0 20px;
   text-align: center;
 }
@@ -61,7 +53,6 @@
   margin: auto;
   width: 100%;
   background: #fff;
-  /* padding-top: 28px; */
   min-height: 588px;
   display: flex;
   justify-content: center;
@@ -124,7 +115,6 @@
   padding: 20px;
   list-style: none;
   display: flow-root;
-  /* display: -webkit-box; */
 }
 
 .vehicle-specs-list-li {
@@ -134,7 +124,6 @@
   line-height: 28px;
   list-style: none;
   margin-left: 0;
-  /* display: inline-block; */
   max-width: 50%;
 }
 
@@ -162,7 +151,6 @@
 
 .vehicle-quantity-info {
   float: right;
-  /* display: -ms-flexbox; */
   display: contents;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -189,32 +177,31 @@
 }
 
 .vehicle-rate-list li {
-    list-style: none;
-    min-height: 20px;
-    margin: 0 0 10px 0;
-    font-size: 13px;
-    zoom: 1;
+  list-style: none;
+  min-height: 20px;
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  zoom: 1;
 }
-.vehicle-rate-list span{
+
+.vehicle-rate-list span {
   float: left;
   vertical-align: middle;
 }
+
 .vehicle-rate-title {
   text-align: left;
-    width: auto;
-    min-width: 65px;
-    padding-right: 0;
-    /* vertical-align: middle; */
+  width: auto;
+  min-width: 65px;
+  padding-right: 0;
 }
 
 .vehicle-rate-graph {
-  /* vertical-align: middle; */
   width: 200px;
-    margin: 7px 10px 0 0;
-    height: 3px;
-    background-color: #E9E9E9;
-    /* float: right; */
-    display: grid;
+  margin: 7px 10px 0 0;
+  height: 3px;
+  background-color: #E9E9E9;
+  display: grid;
 }
 
 .comments-container {
@@ -227,20 +214,19 @@
 
 .vehicle-rate-number {
   width: 50px;
-    height: 20px;
-    text-align: center;
-    line-height: 18px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    /* cursor: pointer; */
-    /* float: right; */
-    /* vertical-align: middle; */
+  height: 20px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
 }
+
 .feedback-container {
   padding: 0 20px;
   font-size: 13px;
   line-height: 18px;
 }
+
 .comment-text-to-post {
   resize: none;
   width: 100%;
@@ -248,33 +234,40 @@
   font-family: var(--regular-font);
   line-height: 1.6;
 }
-.comment-post-title {  
+
+.comment-post-title {
   font-family: var(--regular-font);
   font-size: 18px;
   line-height: 1.6;
   font-weight: bold;
 }
+
 .comment-post-buttons {
   width: 100%;
   text-align: end;
 }
+
 .vehicle-new-comment-header {
   width: 100%;
   text-align: start;
 }
+
 @media screen and (max-width: 768px) {
   .VehicleDetailsContainer {
     flex-direction: column;
   }
+
   .vehicle-main {
     padding-bottom: 10px;
   }
 }
+
 @media screen and (max-width: 1199px) {
   .vehicle-main {
     padding-bottom: 10px;
   }
 }
+
 @media screen and (min-width: 1200px) {
   .vehicle-main-wrap {
     position: relative;

@@ -2,14 +2,14 @@ import React from 'react';
 import autoBind from 'react-autobind';
 import _ from 'lodash';
 import FormData from 'form-data'
-
-import './style.css';
-import { MAKER, TRANSMISSION, VEHICLE , MODEL_TO_MANUFACTURER} from '../../helpers/consts';
+import { MAKER, TRANSMISSION, VEHICLE } from '../../helpers/consts';
 import ImageUpload from '../../components/ImageUpload';
 import TextInput from '../../components/TextInput';
 import Picker from '../../components/Picker';
 import Button from '../../components/Button';
 import AjaxService from '../../services/AjaxService';
+import './style.css';
+
 class AddVehicle extends React.Component {
     constructor(props) {
         super(props);
@@ -23,7 +23,6 @@ class AddVehicle extends React.Component {
             mainImage: '',
             additionalImages: [],
             seats: 2,
-            // modelsList:['A4','A5','A6','Q5','SQ5','Q7','Q8'],
             quantity: 1,
             price: 0,
         }
@@ -31,62 +30,56 @@ class AddVehicle extends React.Component {
     }
 
     onModelChange(event) {
-        this.setState({model: event.target.value});
+        this.setState({ model: event.target.value });
     }
 
     onMakeChange(event) {
-        // let list = [];
-        // MODEL_TO_MANUFACTURER.forEach((item)=>{
-        //     if(item.manufacturer === event.toLowerCase())
-        //         list = item.models
-        // });
-        // this.setState({make: event, modelsList: list});
-        this.setState({make: event});
+        this.setState({ make: event });
     }
 
     onYearChange(event) {
-        this.setState({year: event.target.value});
+        this.setState({ year: event.target.value });
     }
 
     onColorChange(event) {
-        this.setState({color: event.target.value});
+        this.setState({ color: event.target.value });
     }
 
     onDoorsChange(event) {
-        this.setState({doors: event.target.value});
+        this.setState({ doors: event.target.value });
     }
 
     onSeatsChange(event) {
-        this.setState({seats: event.target.value});
+        this.setState({ seats: event.target.value });
     }
     onPriceChange(event) {
-        this.setState({price: event.target.value});
+        this.setState({ price: event.target.value });
     }
     onQuantityChange(event) {
-        this.setState({quantity: event.target.value});
+        this.setState({ quantity: event.target.value });
     }
 
     onTransmissionChange(event) {
-        this.setState({transmission: event});
+        this.setState({ transmission: event });
     }
 
     onMainImageChange(event) {
-        this.setState({mainImage: _.cloneDeep(event)});
+        this.setState({ mainImage: _.cloneDeep(event) });
     }
 
     onAdditionalImagesChange(event) {
-        this.setState({additionalImages: _.cloneDeep(event)});
+        this.setState({ additionalImages: _.cloneDeep(event) });
     }
 
     save() {
         if (
-            this.state.year === ''||
-            this.state.doors===''||
-            this.state.mainImage===''||
-            this.state.additionalImages===[]||
-            this.state.seats===''||
-            this.state.quantity===''||
-            this.state.price===''
+            this.state.year === '' ||
+            this.state.doors === '' ||
+            this.state.mainImage === '' ||
+            this.state.additionalImages === [] ||
+            this.state.seats === '' ||
+            this.state.quantity === '' ||
+            this.state.price === ''
         ) {
             alert('Fill all records');
         } else {
@@ -105,13 +98,11 @@ class AddVehicle extends React.Component {
             data.append(VEHICLE.QUANTITY, this.state.quantity);
             data.append(VEHICLE.PRICE, this.state.price);
 
-            AjaxService.post('/vehicle/addVehicle', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+            AjaxService.post('/vehicle/addVehicle', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
                 .then((res) => {
-                    console.log('---------');
                     this.props.history.push(`/vehicle/${res.data.id}`);
                 }).catch((err) => {
-                console.log(err, ' add vehicle save error');
-            });
+                });
         }
     }
 
@@ -119,36 +110,33 @@ class AddVehicle extends React.Component {
         return (
             <div className={"AddVehicleContainer"}>
                 <div className="AddVehicleDetailsContainer">
-                    <Picker id={"maker"} text={"Maker"} valueChanged={this.onMakeChange} list={MAKER}/>
+                    <Picker id={"maker"} text={"Maker"} valueChanged={this.onMakeChange} list={MAKER} />
                     <TextInput id={"model"} text={"Model"} type={"text"} onChange={this.onModelChange} value={this.state.model} />
-                   {/*
-                    <Picker id={"model"} text={"Model"} list={this.state.modelsList} valueChanged={this.onModelChange}/>
-                */} 
                     <TextInput id={"year"} text={"Year"} type={"number"} onChange={this.onYearChange}
-                               value={this.state.year} min={2000} max={2020}/>
+                        value={this.state.year} min={2000} max={2020} />
                     <TextInput id={"color"} text={"Color"} type={"color"} onChange={this.onColorChange}
-                               value={this.state.color}/>
+                        value={this.state.color} />
                     <TextInput id={"doors"} text={"Doors"} type={"number"} onChange={this.onDoorsChange}
-                               value={this.state.doors}/>
+                        value={this.state.doors} />
                     <Picker id={"transmission"} text={"Transmission"} list={TRANSMISSION}
-                            valueChanged={this.onTransmissionChange}/>
+                        valueChanged={this.onTransmissionChange} />
                     <TextInput id={"seats"} text={"Seats"} type={"number"} onChange={this.onSeatsChange}
-                               value={this.state.seats}/>
+                        value={this.state.seats} />
                     <TextInput id={"price"} text={"Price"} type={"number"} onChange={this.onPriceChange}
-                               value={this.state.price}/>
+                        value={this.state.price} />
                     <TextInput id={"quantity"} text={"Quantity"} type={"number"} onChange={this.onQuantityChange}
-                               value={this.state.quantity}/>
+                        value={this.state.quantity} />
 
                 </div>
                 <div className="AddVehicleUploadImagesContainer">
                     <ImageUpload onValueChanged={this.onMainImageChange} buttonText={"Upload Main Image"}
-                                 singleImage={true}/>
+                        singleImage={true} />
                     <ImageUpload onValueChanged={this.onAdditionalImagesChange} buttonText={"Upload Additional Images"}
-                                 singleImage={false}/>
+                        singleImage={false} />
                 </div>
                 <div className="AddVehicleButton">
                     <div className="SaveBottonAddVehicle">
-                        <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} width={"w100px"}/>
+                        <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} width={"w100px"} />
                     </div>
                 </div>
             </div>

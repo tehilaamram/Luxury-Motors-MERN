@@ -42,10 +42,12 @@ router.post('/new', ensureAuthenticated, (req, res) => {
     });
 });
 router.get('/getAllOrders', (req, res) => {
-    Order.find().populate({ path: 'vehicles', model: "VehicleOrder", populate: {
+    Order.find().populate({
+        path: 'vehicles', model: "VehicleOrder", populate: {
             path: "vehicle", model: "Vehicle"
-        }}).exec((err, list) => {
-        if(err) {
+        }
+    }).exec((err, list) => {
+        if (err) {
             res.sendStatus(404);
         } else {
             res.json({

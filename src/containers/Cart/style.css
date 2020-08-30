@@ -1,10 +1,11 @@
 @import '../../css/variables.css';
+
 * {
   box-sizing: border-box;
 }
+
 .CatalogContainer {
   padding: 20px;
-  /* min-height: calc(100vh - 73px - 30px); */
   display: flex;
   flex-wrap: wrap;
   background-color: var(--light-gray-color);
@@ -13,16 +14,19 @@
 
 .empty-cart-image {
   max-width: 100%;
-    max-height: 100%;
+  max-height: 100%;
 }
+
 .cart-items-to-buy-main {
   display: contents;
 }
+
 .cart-buy {
   place-self: center;
 }
+
 @media screen and (max-width: 700px) {
-  .CatalogContainer {   
+  .CatalogContainer {
     flex-direction: column;
     align-content: center;
   }

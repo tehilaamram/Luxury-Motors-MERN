@@ -1,21 +1,15 @@
 @import '../../css/variables.css';
 
-#slideshow { 
-    /* margin: 50px auto;  */
-    position: relative; 
-    width: 100%; 
-    height: calc((100vw - 20px) * 9 / 16); 
-    /* padding: 10px;  */
-    /* box-shadow: 0 0 20px rgba(0,0,0,0.4);  */
+#slideshow {
+    position: relative;
+    width: 100%;
+    height: calc((100vw - 20px) * 9 / 16);
 }
 
-#slideshow > div { 
-    position: absolute; 
+#slideshow>div {
+    position: absolute;
     top: 10px;
     width: 100%;
-    /* left: 10px; 
-    right: 10px; 
-    bottom: 10px;  */
 }
 
 .SlideShowImg {

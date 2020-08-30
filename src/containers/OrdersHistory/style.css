@@ -1,6 +1,7 @@
 @import '../../css/variables.css';
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .buy-button-div {
@@ -10,8 +11,9 @@
 }
 
 .Buy-button-145 {
-margin-right: 0 !important;
+    margin-right: 0 !important;
 }
+
 .MuiStepIcon-root.MuiStepIcon-active {
     color: var(--red-color) !important;
 }
@@ -19,9 +21,11 @@ margin-right: 0 !important;
 .MuiStepIcon-root.MuiStepIcon-completed {
     color: var(--success-green-color) !important;
 }
+
 .buy-vehicle-image {
     width: 150px;
 }
+
 .dx-widget {
     text-align-last: center;
 }
@@ -36,12 +40,14 @@ margin-right: 0 !important;
 .order-completed-title {
     text-align: center;
 }
+
 .order-completed-body {
     text-align: center;
     margin-bottom: 100px;
 }
+
 #received-icon {
-    color:  #00c400;
+    color: #00c400;
     height: 100px;
     width: 100px;
 }
@@ -50,17 +56,21 @@ margin-right: 0 !important;
     .order-completed-title {
         font-size: 30px;
     }
+
     .order-completed-body {
         font-size: 15px;
     }
 }
+
 @media screen and (min-width: 769px) {
     .order-completed-main {
         margin-top: 30px;
     }
+
     .order-completed-title {
         font-size: 50px;
     }
+
     .order-completed-body {
         font-size: 25px;
     }
@@ -89,6 +99,7 @@ margin-right: 0 !important;
     width: 3px;
     margin-left: 3.5px;
 }
+
 .tracking-progress-bar__item__bar--active {
     background: #00c400;
 }
@@ -97,6 +108,7 @@ margin-right: 0 !important;
     background: #00c400;
     color: #fff;
 }
+
 .tracker-text {
     align-self: baseline;
 }

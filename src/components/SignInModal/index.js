@@ -1,16 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import autoBind from 'react-autobind';
-import {Cookies}  from 'react-cookie';
-// import CircularProgress from '@material-ui/core/CircularProgress';
-
-import './style.css';
+import { Cookies } from 'react-cookie';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import FlashMessage from '../FlashMessage';
 import { signIn } from '../../redux/user/actions';
 import AjaxService from '../../services/AjaxService';
-// import Alert from '@material-ui/lab/Alert';
+import './style.css';
 
 const crypto = require('crypto');
 
@@ -34,7 +31,6 @@ class SignInModal extends React.Component {
         this.setState({ password: event.target.value });
     }
     signIn() {
-        console.log(this.props.user);
         if (this.state.email === '' ||
             this.state.password === '') {
             alert('Make sure you filled all field');
@@ -43,40 +39,36 @@ class SignInModal extends React.Component {
             var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
             encryptedPassword += mykey.final('hex');
             AjaxService.post('/signIn', {
-                // user: {
-                    username: this.state.email,
-                    password: encryptedPassword,
-                // }
+                username: this.state.email,
+                password: encryptedPassword,
             }).then((res) => {
-                    if (res.status === 200) {
-                        console.log(res, ' res sign in');
-                        this.props.onSignIn(res.data.user.id, res.data.user.role, this.state.email, res.data.user.fullName);
-                        this.closeModal();
-                    } else {
-                        alert(res.data.error.errmsg);
-                    }
-                }).catch((err) => {
-                    console.log(err);
-                    if (err.response === undefined) {
+                if (res.status === 200) {
+                    this.props.onSignIn(res.data.user.id, res.data.user.role, this.state.email, res.data.user.fullName);
+                    this.closeModal();
+                } else {
+                    alert(res.data.error.errmsg);
+                }
+            }).catch((err) => {
+                if (err.response === undefined) {
+                    this.setState({
+                        error: true,
+                        errorMessage: 'Unable to connect the server, please try later.'
+                    });
+                } else {
+                    if (err.response.status === 401) {
                         this.setState({
                             error: true,
-                            errorMessage: 'Unable to connect the server, please try later.'
+                            errorMessage: 'email or password is incorrect'
                         });
                     } else {
-                        if (err.response.status === 401) {
-                            this.setState({
-                                error: true,
-                                errorMessage: 'email or password is incorrect'
-                            });
-                        } else {
-                            this.setState({
-                                error: true,
-                                errorMessage: err,
-                            });
-                        }
+                        this.setState({
+                            error: true,
+                            errorMessage: err,
+                        });
                     }
-                    document.getElementById('SignInModalErrorFlash').style.display = "block";
-                });
+                }
+                document.getElementById('SignInModalErrorFlash').style.display = "block";
+            });
         }
     }
 
@@ -90,7 +82,6 @@ class SignInModal extends React.Component {
     render() {
         return (
             <div id='signInModal' className="SignInModal">
-                      {/* <CircularProgress /> */}
                 {this.state.error && <FlashMessage id={'SignInModalErrorFlash'} css={"Error"} subject={'Error!'} message={this.state.errorMessage} />}
                 <div id='signInModalContent' className="SignInModalContent">
                     <div className="SignInDivTitle">
@@ -101,10 +92,10 @@ class SignInModal extends React.Component {
                     <div className='SignInModalRealContent'>
                         <TextInput id={"email"} text={"Email"} type={"email"} onChange={this.onEmailChange} value={this.state.email} />
                         <TextInput id={"password"} text={"Password"} type={"password"} onChange={this.onPasswordChange} value={this.state.password} />
-                        <Button disabled={false} css={"PrimaryButton SignUpButton"} title={"Sign In"} onClick={this.signIn} width={"w100percent"}/>
+                        <Button disabled={false} css={"PrimaryButton SignUpButton"} title={"Sign In"} onClick={this.signIn} width={"w100percent"} />
                         <div className="CloseSignUpModalDiv">
-                        <Button  css={"LinkButton"} title={"Forgot Your Password?"} onClick={this.openResetPasswordModal} />
-                        <Button  css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
+                            <Button css={"LinkButton"} title={"Forgot Your Password?"} onClick={this.openResetPasswordModal} />
+                            <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
                         </div>
                     </div>
                 </div>

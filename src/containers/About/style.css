@@ -1,4 +1,5 @@
 @import '../../css/variables.css';
+
 * {
     box-sizing: border-box;
 }
@@ -7,10 +8,9 @@
     display: flex;
     flex-wrap: wrap;
     background-color: var(--light-gray-color);
-    /* min-height: calc(100vh - 71.44px - 30px); */
 }
+
 .AboutBody {
-    /* max-width: 90%; */
     flex: 100%;
     background-color: transparent;
     padding: 40px;
@@ -22,6 +22,7 @@
 .PTag {
     line-height: 1.55;
 }
+
 .H2Title {
     margin: 40px 0 16px;
     font-size: 30px;
@@ -30,6 +31,7 @@
     line-height: 1.235;
     letter-spacing: 0.00735em;
 }
+
 .AboutDescription {
     margin: 0 0 40px;
     font-size: 1.5rem;
@@ -38,6 +40,7 @@
     line-height: 1.334;
     letter-spacing: 0em;
 }
+
 .H1Title {
     margin: 16px 0;
     font-size: 40px;

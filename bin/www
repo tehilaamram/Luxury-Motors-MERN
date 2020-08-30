@@ -32,15 +32,12 @@ var usernames = {};
 io.on('connect', (socket) => {
   // when the client emits 'join', this listens and executes
   socket.on('join', function (username) {
-    console.log(username, ' username in join');
     // store the username in the socket session for this client
     socket.username = username;
-    console.log('join ', socket.username);
     socket.emit('username', 'SERVER', 'you have connected');
 
   });
   socket.on('switchRoom', function (newroom, userId) {
-    console.log(socket.username, 's u')
     var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
     ChatRoom.findOne({ name: currentRoom[0] }).exec().then((room) => {
       if (room !== null && room.onlineMembers.includes(userId)) {
@@ -60,13 +57,8 @@ io.on('connect', (socket) => {
           if (!(roomJoin.onlineMembers.includes(userId))) {
             roomJoin.onlineMembers.push(userId);
             roomJoin.save();
-            // ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', model: 'User', select: 'username role'}).exec((err, list) => {
-            //   socket.emit('getLast20Messages', list);
-            // });
-            // socket.emit('updateOnlineMembers', roomJoin.onlineMembers.length);
-            // socket.broadcast.to(newroom).emit('updateOnlineMembers', roomJoin.onlineMembers.length);
           }
-          ChatMessage.find({room: roomJoin.id}).populate({ path: 'sender', model: 'User', select: 'username role'}).exec((err, list) => {
+          ChatMessage.find({ room: roomJoin.id }).populate({ path: 'sender', model: 'User', select: 'username role' }).exec((err, list) => {
             socket.emit('getLast20Messages', list);
           });
           socket.emit('updateOnlineMembers', roomJoin.onlineMembers.length);
@@ -77,7 +69,6 @@ io.on('connect', (socket) => {
   });
   // when the client emits 'sendchat', this listens and executes
   socket.on('sendchat', (data, userId, groupId, callback) => {
-    console.log(socket.username, ' username');
     var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
     var currentChatMessage = new ChatMessage({
       sender: userId,
@@ -86,59 +77,22 @@ io.on('connect', (socket) => {
       message: data,
     });
     currentChatMessage.save().then((m) => {
-      // console.log(socket.username, ' username to send');
       User.findOne({ username: socket.username }).exec().then((user) => {
-        io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username, role: user.role}, message: data, date: currentChatMessage.date });
+        io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username, role: user.role }, message: data, date: currentChatMessage.date });
         callback();
-        // ChatRoom.find({ onlineMembers: { "$in" : [user._id]} }).exec((err, list) => {
-        //   list.forEach(element => {
-        //     element.onlineMembers.pop(user._id);
-        //     element.save();
-        //     socket.broadcast.to(element.name).emit('updateOnlineMembers', element.onlineMembers.length);
-        //   });
-        // });
       });
-      // we tell the client to execute 'updatechat' with 2 parameters
-      // io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username}, message: data, date: currentChatMessage.date });
-      // callback();
-      // callback();{}
-
     })
   });
   socket.on('loadMore', (lastMessage) => {
-    console.log(lastMessage, ' username');
-        var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
-    ChatMessage.find({room: currentRoom.id}).populate({ path: 'sender', select: 'username'}).exec((err, list) => {
-      // const isTheSameId = (element) => element._id === lastMessage._id;
-      // const index = list.findIndex(isTheSameId);
-          socket.emit('loadMoreMessages', list);
-      // if (index > 15) {
-      //   socket.emit('loadMoreMessages', list.slice(index - 16, index));
-      // } else {
-      //   socket.emit('loadMoreMessages', list.slice(0, index));
-      // }
-      // callback()
+    var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
+    ChatMessage.find({ room: currentRoom.id }).populate({ path: 'sender', select: 'username' }).exec((err, list) => {
+      socket.emit('loadMoreMessages', list);
     });
-    // var currentChatMessage = new ChatMessage({
-    //   sender: ObjectId(userId),
-    //   room: ObjectId(groupId),
-    //   date: new Date(),
-    //   message: data,
-    // });
-    // currentChatMessage.save().then((m) => {
-    //   console.log(socket.username, ' username to send');
-    //   // we tell the client to execute 'updatechat' with 2 parameters
-    //   io.sockets.in(currentRoom[0]).emit('updatechat', socket.username, { sender: { username: socket.username}, message: data, date: currentChatMessage.date });
-    //   callback();
-    //   // callback();{}
-
-    // })
   });
   // when the user disconnects.. perform this
   socket.on('disconnect', function () {
-    console.log('in dissconnect');
     User.findOne({ username: socket.username }).exec().then((user) => {
-      ChatRoom.find({ onlineMembers: { "$in" : [user._id]} }).exec((err, list) => {
+      ChatRoom.find({ onlineMembers: { "$in": [user._id] } }).exec((err, list) => {
         list.forEach(element => {
           element.onlineMembers.pop(user._id);
           element.save();
@@ -193,11 +147,9 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
       process.exit(1);
       break;
     default:

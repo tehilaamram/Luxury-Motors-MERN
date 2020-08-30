@@ -1,5 +1,3 @@
-// import localStorage from "localforage";
-
 import * as types from './types';
 import { CONNECTED_USER, ROLE } from '../../helpers/consts';
 /*

@@ -4,7 +4,7 @@ import {
 
 const initialState =
 {
-   strSearch: '',
+    strSearch: '',
 };
 
 export default function reducer(state = initialState, action) {

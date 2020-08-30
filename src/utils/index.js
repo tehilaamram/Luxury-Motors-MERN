@@ -1,8 +1,4 @@
-// import localStorage from "localforage";
-import { Cookies } from 'react-cookie';
-const cookie = new Cookies();
 export const isLogin = () => {
-    // console.log(cookie.get('session'), ' session id', cookie);
     if (localStorage.getItem("role")) {
         return true;
     }

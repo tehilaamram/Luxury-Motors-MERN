@@ -19,7 +19,6 @@ var orderRouter = require('./routes/order');
 var chatRoomsRouter = require('./routes/chatRoom');
 var requestRouter = require('./routes/request');
 var commentRouter = require('./routes/comment');
-// var chatMessageRouter = require('./routes/')
 
 let app = express();
 (async () => {
@@ -27,7 +26,7 @@ let app = express();
     let sessConnStr = "mongodb://127.0.0.1/luxury-motors-sessions";
     let sessionConnect = mongoose.createConnection();
     try {
-        await sessionConnect.openUri(sessConnStr, {useNewUrlParser: true, useUnifiedTopology: true});
+        await sessionConnect.openUri(sessConnStr, { useNewUrlParser: true, useUnifiedTopology: true });
     } catch (err) {
         debug(`Error connecting to session backend DB: ${err}`);
         process.exit(0);
@@ -43,8 +42,8 @@ let app = express();
 
 
     app.use(logger('dev'));
-    /* for saving session in client side and not blocking the request at server side */ 
-    app.use(cors({credentials: true, origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003']}));
+    /* for saving session in client side and not blocking the request at server side */
+    app.use(cors({ credentials: true, origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003'] }));
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 
@@ -55,7 +54,7 @@ let app = express();
         })
     )
     app.use(cookieParser(secret));
-    app.use(bodyParser.json({limit: '50mb'}));
+    app.use(bodyParser.json({ limit: '50mb' }));
 
     app.use(session({
         // cookieName: 'session', // automatically used by passport sessions
@@ -66,7 +65,7 @@ let app = express();
         saveUninitialized: false,  // do we need to save an 'empty' session object? - mandatory option
         rolling: true,             // do we send the session ID cookie with each response?
         store: new MongoStore({ mongooseConnection: sessionConnect }), // session storage backend
-        cookie: {  httpOnly: true, sameSite: true}  // cookie parameters
+        cookie: { httpOnly: true, sameSite: true }  // cookie parameters
         // maxAge: 1000 * 60 * 150,
         // NB: maxAge is used for session object expiry setting in the storage backend as well
     }));
@@ -75,11 +74,11 @@ let app = express();
 
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
-      // Configure passport middleware
-      app.use(passport.initialize());
-      app.use(passport.session());
-  
-      app.use(function (err, req, res, next) {
+    // Configure passport middleware
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.use(function (err, req, res, next) {
         if (err.code !== 'EBADCSRFTOKEN') {
             return next(err);
         }
@@ -98,14 +97,14 @@ let app = express();
     app.use('/request', requestRouter);
     app.use('/comment', commentRouter);
     // catch 404 and forward to error handler
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         let err = new Error('Not Found');
         err.status = 404;
         next(err);
     });
 
     // error handler
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
         // set locals, only providing error in development
         res.locals.message = err.message;
         res.locals.error = req.app.get('env') === 'development' ? err : {};

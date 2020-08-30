@@ -1,16 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import autoBind from 'react-autobind';
-// import ReCAPTCHA from "react-google-recaptcha";
-
-
-import './style.css';
 import AjaxService from '../../services/AjaxService';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import FlashMessage from '../FlashMessage';
 import { signUp } from '../../redux/user/actions';
-
+import './style.css';
 
 class ResetPasswordModal extends React.Component {
     constructor(props) {
@@ -27,50 +23,41 @@ class ResetPasswordModal extends React.Component {
         this.setState({ email: event.target.value });
     }
     resetPassword() {
-        // console.log(this.props.user);
         if (this.state.email === '') {
             alert('Make sure you filled all field and your passwords are same');
         } else {
             AjaxService.post('/resetPassword', {
                 email: this.state.email,
             }).then((res) => {
-                    // if (res.status === 200) {
-                        // console.log(res, ' session', res);
-                        this.props.onSignUp(res.data.user.id, this.state.email, this.state.fullName);
-                        this.closeModal();
-                    // } else {
-                    //     alert(res.data.error.errmsg);
-                    // }
-                }).catch((err) => {
-                    if (err.response === undefined) {
+                this.props.onSignUp(res.data.user.id, this.state.email, this.state.fullName);
+                this.closeModal();
+            }).catch((err) => {
+                if (err.response === undefined) {
+                    this.setState({
+                        error: true,
+                        errorMessage: 'Unable to connect the server, please try later.'
+                    });
+                } else {
+                    if (err.response.status === 409) {
                         this.setState({
                             error: true,
-                            errorMessage: 'Unable to connect the server, please try later.'
+                            errorMessage: 'email already exists'
                         });
                     } else {
-                        if (err.response.status === 409) {
-                            this.setState({
-                                error: true,
-                                errorMessage: 'email already exists'
-                            });
-                        } else {
-                            this.setState({
-                                error: true,
-                                errorMessage: err,
-                            });
-                        }
+                        this.setState({
+                            error: true,
+                            errorMessage: err,
+                        });
                     }
-                    document.getElementById('ResetPasswordModalErrorFlash').style.display = "block";
-                });
+                }
+                document.getElementById('ResetPasswordModalErrorFlash').style.display = "block";
+            });
         }
     }
 
     closeModal() {
         document.getElementById('resetPasswordModal').style.display = 'none';
     }
-     onChange(value) {
-        console.log("Captcha value:", value);
-      }
     render() {
         return (
             <div id='resetPasswordModal' className="ResetPasswordModal">
@@ -83,10 +70,10 @@ class ResetPasswordModal extends React.Component {
                     </div>
                     <div className='ResetPasswordModalRealContent'>
                         <TextInput id={"email"} text={"Email"} type={"email"} onChange={this.onEmailChange} value={this.state.email} />
-                        <Button css={"PrimaryButton SignUpButton"} title={"Send"} onClick={this.resetPassword} width={"w100percent"}/>
-                        
+                        <Button css={"PrimaryButton SignUpButton"} title={"Send"} onClick={this.resetPassword} width={"w100percent"} />
+
                         <div className="CloseResetPasswordModalDiv">
-                        <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
+                            <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
                         </div>
                     </div>
                 </div>

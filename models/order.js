@@ -1,6 +1,5 @@
 const debug = require("debug")('car:model-order');
 const mongo = require("mongoose");
-// mongo.set('useCreateIndex', true);
 
 module.exports = db => {
     // create a schema
@@ -9,7 +8,7 @@ module.exports = db => {
             type: mongo.Schema.Types.ObjectId,
             ref: 'User',
         },
-        date: { 
+        date: {
             type: Date,
         },
         vehicles: [{
@@ -18,7 +17,6 @@ module.exports = db => {
             ref: 'VehicleOrder',
         }],
     }, { autoIndex: true });
-    // schema.index({ user: 1, vehicle: 1 }, { unique: true });
 
     db.model('Order', schema);
     debug("Order model created");

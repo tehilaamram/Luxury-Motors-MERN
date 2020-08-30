@@ -5,7 +5,7 @@ var User = require('../models')("User");
 var ChatRoom = require('../models')("ChatRoom");
 const { ensureAuthenticated, ensureAdminAuthenticated } = require('./middleware');
 
-router.post('/new',ensureAuthenticated, (req, res) => {
+router.post('/new', ensureAuthenticated, (req, res) => {
     var newRequest = new Request({
         user: req.user._id,
         room: req.body.room,
@@ -46,7 +46,7 @@ router.post('/remove', ensureAuthenticated, (req, res) => {
         }
     });
 });
-router.post('/reject',ensureAdminAuthenticated, (req, res) => {
+router.post('/reject', ensureAdminAuthenticated, (req, res) => {
     User.findById(req.body.request.user._id, (err, userReq) => {
         if (err) {
             return;

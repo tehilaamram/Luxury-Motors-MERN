@@ -1,4 +1,4 @@
-const debug = require("debug")('car:model-Chat');
+const debug = require("debug")('car:model-Chat-Messages');
 const mongo = require("mongoose");
 
 module.exports = db => {
@@ -12,7 +12,7 @@ module.exports = db => {
             type: mongo.Schema.Types.ObjectId,
             ref: "User",
         },
-        message: { 
+        message: {
             type: String,
             required: true,
         },

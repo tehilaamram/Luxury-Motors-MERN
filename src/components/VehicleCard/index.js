@@ -2,17 +2,14 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
-
-
-import './style.css';
-
-
 import Button from '../Button';
 import IconText from '../IconText';
 import capaciryImg from '../../images/capacity.png';
 import doorsImg from '../../images/doors.png';
 import transmissionImg from '../../images/transmission.png';
 import yearImg from '../../images/year.png';
+import './style.css';
+
 class VehicleCard extends React.Component {
     constructor(props) {
         super(props);
@@ -38,7 +35,7 @@ class VehicleCard extends React.Component {
     }
     buy() {
         var currentVehicle = this.props.vehicle._id;
-        var list = '{ "' + currentVehicle.toString() + '":' + '[' + 8 + ']}';
+        var list = '{ "' + currentVehicle.toString() + '": [' + 8 + ']}';
         this.props.history.push({ pathname: '/buy', state: { vehicles: [this.props.vehicle], list: JSON.parse(list), fromCart: false } });
     }
     render() {

@@ -7,7 +7,7 @@ module.exports = db => {
         name: {
             type: String,
             required: true,
-            unique : true,
+            unique: true,
         },
         members: [{
             type: [mongo.Schema.Types.ObjectId],
@@ -19,7 +19,7 @@ module.exports = db => {
             default: [],
             ref: 'User',
         }],
-        img: { 
+        img: {
             type: {
                 data: Buffer, contentType: String,
             }
@@ -34,7 +34,7 @@ module.exports = db => {
             default: [],
             ref: 'ChatMessage',
         }],
-        }, { autoIndex: false });
+    }, { autoIndex: false });
 
     db.model('ChatRoom', schema);
     debug("Room model created");

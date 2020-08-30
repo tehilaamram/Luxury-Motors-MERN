@@ -1,7 +1,6 @@
 import React from "react";
 import io from "socket.io-client";
 import { connect } from 'react-redux';
-// import { fade } from '@material-ui/core/styles';
 import Messages from '../Messages/Messages';
 import Input from '../Input/Input';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,7 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-// import ImageIcon from '@material-ui/icons/Image';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
@@ -17,10 +15,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { withStyles, fade } from "@material-ui/core/styles";
 import { update } from '../../redux/chatFilter/actions';
 import autoBind from 'react-autobind';
-
-
 import './Chat.css';
-
 
 let socket;
 const ENDPOINT = `${process.env.REACT_APP_SERVER_URL}`;
@@ -61,7 +56,6 @@ const styles = ((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -94,12 +88,7 @@ class Chat extends React.Component {
     socket = io(ENDPOINT);
 
     socket.on('updatechat', (username, data) => {
-      console.log(data, ' datanupdatechat');
       this.setState({ messages: [...this.state.messages, data] });
-    });
-    socket.on('username', (username, data) => {
-      console.log(data, ' data');
-      // this.setState({ messages: [...this.state.messages, data] });
     });
     socket.on('updateOnlineMembers', (numOfOnline) => {
       this.setState({ numOfOnline });
@@ -117,9 +106,7 @@ class Chat extends React.Component {
     socket.emit('disconnect');
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log('in did update');
     if (prevProps.user.email === "" && this.props.user.email !== "") {
-      // call the server-side function 'join' and send one parameter (value of prompt)
       socket.emit('join', this.props.user.email);
 
     }
@@ -154,11 +141,9 @@ class Chat extends React.Component {
     document.getElementById('GroupsContainer').style.display = 'flex';
   }
   onSearchChange(value) {
-    // console.log('in search change value ', value.target.value, this);
     this.props.onUpdateFilter(value.target.value);
   }
   loadMore() {
-    console.log(this.state.messages[0]);
     socket.emit('loadMore', this.state.messages[0])
   }
   render() {
@@ -194,7 +179,7 @@ class Chat extends React.Component {
               </div>
             </ListItemSecondaryAction>
           </ListItem>}
-        <Messages messages={messages} name={this.props.user.email} loadMore={this.loadMore}/>
+        <Messages messages={messages} name={this.props.user.email} loadMore={this.loadMore} />
         {group !== null && <Input message={message} setMessage={(e) => { this.setState({ message: e }) }} sendMessage={this.sendMessage} />
         }
       </div>
@@ -203,9 +188,7 @@ class Chat extends React.Component {
 }
 
 
-// export default Chat;
 const mapStateToProps = (state) => ({
-  chat: state.chat,
   user: state.user,
   filter: state.filter,
 });
@@ -215,4 +198,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Chat));
-// export default connect(mapStateToProps, {})(Chat);

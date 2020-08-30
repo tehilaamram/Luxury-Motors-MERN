@@ -15,7 +15,6 @@ import AjaxService from '../../services/AjaxService';
 import TextInput from '../../components/TextInput';
 import ImageUpload from '../../components/ImageUpload';
 import _ from 'lodash';
-import './style.css';
 import Button from '../../components/Button';
 import FormData from 'form-data';
 import MButton from '@material-ui/core/Button';
@@ -24,6 +23,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import './style.css';
 
 const classes = ((theme) => ({
     root: {
@@ -42,13 +42,6 @@ const classes = ((theme) => ({
         height: theme.spacing(7),
         marginRight: 10,
     },
-    // actions: {
-    //     textTransform: 'none',
-    //     color: '#616161',
-    //     borderColor: '#BDBDBD',
-    //     '&:hover': {
-    //     },
-    // },
     heading: {
         fontSize: theme.typography.pxToRem(15),
         flexBasis: '33.33%',
@@ -89,7 +82,6 @@ class ManageRooms extends React.Component {
                 });
             }
         }).catch((err) => {
-            console.log('chat rooms error', err);
         })
     }
     componentDidUpdate(prevProps, prevState) {
@@ -101,7 +93,6 @@ class ManageRooms extends React.Component {
                     });
                 }
             }).catch((err) => {
-                console.log('chat rooms error', err);
             });
         }
         if (this.state.selectedTab === 0 && prevState.selectedTab !== 0) {
@@ -109,24 +100,16 @@ class ManageRooms extends React.Component {
         }
     }
     getAllRequests() {
-        console.log('in all requests');
         AjaxService.get("/request/getAll").then((res) => {
-            console.log('in req', res.data.requests);
-            // if (res.data.requests.length > 0) {
-                console.log(res.data, ' req get all')
-                this.setState({
-                    requestsList: res.data.requests,
-                });
-            // }
+            this.setState({
+                requestsList: res.data.requests,
+            });
         }).catch((err) => {
-            console.log('chat rooms error', err);
         });
     }
     tabChanges(event, selectedTab) {
         event.preventDefault();
         this.setState({ selectedTab });
-        console.log(selectedTab, ' event');
-
     }
     handleExpandedChange = (panel) => (event, isExpanded) => {
         if (isExpanded) {
@@ -147,7 +130,6 @@ class ManageRooms extends React.Component {
         return (
             <div>
                 {groupedRequestList.map((option, index) => {
-                    console.log(option, ' op');
                     return (
                         <ExpansionPanel
                             key={index}
@@ -180,7 +162,6 @@ class ManageRooms extends React.Component {
                     _id: requestToReject.room._id
                 },
             }
-            // request
         }).then((res) => {
             this.getAllRequests();
         });
@@ -197,14 +178,12 @@ class ManageRooms extends React.Component {
                     _id: requestToAccept.room._id
                 },
             }
-            // request
         }).then((res) => {
             this.getAllRequests();
         });
 
     }
     getRoomRequestList(lst) {
-        console.log(lst, ' lsfifdfiekgbeigbe');
         return (
             <List className={classes.root}>
 
@@ -238,7 +217,6 @@ class ManageRooms extends React.Component {
         this.setState({ roomName: event.target.value });
     }
     onRoomImageChange(event) {
-        console.log(event);
         this.setState({ roomImage: _.cloneDeep(event) });
     }
 
@@ -252,7 +230,6 @@ class ManageRooms extends React.Component {
                 roomImage: '',
             })
         }).catch((err) => {
-            console.log(err, ' add chat room save error');
         });
     }
     renderNew() {
@@ -260,7 +237,7 @@ class ManageRooms extends React.Component {
             <div className="NewRoomContainer">
                 <TextInput id={"roomName"} text={"Name"} type={"text"} onChange={this.onRoomNameChange} value={this.state.roomName} />
                 <ImageUpload onValueChanged={this.onRoomImageChange} buttonText={"Upload Room Image"} singleImage={true} />
-                <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} width={"w100px"}/>
+                <Button css={"PrimaryButton"} title={"Save"} onClick={this.save} width={"w100px"} />
             </div>
         );
     }
@@ -272,13 +249,11 @@ class ManageRooms extends React.Component {
                 });
             }
         }).catch((err) => {
-            console.log('chat rooms error', err);
         });
     }
     renderRooms() {
         return (
             <List className={classes.root}>
-
                 {this.state.roomsList.map((option, index) => {
                     return (
                         <div key={index}>

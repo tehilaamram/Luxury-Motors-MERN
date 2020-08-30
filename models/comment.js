@@ -13,7 +13,7 @@ module.exports = db => {
             type: mongo.Schema.Types.ObjectId,
             ref: 'Vehicle',
         },
-        date: { 
+        date: {
             type: Date,
         },
         rate: {
@@ -38,7 +38,6 @@ module.exports = db => {
             ref: 'User',
         }],
     }, { autoIndex: true });
-    // schema.index({ user: 1, vehicle: 1 }, { unique: true });
 
     db.model('Comment', schema);
     debug("Comment model created");

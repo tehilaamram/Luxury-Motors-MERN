@@ -13,7 +13,7 @@ module.exports = db => {
             type: mongo.Schema.Types.ObjectId,
             ref: 'ChatRoom',
         },
-        date: { 
+        date: {
             type: Date,
         },
     }, { autoIndex: true });

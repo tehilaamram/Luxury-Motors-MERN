@@ -6,19 +6,10 @@
     height: 300px;
     width: 300px;
     margin: 20px;
-    /* background-image: url(../../images/defaultprofile.png); */
 }
 
 .StepContainer {
     text-align: center;
-}
-
-.UploadImageButton {
-
-}
-
-.ImagePreview {
-
 }
 
 .FirstStep {

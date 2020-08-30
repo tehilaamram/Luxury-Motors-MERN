@@ -3,27 +3,31 @@
 * {
   box-sizing: border-box;
 }
+
 .HomeContainer {
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
   background-color: var(--light-gray-color);
-  /* min-height: calc(100vh - var(--header-height) - var(--footer-height)); */
 }
+
 @media screen and (max-width: 768px) {
-  .HomeContainer {   
+  .HomeContainer {
     flex-direction: column;
   }
+
   .HomeVideo {
     margin-top: 10px;
   }
+
   .HomeMainImageCSS {
     width: 100%;
-    height: calc((100vw - 40px) * 9 / 16); 
+    height: calc((100vw - 40px) * 9 / 16);
   }
+
   .HomeImageText {
     width: 100%;
-    height: calc((100vw - 40px) * 9 / 16); 
+    height: calc((100vw - 40px) * 9 / 16);
     font-size: 9vw;
   }
 }
@@ -32,44 +36,37 @@
   .HomeMainImage {
     padding-right: 10px;
   }
+
   .HomeImageText {
     width: calc(100% - 10px);
     height: 100%;
     font-size: 5.5vw;
   }
+
   .HomeMainImageCSS {
     width: 100%;
     height: 100%;
   }
 }
 
-/* .minimize {
-  margin-inline-start: 0;
-} */
-
-/* .pin-panel {
-  margin-inline-start: 200px;
-} */
-
 .HomeVideo {
-  -ms-flex: 60%; /* IE10 */
+  -ms-flex: 60%;
+  /* IE10 */
   flex: 60%;
   background-color: transparent;
-  /* padding: 20px; */
 }
 
 .HomeMainImage {
-  -ms-flex: 40%; /* IE10 */
+  -ms-flex: 40%;
+  /* IE10 */
   flex: 40%;
   background-color: transparent;
-  /* padding: 20px; */
   position: relative;
 }
 
 .HomeSlideShow {
   text-align: center;
   background: transparent;
-  /* padding: 0 10px; */
   width: 100%;
 }
 
@@ -78,7 +75,6 @@
   z-index: 1;
   top: 0;
   left: 0;
-  /* height: 100%; */
   margin: 0;
   background-color: var(--black-color);
   color: var(--light-gray-color);
@@ -93,5 +89,4 @@
 
 .HomeMainImageCSS {
   width: 100%;
-  /* height: 100% */
 }

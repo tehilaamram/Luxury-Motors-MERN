@@ -2,7 +2,6 @@
   background: #F3F3F3;
   border-radius: 7.5px;
   padding: 6px 9px 8px 7px;
-  /* padding: 5px 20px; */
   color: white;
   display: inline-block;
   max-width: 80%;
@@ -38,11 +37,9 @@
   align-items: center;
   font-family: Helvetica;
   color: var(--chat-text-color);
-  /* color: #828282; */
   letter-spacing: 0.3px;
   font-size: 12px;
   margin: 6px 0px;
-  /* width: fit-content; */
 }
 
 .pl-10 {
@@ -66,13 +63,8 @@
   color: var(--chat-text-color);
 }
 
-/* .colorDark {
-  color: #353535;
-} */
-
 .backgroundBlue {
   background: var(--outgoing-background);
-  /* marker-end: 0; */
   align-self: flex-end;
   text-align: -webkit-right;
 }
@@ -81,6 +73,7 @@
   background: #F3F3F3;
   align-self: flex-start;
 }
+
 .avatar {
   vertical-align: middle;
   width: 32px;
@@ -88,21 +81,25 @@
   border-radius: 50%;
   background-color: var(--red-color);
 }
+
 .avatarMessageMe {
   width: 100%;
   justify-items: right;
   display: grid;
   padding-right: 10px;
 }
+
 .avatarMessageOther {
   width: 100%;
   justify-items: left;
   display: inline-grid;
   padding-left: 10px;
 }
+
 .sender {
   font-weight: 500;
 }
+
 .message-header {
   display: flex;
 }
@@ -111,12 +108,12 @@
   margin-left: 5px;
   margin-right: 5px;
   font-size: 12px;
-    color: #999;
+  color: #999;
 }
 
 .message-header-blue {
   text-align-last: end;
-    width: fit-content;
+  width: fit-content;
 }
 
 .message-header-light {

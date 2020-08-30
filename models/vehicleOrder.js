@@ -13,7 +13,7 @@ module.exports = db => {
             type: mongo.Schema.Types.ObjectId,
             ref: 'Vehicle',
         },
-        quantity: { 
+        quantity: {
             type: Number,
             default: 1,
         },

@@ -1,8 +1,9 @@
 .messages {
-  /* padding: 5% 0; */
   overflow: auto;
   flex: auto;
 }
-.css-y1c0xs, [data-css-y1c0xs] {
+
+.css-y1c0xs,
+[data-css-y1c0xs] {
   overflow-x: hidden;
 }

@@ -1,60 +1,48 @@
 @import '../../css/variables.css';
 
-.MuiAvatar-img{
-    object-fit: contain !important;
+.MuiAvatar-img {
+  object-fit: contain !important;
 }
 
 * {
   box-sizing: border-box;
 }
+
 .ChatGroupContainer {
-    width: 100%;
-    height: 100%;
-    max-height: -webkit-fill-available;
-  /* padding: 20px; */
+  width: 100%;
+  height: 100%;
+  max-height: -webkit-fill-available;
   display: flex;
-  /* flex-wrap: wrap; */
   background-color: var(--light-gray-color);
-  /* min-height: calc(100vh - var(--header-height) - var(--footer-height)); */
 }
+
 @media screen and (max-width: 768px) {
-  .ChatGroupContainer {   
+  .ChatGroupContainer {
     flex-direction: column;
   }
-  /* .ChatContainerDiv {
-    display: none;
-  } */
 }
 
 @media screen and (min-width: 769px) {
-   .ChatContainerDiv[style]{
+  .ChatContainerDiv[style] {
     display: flex !important;
   }
+
   .GroupsContainer[style] {
     display: flex !important;
   }
 }
 
-/* .minimize {
-  margin-inline-start: 0;
-} */
-
-/* .pin-panel {
-  margin-inline-start: 200px;
-} */
-
 .ChatContainerDiv {
-  -ms-flex: 60%; /* IE10 */
+  -ms-flex: 60%;
+  /* IE10 */
   flex: 60%;
   height: inherit;
-  /* padding: 20px; */
 }
 
 .GroupsContainer {
-  -ms-flex: 40%; /* IE10 */
+  -ms-flex: 40%;
+  /* IE10 */
   flex: 40%;
   background-color: transparent;
-  /* padding: 20px; */
   position: relative;
 }
-

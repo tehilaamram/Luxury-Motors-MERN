@@ -1,9 +1,9 @@
-
 @import '../../css/variables.css';
 
 * {
     box-sizing: border-box;
-  }
+}
+
 .SignInModal {
     top: 0;
     justify-content: center;
@@ -12,7 +12,7 @@
     display: none;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .SignInModalContent {
@@ -28,6 +28,7 @@
     max-height: 100%;
     overflow: auto;
 }
+
 .SignInDivTitle {
     -webkit-text-stroke: var(--red-color);
     -webkit-text-stroke-width: medium;
@@ -49,11 +50,11 @@
     background-position: center;
 
     padding: 70px 15px 74px 15px;
-    border-top-right-radius:10px;
-    border-top-left-radius:10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
-.SignInTitle{
+.SignInTitle {
     padding-top: 15px;
     font-style: normal;
     font-variant-ligatures: normal;
@@ -68,22 +69,23 @@
     font-weight: bold;
 }
 
-.SignInModalRealContent{
+.SignInModalRealContent {
     background-color: #f2f2f2;
-  padding: 20px;
-  border-radius: 10px;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .CloseSignIpModalDiv {
     width: 100%;
     text-align: center;
 }
+
 @media screen and (max-width: 768px) {
     .SignInModalContent {
         width: auto;
         left: 3px;
         right: 3px;
         max-height: 100%;
-    overflow: auto;
+        overflow: auto;
     }
-  }
+}

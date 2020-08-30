@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import autoBind from 'react-autobind';
-
-import './style.css';
 import AjaxService from '../../services/AjaxService';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import FlashMessage from '../FlashMessage';
 import { signUp } from '../../redux/user/actions';
-
+import './style.css';
 
 const crypto = require('crypto');
 
@@ -40,7 +38,6 @@ class SignUpModal extends React.Component {
     }
 
     signUp() {
-        console.log(this.props.user);
         if (this.state.email === '' ||
             this.state.password === '' ||
             this.state.confirmPassword === '' ||
@@ -57,35 +54,14 @@ class SignUpModal extends React.Component {
                 password: encryptedPassword,
                 fullName: this.state.fullName,
             }).then((res) => {
-                console.log(res, ' cookie');
                 if (res.status === 200) {
-                        // console.log(res.header['Set-Cookie'], ' session', res);
-                        this.props.onSignUp(res.data.user.id, this.state.email, this.state.fullName);
-                        this.closeModal();
-                    } else {
-                        alert(res.data.error.errmsg);
-                    }
-                }).catch((err) => {
-                    // if (err.response === undefined) {
-                    //     this.setState({
-                    //         error: true,
-                    //         errorMessage: 'Unable to connect the server, please try later.'
-                    //     });
-                    // } else {
-                    //     if (err.response.status === 409) {
-                    //         this.setState({
-                    //             error: true,
-                    //             errorMessage: 'email already exists'
-                    //         });
-                    //     } else {
-                    //         this.setState({
-                    //             error: true,
-                    //             errorMessage: err,
-                    //         });
-                    //     }
-                    // }
-                    // document.getElementById('SignUpModalErrorFlash').style.display = "block";
-                });
+                    this.props.onSignUp(res.data.user.id, this.state.email, this.state.fullName);
+                    this.closeModal();
+                } else {
+                    alert(res.data.error.errmsg);
+                }
+            }).catch((err) => {
+            });
         }
     }
 
@@ -109,7 +85,7 @@ class SignUpModal extends React.Component {
                         <TextInput id={"confirmPassword"} text={"Confirm Password"} type={"password"} onChange={this.onConfirmPasswordChange} value={this.state.confirmPassword} />
                         <Button css={"PrimaryButton SignUpButton"} title={"Sign Up"} onClick={this.signUp} width={"w100percent"} />
                         <div className="CloseSignUpModalDiv">
-                        <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
+                            <Button css={"RoundCloseButton"} title={"×"} onClick={this.closeModal} />
                         </div>
                     </div>
                 </div>

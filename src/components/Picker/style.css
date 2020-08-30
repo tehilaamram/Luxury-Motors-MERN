@@ -1,7 +1,9 @@
 @import '../../css/variables.css';
+
 * {
   box-sizing: border-box;
 }
+
 select {
   width: 100%;
   padding: 12px;
@@ -29,16 +31,16 @@ select {
   margin-top: 6px;
 }
 
-/* Clear floats after the columns */
 .PickerRow:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-  .PickerLabelContainer, .PickerListContainer {
+
+  .PickerLabelContainer,
+  .PickerListContainer {
     width: 100%;
     margin-top: 0;
   }

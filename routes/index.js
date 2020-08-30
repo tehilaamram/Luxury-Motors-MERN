@@ -53,7 +53,6 @@ router.post('/resetPassword', async (req, res) => {
     function (done) {
       crypto.randomBytes(20, (err, buf) => {
         var token = buf.toString('hex');
-        console.log(token, ' token')
         done(err, token);
       });
     },
@@ -87,7 +86,6 @@ router.post('/resetPassword', async (req, res) => {
 
       };
       smtpTrans.sendMail(mailOptions, function (err) {
-        console.log('sent')
         if (err) {
           return res.sendStatus(404);
         }
@@ -108,7 +106,6 @@ router.post('/resetPassword', async (req, res) => {
 router.get('/resetPassword/:token', (req, res) => {
   return User.findOne({ resetPasswordToken: req.params.token }, (err, user) => {
     if (err) {
-      console.log(err, 'reset password error');
       return res.sendStatus(404);
     }
     if (user.resetPasswordExpires < Date.now()) {

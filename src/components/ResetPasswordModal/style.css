@@ -1,11 +1,10 @@
-
 @import '../../css/variables.css';
 
 * {
     box-sizing: border-box;
-  }
+}
+
 .ResetPasswordModal {
-    /* display: flex; */
     top: 0;
     justify-content: center;
     z-index: 101;
@@ -13,7 +12,7 @@
     display: none;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .ResetPasswordModalContent {
@@ -29,6 +28,7 @@
     max-height: 100%;
     overflow: auto;
 }
+
 .ResetPasswordDivTitle {
     -webkit-text-stroke: var(--red-color);
     -webkit-text-stroke-width: medium;
@@ -50,10 +50,11 @@
     background-position: center;
 
     padding: 70px 15px 74px 15px;
-    border-top-right-radius:10px;
-    border-top-left-radius:10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
-.ResetPasswordTitle{
+
+.ResetPasswordTitle {
     padding-top: 15px;
     font-style: normal;
     font-variant-ligatures: normal;
@@ -68,10 +69,10 @@
     font-weight: bold;
 }
 
-.ResetPasswordModalRealContent{
+.ResetPasswordModalRealContent {
     background-color: #f2f2f2;
-  padding: 20px;
-  border-radius: 10px;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .CloseResetPasswordModalDiv {
@@ -87,4 +88,4 @@
         overflow: auto;
         right: 3px;
     }
-  }
+}

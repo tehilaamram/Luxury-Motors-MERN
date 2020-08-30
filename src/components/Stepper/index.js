@@ -15,18 +15,16 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import DateFnsUtils from '@date-io/date-fns';
-// import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import './style.css';
 import ChatGroups from '../ChatGroups';
+import './style.css';
+
 var defaultImg = require("../../images/defaultprofile.jpeg");
 const useStyles = ((theme) => ({
   root: {
     width: '100%',
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      // flex: '50%',
       minWidth: '120px',
-      // maxWidth: 900,
       width: '25vw',
     },
   },
@@ -43,7 +41,6 @@ const useStyles = ((theme) => ({
     width: '25vw',
   },
   selectEmpty: {
-    // marginTop: theme.spacing(2),
   },
 }));
 
@@ -55,7 +52,6 @@ class CustomStepper extends React.Component {
       file: defaultImg,
       img: null,
       gender: '',
-      // date: new Date(),
       date: new Date('2014-08-18T21:11:54'),
     }
     autoBind(this);
@@ -102,7 +98,6 @@ class CustomStepper extends React.Component {
     this.setState(date);
   }
   render() {
-    console.log(DateFnsUtils, ' try');
     const { classes, steps } = this.props;
     const { activeStep, gender } = this.state;
     return (
@@ -155,24 +150,8 @@ class CustomStepper extends React.Component {
                       <MenuItem value={'Other'}>Other</MenuItem>
                     </Select>
                   </FormControl>
-                  {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                      disableToolbar
-                      variant="inline"
-                      // format="MM/dd/yyyy"
-                      margin="normal"
-                      id="date-picker-inline"
-                      label="Date picker inline"
-                      value={date}
-                      onChange={this.handleDateChange}
-                      KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                      }}
-                    />
-                  </MuiPickersUtilsProvider> */}
-
                 </div>}
-                { activeStep === 2 && <ChatGroups/>}
+                {activeStep === 2 && <ChatGroups />}
                 <div>
                   <Button
                     disabled={activeStep === 0}
