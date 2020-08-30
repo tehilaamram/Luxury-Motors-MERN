@@ -15,7 +15,7 @@ Runs the server side app: http://localhost:3010
 Runs the client side app in development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser. <br/>
 
-### Technologies
+## Technologies
 * JQuery: SlideShow component
 * Socket.io: Chat
 * Passport: User authentication
