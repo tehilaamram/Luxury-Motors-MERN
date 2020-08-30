@@ -12,8 +12,8 @@ All pages are responsive. <br />
 ![tablet view](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/catalog%20page%20-%20tablet.png)
 <br /> <br />
 * Mobile <br /> <br />
-<img src="https://raw.githubusercontent.com/tehilaamram/Luxury-Motors-MERN/master/screenshots/catalog%20page%20-%20mobile.png?token=AISN2FMQT432G74BK2ALGUK7JPSSW" data-canonical-src="https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/catalog%20page%20-%20mobile.png" width="200" height="550" />
-<br /> <br />
+<img src="https://raw.githubusercontent.com/tehilaamram/Luxury-Motors-MERN/master/screenshots/catalog%20page%20-%20mobile.png?token=AISN2FMTIPVAYOSV3SK44N27JPTNQ" data-canonical-src="https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/catalog%20page%20-%20mobile.png" width="200" height="550" /> <br/>
+
 #### Sign in modal <br />
 ![sign in modal](https://github.com/tehilaamram/Luxury-Motors-MERN/blob/master/screenshots/sign%20in%20modal.png)
 <br />
