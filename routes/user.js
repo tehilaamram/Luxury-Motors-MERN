@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../models')("User");
+let express = require('express');
+let router = express.Router();
+let User = require('../models')("User");
 const { ensureAuthenticated, ensureAdminAuthenticated } = require('./middleware');
 
 router.post('/resetPassword', async function (req, res) {

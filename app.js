@@ -12,13 +12,13 @@ let connectMongo = require('connect-mongo'); // add session store implementation
 const cors = require('cors');
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/user');
-var vehicleRouter = require('./routes/vehicle');
-var orderRouter = require('./routes/order');
-var chatRoomsRouter = require('./routes/chatRoom');
-var requestRouter = require('./routes/request');
-var commentRouter = require('./routes/comment');
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/user');
+let vehicleRouter = require('./routes/vehicle');
+let orderRouter = require('./routes/order');
+let chatRoomsRouter = require('./routes/chatRoom');
+let requestRouter = require('./routes/request');
+let commentRouter = require('./routes/comment');
 
 let app = express();
 (async () => {
@@ -69,7 +69,7 @@ let app = express();
         // maxAge: 1000 * 60 * 150,
         // NB: maxAge is used for session object expiry setting in the storage backend as well
     }));
-    var User = require('./models')("User");
+    let User = require('./models')("User");
     passport.use(User.createStrategy());
 
     passport.serializeUser(User.serializeUser());

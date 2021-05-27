@@ -1,11 +1,11 @@
-var express = require('express');
-var multer = require('multer');
+let express = require('express');
+let multer = require('multer');
 let fs = require("fs");
-var router = express.Router();
+let router = express.Router();
 const { ensureWorkerAuthenticated } = require('./middleware');
-var Vehicle = require('../models')("Vehicle");
-var ObjectId = require('mongoose').Types.ObjectId;
-var storage = multer.diskStorage({
+let Vehicle = require('../models')("Vehicle");
+let ObjectId = require('mongoose').Types.ObjectId;
+let storage = multer.diskStorage({
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now());
   }
@@ -13,25 +13,25 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 router.post('/addVehicle', [ensureWorkerAuthenticated, upload.array('file', 30)], (req, res) => {
-  var additionalImagesList = [];
-  for (var i = 1; i < req.files.length; i++) {
-    var img = fs.readFileSync(req.files[i].path);
-    var encode_image = img.toString('base64');
+  let additionalImagesList = [];
+  for (let i = 1; i < req.files.length; i++) {
+    let img = fs.readFileSync(req.files[i].path);
+    let encode_image = img.toString('base64');
     // Define a JSONobject for the image attributes for saving to database
-    var finalImg = {
+    let finalImg = {
       contentType: req.files[i].mimetype,
       image: Buffer.from(encode_image, 'base64')
     };
     additionalImagesList.push(finalImg);
   }
-  var img = fs.readFileSync(req.files[0].path);
-  var encode_image = img.toString('base64');
+  let img = fs.readFileSync(req.files[0].path);
+  let encode_image = img.toString('base64');
   // Define a JSONobject for the image attributes for saving to database
-  var finalImg = {
+  let finalImg = {
     contentType: req.files[0].mimetype,
     image: new Buffer(encode_image, 'base64')
   };
-  var newVehicle = new Vehicle({
+  let newVehicle = new Vehicle({
     maker: req.body.maker,
     model: req.body.model,
     color: req.body.color,
@@ -83,8 +83,8 @@ router.post('/updateVehicle', (req, res) => {
   });
 });
 router.get('/getVehiclesById/', (req, res) => {
-  var idJson = JSON.parse(req.query.params);
-  var obj_ids = idJson.vid.map(function (element) { return ObjectId(element.vehicle); });
+  let idJson = JSON.parse(req.query.params);
+  let obj_ids = idJson.vid.map(function (element) { return ObjectId(element.vehicle); });
   Vehicle.find({ _id: { $in: obj_ids } }, (err, list) => {
     return res.json({
       status: 200,

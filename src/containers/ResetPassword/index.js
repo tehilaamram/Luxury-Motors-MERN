@@ -40,8 +40,8 @@ class ResetPassword extends React.Component {
         if (this.state.confirmPassword !== this.state.password) {
         } else {
             const { match: { params } } = this.props;
-            var mykey = crypto.createCipher('aes-128-cbc', 'luxury');
-            var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
+            let mykey = crypto.createCipher('aes-128-cbc', 'luxury');
+            let encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
             encryptedPassword += mykey.final('hex');
             AjaxService.post('/user/resetPassword', {
                 newPassword: encryptedPassword,

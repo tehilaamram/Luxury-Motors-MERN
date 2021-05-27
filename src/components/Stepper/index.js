@@ -17,7 +17,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ChatGroups from '../ChatGroups';
 import './style.css';
 
-var defaultImg = require("../../images/defaultprofile.jpeg");
+let defaultImg = require("../../images/defaultprofile.jpeg");
 const useStyles = ((theme) => ({
   root: {
     width: '100%',

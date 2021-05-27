@@ -1,6 +1,6 @@
 const debug = require("debug")('lab7:model-user');
 const mongo = require("mongoose");
-var passportLocalMongoose = require('passport-local-mongoose');
+let passportLocalMongoose = require('passport-local-mongoose');
 
 module.exports = db => {
     // create a schema

@@ -34,13 +34,13 @@ class VehicleCard extends React.Component {
         )
     }
     buy() {
-        var currentVehicle = this.props.vehicle._id;
-        var list = '{ "' + currentVehicle.toString() + '": [' + 8 + ']}';
+        let currentVehicle = this.props.vehicle._id;
+        let list = '{ "' + currentVehicle.toString() + '": [' + 8 + ']}';
         this.props.history.push({ pathname: '/buy', state: { vehicles: [this.props.vehicle], list: JSON.parse(list), fromCart: false } });
     }
     render() {
         const { vehicle } = this.props;
-        var img = require(`../../images/make/${vehicle.maker}.png`);
+        let img = require(`../../images/make/${vehicle.maker}.png`);
         return (
             <div className={"VehicleCard"} style={{ display: this.isDisplay() ? 'flex' : 'none' }}>
                 <div className="VehicleCardHeader">

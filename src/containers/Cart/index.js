@@ -55,10 +55,10 @@ class Cart extends React.Component {
     }
     removeFromCart(key) {
         this.setState(function (state, props) {
-            var newCart = _.remove(this.state.vehicleCart, function (n) {
+            let newCart = _.remove(this.state.vehicleCart, function (n) {
                 return n.vehicle !== key._id;
             });
-            var newList = _.remove(this.state.vehicleList, function (n) {
+            let newList = _.remove(this.state.vehicleList, function (n) {
                 return n._id !== key._id;
             });
             this.props.onSub();
@@ -70,13 +70,13 @@ class Cart extends React.Component {
         }, this.setStateCallback);
     }
     buy() {
-        var vehicleArray = _.groupBy(this.state.vehicleCart, (item) => {
+        let vehicleArray = _.groupBy(this.state.vehicleCart, (item) => {
             return item.vehicle;
         });
         this.props.history.push({ pathname: '/buy', state: { vehicles: this.state.vehicleList, list: vehicleArray, fromCart: true } });
     }
     render() {
-        var vehicleArray = _.groupBy(this.state.vehicleCart, (item) => {
+        let vehicleArray = _.groupBy(this.state.vehicleCart, (item) => {
             return item.vehicle;
         });
         return (

@@ -125,7 +125,7 @@ class ManageRooms extends React.Component {
     }
     renderRequests() {
         const { expanded } = this.state;
-        var groupedRequestList = _.groupBy(this.state.requestsList, 'room.name');
+        let groupedRequestList = _.groupBy(this.state.requestsList, 'room.name');
         groupedRequestList = _.toArray(groupedRequestList);
         return (
             <div>

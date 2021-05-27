@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var Request = require('../models')("Request");
-var User = require('../models')("User");
-var ChatRoom = require('../models')("ChatRoom");
+let express = require('express');
+let router = express.Router();
+let Request = require('../models')("Request");
+let User = require('../models')("User");
+let ChatRoom = require('../models')("ChatRoom");
 const { ensureAuthenticated, ensureAdminAuthenticated } = require('./middleware');
 
 router.post('/new', ensureAuthenticated, (req, res) => {
-    var newRequest = new Request({
+    let newRequest = new Request({
         user: req.user._id,
         room: req.body.room,
         date: new Date(),

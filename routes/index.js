@@ -1,17 +1,17 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('passport');
-var User = require('../models')("User");
-var nodemailer = require('nodemailer');
-var waterfall = require('async-waterfall');
+let express = require('express');
+let router = express.Router();
+let passport = require('passport');
+let User = require('../models')("User");
+let nodemailer = require('nodemailer');
+let waterfall = require('async-waterfall');
 const crypto = require('crypto');
 
-var serverEmailAddress = 'YOUR_GMAIL_MAIL';
-var serverEmailPassword = 'YOUR_GMAIL_MAIL_PASSWORD';
+let serverEmailAddress = 'YOUR_GMAIL_MAIL';
+let serverEmailPassword = 'YOUR_GMAIL_MAIL_PASSWORD';
 
 router.post('/signUp', function (req, res) {
-  var mykey = crypto.createDecipher('aes-128-cbc', 'luxury');
-  var mystr = mykey.update(req.body.password, 'hex', 'utf8');
+  let mykey = crypto.createDecipher('aes-128-cbc', 'luxury');
+  let mystr = mykey.update(req.body.password, 'hex', 'utf8');
   mystr += mykey.final('utf8');
   User.register(new User({ username: req.body.username, role: 'user', fullName: req.body.fullName }), req.body.password, function (err, user) {
     if (err) {
@@ -52,7 +52,7 @@ router.post('/resetPassword', async (req, res) => {
   waterfall([
     function (done) {
       crypto.randomBytes(20, (err, buf) => {
-        var token = buf.toString('hex');
+        let token = buf.toString('hex');
         done(err, token);
       });
     },
@@ -66,14 +66,14 @@ router.post('/resetPassword', async (req, res) => {
 
     },
     function (token, user, done) {
-      var smtpTrans = nodemailer.createTransport({
+      let smtpTrans = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
           user: serverEmailAddress,
           pass: serverEmailPassword,
         }
       });
-      var mailOptions = {
+      let mailOptions = {
 
         to: user.username,
         from: 'Buy a Luxury Vehicle',

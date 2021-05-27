@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var Order = require('../models')("Order");
-var Vehicle = require('../models')("Vehicle");
-var VehicleOrder = require('../models')("VehicleOrder");
+let express = require('express');
+let router = express.Router();
+let Order = require('../models')("Order");
+let Vehicle = require('../models')("Vehicle");
+let VehicleOrder = require('../models')("VehicleOrder");
 const { ensureAuthenticated, ensureWorkerAuthenticated, ensureAdminAuthenticated } = require('./middleware');
 
 router.post('/new', ensureAuthenticated, (req, res) => {
-    var newOrder = new Order({
+    let newOrder = new Order({
         date: new Date(),
         user: req.user._id,
     });
@@ -23,7 +23,7 @@ router.post('/new', ensureAuthenticated, (req, res) => {
                             res.sendStatus(400);
                         }
                     });
-                    var newVehicleOrder = new VehicleOrder({
+                    let newVehicleOrder = new VehicleOrder({
                         order: savedOrder._id,
                         vehicle: element.id,
                         quantity: element.quantity,

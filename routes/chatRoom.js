@@ -1,10 +1,10 @@
-var express = require('express');
-var multer = require('multer');
+let express = require('express');
+let multer = require('multer');
 let fs = require("fs");
-var router = express.Router();
-var ChatRoom = require('../models')("ChatRoom");
+let router = express.Router();
+let ChatRoom = require('../models')("ChatRoom");
 const { ensureAuthenticated, ensureAdminAuthenticated } = require('./middleware');
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploadedImages');
     },
@@ -13,17 +13,17 @@ var storage = multer.diskStorage({
     }
 })
 
-var upload = multer({ storage: storage })
+let upload = multer({ storage: storage })
 router.post('/addRoom', [ensureAdminAuthenticated, upload.array('file', 1)], (req, res) => {
     if (req.isAuthenticated() && req.user.role === 'admin') {
-        var img = fs.readFileSync(req.files[0].path);
-        var encode_image = img.toString('base64');
+        let img = fs.readFileSync(req.files[0].path);
+        let encode_image = img.toString('base64');
         // Define a JSONobject for the image attributes for saving to database
-        var finalImg = {
+        let finalImg = {
             contentType: req.files[0].mimetype,
             image: new Buffer(encode_image, 'base64')
         };
-        var newRoom = new ChatRoom({
+        let newRoom = new ChatRoom({
             img: finalImg,
             name: req.body.name,
         });

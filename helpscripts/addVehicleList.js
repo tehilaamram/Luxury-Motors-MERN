@@ -1,7 +1,7 @@
-var multer = require('multer');
+let multer = require('multer');
 let fs = require("fs");
-var mime = require('mime-types');
-var storage = multer.diskStorage({
+let mime = require('mime-types');
+let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploadedImages');
     },
@@ -9,11 +9,11 @@ var storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now());
     }
 });
-var upload = multer({ storage: storage })
+let upload = multer({ storage: storage })
 const Vehicle = require('../models')("Vehicle");
 
 (async () => {
-    var additionalImagesList = [];
+    let additionalImagesList = [];
     additionalImagesList.push({
         contentType: mime.lookup('./ferrari 488 GTB 2020/4bdbb497-e0de-4bdf-839d-271d647912d3.jpg'),
         image: Buffer.from(fs.readFileSync('./ferrari 488 GTB 2020/4bdbb497-e0de-4bdf-839d-271d647912d3.jpg').toString('base64'), 'base64'),

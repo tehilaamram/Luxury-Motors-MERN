@@ -133,7 +133,7 @@ class Buy extends React.Component {
   }
   commitOrder() {
 
-    var vehicleArray = this.props.location.state.vehicles.map((element, index) => {
+    let vehicleArray = this.props.location.state.vehicles.map((element, index) => {
       return {
         id: element._id,
         price: element.price,

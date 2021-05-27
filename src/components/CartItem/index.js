@@ -46,7 +46,7 @@ class CartItem extends React.Component {
     }
     render() {
         const { vehicle } = this.props;
-        var img = require(`../../images/make/${vehicle.maker}.png`);
+        let img = require(`../../images/make/${vehicle.maker}.png`);
         return (
             <div className={"CartItem"}>
                 <div className="VehicleCardHeader">

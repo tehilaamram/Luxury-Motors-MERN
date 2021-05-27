@@ -1,5 +1,5 @@
 const User = require('../models')("User");
-var users;
+let users;
 (async () => {
     try {
         users = await User.find({});

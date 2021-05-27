@@ -8,16 +8,16 @@
 // }
 const dotenv = require('dotenv');
 dotenv.config();
-var app = require('../app');
-var debug = require('debug')('try:server');
-var http = require('http');
-var ChatRoom = require('../models')("ChatRoom");
-var ChatMessage = require('../models')("ChatMessage");
-var User = require('../models')("User");
-var ObjectId = require('mongoose').Types.ObjectId;/**
+let app = require('../app');
+let debug = require('debug')('try:server');
+let http = require('http');
+let ChatRoom = require('../models')("ChatRoom");
+let ChatMessage = require('../models')("ChatMessage");
+let User = require('../models')("User");
+let ObjectId = require('mongoose').Types.ObjectId;/**
  * Get port from environment and store in Express.
  */
-var port = normalizePort(process.env.REACT_APP_SERVER_PORT);
+let port = normalizePort(process.env.REACT_APP_SERVER_PORT);
 
 app.set('port', port);
 
@@ -25,9 +25,9 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+let server = http.createServer(app);
 const io = require('socket.io')(server);
-var usernames = {};
+let usernames = {};
 
 io.on('connect', (socket) => {
   // when the client emits 'join', this listens and executes
@@ -38,10 +38,10 @@ io.on('connect', (socket) => {
 
   });
   socket.on('switchRoom', function (newroom, userId) {
-    var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
+    let currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
     ChatRoom.findOne({ name: currentRoom[0] }).exec().then((room) => {
       if (room !== null && room.onlineMembers.includes(userId)) {
-        var index = room.onlineMembers.indexOf(userId);
+        let index = room.onlineMembers.indexOf(userId);
         if (index > -1) {
           room.onlineMembers.splice(index, 1);
           room.save();
@@ -69,8 +69,8 @@ io.on('connect', (socket) => {
   });
   // when the client emits 'sendchat', this listens and executes
   socket.on('sendchat', (data, userId, groupId, callback) => {
-    var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
-    var currentChatMessage = new ChatMessage({
+    let currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
+    let currentChatMessage = new ChatMessage({
       sender: userId,
       room: groupId,
       date: new Date(),
@@ -84,7 +84,7 @@ io.on('connect', (socket) => {
     })
   });
   socket.on('loadMore', (lastMessage) => {
-    var currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
+    let currentRoom = Object.keys(io.sockets.adapter.sids[socket.id]).filter(item => item != socket.id);
     ChatMessage.find({ room: currentRoom.id }).populate({ path: 'sender', select: 'username' }).exec((err, list) => {
       socket.emit('loadMoreMessages', list);
     });
@@ -116,7 +116,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  let port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -140,7 +140,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
+  let bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -162,8 +162,8 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
+  let addr = server.address();
+  let bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);

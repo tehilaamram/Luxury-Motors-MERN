@@ -35,8 +35,8 @@ class SignInModal extends React.Component {
             this.state.password === '') {
             alert('Make sure you filled all field');
         } else {
-            var mykey = crypto.createCipher('aes-128-cbc', 'luxury');
-            var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
+            let mykey = crypto.createCipher('aes-128-cbc', 'luxury');
+            let encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
             encryptedPassword += mykey.final('hex');
             AjaxService.post('/signIn', {
                 username: this.state.email,

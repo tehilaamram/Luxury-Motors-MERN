@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var Comment = require('../models')("Comment");
-var Vehicle = require('../models')("Vehicle");
-var ObjectId = require('mongoose').Types.ObjectId;
+let express = require('express');
+let router = express.Router();
+let Comment = require('../models')("Comment");
+let Vehicle = require('../models')("Vehicle");
+let ObjectId = require('mongoose').Types.ObjectId;
 const { ensureAuthenticated } = require('./middleware');
 
 router.post('/new', ensureAuthenticated, (req, res) => {
-  var newComment = new Comment({
+  let newComment = new Comment({
     date: new Date(),
     user: req.user._id,
     vehicle: req.body.vehicle,

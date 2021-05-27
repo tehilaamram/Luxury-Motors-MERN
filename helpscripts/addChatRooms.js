@@ -1,7 +1,7 @@
-var multer = require('multer');
+let multer = require('multer');
 let fs = require("fs");
-var mime = require('mime-types');
-var storage = multer.diskStorage({
+let mime = require('mime-types');
+let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploadedImages');
     },
@@ -9,7 +9,7 @@ var storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now());
     }
 });
-var upload = multer({ storage: storage })
+let upload = multer({ storage: storage })
 const ChatRoom = require('../models')("ChatRoom");
 
 (async () => {

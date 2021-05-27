@@ -4,7 +4,7 @@ import Linkify from 'react-linkify';
 import './Message.css';
 import Avatar from '@material-ui/core/Avatar';
 import { connect } from 'react-redux';
-var Highlight = require('react-highlighter');
+let Highlight = require('react-highlighter');
 
 class Message extends React.Component {
   render() {

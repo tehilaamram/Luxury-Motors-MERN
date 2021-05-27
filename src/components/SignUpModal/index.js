@@ -46,8 +46,8 @@ class SignUpModal extends React.Component {
         ) {
             alert('Make sure you filled all field and your passwords are same');
         } else {
-            var mykey = crypto.createCipher('aes-128-cbc', 'luxury');
-            var encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
+            let mykey = crypto.createCipher('aes-128-cbc', 'luxury');
+            let encryptedPassword = mykey.update(this.state.password, 'utf8', 'hex')
             encryptedPassword += mykey.final('hex');
             AjaxService.post('/signUp', {
                 username: this.state.email,

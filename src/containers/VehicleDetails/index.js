@@ -44,7 +44,7 @@ class VehicleDetails extends React.Component {
   componentDidMount() {
     const { match: { params } } = this.props;
     AjaxService.get(`/vehicle/getVehicle/${params.id}`).then((res) => {
-      var imgList = [];
+      let imgList = [];
       if (res.data.vehicle.mainImg !== undefined) {
         imgList.push({
           original: `data:image/jpeg;base64,${res.data.vehicle.mainImg.image}`,
@@ -164,8 +164,8 @@ class VehicleDetails extends React.Component {
   addToCart() {
     let date = new Date();
     date.setTime(date.getTime() + (99 * 365 * 24 * 60 * 60 * 1000));
-    var arrayToCookie = [];
-    for (var i = 0; i < this.state.quantityToOrder; i++) {
+    let arrayToCookie = [];
+    for (let i = 0; i < this.state.quantityToOrder; i++) {
       arrayToCookie.push({
         id: i,
         vehicle: this.state.vehicle._id,
@@ -175,9 +175,9 @@ class VehicleDetails extends React.Component {
     this.props.onAddMany(this.state.quantityToOrder);
   }
   buy() {
-    var currentVehicle = this.state.vehicle._id;
-    var list = '{ "' + currentVehicle.toString() + '":[';
-    for (var i = 0; i < this.state.quantityToOrder; i++) {
+    let currentVehicle = this.state.vehicle._id;
+    let list = '{ "' + currentVehicle.toString() + '":[';
+    for (let i = 0; i < this.state.quantityToOrder; i++) {
       if (i === 0) {
         list += 8;
       } else {
@@ -188,7 +188,7 @@ class VehicleDetails extends React.Component {
     this.props.history.push({ pathname: '/buy', state: { vehicles: [this.state.vehicle], list: JSON.parse(list), fromCart: false } });
   }
   renderCustomersReview() {
-    var rateArray = _.groupBy(this.state.vehicle.comments, (item) => {
+    let rateArray = _.groupBy(this.state.vehicle.comments, (item) => {
       return item.rate;
     });
     return (
@@ -340,7 +340,7 @@ class VehicleDetails extends React.Component {
   }
   render() {
     const { selectedTab, vehicle } = this.state;
-    var rateAvg = 0;
+    let rateAvg = 0;
     this.state.vehicle.comments.forEach(comment => {
       rateAvg += comment.rate;
     });

@@ -1,5 +1,5 @@
 const Vehicle = require('../models')("Vehicle");
-var vehicles;
+let vehicles;
 (async () => {
     try {
         vehicles = await Vehicle.find({});
